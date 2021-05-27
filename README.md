@@ -60,4 +60,5 @@ Các *@Annotation* dùng để định nghĩa nhiệm vụ của code trong fram
 
 Một class controller có thể chứa nhiều mapping đến nhiều đường dẫn thay vì chỉ 1 như trong servlet. Xử lý .jsp sử dụng taglib JSTL đã biế. Tất cả chỉ có như thế. **Ngoài ra không động chạm đến các file khác dễ gây có vấn đề.**
 
+### CỐ GẮNG TRA GOOGLE
 
