@@ -1,51 +1,54 @@
 CREATE DATABASE MentorFinder
 
-CREATE TABLE myUSER (
-	UserID int identity NOT NULL,
-	Name nvarchar(200) NOT NULL,
+CREATE TABLE [User] (
+	ID int identity(1,1) NOT NULL,
+	Email nvarchar(256) NOT NULL,
+	Password nvarchar(256) NOT NULL,
+	Name nvarchar(256) NOT NULL,
 	DOB date NOT NULL,
 	Gender bit NOT NULL,
-	Address nvarchar(200) NOT NULL,
-	Image nvarchar(200),
-	Description nvarchar(200) NOT NULL,
-	Role nvarchar(200) NOT NULL,
-	Email nvarchar(200) NOT NULL,
-	Password nvarchar(200) NOT NULL,
-	Certificate nvarchar (200),
-	Education nvarchar (200) NOT NULL,
-	Status bit NOT NULL
-	PRIMARY KEY (UserID),
-)
-
-CREATE TABLE Subject (
-	SubjectID int NOT NULL,
-	SubjectName nvarchar(200) NOT NULL,
-	PRIMARY KEY (SubjectID)
-)
-
-CREATE TABLE Request(
-	RequestID int identity NOT NULL,
-	MenteeID int NOT NULL,
-	RequestDescription nvarchar(200),
-	SubjectID int NOT NULL,
+	Role nvarchar(32) NOT NULL,
+	PhoneNumber nvarchar(32),
+	Address nvarchar(256),
+	Image nvarchar(256),
+	Description nvarchar(256),
+	Certificate nvarchar (256),
+	Education nvarchar (256),
 	Status bit NOT NULL,
-	MentorID int default NULL,
-	PRIMARY KEY (RequestID),
-	CONSTRAINT FK_myUserRequest FOREIGN KEY (MenteeID) REFERENCES myUSER(UserID),
-	CONSTRAINT FK_myUserSubject FOREIGN KEY (SubjectID) REFERENCES Subject(SubjectID)
+	--0 for deactivate, 1 for activate
+	PRIMARY KEY (ID),
 )
 
-CREATE TABLE MentorSubject(
+CREATE TABLE [Subject] (
+	ID int identity(1,1) NOT NULL,
+	Name nvarchar(256) NOT NULL,
+	PRIMARY KEY (ID)
+)
+
+CREATE TABLE [Request] (
+	ID int identity(1,1) NOT NULL,
+	MenteeID int NOT NULL,
+	SubjectID int NOT NULL,
+	RequestDescription nvarchar(256),
+	Status int NOT NULL DEFAULT 0,
+	-- 0 for NEW, 1 for DONE, 2 for CANCEL
+	MentorID int default NULL,
+	PRIMARY KEY (ID),
+	CONSTRAINT FK_myUserRequest FOREIGN KEY (MenteeID) REFERENCES [User](ID),
+	CONSTRAINT FK_myUserSubject FOREIGN KEY (SubjectID) REFERENCES Subject(ID)
+)
+
+CREATE TABLE [MentorSubject] (
 	MentorID int,
 	SubjectID int,
-	CONSTRAINT FK_myUserMentorSubject FOREIGN KEY (MentorID) REFERENCES myUSER(UserID),
-	CONSTRAINT FK_myUserMentorSubject2 FOREIGN KEY (SubjectID) REFERENCES Subject(SubjectID),
+	CONSTRAINT FK_myUserMentorSubject FOREIGN KEY (MentorID) REFERENCES [User](ID),
+	CONSTRAINT FK_myUserMentorSubject2 FOREIGN KEY (SubjectID) REFERENCES Subject(ID),
 )
 
-CREATE TABLE EnrolledMentor(
+CREATE TABLE [EnrolledMentor] (
 	RequestID int,
 	MentorID int,
 	Status bit NOT NULL,
-	CONSTRAINT FK_myUserEnrolledMentor FOREIGN KEY(MentorID) REFERENCES myUSER(UserID),
-	CONSTRAINT FK_RequestEnrolledMentor FOREIGN KEY(RequestID) REFERENCES Request(RequestID),
+	CONSTRAINT FK_myUserEnrolledMentor FOREIGN KEY(MentorID) REFERENCES [User](ID),
+	CONSTRAINT FK_RequestEnrolledMentor FOREIGN KEY(RequestID) REFERENCES Request(ID),
 )
