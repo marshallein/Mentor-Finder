@@ -8,6 +8,7 @@ CREATE TABLE [User] (
 	DOB date NOT NULL,
 	Gender bit NOT NULL,
 	Role nvarchar(32) NOT NULL,
+	PhoneNumber nvarchar(32),
 	Address nvarchar(256),
 	Image nvarchar(256),
 	Description nvarchar(256),
