@@ -12,8 +12,8 @@ Basic implementation of Spring MVC: điền form và controller đơn giản.
 
 # Basic Note
 
-Controller đặt trong com.prjmvc.controllers
-.JSP đặt trong webapp/WEB-INF/jsp/
+#### Controller đặt trong com.prjmvc.controllers
+#### .JSP đặt trong webapp/WEB-INF/jsp/
 
 
 Spring MVC dựa trên nền tảng Servlet, về bản chất thì flow không khác gì servlet.
