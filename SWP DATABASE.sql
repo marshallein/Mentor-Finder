@@ -14,7 +14,7 @@ CREATE TABLE [User] (
 	Description nvarchar(256),
 	Certificate nvarchar (256),
 	Education nvarchar (256),
-	Status bit NOT NULL,
+	Status bit NOT NULL DEFAULT 1,
 	--0 for deactivate, 1 for activate
 	PRIMARY KEY (ID),
 )
