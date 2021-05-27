@@ -56,7 +56,7 @@ public class LoginController {
         return "loginsuccess";
     }
 ```
-Các *@Annotation* dùng để định nghĩa nhiệm vụ của code trong framework. *@RequestMapping* để định nghĩa đường dẫn *(value="/login")*, bằng phương thức GET hoặc POST. Method return ra tên file .jsp (vứt hết file .jsp vào thư mục của nó nó tự nhận, rồi chỉ điền **mỗi tên**) dùng để dẫn đến file view đó giống như trong servlet. Ngoài ra có thể return redirect hoặc forward đến một controller khác. Model/ModelMap là object di chuyển thông tin giữa giống như request và response. Khi điền form thì nhận thông tin từ input bằng @RequestParam.
+*@Controller* dùng để định nghĩa class này là controller. *@RequestMapping* để định nghĩa đường dẫn *(value="/login")*, bằng phương thức GET hoặc POST. Method return ra tên file .jsp (vứt hết file .jsp vào thư mục của nó nó tự nhận, rồi chỉ điền **mỗi tên**) dùng để dẫn đến file view đó giống như trong servlet. Ngoài ra có thể return redirect hoặc forward đến một controller khác. Model/ModelMap là object di chuyển thông tin giữa giống như request và response. Khi điền form thì nhận thông tin từ input bằng @RequestParam.
 
 Một class controller có thể chứa nhiều mapping đến nhiều đường dẫn thay vì chỉ 1 như trong servlet. Xử lý .jsp sử dụng taglib JSTL đã biế. Tất cả chỉ có như thế. **Ngoài ra không động chạm đến các file khác dễ gây có vấn đề.**
 
