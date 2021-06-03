@@ -1,68 +1,104 @@
 # Mentor-Finder
 
 # Version
+
+## 3/6/2021
+Thay đổi hoàn toàn sang Spring Boot, tích hợp thành công View và JPA, basic Entity managing.
+FR: Login & Register.
 ## 27/5/2021 
 Basic implementation of Spring MVC: điền form và controller đơn giản.
 
 # To-do (liên quan đến kỹ thuật)
-- [ ] Kết nối Database MS SQL
-- [ ] Tích hợp JPA
-- [ ] Chuyển hết phần view sang Thymeleaf hoặc Spring MVC Tech
-- [ ] Chuyển hết project sang Spring MVC thuộc Spring Boot
+- [ ] Advanced Security: Spring Security
+- [ ] Phân quyền
+- [x] Kết nối Database MS SQL
+- [x] Tích hợp JPA
+- [x] Chuyển hết phần view sang Thymeleaf hoặc Spring MVC Tech
+- [x] Chuyển hết project sang Spring MVC thuộc Spring Boot
 
-# Basic Note
+# Config
+Chỉnh sửa file application.properties cho phù hợp 
+```
+spring.datasource.url=jdbc:sqlserver://localhost /tên server, hoặc localhost/; databaseName=SWPTEST1 /tên database/
+spring.datasource.username=sa /tài khỏan/
+spring.datasource.password=1 /mật khẩu/
+spring.datasource.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
+spring.jpa.show-sql=true
+spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServer2014Dialect /tùy version SQLServer/
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 
-#### Controller đặt trong com.prjmvc.controllers
-#### .JSP đặt trong webapp/WEB-INF/jsp/
+```
 
+# Directory Note
+- Controller tại WebApp2/controller
+- DAO Repository tại WebApp2/dao
+- Entity tại WebApp2/entity
+- Service truy vấn từ Repository ra tại WebApp2/repository
+- HTML/Thymeleaf tại resources/templates
+- css tại resources/static/css
+- js tại resources/static/js
+- Ảnh tại resource/static/image
 
+- Nối css với html theo ĐÚNG syntax``` <link rel="stylesheet" type="text/css" th:href="@{/css/tên-folder/tên-file.css}" />```
+- Nối background style css theo ĐÚNG syntax  ```url(/image/tên-folder/tên-file.png)```
+# Technical Note
+
+## Controller
 Spring MVC dựa trên nền tảng Servlet, về bản chất thì flow không khác gì servlet.
 
-Các controller đóng vai trò như servlet, tuy vậy không phải config trong web.xml. Không cần động chạm gì vào các file xml. Ngoài ra, **bắt buộc** phải để các controller trong folder com.prjmvc.controllers.
-
+Các controller đóng vai trò như servlet, tuy vậy không phải config bất kỳ cái gì, chỉ cần đáp file đúng vị trí.
 Mẫu một controller như sau:
 ```
 @Controller
 public class LoginController {
 
-    @RequestMapping(value="/login", method = RequestMethod.GET)
-    public String viewLogin(){
-        return "accountLogin";
+     @GetMapping("/login")
+    public String showSignUpForm() {
+       
+        return "SignIn";
     }
-    
-    @RequestMapping(value="/login", method = RequestMethod.POST)
-    public String doLogin( @RequestParam("userLoginName") String username,
-		@RequestParam("userPassword") String password,
-		HttpSession session,
-		ModelMap modelMap) 
+
+    @PostMapping("/login")
+    public String checkLogin(@RequestParam(value = "username") String username,
+                             @RequestParam(value = "password") String password,
+                             @RequestParam(value = "remember", required = false) String remember, Model model)
     {
-        if(username.equalsIgnoreCase("acc1") && password.equalsIgnoreCase("123")) 
+        Long uId = lcs.checkLoginInfo(username, password);
+        if(uId == -1L)
         {
-            session.setAttribute("username", username);
-            modelMap.addAttribute("username", username);
-            modelMap.addAttribute("password", password);
-	          return "redirect:/win"; 
-	      } 
-        else 
+            model.addAttribute("error", "Invalid Account");
+            return "SignIn";     
+        }
+        else
         {
-	          modelMap.put("error", "Invalid Account");
-	          return "accountLogin";
-	      }
-    }
-    
-    @RequestMapping(value="/register", method = RequestMethod.GET)
-    public String viewRegister(){
-        return "register";
-    }
-    
-    @RequestMapping(value="/win", method = RequestMethod.GET)
-    public String viewWin(){
-        return "loginsuccess";
+            return "home";
+        }
+        
     }
 ```
 *@Controller* dùng để định nghĩa class này là controller. *@RequestMapping* để định nghĩa đường dẫn *(value="/login")*, bằng phương thức GET hoặc POST. Method return ra tên file .jsp (vứt hết file .jsp vào thư mục của nó nó tự nhận, rồi chỉ điền **mỗi tên**) dùng để dẫn đến file view đó giống như trong servlet. Ngoài ra có thể return redirect hoặc forward đến một controller khác. Model/ModelMap là object di chuyển thông tin giữa giống các controller hoặc giữa các trang như request và response. Khi điền form thì nhận thông tin từ input bằng @RequestParam.
 
-Một class controller có thể chứa nhiều mapping đến nhiều đường dẫn thay vì phải tạo mới một class Servlet cho mỗi một đường dẫn như trước. Xử lý .jsp sử dụng taglib JSTL đã biết. Tất cả chỉ có như thế. **Ngoài ra không động chạm đến các file khác dễ gây có vấn đề.**
+Một class controller có thể chứa nhiều mapping đến nhiều đường dẫn thay vì phải tạo mới một class Servlet cho mỗi một đường dẫn như trước. 
+
+## View
+Sử dụng Thymeleaf, về căn bản là không khác gì HTML. Thymeleaf được tích hợp khả năng tương tác với object như .jsp, có thể truy xuất dữ liệu từ object ra view
+Các controller chuyển dữ liệu từ nó qua view và qua nhau bằng object Model. 
+Mẫu:
+```
+ <form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
+                <p>Id: <input type="text" th:field="*{id}" /></p>
+                <p>Message: <input type="text" th:field="*{content}" /></p>
+                <p><input type="submit" value="Submit" /> </p>
+ </form>
+```
+
+Đọc thêm tại: https://loda.me/spring-boot-9-giai-thich-cach-thymeleaf-van-hanh-expression-demo-full-loda1558267496214/
+https://www.baeldung.com/spring-boot-crud-thymeleaf
+
+## Database
+
+Tích hợp một công nghệ có tên là JPA. 
+
 
 ### CỐ GẮNG TRA GOOGLE
 
