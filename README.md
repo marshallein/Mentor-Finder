@@ -97,7 +97,76 @@ https://www.baeldung.com/spring-boot-crud-thymeleaf
 
 ## Database
 
-Tích hợp một công nghệ có tên là JPA. 
+Tích hợp một công nghệ có tên là JPA. Nếu như hồi trước phải tạo connection đến database, nhập query, lôi dữ liệu ra gán vào object rồi trả về controller, thì nay framework tự làm hết tất cả các việc đó cho ta.
+JPA sở hữu các class Entity, tương ứng với một bảng trong database, các class này sẽ chiếu dữ liệu xuống thẳng database thay vì phải gọi nó lên mỗi lần truy xuất script.
+```
+@Entity
+@Table(name = "LoginInfo", uniqueConstraints = { 
+               @UniqueConstraint(columnNames = "lgUsername"), @UniqueConstraint(columnNames = "lgEmail")})
+public class LoginInfo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "lgId")
+    private Long userid;
+     
+
+    @Column(name = "lgUsername")
+    private String username;
+    
+
+    @Column(name = "lgEmail")
+    private String email;
+    
+    @Column(name = "lgPassword")
+    private String password;
+ ```
+ `@Entity` để định nghĩa đây là Entity. `@Table` và `@Column` định nghĩa tương ứng với sự vật. `name` phải đúng y hệt tên tương ứng trong bảng, ngoài ra tên biến đặt tùy thích.
+ `@GeneratedValue(strategy = GenerationType.IDENTITY `để định nghĩa rằng biến @Id sẽ tự được gán vào như điều kiện trong database (ở đây là +1 theo IDENTITY(1,1)). Các Entity sẽ được thiết kế tương ứng với một bảng trong database để nhanh chóng chiếu xuống và gom dữ liệu (đó là lý do nên tách bảng thành các bảng nhỏ hơn tùy mục đích cho thuận tiện). Nếu có object nào cần dữ liệu đến từ nhiều bảng khác nhau, tạo class như bình thường tại WebApp2/model.
+ 
+ Phần DAO sử dụng các interface Repository, ở đây là `JpaRepository` được extends từ `CrudRepository`. Long ở bên cạnh là Id của object Entity.
+ ```
+ @Repository
+public interface LoginInfoRepository extends JpaRepository<LoginInfo, Long> {
+    
+    @Nullable
+    LoginInfo findByUsername(String username);
+    
+    @Nullable 
+    LoginInfo findByEmail(String email);
+            
+}
+```
+Các hàm interface bên trên có nhiệm vụ đúng như những gì nó được định nghĩa. Điểm đặc biệt của repository bên trên đó là chỉ cần phải viết hàm có đúng mỗi cái tên, framework tự hiểu và tự generate những gì cần phục vụ. Đọc thêm tại 6.3 Query Method https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.
+Ngoài ra, còn có thể custom query với `@Query`, tuy vậy được viết bằng một ngôn ngữ query language riêng, cú pháp gần tương tự SQL Server, xin mời tự tìm hiểu.
+
+Các hàm `@Service` dùng để implement cách thức hoạt động của Repository, trước đó cần phải tạo object 
+```
+ @Autowired
+    private LoginInfoRepository repo;
+```
+Từ đó có thể sử dụng một cách gián tiếp ở các hàm khác.
+```
+ public boolean checkEmail(String email)
+    {
+        LoginInfo result = repo.findByEmail(email);
+        if(result==null)
+        {
+            System.out.println("there's no email");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+```
+Có thể lưu trực tiếp một object Entity vào thẳng database chỉ bằng một một dòng lệnh repo đã được tạo sẵn:
+```
+public void saveNewRegister(LoginInfo lgIf)
+    {
+        repo.save(lgIf);
+    }
+```
 
 
 ### CỐ GẮNG TRA GOOGLE
