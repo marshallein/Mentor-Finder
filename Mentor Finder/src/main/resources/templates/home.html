@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head> 
+        <title>Getting Started: Handling Form Submission</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    
+    <body>
+        <h1>Result</h1>
+        <div th:object ="${currentUserInfo}">
+<!--            <p> <span th:text = *{id}> </p>-->
+            <p> <span th:text = *{uName}> </p>
+            <p> <span th:text = *{uGender}> </p>
+            <p> <span th:text = *{uRole}> </p>
+            <p> <span th:text = *{uPhoneNumber}> </p>
+        </div>
+       
+        <br>
+        <br>
+        Add a request:
+        <br>
+        Your Requests:
+        
+        
+        
+    </body>
+</html>
