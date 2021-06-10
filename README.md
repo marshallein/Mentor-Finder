@@ -1,5 +1,11 @@
 # Mentor-Finder
 
+
+Chưa rõ lắm cách xóa file .jar của dependency đi nên xin tải tạm file Google Drive code mới nhất
+
+https://drive.google.com/drive/folders/1pI-3HmkTQvcXGKh0M7w_lfFn7zzmE4RK?usp=sharing
+
+
 # Version
 
 ## 6/10/2021
