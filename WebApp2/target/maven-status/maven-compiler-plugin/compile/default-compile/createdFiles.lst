@@ -1,6 +1,0 @@
-com\abc\WebApp2\service\LoginCheckService.class
-com\abc\WebApp2\model\LoginInfoModel.class
-com\abc\WebApp2\entity\LoginEntity.class
-com\abc\WebApp2\controller\LoginRegisterController.class
-com\abc\WebApp2\WebApp2Application.class
-com\abc\WebApp2\dao\LoginInfoRepository.class
