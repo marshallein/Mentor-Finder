@@ -2,6 +2,12 @@
 
 # Version
 
+## 6/10/2021
+Phân quyền admin và user thành công
+Giữ User Context
+Đối chiếu entity từ bảng
+Update table
+
 ## 3/6/2021
 Thay đổi hoàn toàn sang Spring Boot, tích hợp thành công View và JPA, basic Entity managing.
 FR: Login & Register.
