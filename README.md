@@ -96,6 +96,8 @@ Một class controller có thể chứa nhiều mapping đến nhiều đường
 ## View
 Sử dụng Thymeleaf, về căn bản là không khác gì HTML. Thymeleaf được tích hợp khả năng tương tác với object như .jsp, có thể truy xuất dữ liệu từ object ra view
 Các controller chuyển dữ liệu từ nó qua view và qua nhau bằng object Model. 
+Thêm tag cho html : <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"> 
+Nếu vẫn không được thì thêm plugin theo link này https://github.com/ArturWisniewski/NB-Thymeleaf-Code-Completion 
 Mẫu:
 ```
  <form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
