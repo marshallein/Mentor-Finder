@@ -162,6 +162,12 @@
 .sign-up-foreground-item {
     display: flex;
     flex: 0 0 auto;
+    border: none;
+}
+.sign-up-foreground3-item {
+    display: flex;
+    flex: 0 0 auto;
+    border: none;
 }
 
 .sign-up-txt2 {
@@ -211,6 +217,7 @@
 .sign-up-foreground1-item {
     display: flex;
     flex: 0 0 auto;
+    border: none;
 }
 
 .sign-up-txt3 {
@@ -260,6 +267,7 @@
 .sign-up-foreground2-item {
     display: flex;
     flex: 0 0 auto;
+    border: none;
 }
 
 .sign-up-txt4 {
@@ -575,4 +583,16 @@
     font: 0.8333333333em PT Serif, Helvetica, Arial, serif;
     color: #000 ff;
     letter-spacing: -0.72;
+}
+
+.sign-in-txt20{
+    overflow: visible;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    margin-left: 75px;
+    font: 15px PT Serif, Helvetica, Arial, serif;
+    color: #000;
+    text-align: center;
+    letter-spacing: 0;
+    white-space: pre-wrap; 
 }
