@@ -1,0 +1,866 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 13, 2021, 10:03:10 PM
+    Author     : Marshallein
+*/
+
+/* This source code is exported from pxCode, you can get more document from https://www.pxcode.io */
+
+.home-mentee-flexbox {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 121, 205, 0.46) 35.94%, #23049D 100%);
+}
+
+.home-mentee-flexbox-posize {
+    position: relative;
+    flex-grow: 1;
+    margin: 0px;
+}
+
+.home-mentee-flexbox-item {
+    display: flex;
+    flex: 0 0 auto;
+    z-index: 3;
+}
+
+.home-mentee-section1-navbar {
+    display: flex;
+    background-color: #fff;
+}
+
+.home-mentee-section1-navbar-posize {
+    position: relative;
+    height: 120px;
+    flex-grow: 1;
+    margin: 0px;
+}
+
+.home-mentee-section1-flexbox {
+    display: flex;
+}
+
+.home-mentee-section1-flexbox-posize {
+    position: relative;
+    flex-grow: 1;
+    margin: 25px 42px 34px 50px;
+}
+
+.home-mentee-section1-icon {
+    background: var(--src) center center / contain no-repeat;
+}
+
+.home-mentee-section1-icon-posize {
+    position: relative;
+    height: 35.5px;
+    width: 53.25px;
+    min-width: 53.25px;
+    margin: 18px 0px 8px;
+}
+
+.home-mentee-section1-flexbox-space {
+    display: flex;
+    flex: 1 4 1047.88px;
+}
+
+.home-mentee-section1-icon-posize1 {
+    position: relative;
+    height: 61px;
+    width: 61px;
+    min-width: 61px;
+    margin: 0px;
+}
+
+.home-mentee-section1-flexbox-space1 {
+    display: flex;
+    flex: 0 1 37.08px;
+}
+
+.home-mentee-section1-flexbox-item {
+    display: flex;
+    flex: 0 1 55.92px;
+}
+
+.home-mentee-section1-group {
+    display: flex;
+}
+
+.home-mentee-section1-group-posize {
+    position: relative;
+    min-height: 50.92px;
+    flex-grow: 1;
+    margin: 5px 0px;
+}
+
+.home-mentee-section1-icon-posize2 {
+    position: relative;
+    height: 50.83px;
+    width: 50.83px;
+    min-width: 50.83px;
+    margin: 0px 5px 0px 0px;
+}
+
+.home-mentee-section1-icon-posize3 {
+    position: absolute;
+    top: 0px;
+    height: 25px;
+    left: 0px;
+    width: 25px;
+    min-width: 25px;
+    margin: 26px 0px 0px 31px;
+}
+
+.home-mentee-section1-flexbox-space2 {
+    display: flex;
+    flex: 0 1 32px;
+}
+
+.home-mentee-section1-icon-posize4 {
+    position: relative;
+    height: 61px;
+    width: 61px;
+    min-width: 61px;
+    margin: 0px;
+}
+
+.home-mentee-flexbox-item1 {
+    display: flex;
+    flex: 0 0 auto;
+    z-index: 1;
+}
+
+.home-mentee-section2-avatar {
+    display: flex;
+}
+
+.home-mentee-section2-avatar-posize {
+    position: relative;
+    height: 377px;
+    flex-grow: 1;
+    margin: 0px;
+}
+
+.home-mentee-section2-flexbox {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-mentee-section2-flexbox-posize1 {
+    position: relative;
+    flex-grow: 1;
+    margin: 34px 47px 34px 50px;
+}
+
+.home-mentee-section2-flexbox-item {
+    display: flex;
+    flex: 0 1 308px;
+}
+
+.home-mentee-section2-flexbox1 {
+    display: flex;
+}
+
+.home-mentee-section2-flexbox1-posize {
+    position: relative;
+    width: 667px;
+    min-width: 667px;
+    margin: 0px 676px 36px 0px;
+}
+
+.home-mentee-section2-flexbox1-item {
+    display: flex;
+    flex: 0 1 272px;
+}
+
+.home-mentee-section2-rect {
+    background-color: #fff;
+}
+
+.home-mentee-section2-rect-posize {
+    position: relative;
+    height: 272px;
+    flex-grow: 1;
+    margin: 0px;
+}
+
+.home-mentee-section2-flexbox1-space {
+    display: flex;
+    flex: 1 1 48px;
+}
+
+.home-mentee-section2-flexbox1-item1 {
+    display: flex;
+    flex: 0 1 347px;
+}
+
+.home-mentee-section2-flexbox-posize {
+    position: relative;
+    flex-grow: 1;
+    margin: 0px 0px 185px;
+}
+
+.home-mentee-section2-flexbox2-item {
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.home-mentee-section2-txt {
+    display: flex;
+    align-items: center;
+    font: 30px PT Serif, Helvetica, Arial, serif;
+    color: #000;
+    letter-spacing: -1.44;
+}
+
+.home-mentee-section2-txt-posize {
+    position: relative;
+    width: fit-content;
+    margin: 0px auto;
+}
+
+.home-mentee-section2-flexbox2-space {
+    display: flex;
+    flex: 0 0 auto;
+    min-height: 23px;
+}
+
+.home-mentee-section2-txt1 {
+    font: 15px PT sans, Helvetica, Arial, serif;
+    color: #000;
+    letter-spacing: 0;
+}
+
+.home-mentee-section2-txt1-posize {
+    position: relative;
+    width: fit-content;
+    margin: 0px;
+}
+
+.home-mentee-section2-line {
+    background-color: #000;
+    flex: 0 0 auto;
+}
+
+.home-mentee-section2-line-posize {
+    position: relative;
+    height: 1px;
+    margin: 0px 0px 0px 1px;
+}
+
+.home-mentee-section2-img {
+    background: var(--src) center center / cover no-repeat;
+}
+
+.home-mentee-section2-img-posize {
+    position: absolute;
+    top: 0px;
+    height: 272px;
+    left: 0px;
+    width: 272px;
+    min-width: 272px;
+    margin: 34px 1117px 71px 51px;
+}
+
+.home-mentee-flexbox-item2 {
+    display: flex;
+    flex: 0 0 auto;
+    z-index: 2;
+}
+
+.home-mentee-section3-mainComponent {
+    display: flex;
+}
+
+.home-mentee-section3-mainComponent-posize {
+    position: relative;
+    height: 1677px;
+    flex-grow: 1;
+    margin: 0px;
+}
+
+.home-mentee-section3-flexbox {
+    display: flex;
+}
+
+.home-mentee-section3-flexbox-posize1 {
+    position: relative;
+    flex-grow: 1;
+    margin: 1px 47px 40px 51px;
+}
+
+.home-mentee-section3-flexbox-item {
+    display: flex;
+    flex: 0 1 912px;
+}
+
+.home-mentee-section3-coverGroup {
+    display: flex;
+}
+
+.home-mentee-section3-coverGroup-posize2 {
+    position: relative;
+    min-height: 1635px;
+    flex-grow: 1;
+    margin: 1px 0px 0px;
+}
+
+.home-mentee-section3-background {
+    background-color: #fff;
+    box-shadow: 12px 13px 5px 0px rgba(0, 0, 0, 0.25098039215686274);
+    border: 2px solid #000;
+}
+
+.home-mentee-section3-background-posize {
+    position: absolute;
+    top: 0px;
+    height: 1635px;
+    left: 0px;
+    flex-grow: 1;
+    right: 0px;
+    margin: 0px;
+}
+
+.home-mentee-section3-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-mentee-section3-list-posize {
+    position: relative;
+    flex-grow: 1;
+    margin: 18px 36px 20px 20px;
+}
+
+.home-mentee-section3-list-item {
+    display: flex;
+    flex: 0 1 168px;
+}
+
+.home-mentee-section3-yourRequest {
+    display: flex;
+    background-color: rgba(169, 150, 242, 0.7529411764705882);
+}
+
+.home-mentee-section3-yourRequest-posize {
+    position: relative;
+    flex-grow: 1;
+    margin: 0px 0px 51px;
+}
+
+.home-mentee-section3-yourRequest-space {
+    display: flex;
+    flex: 0 0 auto;
+    min-width: 29.28px;
+}
+
+.home-mentee-section3-yourRequest-item {
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.home-mentee-section3-txt {
+    display: flex;
+    align-items: center;
+    font: 30px PT Serif, Helvetica, Arial, serif;
+    color: #000;
+    letter-spacing: -1.44;
+}
+
+.home-mentee-section3-txt-posize {
+    position: relative;
+    width: fit-content;
+    margin: 40px auto 34px;
+}
+
+.home-mentee-section3-yourRequest-space1 {
+    display: flex;
+    flex: 1 1 493px;
+}
+
+.home-mentee-section3-icon {
+    background: var(--src) center center / contain no-repeat;
+}
+
+.home-mentee-section3-icon-posize {
+    position: relative;
+    height: 30px;
+    width: 31px;
+    min-width: 31px;
+    margin: 47px 0px 40px;
+}
+
+.home-mentee-section3-yourRequest-space2 {
+    display: flex;
+    flex: 0 0 auto;
+    min-width: 19.72px;
+}
+
+.home-mentee-section3-icon-posize1 {
+    position: relative;
+    height: 35.19px;
+    width: 38.92px;
+    min-width: 38.92px;
+    margin: 41px 0px 40px;
+}
+
+.home-mentee-section3-yourRequest-space3 {
+    display: flex;
+    flex: 0 0 auto;
+    min-width: 24.33px;
+}
+
+.home-mentee-section3-list-item1 {
+    display: flex;
+    flex: 0 1 275px;
+}
+
+.home-mentee-section3-requestTag {
+    display: flex;
+    background-color: rgba(255, 122, 206, 0.4627450980392157);
+}
+
+.home-mentee-section3-requestTag-posize {
+    position: relative;
+    height: 251px;
+    flex-grow: 1;
+    margin: 0px 11px 24px 10px;
+}
+
+.home-mentee-section3-flexbox-posize {
+    position: relative;
+    flex-grow: 1;
+    margin: 18px 25px 102px 19px;
+}
+
+.home-mentee-section3-flexbox1-item {
+    display: flex;
+    flex: 0 1 99.63px;
+}
+
+.home-mentee-section3-flexbox2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-mentee-section3-flexbox2-posize {
+    position: relative;
+    flex-grow: 1;
+    margin: 0px;
+}
+
+.home-mentee-section3-rect {
+    background-color: #fff;
+    flex: 0 0 auto;
+}
+
+.home-mentee-section3-rect-posize {
+    position: relative;
+    height: 100px;
+    margin: 0px;
+}
+
+.home-mentee-section3-flexbox2-space {
+    display: flex;
+    flex: 0 0 auto;
+    min-height: 12px;
+}
+
+.home-mentee-section3-flexbox2-item {
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.home-mentee-section3-coverGroup1 {
+    display: flex;
+    background-color: rgba(255, 0, 0, 0.37254901960784315);
+}
+
+.home-mentee-section3-coverGroup1-posize {
+    position: relative;
+    min-height: 19px;
+    flex-grow: 1;
+    margin: 0px 5px 0px 4px;
+}
+
+.home-mentee-section3-txt1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: 10px "Roboto", Helvetica, Arial, serif;
+    color: #000;
+    text-align: center;
+    letter-spacing: 0;
+}
+
+.home-mentee-section3-txt1-posize {
+    position: relative;
+    width: fit-content;
+    margin: 5px auto 0px;
+}
+
+.home-mentee-section3-flexbox1-space {
+    display: flex;
+    flex: 0 0 auto;
+    min-width: 27.37px;
+}
+
+.home-mentee-section3-flexbox1-item1 {
+    display: flex;
+    flex: 0 1 664px;
+}
+
+.home-mentee-section3-icon-posize2 {
+    position: absolute;
+    top: 0px;
+    height: 100px;
+    left: 0px;
+    width: 99.63px;
+    min-width: 99.63px;
+    margin: 18px 716px 133px 19px;
+}
+
+.home-mentee-section3-coverGroup2 {
+    display: flex;
+    background-color: #ffe06c;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.home-mentee-section3-coverGroup2-posize {
+    position: absolute;
+    top: 191px;
+    bottom: 18px;
+    min-height: 42px;
+    left: 567px;
+    flex-grow: 1;
+    right: 72px;
+}
+
+.home-mentee-section3-txt2 {
+    font: 15px "Roboto", Helvetica, Arial, serif;
+    color: #000;
+    letter-spacing: 0;
+}
+
+.home-mentee-section3-txt2-posize {
+    position: relative;
+    display: block;
+    width: fit-content;
+    margin: 8px auto 13px;
+}
+
+.home-mentee-section3-txt3 {
+    font: 11.6666666667px "Roboto", Helvetica, Arial, serif;
+    color: #000;
+    letter-spacing: 0;
+}
+
+.home-mentee-section3-txt3-posize {
+    position: absolute;
+    top: 206px;
+    bottom: 29px;
+    left: 351px;
+    width: fit-content;
+}
+
+.home-mentee-section3-icon3 {
+    background: var(--src) center center / contain no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+.home-mentee-section3-icon-posize3 {
+    position: absolute;
+    top: 0px;
+    height: 24px;
+    left: 0px;
+    width: 24px;
+    min-width: 24px;
+    margin: 172px 782px 55px 29px;
+}
+
+.home-mentee-section3-txt4 {
+    display: flex;
+    align-items: center;
+    font: 10.8333333333px "Roboto", Helvetica, Arial, serif;
+    color: #000;
+    letter-spacing: 0;
+}
+
+.home-mentee-section3-txt4-posize {
+    position: absolute;
+    top: 174px;
+    bottom: 62px;
+    left: 63px;
+    width: fit-content;
+}
+
+.home-mentee-section3-icon-posize4 {
+    position: absolute;
+    top: 0px;
+    height: 24px;
+    left: 0px;
+    width: 24px;
+    min-width: 24px;
+    margin: 204px 782px 23px 29px;
+}
+
+.home-mentee-section3-txt5 {
+    display: flex;
+    align-items: center;
+    font: 10.8333333333px "Roboto", Helvetica, Arial, serif;
+    color: #000;
+    letter-spacing: 0;
+}
+
+.home-mentee-section3-txt5-posize {
+    position: absolute;
+    top: 206px;
+    bottom: 30px;
+    left: 62px;
+    width: fit-content;
+}
+
+.home-mentee-section3-list-item2 {
+    display: flex;
+    flex: 0 1 37px;
+}
+
+.home-mentee-section3-pageControl {
+    display: flex;
+}
+
+.home-mentee-section3-pageControl-posize {
+    position: relative;
+    flex-grow: 1;
+    margin: 0px 11px 0px 10px;
+}
+
+.home-mentee-section3-pageControl-item {
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.home-mentee-section3-txt6 {
+    font: 11.6666666667px PT Serif, Helvetica, Arial, serif;
+    color: #000;
+    letter-spacing: 0;
+}
+
+.home-mentee-section3-txt6-posize {
+    position: relative;
+    display: block;
+    width: fit-content;
+    margin: 7px auto 14px;
+}
+
+.home-mentee-section3-pageControl-space {
+    display: flex;
+    flex: 1 1 428px;
+}
+
+.home-mentee-section3-pageControl-item1 {
+    display: flex;
+    flex: 0 1 148px;
+}
+
+.home-mentee-section3-coverGroup-posize {
+    position: relative;
+    min-height: 36px;
+    flex-grow: 1;
+    margin: 1px 0px 0px;
+}
+
+.home-mentee-section3-background1 {
+    background-color: #ff7ace;
+    box-shadow: 3px 4px 4px 0px rgba(0, 0, 0, 0.25098039215686274);
+    border: 1px solid #000;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.home-mentee-section3-background1-posize {
+    position: absolute;
+    top: 0px;
+    height: 36px;
+    left: 0px;
+    flex-grow: 1;
+    right: 0px;
+    margin: 0px;
+}
+
+.home-mentee-section3-txt7 {
+    display: flex;
+    justify-content: center;
+    font: 11.6666666667px PT Serif, Helvetica, Arial, serif;
+    color: #000;
+    text-align: center;
+    letter-spacing: 0;
+}
+
+.home-mentee-section3-txt7-posize {
+    position: relative;
+    width: fit-content;
+    margin: 8px auto 12px;
+}
+
+.home-mentee-section3-pageControl-space1 {
+    display: flex;
+    flex: 0 0 auto;
+    min-width: 22px;
+}
+
+.home-mentee-section3-pageControl-item2 {
+    display: flex;
+    flex: 0 1 148px;
+}
+
+.home-mentee-section3-coverGroup-posize1 {
+    position: relative;
+    min-height: 36px;
+    flex-grow: 1;
+    margin: 0px 0px 1px;
+}
+
+.home-mentee-section3-background2 {
+    background-color: #ff7ace;
+    box-shadow: 3px 4px 4px 0px rgba(0, 0, 0, 0.25098039215686274);
+    border: 1px solid #000;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.home-mentee-section3-background2-posize {
+    position: absolute;
+    top: 0px;
+    height: 36px;
+    left: 0px;
+    flex-grow: 1;
+    right: 0px;
+    margin: 0px;
+}
+
+.home-mentee-section3-txt8 {
+    display: flex;
+    justify-content: center;
+    font: 11.6666666667px PT Serif, Helvetica, Arial, serif;
+    color: #000;
+    text-align: center;
+    letter-spacing: 0;
+}
+
+.home-mentee-section3-txt8-posize {
+    position: relative;
+    width: fit-content;
+    margin: 8px auto 12px;
+}
+
+.home-mentee-section3-flexbox-space {
+    display: flex;
+    flex: 1 1 46px;
+}
+
+.home-mentee-section3-flexbox-item1 {
+    display: flex;
+    flex: 0 1 384px;
+    cursor: pointer;
+}
+
+.home-mentee-section3-coverGroup5 {
+    display: flex;
+    background-color: #fff;
+}
+
+.home-mentee-section3-coverGroup5-posize {
+    position: relative;
+    min-height: 1076px;
+    flex-grow: 1;
+    margin: 0px 0px 560px;
+}
+
+.home-mentee-section3-button {
+    display: flex;
+}
+
+.home-mentee-section3-button-posize {
+    position: relative;
+    min-height: 120px;
+    flex-grow: 1;
+    margin: 16px 16px 940px;
+}
+
+.home-mentee-section3-background3 {
+    background-color: #ffe06c;
+    border: 1px solid #000;
+}
+
+.home-mentee-section3-background3-posize {
+    position: absolute;
+    top: 0px;
+    height: 120px;
+    left: 0px;
+    flex-grow: 1;
+    right: 0px;
+    margin: 0px;
+}
+
+.home-mentee-section3-foreground {
+    display: flex;
+}
+
+.home-mentee-section3-foreground-posize {
+    position: relative;
+    flex-grow: 1;
+    margin: 36px 56px 37px 46px;
+}
+
+.home-mentee-section3-icon-posize5 {
+    position: relative;
+    height: 47.25px;
+    width: 47.25px;
+    min-width: 47.25px;
+    margin: 0px;
+}
+
+.home-mentee-section3-foreground-space {
+    display: flex;
+    flex: 1 1 58.37px;
+}
+
+.home-mentee-section3-foreground-item {
+    display: flex;
+    flex: 0 0 auto;
+    min-width: 145px;
+}
+
+.home-mentee-section3-txt9 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: 25.5319149584px PT Serif, Helvetica, Arial, serif;
+    color: #000;
+    text-align: center;
+    letter-spacing: -0.96;
+}
+
+.home-mentee-section3-txt9-posize {
+    position: relative;
+    width: fit-content;
+    margin: 0px auto 25px;
+}
+
+.home-mentee-flexbox-space {
+    display: flex;
+    flex: 0 0 auto;
+    z-index: 4;
+    min-height: 61px;
+}
+
+
+/* .text {
+    display: block;
+    resize: none;
+    width: auto;
+    height: 300px;
+} */
