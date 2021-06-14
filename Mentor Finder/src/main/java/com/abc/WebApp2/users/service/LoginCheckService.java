@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.service;
+package com.abc.WebApp2.users.service;
 
-import com.abc.WebApp2.repository.LoginInfoRepository;
-import com.abc.WebApp2.entity.LoginInfo;
+import com.abc.WebApp2.users.repo.LoginInfoRepository;
+import com.abc.WebApp2.users.entity.LoginInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

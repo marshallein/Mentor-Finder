@@ -5,7 +5,7 @@
  */
 package com.abc.WebApp2.config;
 
-import com.abc.WebApp2.service.LoginInfoDetailsImplService;
+import com.abc.WebApp2.users.service.LoginInfoDetailsImplService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

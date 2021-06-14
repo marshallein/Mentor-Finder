@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.repository;
+package com.abc.WebApp2.users.repo;
 
-import com.abc.WebApp2.entity.LoginInfo;
+import com.abc.WebApp2.users.entity.LoginInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.Nullable;
 

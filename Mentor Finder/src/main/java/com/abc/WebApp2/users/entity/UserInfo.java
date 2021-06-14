@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.entity;
+package com.abc.WebApp2.users.entity;
 
+import com.abc.WebApp2.user_function.entity.Comment;
+import com.abc.WebApp2.user_function.entity.Enrolled;
+import com.abc.WebApp2.user_function.entity.Notify;
+import com.abc.WebApp2.user_function.entity.Request;
+import com.abc.WebApp2.user_function.entity.Subject;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;

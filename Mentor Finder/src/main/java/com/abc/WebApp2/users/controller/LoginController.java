@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.controller;
+package com.abc.WebApp2.users.controller;
 
-import com.abc.WebApp2.repository.LoginInfoRepository;
-import com.abc.WebApp2.entity.LoginInfo;
+import com.abc.WebApp2.users.repo.LoginInfoRepository;
+import com.abc.WebApp2.users.entity.LoginInfo;
 
-import com.abc.WebApp2.service.LoginCheckService;
+import com.abc.WebApp2.users.service.LoginCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
