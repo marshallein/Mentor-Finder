@@ -3,6 +3,8 @@
 đã đẩy front end draft chưa chỉnh sửa vào đây
 
 
+Gọi CurrentUserExtractorService để truy xuất ra User hiện tại khi đã đăng nhập xong.
+Cứ thế mà phát triển lên từ đó.
 
 
 # Version
