@@ -23,16 +23,16 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class LoginController {
-    
+
     @Autowired
     LoginCheckService lcs;
-            
+
     @Autowired
     private LoginInfoRepository repo;
-    
+
     @GetMapping("/login")
     public String showSignUpForm() {
-       
+
         return "Login";
     }
 
@@ -53,5 +53,4 @@ public class LoginController {
 //        }
 //        
 //    }
-
 }

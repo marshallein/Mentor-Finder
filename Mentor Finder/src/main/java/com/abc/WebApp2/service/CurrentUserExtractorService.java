@@ -19,42 +19,35 @@ import org.springframework.stereotype.Service;
  *
  * @author User
  */
-
 @Service
 public class CurrentUserExtractorService {
-    
+
     @Autowired
     private LoginInfoRepository lgIfRepo;
-    
-    @Autowired 
+
+    @Autowired
     private UserInfoRepository userIfRepo;
 
     public CurrentUserExtractorService() {
     }
-    
-    
-    public UserInfo returnCurrentUser()
-    {
+
+    public UserInfo returnCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         System.out.println(currentPrincipalName);
-        
+
         LoginInfo lgIf = lgIfRepo.findByUsername(currentPrincipalName);
         System.out.print(lgIf.toString());
-        
+
         Optional<UserInfo> uIf = userIfRepo.findById(lgIf.getUserid());
-        if(uIf.isPresent())
-        {
+        if (uIf.isPresent()) {
             System.out.println(uIf.get().toString());
             return uIf.get();
 
-        }
-        else
-        {
+        } else {
             return null;
         }
-   
+
     }
-    
-    
+
 }

@@ -26,14 +26,14 @@ public class ProfileController {
         model.addObject("mentor", mentor);
         return null;
     }
-    
+
     @GetMapping("/profile")
-    public ModelAndView myProfile(){
+    public ModelAndView myProfile() {
         ModelAndView model = new ModelAndView("my_profile");
-        Long uid=0L;
+        Long uid = 0L;
         UserInfo info = uisrv.getUserInfo(uid);
         model.addObject("user_info", info);
         return null;
     }
-    
+
 }
