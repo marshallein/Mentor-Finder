@@ -21,22 +21,27 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class HomeController {
-  
-   
+
     @Autowired
     CurrentUserExtractorService cUES;
-    
+
     @GetMapping("/home")
     public String showHomePage(Model model) {
         UserInfo uIf = cUES.returnCurrentUser();
         System.out.println(uIf.toString());
         model.addAttribute("currentUserInfo", uIf);
-        
+
         return "home";
     }
-    
+
     @PostMapping("/home")
     public String showHomePage1() {
         return "home";
     }
+
+    @GetMapping("/landing")
+    public String showLandingPage() {
+        return "landing";
+    }
+
 }

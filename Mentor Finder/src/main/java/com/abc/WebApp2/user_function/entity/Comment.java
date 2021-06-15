@@ -120,5 +120,5 @@ public class Comment implements Serializable {
     public String toString() {
         return "com.abc.WebApp2.entity.Comment[ comId=" + comId + " ]";
     }
-    
+
 }

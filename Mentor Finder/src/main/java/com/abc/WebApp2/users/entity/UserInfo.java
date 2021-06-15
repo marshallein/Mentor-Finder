@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author User
  */
 @Entity
-@Table(name= "[User]")
+@Table(name = "[User]")
 public class UserInfo {
 
     @ManyToMany(mappedBy = "userInfoCollection")
@@ -51,41 +51,40 @@ public class UserInfo {
     @Id
     @Column(name = "uId")
     private Long id;
-    
+
     @Basic(optional = false)
     @Column(name = "uName")
     private String uName;
-    
+
     @Basic(optional = false)
     @Column(name = "uDOB")
     @Temporal(TemporalType.DATE)
     private Date uDOB;
-    
+
     @Basic(optional = false)
     @Column(name = "uGender")
     private boolean uGender;
-    
+
     @Basic(optional = false)
     @Column(name = "uRole")
     private String uRole;
-    
+
     @Column(name = "uPhoneNumber")
     private String uPhoneNumber;
-    
+
     @Column(name = "uAddress")
     private String uAddress;
-    
+
     @Column(name = "uImage")
     private String uImage;
-    
+
     @Column(name = "uDescription")
     private String uDescription;
-    
+
     @Basic(optional = false)
     @Column(name = "uStatus")
     private boolean uStatus;
-    
-    
+
     public UserInfo() {
     }
 
@@ -237,9 +236,5 @@ public class UserInfo {
     public String toString() {
         return "id=" + id + ", uName=" + uName + ", uDOB=" + uDOB + ", uGender=" + uGender + ", uRole=" + uRole + ", uPhoneNumber=" + uPhoneNumber + ", uAddress=" + uAddress + ", uImage=" + uImage + ", uDescription=" + uDescription + ", uStatus=" + uStatus + '}';
     }
-    
-    
 
-
-    
 }

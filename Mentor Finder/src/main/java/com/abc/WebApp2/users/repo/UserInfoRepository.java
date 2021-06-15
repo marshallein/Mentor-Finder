@@ -5,19 +5,19 @@
  */
 package com.abc.WebApp2.users.repo;
 
-
 import com.abc.WebApp2.users.entity.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
-
 
 /**
  *
  * @author User
  */
-
 @Repository
-public interface UserInfoRepository extends JpaRepository<UserInfo, Long>{
-    
-    
+public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {
+
+    @Nullable
+    UserInfo findByUId(Long uId);
+
 }

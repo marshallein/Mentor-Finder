@@ -23,10 +23,10 @@ public class Role {
     @Id
     @Column(name = "rId")
     private Long id;
-    
+
     @Column(name = "rName")
     private String name;
-    
+
     @ManyToMany(mappedBy = "roles")
     private Set<LoginInfo> lgInfos;
 
@@ -53,11 +53,5 @@ public class Role {
     public void setLgInfos(Set<LoginInfo> lgInfos) {
         this.lgInfos = lgInfos;
     }
-    
-    
-    
-    
 
-
-    
 }

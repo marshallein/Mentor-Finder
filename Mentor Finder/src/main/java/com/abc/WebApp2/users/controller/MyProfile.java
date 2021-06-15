@@ -5,13 +5,6 @@
  */
 package com.abc.WebApp2.users.controller;
 
-import org.springframework.stereotype.Controller;
-
-/**
- *
- * @author User
- */
-@Controller
-public class PostRegisterController {
+public class MyProfile {
 
 }
