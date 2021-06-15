@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.users.controller;
+package com.abc.WebApp2.controller;
 
-import com.abc.WebApp2.users.entity.UserInfo;
-import com.abc.WebApp2.users.service.CurrentUserExtractorService;
+import com.abc.WebApp2.entity.UserInfo;
+import com.abc.WebApp2.service.CurrentUserExtractorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,27 +21,22 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class HomeController {
-
+  
+   
     @Autowired
     CurrentUserExtractorService cUES;
-
+    
     @GetMapping("/home")
     public String showHomePage(Model model) {
         UserInfo uIf = cUES.returnCurrentUser();
         System.out.println(uIf.toString());
         model.addAttribute("currentUserInfo", uIf);
-
+        
         return "home";
     }
-
+    
     @PostMapping("/home")
     public String showHomePage1() {
         return "home";
     }
-
-    @GetMapping("/landing")
-    public String showLandingPage() {
-        return "landing";
-    }
-
 }

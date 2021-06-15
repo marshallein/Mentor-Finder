@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.users.entity;
+package com.abc.WebApp2.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -104,5 +104,5 @@ public class SkillnExperience implements Serializable {
     public String toString() {
         return "com.abc.WebApp2.entity.SkillnExperience[ sneId=" + sneId + " ]";
     }
-
+    
 }

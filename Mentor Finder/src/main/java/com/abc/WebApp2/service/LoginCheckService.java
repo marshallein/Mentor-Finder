@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.users.service;
+package com.abc.WebApp2.service;
 
-import com.abc.WebApp2.users.repo.LoginInfoRepository;
-import com.abc.WebApp2.users.entity.LoginInfo;
+import com.abc.WebApp2.repository.LoginInfoRepository;
+import com.abc.WebApp2.entity.LoginInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,32 +16,42 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LoginCheckService {
-
+    
     @Autowired
     private LoginInfoRepository repo;
-
-    public Long checkLoginInfo(String username, String password) {
+    
+    public Long checkLoginInfo(String username, String password)
+    {
         LoginInfo result = repo.findByUsername(username);
-        if ((result == null)
-                || (!username.equals(result.getUsername()))
-                || (!password.equals(result.getPassword()))) {
+        if((result==null) ||
+           (!username.equals(result.getUsername())) ||
+           (!password.equals(result.getPassword())))
+        {
             return -1l;
-        } else {
+        }
+        else
+        {
             return 1l;
         }
     }
-
-    public boolean checkEmail(String email) {
+    
+    public boolean checkEmail(String email)
+    {
         LoginInfo result = repo.findByEmail(email);
-        if (result == null) {
+        if(result==null)
+        {
             System.out.println("there's no email");
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
-
-    public void saveNewRegister(LoginInfo lgIf) {
+    
+    public void saveNewRegister(LoginInfo lgIf)
+    {
         repo.save(lgIf);
     }
 }
+

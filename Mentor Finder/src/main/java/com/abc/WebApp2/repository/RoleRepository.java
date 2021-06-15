@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.users.repo;
+package com.abc.WebApp2.repository;
 
-import com.abc.WebApp2.users.entity.Role;
+import com.abc.WebApp2.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

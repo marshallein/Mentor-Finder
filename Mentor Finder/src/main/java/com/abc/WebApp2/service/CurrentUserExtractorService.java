@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.users.service;
+package com.abc.WebApp2.service;
 
-import com.abc.WebApp2.users.entity.LoginInfo;
-import com.abc.WebApp2.users.entity.UserInfo;
-import com.abc.WebApp2.users.repo.LoginInfoRepository;
-import com.abc.WebApp2.users.repo.UserInfoRepository;
+import com.abc.WebApp2.entity.LoginInfo;
+import com.abc.WebApp2.entity.UserInfo;
+import com.abc.WebApp2.repository.LoginInfoRepository;
+import com.abc.WebApp2.repository.UserInfoRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -19,35 +19,42 @@ import org.springframework.stereotype.Service;
  *
  * @author User
  */
+
 @Service
 public class CurrentUserExtractorService {
-
+    
     @Autowired
     private LoginInfoRepository lgIfRepo;
-
-    @Autowired
+    
+    @Autowired 
     private UserInfoRepository userIfRepo;
 
     public CurrentUserExtractorService() {
     }
-
-    public UserInfo returnCurrentUser() {
+    
+    
+    public UserInfo returnCurrentUser()
+    {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         System.out.println(currentPrincipalName);
-
+        
         LoginInfo lgIf = lgIfRepo.findByUsername(currentPrincipalName);
         System.out.print(lgIf.toString());
-
+        
         Optional<UserInfo> uIf = userIfRepo.findById(lgIf.getUserid());
-        if (uIf.isPresent()) {
+        if(uIf.isPresent())
+        {
             System.out.println(uIf.get().toString());
             return uIf.get();
 
-        } else {
+        }
+        else
+        {
             return null;
         }
-
+   
     }
-
+    
+    
 }

@@ -3,8 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.users.controller;
+package com.abc.WebApp2.controller;
 
-public class MyProfile {
+import org.springframework.stereotype.Controller;
 
+/**
+ *
+ * @author User
+ */
+@Controller
+public class RequestCreatingController {
+    
 }

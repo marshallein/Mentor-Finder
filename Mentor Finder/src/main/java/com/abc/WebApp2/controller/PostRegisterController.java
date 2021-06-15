@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.users.controller;
+package com.abc.WebApp2.controller;
 
 import org.springframework.stereotype.Controller;
 
@@ -13,5 +13,5 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class PostRegisterController {
-
+    
 }

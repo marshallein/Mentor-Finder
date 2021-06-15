@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.users.controller;
+package com.abc.WebApp2.controller;
 
-import com.abc.WebApp2.users.repo.LoginInfoRepository;
-import com.abc.WebApp2.users.entity.LoginInfo;
-import com.abc.WebApp2.users.service.LoginCheckService;
+import com.abc.WebApp2.repository.LoginInfoRepository;
+import com.abc.WebApp2.entity.LoginInfo;
+import com.abc.WebApp2.service.LoginCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,44 +21,54 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class RegisterController {
-
+    
     @Autowired
     LoginCheckService lcs;
-
+    
     @GetMapping("/register")
     public String showRegisterForm() {
-
+    
         return "Register";
     }
-
+    
     @PostMapping("/register")
     public String checkRegister(@RequestParam(value = "username") String username,
-            @RequestParam(value = "password") String password,
-            @RequestParam(value = "passwordRetyped") String passwordRetyped,
-            @RequestParam(value = "email") String email,
-            @RequestParam(value = "acceptTerm") String acceptTerm,
-            Model model) {
-        if (!password.equals(passwordRetyped)) {
+                             @RequestParam(value = "password") String password,
+                             @RequestParam(value = "passwordRetyped") String passwordRetyped,
+                             @RequestParam(value = "email") String email, 
+                              @RequestParam(value = "acceptTerm") String acceptTerm,
+                               Model model)
+    {
+        if(!password.equals(passwordRetyped))
+        {
             model.addAttribute("error", "Password doesn't not match");
             return "Register";
-        } else if (lcs.checkLoginInfo(username, password) != -1L) {
+        }
+        else if(lcs.checkLoginInfo(username, password) != -1L)
+        {
             model.addAttribute("error", "Account already existed, please specify another ");
             return "Register";
-        } else if (!lcs.checkEmail(email)) {
+        }
+        else if (!lcs.checkEmail(email))
+        {
             model.addAttribute("error", "Email is already existed ");
             return "Register";
-        } else if (acceptTerm == null) {
+        }
+        else if (acceptTerm == null)
+        {
             model.addAttribute("error", "Please accept the term");
             return "Register";
-        } else {
+        }
+        else
+        {
             LoginInfo lgIf = new LoginInfo();
             lgIf.setUsername(username);
             lgIf.setPassword(password);
             lgIf.setEmail(email);
-
+            
             lcs.saveNewRegister(lgIf);
             return "home";
         }
-
+        
     }
 }

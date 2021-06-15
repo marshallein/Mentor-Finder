@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.users.service;
+package com.abc.WebApp2.service;
 
-import com.abc.WebApp2.users.repo.LoginInfoRepository;
-import com.abc.WebApp2.users.entity.LoginInfo;
-import com.abc.WebApp2.users.entity.Role;
+import com.abc.WebApp2.repository.LoginInfoRepository;
+import com.abc.WebApp2.entity.LoginInfo;
+import com.abc.WebApp2.entity.Role;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +27,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class LoginInfoDetailsImplService implements UserDetailsService {
 
+    
     @Autowired
     private LoginInfoRepository loginInfoRepository;
-
+	
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -38,18 +39,18 @@ public class LoginInfoDetailsImplService implements UserDetailsService {
             System.out.println("User not found! " + username);
             throw new UsernameNotFoundException("User not found");
         }
-        System.out.println("Found User: " + lgInf);
-
+         System.out.println("Found User: " + lgInf);
+         
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        Set<Role> roles = lgInf.getRoles();
-        for (Role role : roles) {
+	Set<Role> roles = lgInf.getRoles();
+	for (Role role : roles) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
-            System.out.println("Found Role: " + role.getName());
-        }
+             System.out.println("Found Role: " + role.getName());
+	}
         UserDetails userDetails = (UserDetails) new User(lgInf.getUsername(),
                 lgInf.getPassword(), grantedAuthorities);
-
+        
         return userDetails;
     }
-
+    
 }

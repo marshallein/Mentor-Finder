@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.users.entity;
+package com.abc.WebApp2.entity;
 
 import java.util.Set;
 import javax.persistence.Column;
@@ -23,10 +23,10 @@ public class Role {
     @Id
     @Column(name = "rId")
     private Long id;
-
+    
     @Column(name = "rName")
     private String name;
-
+    
     @ManyToMany(mappedBy = "roles")
     private Set<LoginInfo> lgInfos;
 
@@ -53,5 +53,11 @@ public class Role {
     public void setLgInfos(Set<LoginInfo> lgInfos) {
         this.lgInfos = lgInfos;
     }
+    
+    
+    
+    
 
+
+    
 }

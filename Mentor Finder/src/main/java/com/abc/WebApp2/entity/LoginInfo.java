@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.users.entity;
+package com.abc.WebApp2.entity;
 
 import java.util.Set;
 import javax.persistence.Column;
@@ -17,42 +17,41 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.springframework.lang.Nullable;
-
 /**
  *
  * @author User
  */
 @Entity
-@Table(name = "LoginInfo", uniqueConstraints = {
-    @UniqueConstraint(columnNames = "lgUsername"),
-    @UniqueConstraint(columnNames = "lgEmail")})
+@Table(name = "LoginInfo", uniqueConstraints = { 
+               @UniqueConstraint(columnNames = "lgUsername"), @UniqueConstraint(columnNames = "lgEmail")})
 public class LoginInfo {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lgId")
     private Long userid;
+     
 
     @Column(name = "lgUsername")
     private String username;
+    
 
     @Column(name = "lgEmail")
     private String email;
-
+    
     @Column(name = "lgPassword")
     private String password;
 
-    @ManyToMany
-    @JoinTable(
-            name = "LoginInfo_Role",
-            joinColumns = @JoinColumn(
-                    name = "lgId"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "rId")
+    @ManyToMany 
+    @JoinTable( 
+        name = "LoginInfo_Role", 
+        joinColumns = @JoinColumn(
+          name = "lgId"), 
+        inverseJoinColumns = @JoinColumn(
+          name = "rId") 
     )
-
+    
     private Set<Role> roles;
-
+    
     public String getEmail() {
         return email;
     }
@@ -92,10 +91,15 @@ public class LoginInfo {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+    
+    
 
     @Override
     public String toString() {
         return "LoginEntity{" + "userid=" + userid + ", username=" + username + ", password=" + password + '}';
     }
-
+    
+    
+    
+        
 }

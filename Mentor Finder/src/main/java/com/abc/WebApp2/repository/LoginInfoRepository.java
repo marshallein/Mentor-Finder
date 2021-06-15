@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.abc.WebApp2.users.repo;
+package com.abc.WebApp2.repository;
 
-import com.abc.WebApp2.users.entity.UserInfo;
+import com.abc.WebApp2.entity.LoginInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.lang.Nullable;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,9 +16,13 @@ import org.springframework.stereotype.Repository;
  * @author User
  */
 @Repository
-public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {
-
+public interface LoginInfoRepository extends JpaRepository<LoginInfo, Long> {
+    
     @Nullable
-    UserInfo findByUId(Long uId);
-
+    LoginInfo findByUsername(String username);
+    
+    @Nullable 
+    LoginInfo findByEmail(String email);
+            
+    
 }
