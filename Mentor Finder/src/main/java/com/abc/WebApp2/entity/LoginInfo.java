@@ -43,14 +43,15 @@ public class LoginInfo {
 
     @ManyToMany 
     @JoinTable( 
-        name = "LoginInfo_Role", 
+        name = "LoginInfo_Authorization", 
         joinColumns = @JoinColumn(
           name = "lgId"), 
         inverseJoinColumns = @JoinColumn(
-          name = "rId") 
+          name = "aId") 
     )
     
-    private Set<Role> roles;
+    
+    private Set<Authorization> authors;
     
     public String getEmail() {
         return email;
@@ -84,12 +85,12 @@ public class LoginInfo {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Set<Authorization> getRoles() {
+        return authors;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Set<Authorization> authors) {
+        this.authors = authors;
     }
     
     
@@ -100,6 +101,4 @@ public class LoginInfo {
     }
     
     
-    
-        
 }

@@ -15,10 +15,11 @@ import org.springframework.stereotype.Service;
  * @author User
  */
 @Service
-public class LoginCheckService {
+public class CheckExistedLoginInfoService {
     
     @Autowired
     private LoginInfoRepository repo;
+    
     
     public Long checkLoginInfo(String username, String password)
     {
@@ -48,10 +49,6 @@ public class LoginCheckService {
             return false;
         }
     }
-    
-    public void saveNewRegister(LoginInfo lgIf)
-    {
-        repo.save(lgIf);
-    }
+     
+   
 }
-

@@ -7,7 +7,7 @@ package com.abc.WebApp2.service;
 
 import com.abc.WebApp2.repository.LoginInfoRepository;
 import com.abc.WebApp2.entity.LoginInfo;
-import com.abc.WebApp2.entity.Role;
+import com.abc.WebApp2.entity.Authorization;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +42,8 @@ public class LoginInfoDetailsImplService implements UserDetailsService {
          System.out.println("Found User: " + lgInf);
          
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-	Set<Role> roles = lgInf.getRoles();
-	for (Role role : roles) {
+	Set<Authorization> roles = lgInf.getRoles();
+	for (Authorization role : roles) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
              System.out.println("Found Role: " + role.getName());
 	}
