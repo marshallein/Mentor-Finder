@@ -17,17 +17,17 @@ import javax.persistence.Table;
  * @author User
  */
 @Entity
-@Table(name = "Role")
-public class Role {
+@Table(name = "[Authorization]")
+public class Authorization {
 
     @Id
-    @Column(name = "rId")
+    @Column(name = "aId")
     private Long id;
     
-    @Column(name = "rName")
+    @Column(name = "aName")
     private String name;
     
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "authors")
     private Set<LoginInfo> lgInfos;
 
     public Long getId() {
@@ -52,6 +52,11 @@ public class Role {
 
     public void setLgInfos(Set<LoginInfo> lgInfos) {
         this.lgInfos = lgInfos;
+    }
+
+    @Override
+    public String toString() {
+        return "Authorization{" + "id=" + id + ", name=" + name + ", lgInfos=" + lgInfos + '}';
     }
     
     

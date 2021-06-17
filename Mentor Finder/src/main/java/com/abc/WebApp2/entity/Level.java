@@ -111,5 +111,5 @@ public class Level implements Serializable {
     public String toString() {
         return "com.abc.WebApp2.entity.Level[ levId=" + levId + " ]";
     }
-    
+
 }

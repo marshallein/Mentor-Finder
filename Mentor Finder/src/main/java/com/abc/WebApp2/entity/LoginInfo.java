@@ -17,40 +17,42 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.springframework.lang.Nullable;
+
 /**
  *
  * @author User
  */
 @Entity
-@Table(name = "LoginInfo", uniqueConstraints = { 
-               @UniqueConstraint(columnNames = "lgUsername"), @UniqueConstraint(columnNames = "lgEmail")})
+@Table(name = "LoginInfo", uniqueConstraints = {
+    @UniqueConstraint(columnNames = "lgUsername"),
+    @UniqueConstraint(columnNames = "lgEmail")})
 public class LoginInfo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lgId")
     private Long userid;
-     
 
     @Column(name = "lgUsername")
     private String username;
-    
 
     @Column(name = "lgEmail")
     private String email;
-    
+
     @Column(name = "lgPassword")
     private String password;
 
     @ManyToMany 
     @JoinTable( 
-        name = "LoginInfo_Role", 
+        name = "LoginInfo_Authorization", 
         joinColumns = @JoinColumn(
           name = "lgId"), 
         inverseJoinColumns = @JoinColumn(
-          name = "rId") 
+          name = "aId") 
     )
     
-    private Set<Role> roles;
+    
+    private Set<Authorization> authors;
     
     public String getEmail() {
         return email;
@@ -84,15 +86,13 @@ public class LoginInfo {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Set<Authorization> getRoles() {
+        return authors;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Set<Authorization> authors) {
+        this.authors = authors;
     }
-    
-    
 
     @Override
     public String toString() {
@@ -100,6 +100,4 @@ public class LoginInfo {
     }
     
     
-    
-        
 }

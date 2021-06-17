@@ -145,5 +145,5 @@ public class Notify implements Serializable {
     public String toString() {
         return "com.abc.WebApp2.entity.Notify[ notId=" + notId + " ]";
     }
-    
+
 }

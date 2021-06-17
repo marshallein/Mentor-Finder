@@ -24,39 +24,39 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    
+
     @Autowired
     private LoginInfoDetailsImplService loginInfoDetailsService;
-    
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(loginInfoDetailsService).passwordEncoder(passwordEncoder());
     }
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        
+
         http.csrf().disable();
-        
+
         http.authorizeRequests()
-                .antMatchers("/","/login","/register").permitAll()
+                .antMatchers("/", "/login", "/register").permitAll()
                 .antMatchers("/home").hasRole("USER")
                 .antMatchers("/admin").hasRole("ADMIN")
                 .and()
-            .formLogin()
-                .loginProcessingUrl("/login_check") 
+                .formLogin()
+                .loginProcessingUrl("/login_check")
                 .loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/home")
                 .failureUrl("/login?error=true")
                 .and()
-            .exceptionHandling().accessDeniedPage("/403");
+                .exceptionHandling().accessDeniedPage("/403");
     }
 
 }
