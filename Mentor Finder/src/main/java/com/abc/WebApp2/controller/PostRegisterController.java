@@ -5,7 +5,13 @@
  */
 package com.abc.WebApp2.controller;
 
+import com.abc.WebApp2.entity.UserInfo;
+import com.abc.WebApp2.service.SaveUserInfoService;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -13,5 +19,19 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class PostRegisterController {
+    @Autowired
+    SaveUserInfoService suis;
+    
+    @PostMapping("/post-register")
+    public String checkRegister(@ModelAttribute("newUIf") UserInfo ui, HttpSession session){
+      
+         System.out.println("aDSADSDSADSADSAD");
+        ui.setId((Long)session.getAttribute("id"));
+        System.out.println(ui.getId());
+        System.out.println(ui.getuDOB());
 
+        ui.setuStatus(true);
+        suis.saveUserInfo(ui);
+        return "redirect:/login";
+    }
 }

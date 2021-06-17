@@ -5,7 +5,8 @@
  */
 package com.abc.WebApp2.repository;
 
-import com.abc.WebApp2.entity.Role;
+import com.abc.WebApp2.entity.Authorization;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author User
  */
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface AuthorizationRepository extends JpaRepository<Authorization, Long> {
 
+    Authorization findByName(String name);
 }

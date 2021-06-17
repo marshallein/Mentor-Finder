@@ -30,24 +30,34 @@ public class CurrentUserExtractorService {
 
     public CurrentUserExtractorService() {
     }
-
-    public UserInfo returnCurrentUser() {
+    
+    
+    public UserInfo returnCurrentUser() throws NullPointerException
+    {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         System.out.println(currentPrincipalName);
 
         LoginInfo lgIf = lgIfRepo.findByUsername(currentPrincipalName);
-        System.out.print(lgIf.toString());
+//        System.out.print(lgIf.toString());
+        try{
+             Optional<UserInfo> uIf = userIfRepo.findById(lgIf.getUserid());
+             if(uIf.isPresent())
+            {
+                System.out.println(uIf.get().toString());
+                return uIf.get();
 
-        Optional<UserInfo> uIf = userIfRepo.findById(lgIf.getUserid());
-        if (uIf.isPresent()) {
-            System.out.println(uIf.get().toString());
-            return uIf.get();
-
-        } else {
-            return null;
+            }
+            else
+            {
+                return null;
+            }
+        }   
+        catch (Exception e) {    
         }
-
+       
+        return null;
+   
     }
 
 }

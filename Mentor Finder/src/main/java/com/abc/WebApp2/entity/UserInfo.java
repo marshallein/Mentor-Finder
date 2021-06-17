@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -48,20 +49,21 @@ public class UserInfo {
     private Long id;
 
     @Basic(optional = false)
-    @Column(name = "uName")
+    @Column(name = "uName",  nullable = false)
     private String uName;
 
     @Basic(optional = false)
-    @Column(name = "uDOB")
+    @Column(name = "uDOB",  nullable = false)
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date uDOB;
 
     @Basic(optional = false)
-    @Column(name = "uGender")
+    @Column(name = "uGender",  nullable = false)
     private boolean uGender;
 
     @Basic(optional = false)
-    @Column(name = "uRole")
+    @Column(name = "uRole",  nullable = false)
     private String uRole;
 
     @Column(name = "uPhoneNumber")
@@ -83,10 +85,47 @@ public class UserInfo {
     public UserInfo() {
     }
 
-    public Long getUID() {
-        return this.id;
+    public Long getId() {
+        return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getuDOB() {
+        return uDOB;
+    }
+
+    public void setuDOB(Date uDOB) {
+        this.uDOB = uDOB;
+    }
+
+    public boolean isuGender() {
+        return uGender;
+    }
+
+    public void setuGender(boolean uGender) {
+        this.uGender = uGender;
+    }
+
+    public String getuAddress() {
+        return uAddress;
+    }
+
+    public void setuAddress(String uAddress) {
+        this.uAddress = uAddress;
+    }
+
+    public String getuDescription() {
+        return uDescription;
+    }
+
+    public void setuDescription(String uDescription) {
+        this.uDescription = uDescription;
+    }
+
+    
     public String getUName() {
         return uName;
     }
@@ -231,6 +270,47 @@ public class UserInfo {
         this.skillnExperienceCollection = skillnExperienceCollection;
     }
 
+    public void setuName(String uName) {
+        this.uName = uName;
+    }
+
+    public void setuRole(String uRole) {
+        this.uRole = uRole;
+    }
+
+    public void setuPhoneNumber(String uPhoneNumber) {
+        this.uPhoneNumber = uPhoneNumber;
+    }
+
+    public void setuImage(String uImage) {
+        this.uImage = uImage;
+    }
+
+    public void setuStatus(boolean uStatus) {
+        this.uStatus = uStatus;
+    }
+
+    public String getuName() {
+        return uName;
+    }
+
+    public String getuRole() {
+        return uRole;
+    }
+
+    public String getuPhoneNumber() {
+        return uPhoneNumber;
+    }
+
+    public String getuImage() {
+        return uImage;
+    }
+
+    public boolean isuStatus() {
+        return uStatus;
+    }
+
+    
     @Override
     public String toString() {
         return "id=" + id + ", uName=" + uName + ", uDOB=" + uDOB + ", uGender=" + uGender + ", uRole=" + uRole + ", uPhoneNumber=" + uPhoneNumber + ", uAddress=" + uAddress + ", uImage=" + uImage + ", uDescription=" + uDescription + ", uStatus=" + uStatus + '}';
