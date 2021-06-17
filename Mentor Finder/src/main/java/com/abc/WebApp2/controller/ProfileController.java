@@ -20,10 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ProfileController {
 
-    
     @Autowired
     CurrentUserExtractorService cUES;
-    
+
     @Autowired
     private UserInfoService uisrv;
 
@@ -42,23 +41,19 @@ public class ProfileController {
         model.addObject("user_info", user);
         return null;
     }
-    
+
     @PostMapping("/profile_update")
     public String editMyProfile(
-            @RequestParam(name="uId") Long uId,
-            @RequestParam(name="uEmail") String uEmail,
-            @RequestParam(name="uName") String uName,
-            @RequestParam(name="uDob") Date uDob,
-            @RequestParam(name="uGender") boolean uGender,
-            @RequestParam(name="uPhonenumber") String uPhonenumber,
-            @RequestParam(name="uAddress") String uAddress,
-            @RequestParam(name="uImage") String uDescription){
+            @RequestParam(name = "uEmail") String uEmail,
+            @RequestParam(name = "uName") String uName,
+            @RequestParam(name = "uDob") Date uDob,
+            @RequestParam(name = "uGender") boolean uGender,
+            @RequestParam(name = "uPhonenumber") String uPhonenumber,
+            @RequestParam(name = "uAddress") String uAddress,
+            @RequestParam(name = "uImage") String uDescription) {
         UserInfo user = cUES.returnCurrentUser();
-        if (user.getUID() == uId)
-        {
-            
-        }
-        return "403";
+        uisrv.setUserInfo(uEmail, uName, uDob, uGender, uPhonenumber, uAddress, uDescription);
+        return "edit_profile";
     }
 
 }
