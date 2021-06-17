@@ -12,6 +12,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,19 +28,17 @@ public class ProfileController {
     private UserInfoService uisrv;
 
     @GetMapping("/mentor_profile")
-    public ModelAndView getMentorProfile(@RequestParam(name = "mentor_id", required = true) Long mentor_id) {
-        ModelAndView model = new ModelAndView("mentor_profile");
+    public String getMentorProfile(@RequestParam(name = "mentor_id", required = true) Long mentor_id, Model model) {
         UserInfo mentor = uisrv.getUserInfo(mentor_id);
-        model.addObject("mentor", mentor);
-        return null;
+        model.addAttribute("mentor", mentor);
+        return "mentor_profile";
     }
 
     @GetMapping("/profile")
-    public ModelAndView myProfile() {
-        ModelAndView model = new ModelAndView("my_profile");
+    public String myProfile(Model model) {
         UserInfo user = cUES.returnCurrentUser();
-        model.addObject("user_info", user);
-        return null;
+        model.addAttribute("user_info", user);
+        return "my_profile";
     }
 
     @PostMapping("/profile_update")
