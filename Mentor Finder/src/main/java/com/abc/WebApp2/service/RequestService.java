@@ -5,8 +5,8 @@
  */
 package com.abc.WebApp2.service;
 
-import com.abc.WebApp2.entity.UserInfo;
-import com.abc.WebApp2.repository.UserInfoRepository;
+import com.abc.WebApp2.entity.Request;
+import com.abc.WebApp2.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +15,13 @@ import org.springframework.stereotype.Service;
  * @author User
  */
 @Service
-public class SaveUserInfoService {
-    @Autowired
-    UserInfoRepository uiRepo;
+public class RequestService {
     
-    public void saveUserInfo(UserInfo ui)
+    @Autowired
+    RequestRepository reqRepo;
+    
+    public Request saveNewRequest(Request newRq)
     {
-        uiRepo.save(ui);
+        return reqRepo.save(newRq);
     }
 }

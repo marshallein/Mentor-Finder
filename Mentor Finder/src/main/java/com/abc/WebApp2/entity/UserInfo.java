@@ -11,8 +11,10 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,8 +26,12 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author User
  */
 @Entity
-@Table(name= "[User]")
+@Table(name= "UserInfo")
 public class UserInfo {
+
+    @JoinColumn(name = "uId", referencedColumnName = "lgId")
+    @OneToOne(optional = false)
+    private LoginInfo loginInfo;
 
     @ManyToMany(mappedBy = "userInfoCollection")
     private Collection<Subject> subjectCollection;
@@ -39,7 +45,7 @@ public class UserInfo {
     private Collection<Notify> notifyCollection;
     @OneToMany(mappedBy = "userFrom")
     private Collection<Notify> notifyCollection1;
-    @OneToMany(mappedBy = "menteeId")
+    @OneToMany(mappedBy = "menteeIdFrom")
     private Collection<Request> requestCollection;
     @OneToMany(mappedBy = "userId")
     private Collection<SkillnExperience> skillnExperienceCollection;
@@ -315,6 +321,14 @@ public class UserInfo {
     @Override
     public String toString() {
         return "id=" + id + ", uName=" + uName + ", uDOB=" + uDOB + ", uGender=" + uGender + ", uRole=" + uRole + ", uPhoneNumber=" + uPhoneNumber + ", uAddress=" + uAddress + ", uImage=" + uImage + ", uDescription=" + uDescription + ", uStatus=" + uStatus + '}';
+    }
+
+    public LoginInfo getLoginInfo() {
+        return loginInfo;
+    }
+
+    public void setLoginInfo(LoginInfo loginInfo) {
+        this.loginInfo = loginInfo;
     }
     
     
