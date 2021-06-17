@@ -6,7 +6,7 @@
 package com.abc.WebApp2.entity;
 
 import java.util.Collection;
-import java.util.Date;
+import java.sql.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -82,7 +82,12 @@ public class UserInfo {
 
     public UserInfo() {
     }
-
+    
+    public Long getUID()
+    {
+        return this.id;
+    }
+   
     public String getUName() {
         return uName;
     }
