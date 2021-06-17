@@ -65,7 +65,11 @@ public class RegisterController {
         {
             model.addAttribute("error", "Password doesn't not match");
             return "Register";
-        } else if (lcs.checkLoginInfo(username, password) != -1L) {
+        }else if(password.trim().equals("")){
+            model.addAttribute("error", "Password must not be empty");
+        }
+        else if(lcs.checkLoginInfo(username, password) != -1L)
+        {
             model.addAttribute("error", "Account already existed, please specify another ");
             return "Register";
         } else if (!lcs.checkEmail(email)) {
