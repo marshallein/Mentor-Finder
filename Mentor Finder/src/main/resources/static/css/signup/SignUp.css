@@ -163,6 +163,8 @@
     display: flex;
     flex: 0 0 auto;
     border: none;
+    width: 800px;
+    
 }
 .sign-up-foreground3-item {
     display: flex;

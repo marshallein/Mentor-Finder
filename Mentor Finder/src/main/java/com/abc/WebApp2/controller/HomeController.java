@@ -35,6 +35,12 @@ public class HomeController {
         return "home";
     }
     
+    @GetMapping("/landing")
+    public String showStart(){
+        return "LandingPage";
+    }
+   
+    
     @PostMapping("/home")
     public String showHomePage1() {
         return "home";
