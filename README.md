@@ -10,6 +10,9 @@ Cứ thế mà phát triển lên từ đó.
 
 # Version
 
+## 17/6/2021
+Sửa lại bảng Request, xong sơ bộ function Create Request
+
 ## 15/6/2021
 Từ giờ tạo user để làm clg thì cứ register nhé.
 
@@ -26,8 +29,8 @@ FR: Login & Register.
 Basic implementation of Spring MVC: điền form và controller đơn giản.
 
 # To-do (liên quan đến kỹ thuật)
-- [ ] Advanced Security: Spring Security
-- [ ] Phân quyền
+- [x] Advanced Security: Spring Security
+- [x] Phân quyền
 - [x] Kết nối Database MS SQL
 - [x] Tích hợp JPA
 - [x] Chuyển hết phần view sang Thymeleaf hoặc Spring MVC Tech
