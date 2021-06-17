@@ -10,25 +10,25 @@ CREATE TABLE LoginInfo(
 	lgPassword varchar(60) NOT NULL
 )
 
-CREATE TABLE [Role](
-    rId int PRIMARY KEY,
-	rName nvarchar(60) NOT NULL
+CREATE TABLE [Authorization](
+    aId int PRIMARY KEY,
+	aName nvarchar(60) NOT NULL
 )
 
-INSERT INTO Role(rId, rName) VALUES (1, 'ROLE_ADMIN')
-INSERT INTO Role(rId, rName) VALUES (2, 'ROLE_USER')
-SELECT * FROM Role
+INSERT INTO [Authorization](aId, aName) VALUES (1, 'ROLE_ADMIN')
+INSERT INTO [Authorization](aId, aName) VALUES (2, 'ROLE_USER')
+SELECT * FROM [Authorization]
 
-CREATE TABLE LoginInfo_Role(
+CREATE TABLE LoginInfo_Authorization(
     lgId int FOREIGN KEY REFERENCES LoginInfo(lgId),
-	rId int FOREIGN KEY REFERENCES [Role](rId)
+	aId int FOREIGN KEY REFERENCES [Authorization](aId)
 )
  
 CREATE TABLE [User](
     uId int PRIMARY KEY REFERENCES LoginInfo(lgId),
 	uName nvarchar(256) NOT NULL,
 	uDOB date NOT NULL,
-	uGender bit NOT NULL,
+	uGender bit NOT NULL,	
 	uRole nvarchar(32) NOT NULL,
 	uPhoneNumber nvarchar(32),
 	uAddress nvarchar(256),
@@ -69,7 +69,8 @@ CREATE TABLE Request(
 	levId int FOREIGN KEY REFERENCES Level(levId),
 	reqStatus bit NOT NULL DEFAULT 0,
 	reqDesc nvarchar(256),
-	reqDate DATE
+	reqDate DATE,
+	reqAvailableDate DATE
 )
 
 CREATE TABLE Enrolled(
@@ -120,11 +121,11 @@ INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('user1', 'user1@gm
 INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('user2', 'user2@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
 SELECT * FROM LoginInfo
 
-INSERT INTO LoginInfo_Role(lgId, rId) VALUES (1,1)
-INSERT INTO LoginInfo_Role(lgId, rId) VALUES (1,2)
-INSERT INTO LoginInfo_Role(lgId, rId) VALUES (2,2)
+INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (1,1)
+INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (1,2)
+INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (2,2)
 
-SELECT * FROM LoginInfo_Role
+SELECT * FROM LoginInfo_Authorization
 
 INSERT INTO [User](uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (1, 'Nguyen Van A', '12/12/2001', 1, 'Mentor', '123456789')
-SELECT * From [User] where uId= 1
+INSERT INTO [User](uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (2, 'Nguyen Van B', '12/12/2001', 1, 'Mentor', '123456789')

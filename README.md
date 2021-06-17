@@ -2,12 +2,16 @@
 
 đã đẩy front end draft chưa chỉnh sửa vào đây
 
-Chưa rõ lắm cách xóa file .jar của dependency đi nên không up lên Github được, xin tải tạm file Google Drive code mới nhất
 
-https://drive.google.com/drive/folders/1pI-3HmkTQvcXGKh0M7w_lfFn7zzmE4RK?usp=sharing
+Gọi CurrentUserExtractorService để truy xuất ra User hiện tại khi đã đăng nhập xong.
+Cứ thế mà phát triển lên từ đó.
+
 
 
 # Version
+
+## 15/6/2021
+Từ giờ tạo user để làm clg thì cứ register nhé.
 
 ## 6/10/2021
 Phân quyền admin và user thành công

@@ -12,13 +12,51 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>Hi, welcome to Mentor Finder!</div>
-        <div>Tell us a little bit about you!:</div>
-        <form  th:action="@{/???}" method="post">
-            Your name: <input type="text" th:name="name" />
-            DoB: <input type="text" th:name="dob" />
-            Gender: 
+        
+        <div th:object ="${registeredUser}">
+<!--            <p> <span th:text = *{id}> </p>-->
+            <p> <span th:text = ${registeredUser.userid}> </p>
+            <p> <span th:text = ${registeredUser.username}> </p>
+            <p> <span th:text = ${registeredUser.email}> </p>
+            <p> <span th:text = ${registeredUser.password}> </p>
+        </div>
+        <br> ab <br>
+        <div th:object ="${newUIf}">
+<!--            <p> <span th:text = *{id}> </p>-->
+            <p> <span th:text = ${newUIf.id}> </span> </p>
+          
+        </div>
+        
+        
+        
+        <div>Hi, welcome to Mentor Finder!</div> <br>
+        <div>Tell us a little bit about you!:</div> <br>
+
+        <form  th:action="@{/post-register}" method="post" th:object=${newUIf}>
+
             
+     
+            Your name: <input type="text" th:field="*{uName}" /> <br>
+            DoB: <input type="date" th:field="*{uDOB}" /> <br>
+            Gender: <input type="radio" th:field="*{uGender}" value="true"> Male <br>
+                    <input type="radio" th:field="*{uGender}" value="false"> Female <br>
+            I want to be: <br>
+                <div> 
+                    <input type="radio" th:field="*{uRole}" value="Mentor">  A mentor <br>
+                    Accept requests and help other mentee with your skills and knowledge
+                </div>
+            
+                <div> 
+                    <input type="radio" th:field="*{uRole}" value="Mentee">  A mentee <br>
+                    Create requests and connect to many mentors around you
+                </div>
+            
+            A phone number: (optional)  <input type="tel" th:field="*{uPhoneNumber}"> <br>
+            Your address: (optional)   <input type="text" th:field="*{uAddress}"> <br>
+            Tell us about yourself: (optional) <input type="text" th:field="*{uDescription}"> <br>
+            
+            
+            <input type="submit" value="Let's go" />
         </form>
     </body>
 </html>

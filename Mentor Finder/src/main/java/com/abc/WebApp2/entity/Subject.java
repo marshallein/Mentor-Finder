@@ -128,5 +128,5 @@ public class Subject implements Serializable {
     public String toString() {
         return "com.abc.WebApp2.entity.Subject[ subId=" + subId + " ]";
     }
-    
+
 }
