@@ -69,7 +69,8 @@ CREATE TABLE Request(
 	levId int FOREIGN KEY REFERENCES Level(levId),
 	reqStatus bit NOT NULL DEFAULT 0,
 	reqDesc nvarchar(256),
-	reqDate DATE
+	reqDate DATE,
+	reqAvailableDate DATE
 )
 
 CREATE TABLE Enrolled(
