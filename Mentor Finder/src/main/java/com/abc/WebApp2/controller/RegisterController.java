@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class RegisterController {
-    
+
     @Autowired
     CheckExistedLoginInfoService lcs;
     
@@ -52,7 +52,7 @@ public class RegisterController {
             
   
     }
-    
+
     @PostMapping("/register")
     public String checkRegister(@RequestParam(value = "username", required = false) String username,
                              @RequestParam(value = "password", required = false) String password,
@@ -65,19 +65,18 @@ public class RegisterController {
         {
             model.addAttribute("error", "Password doesn't not match");
             return "Register";
+        }else if(password.trim().equals("")){
+            model.addAttribute("error", "Password must not be empty");
+            return "Register";
         }
         else if(lcs.checkLoginInfo(username, password) != -1L)
         {
             model.addAttribute("error", "Account already existed, please specify another ");
             return "Register";
-        }
-        else if (!lcs.checkEmail(email))
-        {
+        } else if (!lcs.checkEmail(email)) {
             model.addAttribute("error", "Email is already existed ");
             return "Register";
-        }
-        else if (acceptTerm == null)
-        {
+        } else if (acceptTerm == null) {
             model.addAttribute("error", "Please accept the term");
             return "Register";
         }
@@ -101,6 +100,6 @@ public class RegisterController {
             session.setAttribute("id", lgIf.getUserid());
             return "UserInfoSpecify";
         }
-        
+
     }
 }

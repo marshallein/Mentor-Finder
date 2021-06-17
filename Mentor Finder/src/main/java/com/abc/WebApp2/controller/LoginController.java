@@ -30,10 +30,10 @@ public class LoginController {
     
     @Autowired
     private LoginInfoRepository repo;
-    
+
     @GetMapping("/login")
     public String showSignUpForm() {
-       
+
         return "Login";
     }
 
@@ -54,5 +54,4 @@ public class LoginController {
 //        }
 //        
 //    }
-
 }

@@ -27,10 +27,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class LoginInfoDetailsImplService implements UserDetailsService {
 
-    
     @Autowired
     private LoginInfoRepository loginInfoRepository;
-	
+
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -39,18 +38,18 @@ public class LoginInfoDetailsImplService implements UserDetailsService {
             System.out.println("User not found! " + username);
             throw new UsernameNotFoundException("User not found");
         }
-         System.out.println("Found User: " + lgInf);
-         
+        System.out.println("Found User: " + lgInf);
+
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 	Set<Authorization> roles = lgInf.getRoles();
 	for (Authorization role : roles) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
-             System.out.println("Found Role: " + role.getName());
-	}
+            System.out.println("Found Role: " + role.getName());
+        }
         UserDetails userDetails = (UserDetails) new User(lgInf.getUsername(),
                 lgInf.getPassword(), grantedAuthorities);
-        
+
         return userDetails;
     }
-    
+
 }

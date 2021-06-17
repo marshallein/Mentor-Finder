@@ -53,42 +53,41 @@ public class UserInfo {
     @Id
     @Column(name = "uId")
     private Long id;
-    
+
     @Basic(optional = false)
     @Column(name = "uName",  nullable = false)
     private String uName;
-    
+
     @Basic(optional = false)
     @Column(name = "uDOB",  nullable = false)
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date uDOB;
-    
+
     @Basic(optional = false)
     @Column(name = "uGender",  nullable = false)
     private boolean uGender;
-    
+
     @Basic(optional = false)
     @Column(name = "uRole",  nullable = false)
     private String uRole;
-    
+
     @Column(name = "uPhoneNumber")
     private String uPhoneNumber;
-    
+
     @Column(name = "uAddress")
     private String uAddress;
-    
+
     @Column(name = "uImage")
     private String uImage;
-    
+
     @Column(name = "uDescription")
     private String uDescription;
-    
+
     @Basic(optional = false)
     @Column(name = "uStatus")
     private boolean uStatus;
-    
-    
+
     public UserInfo() {
     }
 
@@ -334,5 +333,4 @@ public class UserInfo {
     
 
 
-    
 }

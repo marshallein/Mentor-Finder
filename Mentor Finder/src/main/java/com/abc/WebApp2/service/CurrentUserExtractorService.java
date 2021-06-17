@@ -19,14 +19,13 @@ import org.springframework.stereotype.Service;
  *
  * @author User
  */
-
 @Service
 public class CurrentUserExtractorService {
-    
+
     @Autowired
     private LoginInfoRepository lgIfRepo;
-    
-    @Autowired 
+
+    @Autowired
     private UserInfoRepository userIfRepo;
 
     public CurrentUserExtractorService() {
@@ -38,7 +37,7 @@ public class CurrentUserExtractorService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         System.out.println(currentPrincipalName);
-        
+
         LoginInfo lgIf = lgIfRepo.findByUsername(currentPrincipalName);
 //        System.out.print(lgIf.toString());
         try{
@@ -60,6 +59,5 @@ public class CurrentUserExtractorService {
         return null;
    
     }
-    
-    
+
 }

@@ -19,13 +19,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.springframework.lang.Nullable;
+
 /**
  *
  * @author User
  */
 @Entity
-@Table(name = "LoginInfo", uniqueConstraints = { 
-               @UniqueConstraint(columnNames = "lgUsername"), @UniqueConstraint(columnNames = "lgEmail")})
+@Table(name = "LoginInfo", uniqueConstraints = {
+    @UniqueConstraint(columnNames = "lgUsername"),
+    @UniqueConstraint(columnNames = "lgEmail")})
 public class LoginInfo {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "loginInfo")
@@ -34,15 +36,13 @@ public class LoginInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lgId")
     private Long userid;
-     
 
     @Column(name = "lgUsername")
     private String username;
-    
 
     @Column(name = "lgEmail")
     private String email;
-    
+
     @Column(name = "lgPassword")
     private String password;
 
@@ -97,8 +97,6 @@ public class LoginInfo {
     public void setRoles(Set<Authorization> authors) {
         this.authors = authors;
     }
-    
-    
 
     @Override
     public String toString() {

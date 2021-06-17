@@ -24,28 +24,21 @@ public class CheckExistedLoginInfoService {
     public Long checkLoginInfo(String username, String password)
     {
         LoginInfo result = repo.findByUsername(username);
-        if((result==null) ||
-           (!username.equals(result.getUsername())) ||
-           (!password.equals(result.getPassword())))
-        {
+        if ((result == null)
+                || (!username.equals(result.getUsername()))
+                || (!password.equals(result.getPassword()))) {
             return -1l;
-        }
-        else
-        {
+        } else {
             return 1l;
         }
     }
-    
-    public boolean checkEmail(String email)
-    {
+
+    public boolean checkEmail(String email) {
         LoginInfo result = repo.findByEmail(email);
-        if(result==null)
-        {
+        if (result == null) {
             System.out.println("there's no email");
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }

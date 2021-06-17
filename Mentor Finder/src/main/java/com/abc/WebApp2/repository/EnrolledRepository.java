@@ -5,15 +5,12 @@
  */
 package com.abc.WebApp2.repository;
 
-import com.abc.WebApp2.entity.Request;
+import com.abc.WebApp2.entity.Enrolled;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author User
- */
+
 @Repository
-public interface RequestRepository extends JpaRepository<Request, Long> {
+public interface EnrolledRepository extends JpaRepository<Enrolled, Long> {
     
 }
