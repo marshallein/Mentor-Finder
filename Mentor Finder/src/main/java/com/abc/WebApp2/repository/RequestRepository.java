@@ -16,5 +16,5 @@ import org.springframework.stereotype.Repository;
 public interface RequestRepository extends JpaRepository<Request, Long> {
     
     @Nullable
-    List<Request> findByMenteeID(Long menteeID);
+    List<Request> findByMenteeId(Long menteeId);
 }

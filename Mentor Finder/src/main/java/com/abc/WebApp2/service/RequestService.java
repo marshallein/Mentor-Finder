@@ -23,7 +23,7 @@ public class RequestService {
     }
     
     public List<Request> getMyRequestMentee(Long uId){
-        return repo.findByMenteeID(uId);
+        return repo.findByMenteeId(uId);
     }
     
 }

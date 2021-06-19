@@ -29,8 +29,8 @@ public class ProfileController {
 
     @GetMapping("/mentor_profile")
     public String getMentorProfile(@RequestParam(name = "mentor_id", required = true) Long mentor_id, Model model) {
-        UserInfo mentor = uisrv.getUserInfo(mentor_id);
-        model.addAttribute("mentor", mentor);
+        //UserInfo mentor = uisrv.getUserInfo(mentor_id);
+        //model.addAttribute("mentor", mentor);
         return "mentor_profile";
     }
 

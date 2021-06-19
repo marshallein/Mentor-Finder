@@ -20,10 +20,6 @@ public class UserInfoService {
     @Autowired
     CurrentUserExtractorService cUES;
 
-    public UserInfo getUserInfo(Long uId) {
-        UserInfo info = ui_repo.findByUId(uId);
-        return info;
-    }
 
     public void setUserInfo(String uEmail,
             String uName,
