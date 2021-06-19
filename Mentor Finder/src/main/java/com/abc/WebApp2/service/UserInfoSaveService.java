@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * @author User
  */
 @Service
-public class SaveUserInfoService {
+public class UserInfoSaveService {
     @Autowired
     UserInfoRepository uiRepo;
     

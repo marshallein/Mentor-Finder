@@ -6,7 +6,7 @@
 package com.abc.WebApp2.controller;
 
 import com.abc.WebApp2.entity.UserInfo;
-import com.abc.WebApp2.service.SaveUserInfoService;
+import com.abc.WebApp2.service.UserInfoSaveService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class PostRegisterController {
     @Autowired
-    SaveUserInfoService suis;
+    UserInfoSaveService suis;
     
     @PostMapping("/post-register")
     public String checkRegister(@ModelAttribute("newUIf") UserInfo ui, HttpSession session){

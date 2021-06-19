@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,9 +36,21 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Request.findAll", query = "SELECT r FROM Request r")})
 public class Request implements Serializable {
 
+    @Column(name = "reqTitle")
+    private String reqTitle;
+    @Column(name = "reqAvaiTime")
+    private String reqAvaiTime;
+    @Column(name = "reqDateTime")
+    @Temporal(TemporalType.DATE)
+    private Date reqDateTime;
+    @JoinColumn(name = "menteeIdFrom", referencedColumnName = "uId")
+    @ManyToOne
+    private UserInfo menteeIdFrom;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reqId")
     private Integer reqId;
     @Basic(optional = false)
@@ -44,9 +58,7 @@ public class Request implements Serializable {
     private boolean reqStatus;
     @Column(name = "reqDesc")
     private String reqDesc;
-    @Column(name = "reqDate")
-    @Temporal(TemporalType.DATE)
-    private Date reqDate;
+
     @OneToMany(mappedBy = "reqId")
     private Collection<Enrolled> enrolledCollection;
     @JoinColumn(name = "levId", referencedColumnName = "levId")
@@ -55,9 +67,7 @@ public class Request implements Serializable {
     @JoinColumn(name = "subId", referencedColumnName = "subId")
     @ManyToOne
     private Subject subId;
-    @JoinColumn(name = "menteeId", referencedColumnName = "uId")
-    @ManyToOne
-    private UserInfo menteeId;
+
 
     public Request() {
     }
@@ -95,14 +105,6 @@ public class Request implements Serializable {
         this.reqDesc = reqDesc;
     }
 
-    public Date getReqDate() {
-        return reqDate;
-    }
-
-    public void setReqDate(Date reqDate) {
-        this.reqDate = reqDate;
-    }
-
     @XmlTransient
     public Collection<Enrolled> getEnrolledCollection() {
         return enrolledCollection;
@@ -128,13 +130,7 @@ public class Request implements Serializable {
         this.subId = subId;
     }
 
-    public UserInfo getMenteeId() {
-        return menteeId;
-    }
 
-    public void setMenteeId(UserInfo menteeId) {
-        this.menteeId = menteeId;
-    }
 
     @Override
     public int hashCode() {
@@ -161,4 +157,36 @@ public class Request implements Serializable {
         return "com.abc.WebApp2.entity.Request[ reqId=" + reqId + " ]";
     }
 
+    public String getReqTitle() {
+        return reqTitle;
+    }
+
+    public void setReqTitle(String reqTitle) {
+        this.reqTitle = reqTitle;
+    }
+
+    public String getReqAvaiTime() {
+        return reqAvaiTime;
+    }
+
+    public void setReqAvaiTime(String reqAvaiTime) {
+        this.reqAvaiTime = reqAvaiTime;
+    }
+
+    public Date getReqDateTime() {
+        return reqDateTime;
+    }
+
+    public void setReqDateTime(Date reqDateTime) {
+        this.reqDateTime = reqDateTime;
+    }
+
+    public UserInfo getMenteeIdFrom() {
+        return menteeIdFrom;
+    }
+
+    public void setMenteeIdFrom(UserInfo menteeIdFrom) {
+        this.menteeIdFrom = menteeIdFrom;
+    }
+    
 }
