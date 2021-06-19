@@ -7,19 +7,22 @@ package com.abc.WebApp2.service;
 
 import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.repository.RequestRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+/**
+ *
+ * @author User
+ */
 @Service
 public class RequestService {
     
     @Autowired
-    private RequestRepository repo;
+    RequestRepository reqRepo;
     
-    public List<Request> getAllRequest(){
-        return repo.findAll();
+    public Request saveNewRequest(Request newRq)
+    {
+        return reqRepo.save(newRq);
     }
     
     public List<Request> getMyRequestMentee(Long uId){

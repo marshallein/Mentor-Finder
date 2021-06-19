@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+        
+        Add Request
+        
+        <form  th:action="@{/process-request}" method="post">
+
+            Title:<br>
+            <input type="text" th:field="${newRq.reqTitle}" /><br>
+            Description: <br>
+            <input type="text" th:field="${newRq.reqDesc}" /><br>
+            Avaiable days in a week:
+            <ul>
+                <li>
+                    <input type="checkbox" name="dotw" value="Monday"> Monday 
+                </li>
+                <li>
+                    <input type="checkbox" name="dotw" value="Tuesday"> Tuesday
+                </li>
+                <li>
+                    <input type="checkbox" name="dotw" value="Wednesday"> Wednesday
+                </li>
+                <li>
+                    <input type="checkbox" name="dotw" value="Thursday"> Thursday
+                </li>
+                <li>
+                    <input type="checkbox" name="dotw" value="Friday"> Friday
+                </li>
+                <li>
+                    <input type="checkbox" name="dotw" value="Saturday"> Saturday
+                </li>
+                <li>
+                    <input type="checkbox" name="dotw" value="Sunday"> Sunday
+                </li>
+            </ul>
+            |
+            <ul>
+                <li>
+                    <input type="checkbox" name="dORn" value="Evening"> Evening 
+                </li>
+                <li>
+                    <input type="checkbox" name="dORn" value="Morning"> Morning 
+                </li>
+            </ul>
+            Choose a subject:
+            <select th:name="subjectId">
+                <option th:each="subject : ${subjectList}" th:value="${subject.subId}" th:text="${subject.getSubName()}">
+                </option>
+            </select>
+            
+            Choose a level
+            <select th:name="levelId">
+                <option th:each="level : ${levelList}" th:value="${level.levId}" th:text="${level.getLevName()}">
+                </option>
+            </select>
+       
+<!--            
+                Your name: <input type="text" th:field="*{uName}" /> <br>
+            DoB: <input type="date" th:field="*{uDOB}" /> <br>
+            Gender: <input type="radio" th:field="*{uGender}" value="true"> Male <br>
+                    <input type="radio" th:field="*{uGender}" value="false"> Female <br>
+            I want to be: <br>
+                <div> 
+                    <input type="radio" th:field="*{uRole}" value="Mentor">  A mentor <br>
+                    Accept requests and help other mentee with your skills and knowledge
+                </div>
+            
+                <div> 
+                    <input type="radio" th:field="*{uRole}" value="Mentee">  A mentee <br>
+                    Create requests and connect to many mentors around you
+                </div>
+            
+            A phone number: (optional)  <input type="tel" th:field="*{uPhoneNumber}"> <br>
+            Your address: (optional)   <input type="text" th:field="*{uAddress}"> <br>
+            Tell us about yourself: (optional) <input type="text" th:field="*{uDescription}"> <br>
+            -->
+            
+            <input type="submit" value="Submit" />
+        </form>
+        
+    </body>
+</html>
