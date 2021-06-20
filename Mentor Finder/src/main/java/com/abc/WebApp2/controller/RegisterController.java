@@ -14,6 +14,9 @@ import com.abc.WebApp2.service.CurrentUserExtractorService;
 import com.abc.WebApp2.service.RegistingInfoService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,13 +42,15 @@ public class RegisterController {
 
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
-        if (cUES.returnCurrentUser() != null) {
-            return "redirect:/home";
-
-        } else {
-            model.addAttribute("registerInfo", new LoginInfo());
+        
+        
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken){
+             model.addAttribute("registerInfo", new LoginInfo());
             return "Register";
         }
+        
+        return "redirect:/home";
 
     }
 
@@ -77,18 +82,21 @@ public class RegisterController {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
             LoginInfo lgIf = new LoginInfo();
-            lgIf.setUsername(username);
-            lgIf.setPassword(passwordEncoder.encode(password));
-            lgIf.setEmail(email);
-
+            lgIf.setLgUsername(username);
+            lgIf.setLgPassword(passwordEncoder.encode(password));
+            lgIf.setLgEmail(email);
+            
             lgIf = ris.saveNewRegister(lgIf);
 
-            model.addAttribute("registeredUser", lgIf);
 
+            model.addAttribute("registeredUser", lgIf);
+            session.setAttribute("thatlgIf", lgIf);
+            
             UserInfo uIf = new UserInfo();
-            uIf.setId(lgIf.getUserid());
+   
+            uIf.setLoginInfo(lgIf);
             model.addAttribute("newUIf", uIf);
-            session.setAttribute("id", lgIf.getUserid());
+//            session.setAttribute("id", lgIf.getUserid());
             return "UserInfoSpecify";
         }
 

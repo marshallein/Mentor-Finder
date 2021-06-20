@@ -49,7 +49,7 @@ public class RequestController {
     @GetMapping("/mentee/request/my_request")
     public String myRequestList(Model model){
         UserInfo user = cUES.returnCurrentUser();
-        List<Request> requests = reqsrv.getMyRequestMentee(user.getId());
+        List<Request> requests = reqsrv.getMyRequestMentee(user.getUId());
         model.addAttribute("requests", requests);
         return "";
     }

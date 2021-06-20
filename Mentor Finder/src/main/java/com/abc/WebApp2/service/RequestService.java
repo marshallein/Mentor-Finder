@@ -26,7 +26,7 @@ public class RequestService {
         return repo.save(newRq);
     }
     
-    public List<Request> getMyRequestMentee(Long uId){
+    public List<Request> getMyRequestMentee(Integer uId){
         return repo.findByMenteeIdFrom(uId);
     }
 

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author User
  */
 @Repository
-public interface LevelRepository extends JpaRepository<Level, Long> {
+public interface LevelRepository extends JpaRepository<Level, Integer> {
 
    
     
