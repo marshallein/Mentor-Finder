@@ -37,26 +37,29 @@ public class CurrentUserExtractorService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         System.out.println(currentPrincipalName);
+        
+        LoginInfo lgIf = lgIfRepo.findBylgUsername(currentPrincipalName);
+        // cần có throw catch nullpointer ở chỗ này phòng trường hợp người dùng out ra trước khi nhập UserInfo nhưng để sau tính
+        
 
-        LoginInfo lgIf = lgIfRepo.findByUsername(currentPrincipalName);
-//        System.out.print(lgIf.toString());
-        try{
-             Optional<UserInfo> uIf = userIfRepo.findById(lgIf.getUserid());
-             if(uIf.isPresent())
-            {
-                System.out.println(uIf.get().toString());
-                return uIf.get();
-
-            }
-            else
-            {
-                return null;
-            }
-        }   
-        catch (Exception e) {    
-        }
-       
-        return null;
+//        try{
+//             Optional<UserInfo> uIf = userIfRepo.findById(lgIf.getLgId().longValue());
+//             if(uIf.isPresent())
+//            {
+//                System.out.println(uIf.get().toString());
+//                return uIf.get();
+//
+//            }
+//            else
+//            {
+//                return null;
+//            }
+//        }   
+//        catch (NullPointerException e) {    
+//            System.out.println("Null Pointer Exception");
+//        }
+//       
+        return  lgIf.getUserInfo();
    
     }
 

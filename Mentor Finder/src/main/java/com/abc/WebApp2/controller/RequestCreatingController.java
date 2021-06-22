@@ -43,8 +43,8 @@ public class RequestCreatingController {
     
     @PostMapping("/process-request")
     public String abcd2(@ModelAttribute("newRq") Request newRq, Model model,
-            @RequestParam(value = "subjectId") String subId,
-            @RequestParam(value = "levelId") String levId,
+            @RequestParam(value = "subjectId") int subId,
+            @RequestParam(value = "levelId") int levId,
             @RequestParam(value = "dotw", required = false) String[] dotw,
             @RequestParam(value = "dORn", required = false) String[] dORn){
        
@@ -64,8 +64,8 @@ public class RequestCreatingController {
         
         newRq.setMenteeIdFrom(cUEs.returnCurrentUser());
         newRq.setReqAvaiTime(str);
-//        newRq.setLevId(lsals.findLevelbyId(Long.parseLong(levId)));
-//        newRq.setSubId(lsals.findSubjectbyId(Long.parseLong(subId)));
+        newRq.setLevId(lsals.findLevelbyId(levId));
+        newRq.setSubId(lsals.findSubjectbyId(subId));
         System.out.println(newRq.toString());
         rqSr.saveNewRequest(newRq);
         
