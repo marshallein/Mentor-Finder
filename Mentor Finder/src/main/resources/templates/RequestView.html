@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
+    </head>
+    
+    <body onload="changeComment()">
+        
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" 
+        src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0"
+        nonce="tb50PxnL">       
+        </script>
+            
+        <div>This Request </div>
+        
+        Title: [[${request.reqTitle}]] <br>
+        Description: [[${request.reqDesc}]] <br>
+        Mentee: [[${userRealName}]] <br>
+        Subject: [[${subject}]] <br>
+        Level: [[${level}]] <br>
+        Avaiable Time: [[${request.reqAvaiTime}]]
+    
+        <a> Accept this request and Enroll yourself</a> <br>
+        <script>
+            function goBack() {
+                 window.history.back();
+            }
+        </script>   
+        
+        <button onclick="goBack()"> Return </button>
+        
+        <form>
+            <input type="text">
+            <input type="submit">
+            
+        </form>
+        
+        <div  id ="fb-comments" class="fb-comments" data-href="" data-width="" data-numposts="5"></div>
+        <script>
+            function changeComment(){
+                document.getElementById("fb-comments").setAttribute("data-href",window.location.href);
+            }
+        </script>
+        
+
+        
+    </body>
+</html>

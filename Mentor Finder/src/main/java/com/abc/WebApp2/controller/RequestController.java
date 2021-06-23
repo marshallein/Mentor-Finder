@@ -40,10 +40,17 @@ public class RequestController {
         return "";
     }
     
-    @GetMapping("/request/view?id={request_id}")
-    public String viewRequest(@PathVariable("request_id") Long rID,Model model){
+    @GetMapping("/request/view")
+    public String viewRequest(@RequestParam(value="id") Integer rID,Model model){
         
-        return "";
+        // doan nay su dung RequestParam thay vi PathVariable neu nhu dung cu phap tren
+        
+        Request thisRequest = reqsrv.getRequestFromId(rID);
+        model.addAttribute("userRealName", thisRequest.getMenteeIdFrom().getUName());
+        model.addAttribute("subject", thisRequest.getSubId().getSubName());
+        model.addAttribute("level", thisRequest.getLevId().getLevName());
+        model.addAttribute("request", thisRequest);
+        return "RequestView";
     }
     
     @GetMapping("/mentee/request/my_request")

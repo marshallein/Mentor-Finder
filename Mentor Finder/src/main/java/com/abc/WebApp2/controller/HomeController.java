@@ -30,7 +30,14 @@ public class HomeController {
         UserInfo uIf = cUES.returnCurrentUser();
         System.out.println(uIf.toString());
         model.addAttribute("currentUserInfo", uIf);
-
+        if(uIf.getURole().equals("Mentee"))
+        {
+            return "home";
+        }
+        else if(uIf.getURole().equals("Mentor"))
+        {
+            return "home";
+        }
         return "home";
     }
 
