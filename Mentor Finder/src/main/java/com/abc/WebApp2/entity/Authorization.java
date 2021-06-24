@@ -25,9 +25,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "[Authorization]")
 @NamedQueries({
-    @NamedQuery(name = "Authorization.findAll", query = "SELECT a FROM Authorization a")
-    , @NamedQuery(name = "Authorization.findByAId", query = "SELECT a FROM Authorization a WHERE a.aId = :aId")
-    , @NamedQuery(name = "Authorization.findByAName", query = "SELECT a FROM Authorization a WHERE a.aName = :aName")})
+    @NamedQuery(name = "Authorization.findAll", query = "SELECT a FROM Authorization a"),
+    @NamedQuery(name = "Authorization.findByAId", query = "SELECT a FROM Authorization a WHERE a.aId = :aId"),
+    @NamedQuery(name = "Authorization.findByAName", query = "SELECT a FROM Authorization a WHERE a.aName = :aName")})
 public class Authorization implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,11 +35,11 @@ public class Authorization implements Serializable {
     @Basic(optional = false)
     @Column(name = "aId")
     private Integer aId;
-    
+
     @Basic(optional = false)
     @Column(name = "aName")
     private String aName;
-    
+
     @ManyToMany(mappedBy = "authorizationSet")
     private Set<LoginInfo> loginInfoSet;
 
@@ -103,5 +103,5 @@ public class Authorization implements Serializable {
     public String toString() {
         return "com.abc.WebApp2.entity.Authorization[ aId=" + aId + " ]";
     }
-    
+
 }

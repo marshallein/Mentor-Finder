@@ -16,13 +16,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CheckExistedLoginInfoService {
-    
+
     @Autowired
     private LoginInfoRepository repo;
-    
-    
-    public Long checkLoginInfo(String username, String password)
-    {
+
+    public Long checkLoginInfo(String username, String password) {
         LoginInfo result = repo.findBylgUsername(username);
         if ((result == null)
                 || (!username.equals(result.getLgUsername()))
@@ -42,6 +40,5 @@ public class CheckExistedLoginInfoService {
             return false;
         }
     }
-     
-   
+
 }

@@ -21,38 +21,34 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RequestService {
-    
+
     @Autowired
     RequestRepository repo;
-    
-    public Request saveNewRequest(Request newRq)
-    {
+
+    public Request saveNewRequest(Request newRq) {
         return repo.save(newRq);
     }
-    
-    public List<Request> getMyRequestMentee(Integer uId){
-        
+
+    public List<Request> getMyRequestMentee(Integer uId) {
+
         return repo.findByMenteeIdFrom(uId);
     }
-    
-    
 
     public List<Request> getAllRequest() {
         return repo.findAll();
     }
-    
+
     public Page<Request> listAllByPage(int pagenum) {
         Pageable pageable = PageRequest.of(pagenum - 1, 10);
-        
+
         return repo.findAll(pageable);
     }
-    
-    public Request getRequestFromId(int rId)
-    {
+
+    public Request getRequestFromId(int rId) {
         return repo.findByreqId(rId);
     }
-    
-    public void deleteRequest(int rId){
+
+    public void deleteRequest(int rId) {
         repo.deleteById(rId);
     }
 

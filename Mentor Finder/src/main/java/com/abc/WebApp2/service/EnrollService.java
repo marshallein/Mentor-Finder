@@ -12,15 +12,14 @@ import com.abc.WebApp2.entity.Enrolled;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class EnrollService {
-    
+
     @Autowired
     EnrolledRepository repo;
-    
-    public List<Enrolled> getMyEnrolled(Integer uId){
+
+    public List<Enrolled> getMyEnrolled(Integer uId) {
         return repo.findByMentorId(uId);
     }
-    
+
 }

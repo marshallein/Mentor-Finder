@@ -26,15 +26,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class AdminMenteeController {
-    @Autowired 
+
+    @Autowired
     UserInfoService userService;
-     
+
     @GetMapping("/adminMentee")
     public String showMenteeList(Model model) {
         List<UserInfo> listMentees = userService.findAllMentees();
         model.addAttribute("listMentees", listMentees);
         return "Admin_ManageMentee";
     }
-    
 
 }

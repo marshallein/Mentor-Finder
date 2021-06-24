@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.abc.WebApp2.service;
 
 import com.abc.WebApp2.entity.Authorization;
@@ -21,20 +20,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RegistingInfoService {
+
     @Autowired
     private LoginInfoRepository loginInfoRepo;
-    
+
     @Autowired
     private AuthorizationRepository authorRepo;
-    
-    public LoginInfo saveNewRegister(LoginInfo lgIf)
-    {
+
+    public LoginInfo saveNewRegister(LoginInfo lgIf) {
 
         Set<Authorization> set = new HashSet<Authorization>();
         set.add(authorRepo.findByaName("ROLE_USER"));
         lgIf.setAuthorizationSet(set);
         return loginInfoRepo.save(lgIf);
     }
-    
-     
+
 }

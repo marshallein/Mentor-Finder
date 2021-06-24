@@ -19,28 +19,28 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class LoadSubjectAndLevelService {
-    
-    @Autowired 
+
+    @Autowired
     LevelRepository levelRepo;
-    
-    @Autowired 
+
+    @Autowired
     SubjectRepository subjectRepo;
-    
-    public List<Level> getAllLevel(){
-        
+
+    public List<Level> getAllLevel() {
+
         return levelRepo.findAll();
     }
-    
-    public List<Subject> getAllSubject(){
-        
+
+    public List<Subject> getAllSubject() {
+
         return subjectRepo.findAll();
     }
-    
-    public Subject findSubjectbyId(int id){
+
+    public Subject findSubjectbyId(int id) {
         return subjectRepo.getById(id);
     }
-    
-    public Level findLevelbyId(int id){
+
+    public Level findLevelbyId(int id) {
         return levelRepo.getById(id);
     }
 }

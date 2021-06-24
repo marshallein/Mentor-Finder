@@ -9,7 +9,6 @@ import com.abc.WebApp2.repository.LoginInfoRepository;
 import com.abc.WebApp2.entity.LoginInfo;
 import com.abc.WebApp2.service.CheckExistedLoginInfoService;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,22 +26,22 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class LoginController {
-  
+
     @Autowired
-    CheckExistedLoginInfoService lcs; 
-    
+    CheckExistedLoginInfoService lcs;
+
     @Autowired
     private LoginInfoRepository repo;
 
     @GetMapping("/login")
     public String showSignUpForm() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || authentication instanceof AnonymousAuthenticationToken){
-             return "Login";
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "Login";
         }
-        
+
         return "redirect:/home";
-       
+
     }
 
 //    @PostMapping("/login")

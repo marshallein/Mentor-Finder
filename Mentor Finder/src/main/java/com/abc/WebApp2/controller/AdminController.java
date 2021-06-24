@@ -27,13 +27,13 @@ public class AdminController {
 
     @Autowired
     private AdminService aSrv;
-    
+
     @Autowired
     private LoadSubjectAndLevelService subAndSer;
-    
+
     @Autowired
     private UserInfoService userSvr;
-    
+
     @Autowired
     private RequestService rqSr;
 
@@ -53,15 +53,14 @@ public class AdminController {
         model.addAttribute("levelList", subAndSer.getAllLevel());
         return "AdminCreateRequest";
     }
-    
+
     @PostMapping("/saveRequest")
-    public String saveRequest(@RequestParam(value = "id") int menteeId ,
-            @RequestParam(value = "subjectId") int subId ,
+    public String saveRequest(@RequestParam(value = "id") int menteeId,
+            @RequestParam(value = "subjectId") int subId,
             @RequestParam(value = "levelId") int levId,
             @RequestParam(value = "title") String title,
             @RequestParam(value = "description") String des,
-            @RequestParam(value = "available") String available)
-    {
+            @RequestParam(value = "available") String available) {
         System.out.println(menteeId);
         System.out.println(subId);
         System.out.println(levId);
@@ -78,31 +77,31 @@ public class AdminController {
         rqSr.saveNewRequest(newRq);
         return "redirect:/admin";
     }
-    
+
     @GetMapping("/deleteRequest")
-    public String deleteRequest(@RequestParam(value = "id") int reqID){
+    public String deleteRequest(@RequestParam(value = "id") int reqID) {
         System.out.println(reqID);
         rqSr.deleteRequest(reqID);
         return "redirect:/admin";
     }
-    
+
     @GetMapping("/updateRequest")
-    public String updateRequest(@RequestParam(value = "id") int reqID , Model model){
+    public String updateRequest(@RequestParam(value = "id") int reqID, Model model) {
         Request a = rqSr.getRequestFromId(reqID);
         model.addAttribute("subjectList", subAndSer.getAllSubject());
         model.addAttribute("levelList", subAndSer.getAllLevel());
         model.addAttribute("Request", a);
         return "AdminUpdateRequest";
     }
-    
+
     @PostMapping("/updateRequest")
-    public String saveUpdateRequest(@RequestParam(value = "id") int requestID ,
-            @RequestParam(value = "subjectId") int subId ,
+    public String saveUpdateRequest(@RequestParam(value = "id") int requestID,
+            @RequestParam(value = "subjectId") int subId,
             @RequestParam(value = "levelId") int levId,
             @RequestParam(value = "title") String title,
             @RequestParam(value = "description") String des,
             @RequestParam(value = "available") String available,
-            @RequestParam(value = "menteeId") int menteeId){
+            @RequestParam(value = "menteeId") int menteeId) {
         System.out.println(requestID);
         System.out.println(subId);
         System.out.println(levId);

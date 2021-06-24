@@ -20,11 +20,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Integer> {
-    
+
     @Nullable
     List<Request> findByMenteeIdFrom(Integer menteeId);
-    
+
     Request findByreqId(int rId);
-    
-   
+
 }

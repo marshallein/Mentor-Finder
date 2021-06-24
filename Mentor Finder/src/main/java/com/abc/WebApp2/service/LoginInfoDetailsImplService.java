@@ -41,8 +41,8 @@ public class LoginInfoDetailsImplService implements UserDetailsService {
         System.out.println("Found User: " + lgInf);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-	Set<Authorization> roles = lgInf.getAuthorizationSet();
-	for (Authorization role : roles) {
+        Set<Authorization> roles = lgInf.getAuthorizationSet();
+        for (Authorization role : roles) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getAName()));
             System.out.println("Found Role: " + role.getAName());
         }

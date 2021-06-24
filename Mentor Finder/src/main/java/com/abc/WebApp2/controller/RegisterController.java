@@ -42,14 +42,13 @@ public class RegisterController {
 
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
-        
-        
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || authentication instanceof AnonymousAuthenticationToken){
-             model.addAttribute("registerInfo", new LoginInfo());
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            model.addAttribute("registerInfo", new LoginInfo());
             return "Register";
         }
-        
+
         return "redirect:/home";
 
     }
@@ -67,9 +66,7 @@ public class RegisterController {
         } else if (password.trim().equals("")) {
             model.addAttribute("error", "Password must not be empty");
             return "Register";
-        }
-        else if(lcs.checkLoginInfo(username, password) != -1L)
-        {
+        } else if (lcs.checkLoginInfo(username, password) != -1L) {
             model.addAttribute("error", "Account already existed, please specify another ");
             return "Register";
         } else if (!lcs.checkEmail(email)) {
@@ -85,15 +82,14 @@ public class RegisterController {
             lgIf.setLgUsername(username);
             lgIf.setLgPassword(passwordEncoder.encode(password));
             lgIf.setLgEmail(email);
-            
-            lgIf = ris.saveNewRegister(lgIf);
 
+            lgIf = ris.saveNewRegister(lgIf);
 
             model.addAttribute("registeredUser", lgIf);
             session.setAttribute("thatlgIf", lgIf);
-            
+
             UserInfo uIf = new UserInfo();
-   
+
             uIf.setLoginInfo(lgIf);
             model.addAttribute("newUIf", uIf);
 //            session.setAttribute("id", lgIf.getUserid());
