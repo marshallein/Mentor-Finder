@@ -178,6 +178,7 @@ INSERT INTO [Subject](subName, subDesc) VALUES ('Biology','Biology')
 INSERT INTO [Subject](subName, subDesc) VALUES ('Java','Java')
 INSERT INTO [Subject](subName, subDesc) VALUES ('Python','Python')
 INSERT INTO [Subject](subName, subDesc) VALUES ('C++','C++')
+INSERT INTO [Subject](subName, subDesc) VALUES ('Spring MVC','Spring MVC')
 
 INSERT INTO [Level](levName, levDesc) VALUES ('Grade 1', 'Primary School')
 INSERT INTO [Level](levName, levDesc) VALUES ('Grade 2', 'Primary School')
@@ -191,6 +192,9 @@ INSERT INTO [Level](levName, levDesc) VALUES ('Grade 9', 'Secondary School')
 INSERT INTO [Level](levName, levDesc) VALUES ('Grade 10', 'High School')
 INSERT INTO [Level](levName, levDesc) VALUES ('Grade 11', 'High School')
 INSERT INTO [Level](levName, levDesc) VALUES ('Grade 12', 'High School')
+INSERT INTO [Level](levName, levDesc) VALUES ('Freshman', 'University')
+INSERT INTO [Level](levName, levDesc) VALUES ('Sophomore', 'University')
+INSERT INTO [Level](levName, levDesc) VALUES ('Senior', 'University')
 Select * from Subject
 Select * From Level
 
