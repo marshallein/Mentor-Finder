@@ -35,7 +35,7 @@ public class RequestController {
     }
     
     @PostMapping("/mentee/request/edit")
-    public String editRequest(Model model){
+    public String editRequest(@RequestParam(name="editRequest") Integer requestId, Model model){
         
         return "";
     }
@@ -53,10 +53,17 @@ public class RequestController {
         return "RequestView";
     }
     
-    @GetMapping("/mentee/request/my_request")
+    @GetMapping("/request/my_request")
     public String myRequestList(Model model){
         UserInfo user = cUES.returnCurrentUser();
-        List<Request> requests = reqsrv.getMyRequestMentee(user.getUId());
+        if (user == null) return "redirect:/landing";
+        List<Request> requests = null;
+        if (user.getURole().equalsIgnoreCase("Mentor")) {
+            return "redirect:/landing";
+        }
+        else if (user.getURole().equalsIgnoreCase("Mentee")){
+            requests = reqsrv.getMyRequestMentee(user.getUId());
+        }
         model.addAttribute("requests", requests);
         return "";
     }

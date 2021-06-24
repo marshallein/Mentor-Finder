@@ -24,8 +24,6 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
     @Nullable
     List<Request> findByMenteeIdFrom(Integer menteeId);
     
-    List<Request> findAll();
-    
     Request findByreqId(int rId);
     
    
