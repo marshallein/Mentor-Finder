@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Home</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" th:href="@{/font/mainhomementee/fontawesome5-overrides.min.css}">
+        <link rel="stylesheet" th:href="@{/css/mainhomementee/Add-Another-Button.css}">
+        <link rel="stylesheet" th:href="@{/css/mainhomementee/Card-Group1-Shadow.css}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+        <link rel="stylesheet" th:href="@{/css/mainhomementee/Navigation-Clean.css}">
+        <link rel="stylesheet" th:href="@{/css/mainhomementee/Search-Field-With-Icon.css}">
+        <link rel="stylesheet" th:href="@{/css/mainhomementee/Separator-with-icon.css}">
+        <link rel="stylesheet" th:href="@{/css/mainhomementee/styles.css}">
+    </head>
+
+    <body style="background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 121, 205, 0.46) 35.94%, #23049D 100%);">
+        <nav class="navbar navbar-light navbar-expand-md navigation-clean" style="border-bottom: solid 1px;">
+            <div class="container"><a class="navbar-brand" href="#">Mentor Finder</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item" style="margin-right: 20px;"><a class="nav-link active" href="#" style="cursor: pointer;"><i class="fas fa-home" style="font-size: 45px;color: purple;"></i></a></li>
+                        <li class="nav-item" style="margin-right: 20px;"><a class="nav-link" href="#"><i class="far fa-comment" style="font-size: 45px;color: purple;"></i><span class="badge badge-primary" style="padding: 2px 3.8px;margin-left: -12px;">42</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="far fa-user" style="font-size: 45px;color: purple;"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-xl-4"><img data-aos="fade" src="image/mainhomementee/Group%2013.png" style="margin: 15px;margin-left: 30px;"></div>
+                    <div class="col-md-6">
+                        <p style="font-size: 40px;margin-top: 20px;"><em>Welcome back, User !</em><br></p>
+                        <p>Paragraph</p>
+                        <p>Paragraph</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center icon-separator">
+            <div></div><i class="fas fa-table"></i>
+            <div></div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-xl-8" style="background-color: white;border: solid 1px;">
+                    <div style="margin-top: 10px;">
+                        <form>
+                            <div class="search-container"><input class="form-control search-input" type="text" name="search-bar" placeholder="Search..."><button class="btn btn-light search-btn" type="button" style="border: 1px solid;"> <i class="fa fa-search"></i></button></div>
+                        </form>
+                    </div>
+                    <section>
+                        
+                        <!-- phần loop request sẽ display ở dây -->
+                        <div data-aos="fade" style="margin: 10px;padding: 20px;border: solid white 2px;background-color: #FF79CD;">
+                            <div style="padding: 10px;border-width: 3px;border-style: solid;background: #ffffff;"><a style="cursor: pointer;"><img src="image/mainhomementee/Group%2013.png" style="width: 100px;">
+                                <p style="display: inline-block;margin-left: 44px;font-size: 31px;"><em>I want to find a math mentor</em></p></a>
+                            </div>
+                            <p style="color: white;font-size: 15px;"><br>It was that terrifying feeling you have as you tightly hold the covers over you with the knowledge that there is something hiding under your bed. You want to look, but you don't at the same time. You're frozen with fear and unable to act. That's where she found herself and she didn't know what to do next<br><br></p>
+                            <div><i class="fas fa-school" style="margin-left: 20px;font-size: 15px;"></i>
+                                <p style="display: inline-block;margin-left: 10px;font-size: 10px;">High School</p>
+                            </div>
+                            <div style="margin-left: 20px;"><i class="fa fa-calendar" style="display: inline-block;font-size: 15px;"></i>
+                                <p style="display: inline-block;font-size: 10px;margin-left: 10px;">Mon-Tue-Sun Morning</p>
+                            </div>
+                            <div style="margin-top: 10px;"><a class="btn btn-primary" role="button" style="margin-left: 450px;">View enrolled</a><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete" style="margin-left: 10px;">Delete</button></div>
+                        </div>
+                        
+                        
+                        
+<!--                        <div data-aos="fade" style="margin: 10px;padding: 20px;border: solid white 2px;background-color: #FF79CD;">
+                            <div style="padding: 10px;border-width: 3px;border-style: solid;background: #ffffff;"><img src="image/mainhomementer/Group%2013.png" style="width: 100px;">
+                                <p style="display: inline-block;margin-left: 44px;font-size: 31px;"><em>I want to find a math mentor</em></p>
+                            </div>
+                            <p style="color: white;font-size: 15px;"><br>It was that terrifying feeling you have as you tightly hold the covers over you with the knowledge that there is something hiding under your bed. You want to look, but you don't at the same time. You're frozen with fear and unable to act. That's where she found herself and she didn't know what to do next<br><br></p>
+                            <div><i class="fas fa-school" style="margin-left: 20px;font-size: 15px;"></i>
+                                <p style="display: inline-block;margin-left: 10px;font-size: 10px;">HighSchool</p>
+                            </div>
+                            <div style="margin-left: 20px;"><i class="fa fa-calendar" style="display: inline-block;font-size: 15px;"></i>
+                                <p style="display: inline-block;font-size: 10px;margin-left: 10px;">Mon-Tue-Sun</p>
+                            </div>
+                            <div style="margin-top: 10px;"><button class="btn btn-primary" type="button" style="margin-left: 450px;">View enrolled</button><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete" style="margin-left: 10px;">Delete</button></div>
+                        </div>
+                        <div data-aos="fade" style="margin: 10px;padding: 20px;border: solid white 2px;background-color: #FF79CD;">
+                            <div style="padding: 10px;border-width: 3px;border-style: solid;background: #ffffff;"><img src="image/mainhomementer/Group%2013.png" style="width: 100px;">
+                                <p style="display: inline-block;margin-left: 44px;font-size: 31px;"><em>I want to find a math mentor</em></p>
+                            </div>
+                            <p style="color: white;font-size: 15px;"><br>It was that terrifying feeling you have as you tightly hold the covers over you with the knowledge that there is something hiding under your bed. You want to look, but you don't at the same time. You're frozen with fear and unable to act. That's where she found herself and she didn't know what to do next<br><br></p>
+                            <div><i class="fas fa-school" style="margin-left: 20px;font-size: 15px;"></i>
+                                <p style="display: inline-block;margin-left: 10px;font-size: 10px;">HighSchool</p>
+                            </div>
+                            <div style="margin-left: 20px;"><i class="fa fa-calendar" style="display: inline-block;font-size: 15px;"></i>
+                                <p style="display: inline-block;font-size: 10px;margin-left: 10px;">Mon-Tue-Sun</p>
+                            </div>
+                            <div style="margin-top: 10px;"><button class="btn btn-primary" type="button" style="margin-left: 450px;">View enrolled</button><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete" style="margin-left: 10px;">Delete</button></div>
+                        </div>-->
+                    </section>
+                    <div style="margin: 10px;text-align:right;">
+                        <div class="btn-group" role="group"><a class="btn btn-primary" role="button" >Prev</a> <a class="btn btn-primary"  role="button" style="margin-left: 10px;">Next</a></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-4"><button class="btn btn-outline-primary text-truncate float-none float-sm-none add-another-btn" data-bss-hover-animate="pulse" type="button" style="padding: 50px;margin-left: 50px;">Add Another Request<i class="fas fa-plus-circle edit-icon" style="font-size: 30px;"></i></button></div>
+            </div>
+        </div>
+        <div class="modal fade" role="dialog" tabindex="-1" id="delete">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal Title</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>The content of your modal.</p>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><a role="button" class="btn btn-primary" >Save</a></div>
+                </div>
+            </div>
+        </div>
+        <footer class="bg-light footer" style="margin-top: 35px;padding: 20px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left my-auto h-100">
+                        <ul class="list-inline mb-2">
+                            <li class="list-inline-item"><a href="#">About</a></li>
+                            <li class="list-inline-item"><span>⋅</span></li>
+                            <li class="list-inline-item"><a href="#">Contact</a></li>
+                            <li class="list-inline-item"><span>⋅</span></li>
+                            <li class="list-inline-item"><a href="#">Terms of &nbsp;Use</a></li>
+                            <li class="list-inline-item"><span>⋅</span></li>
+                            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                        </ul>
+                        <p class="text-muted small mb-4 mb-lg-0">© Mentor Finder 2021. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right my-auto h-100">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook fa-2x fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter fa-2x fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-instagram fa-2x fa-fw"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+        <script src="js/mainhomementee/bs-init.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    </body>
+
+</html>
