@@ -21,29 +21,42 @@
                                             <div class="container" style="margin-top: 60px;margin-bottom: 100px;">
                                                 <div class="row">
                                                     <div class="col-md-6"><img src="/image/postregister/Group1070.png" style="width: 400px;"></div>
-                                                    <form th:action="#" method="#">
+                                                    <form  th:action="@{/post-register}" method="post" th:object=${newUIf}>
                                                         <div class="col-md-6">
                                                             <p style="font-size: 30px;">Lets tell us about yourself......</p>
                                                             <div class="input-group mb-3">
-                                                                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user" style="font-size: 24px;"></i></span></div><input type="text" th:field="*{#}" style="width: 400px;" placeholder="Your Name">
+                                                                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user" style="font-size: 24px;"></i></span></div><input type="text"  style="width: 400px;" placeholder="Your Name">
                                                             </div>
                                                             <div class="input-group mb-3">
-                                                                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar-o" style="font-size: 24px;"></i></span></div><input type="date" th:field="*{#}" style="/*margin-left: 40px;*/">
+                                                                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar-o" style="font-size: 24px;"></i></span></div><input type="date" style="/*margin-left: 40px;*/">
+                                                                    
                                                             </div>
                                                             <div class="input-group mb-3">
-                                                                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone" style="font-size: 24px;"></i></span></div><input type="text" th:field="*{#}" style="width: 400px;" placeholder="Your Phone Number">
+                                                                <input type="radio"  value="true"> Male <br>
+                                                                <input type="radio"  value="false"> Female <br>
+                                                            </div>
+                                                            
+                                                            
+                                                            
+                                                            <div class="input-group mb-3">
+                                                                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone" style="font-size: 24px;"></i></span></div><input type="text"  style="width: 400px;" placeholder="Your Phone Number">
                                                             </div>
                                                             <div class="input-group mb-3">
-                                                                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-home" style="font-size: 24px;"></i></span></div><input type="text" th:field="*{#}" style="width: 400px;" placeholder="Your Address">
+                                                                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-home" style="font-size: 24px;"></i></span></div><input type="text"  style="width: 400px;" placeholder="Your Address">
                                                             </div>
-                                                            <p>Accept requests and help other mentee with your skills and knowledge</p><label class="check">Mentor
-                                                                <input type="checkbox" th:field="*{#}">
+                                                            
+                                                            <div class="input-group mb-3">
+                                                                <input type="text" > 
+                                                            </div>
+                                                            <p>Accept requests and help other mentee with your skills and knowledge</p>
+                                                            <label class="check">Mentor
+                                                                <input type="checkbox" value="Mentor">
                                                                     <span class="checkmark"></span>
                                                             </label>
                                                             <p>Create requests and connect to many mentors around you</p><label class="check">Mentee
-                                                                <input type="checkbox" th:field="*{#}" >
+                                                                <input type="checkbox" value="Mentee" >
                                                                     <span class="checkmark"></span>
-                                                            </label><button class="btn btn-primary" type="button">Create</button>
+                                                            </label><button type="submit" class="btn btn-primary">Create</button>
                                                         </div>
                                                     </form>
                                                 </div>
