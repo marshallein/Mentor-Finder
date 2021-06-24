@@ -33,7 +33,7 @@ public class LoginInfoDetailsImplService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        LoginInfo lgInf = loginInfoRepository.findByUsername(username);
+        LoginInfo lgInf = loginInfoRepository.findBylgUsername(username);
         if (lgInf == null) {
             System.out.println("User not found! " + username);
             throw new UsernameNotFoundException("User not found");
@@ -41,13 +41,13 @@ public class LoginInfoDetailsImplService implements UserDetailsService {
         System.out.println("Found User: " + lgInf);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-	Set<Authorization> roles = lgInf.getRoles();
+	Set<Authorization> roles = lgInf.getAuthorizationSet();
 	for (Authorization role : roles) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
-            System.out.println("Found Role: " + role.getName());
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getAName()));
+            System.out.println("Found Role: " + role.getAName());
         }
-        UserDetails userDetails = (UserDetails) new User(lgInf.getUsername(),
-                lgInf.getPassword(), grantedAuthorities);
+        UserDetails userDetails = (UserDetails) new User(lgInf.getLgUsername(),
+                lgInf.getLgPassword(), grantedAuthorities);
 
         return userDetails;
     }

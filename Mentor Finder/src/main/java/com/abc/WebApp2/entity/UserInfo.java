@@ -5,20 +5,21 @@
  */
 package com.abc.WebApp2.entity;
 
-import java.util.Collection;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.MapsId;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -26,112 +27,82 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author User
  */
 @Entity
-@Table(name= "UserInfo")
-public class UserInfo {
+@Table(name = "UserInfo")
+@NamedQueries({
+    @NamedQuery(name = "UserInfo.findAll", query = "SELECT u FROM UserInfo u")
+    , @NamedQuery(name = "UserInfo.findByUId", query = "SELECT u FROM UserInfo u WHERE u.uId = :uId")
+    , @NamedQuery(name = "UserInfo.findByUName", query = "SELECT u FROM UserInfo u WHERE u.uName = :uName")
+    , @NamedQuery(name = "UserInfo.findByUDOB", query = "SELECT u FROM UserInfo u WHERE u.uDOB = :uDOB")
+    , @NamedQuery(name = "UserInfo.findByUGender", query = "SELECT u FROM UserInfo u WHERE u.uGender = :uGender")
+    , @NamedQuery(name = "UserInfo.findByURole", query = "SELECT u FROM UserInfo u WHERE u.uRole = :uRole")
+    , @NamedQuery(name = "UserInfo.findByUPhoneNumber", query = "SELECT u FROM UserInfo u WHERE u.uPhoneNumber = :uPhoneNumber")
+    , @NamedQuery(name = "UserInfo.findByUAddress", query = "SELECT u FROM UserInfo u WHERE u.uAddress = :uAddress")
+    , @NamedQuery(name = "UserInfo.findByUImage", query = "SELECT u FROM UserInfo u WHERE u.uImage = :uImage")
+    , @NamedQuery(name = "UserInfo.findByUDescription", query = "SELECT u FROM UserInfo u WHERE u.uDescription = :uDescription")
+    , @NamedQuery(name = "UserInfo.findByUStatus", query = "SELECT u FROM UserInfo u WHERE u.uStatus = :uStatus")})
+public class UserInfo implements Serializable {
 
-    @JoinColumn(name = "uId", referencedColumnName = "lgId")
-    @OneToOne(optional = false)
-    private LoginInfo loginInfo;
-
-    @ManyToMany(mappedBy = "userInfoCollection")
-    private Collection<Subject> subjectCollection;
-    @OneToMany(mappedBy = "mentorId")
-    private Collection<Enrolled> enrolledCollection;
-    @OneToMany(mappedBy = "userFrom")
-    private Collection<Comment> commentCollection;
-    @OneToMany(mappedBy = "userReceived")
-    private Collection<Comment> commentCollection1;
-    @OneToMany(mappedBy = "userReceived")
-    private Collection<Notify> notifyCollection;
-    @OneToMany(mappedBy = "userFrom")
-    private Collection<Notify> notifyCollection1;
-    @OneToMany(mappedBy = "menteeIdFrom")
-    private Collection<Request> requestCollection;
-    @OneToMany(mappedBy = "userId")
-    private Collection<SkillnExperience> skillnExperienceCollection;
-
+    private static final long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
     @Column(name = "uId")
-    private Long id;
-
+    private Integer uId;
+    
     @Basic(optional = false)
-    @Column(name = "uName",  nullable = false)
+    @Column(name = "uName")
     private String uName;
-
     @Basic(optional = false)
-    @Column(name = "uDOB",  nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Column(name = "uDOB")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date uDOB;
-
     @Basic(optional = false)
-    @Column(name = "uGender",  nullable = false)
+    @Column(name = "uGender")
     private boolean uGender;
-
     @Basic(optional = false)
-    @Column(name = "uRole",  nullable = false)
+    @Column(name = "uRole")
     private String uRole;
-
     @Column(name = "uPhoneNumber")
     private String uPhoneNumber;
-
     @Column(name = "uAddress")
     private String uAddress;
-
     @Column(name = "uImage")
     private String uImage;
-
     @Column(name = "uDescription")
     private String uDescription;
-
     @Basic(optional = false)
     @Column(name = "uStatus")
     private boolean uStatus;
+    
+    @MapsId
+    @JoinColumn(name = "uId", referencedColumnName = "lgId", insertable = false, updatable = false)
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    private LoginInfo loginInfo;
 
     public UserInfo() {
     }
 
-    public Long getId() {
-        return id;
+    public UserInfo(Integer uId) {
+        this.uId = uId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getuDOB() {
-        return uDOB;
-    }
-
-    public void setuDOB(Date uDOB) {
+    public UserInfo(Integer uId, String uName, Date uDOB, boolean uGender, String uRole, boolean uStatus) {
+        this.uId = uId;
+        this.uName = uName;
         this.uDOB = uDOB;
-    }
-
-    public boolean isuGender() {
-        return uGender;
-    }
-
-    public void setuGender(boolean uGender) {
         this.uGender = uGender;
+        this.uRole = uRole;
+        this.uStatus = uStatus;
     }
 
-    public String getuAddress() {
-        return uAddress;
+    public Integer getUId() {
+        return uId;
     }
 
-    public void setuAddress(String uAddress) {
-        this.uAddress = uAddress;
+    public void setUId(Integer uId) {
+        this.uId = uId;
     }
 
-    public String getuDescription() {
-        return uDescription;
-    }
-
-    public void setuDescription(String uDescription) {
-        this.uDescription = uDescription;
-    }
-
-    
     public String getUName() {
         return uName;
     }
@@ -204,124 +175,6 @@ public class UserInfo {
         this.uStatus = uStatus;
     }
 
-    @XmlTransient
-    public Collection<Subject> getSubjectCollection() {
-        return subjectCollection;
-    }
-
-    public void setSubjectCollection(Collection<Subject> subjectCollection) {
-        this.subjectCollection = subjectCollection;
-    }
-
-    @XmlTransient
-    public Collection<Enrolled> getEnrolledCollection() {
-        return enrolledCollection;
-    }
-
-    public void setEnrolledCollection(Collection<Enrolled> enrolledCollection) {
-        this.enrolledCollection = enrolledCollection;
-    }
-
-    @XmlTransient
-    public Collection<Comment> getCommentCollection() {
-        return commentCollection;
-    }
-
-    public void setCommentCollection(Collection<Comment> commentCollection) {
-        this.commentCollection = commentCollection;
-    }
-
-    @XmlTransient
-    public Collection<Comment> getCommentCollection1() {
-        return commentCollection1;
-    }
-
-    public void setCommentCollection1(Collection<Comment> commentCollection1) {
-        this.commentCollection1 = commentCollection1;
-    }
-
-    @XmlTransient
-    public Collection<Notify> getNotifyCollection() {
-        return notifyCollection;
-    }
-
-    public void setNotifyCollection(Collection<Notify> notifyCollection) {
-        this.notifyCollection = notifyCollection;
-    }
-
-    @XmlTransient
-    public Collection<Notify> getNotifyCollection1() {
-        return notifyCollection1;
-    }
-
-    public void setNotifyCollection1(Collection<Notify> notifyCollection1) {
-        this.notifyCollection1 = notifyCollection1;
-    }
-
-    @XmlTransient
-    public Collection<Request> getRequestCollection() {
-        return requestCollection;
-    }
-
-    public void setRequestCollection(Collection<Request> requestCollection) {
-        this.requestCollection = requestCollection;
-    }
-
-    @XmlTransient
-    public Collection<SkillnExperience> getSkillnExperienceCollection() {
-        return skillnExperienceCollection;
-    }
-
-    public void setSkillnExperienceCollection(Collection<SkillnExperience> skillnExperienceCollection) {
-        this.skillnExperienceCollection = skillnExperienceCollection;
-    }
-
-    public void setuName(String uName) {
-        this.uName = uName;
-    }
-
-    public void setuRole(String uRole) {
-        this.uRole = uRole;
-    }
-
-    public void setuPhoneNumber(String uPhoneNumber) {
-        this.uPhoneNumber = uPhoneNumber;
-    }
-
-    public void setuImage(String uImage) {
-        this.uImage = uImage;
-    }
-
-    public void setuStatus(boolean uStatus) {
-        this.uStatus = uStatus;
-    }
-
-    public String getuName() {
-        return uName;
-    }
-
-    public String getuRole() {
-        return uRole;
-    }
-
-    public String getuPhoneNumber() {
-        return uPhoneNumber;
-    }
-
-    public String getuImage() {
-        return uImage;
-    }
-
-    public boolean isuStatus() {
-        return uStatus;
-    }
-
-    
-    @Override
-    public String toString() {
-        return "id=" + id + ", uName=" + uName + ", uDOB=" + uDOB + ", uGender=" + uGender + ", uRole=" + uRole + ", uPhoneNumber=" + uPhoneNumber + ", uAddress=" + uAddress + ", uImage=" + uImage + ", uDescription=" + uDescription + ", uStatus=" + uStatus + '}';
-    }
-
     public LoginInfo getLoginInfo() {
         return loginInfo;
     }
@@ -329,8 +182,30 @@ public class UserInfo {
     public void setLoginInfo(LoginInfo loginInfo) {
         this.loginInfo = loginInfo;
     }
-    
-    
 
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (uId != null ? uId.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof UserInfo)) {
+            return false;
+        }
+        UserInfo other = (UserInfo) object;
+        if ((this.uId == null && other.uId != null) || (this.uId != null && !this.uId.equals(other.uId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.abc.WebApp2.entity.UserInfo[ uId=" + uId + " " + loginInfo.toString() +" ]";
+    }
+    
 }

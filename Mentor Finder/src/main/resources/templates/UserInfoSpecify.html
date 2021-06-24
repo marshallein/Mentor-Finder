@@ -15,18 +15,12 @@ and open the template in the editor.
         
         <div th:object ="${registeredUser}">
 <!--            <p> <span th:text = *{id}> </p>-->
-            <p> <span th:text = ${registeredUser.userid}> </p>
-            <p> <span th:text = ${registeredUser.username}> </p>
-            <p> <span th:text = ${registeredUser.email}> </p>
-            <p> <span th:text = ${registeredUser.password}> </p>
+            <p> <span th:text = ${registeredUser.lgId}> </p>
+            <p> <span th:text = ${registeredUser.lgUsername}> </p>
+            <p> <span th:text = ${registeredUser.lgEmail}> </p>
+            <p> <span th:text = ${registeredUser.lgPassword}> </p>
         </div>
         <br> ab <br>
-        <div th:object ="${newUIf}">
-<!--            <p> <span th:text = *{id}> </p>-->
-            <p> <span th:text = ${newUIf.id}> </span> </p>
-          
-        </div>
-        
         
         
         <div>Hi, welcome to Mentor Finder!</div> <br>

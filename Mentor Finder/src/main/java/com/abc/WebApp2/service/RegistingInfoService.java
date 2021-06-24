@@ -31,8 +31,8 @@ public class RegistingInfoService {
     {
 
         Set<Authorization> set = new HashSet<Authorization>();
-        set.add(authorRepo.findByName("ROLE_USER"));
-        lgIf.setRoles(set);
+        set.add(authorRepo.findByaName("ROLE_USER"));
+        lgIf.setAuthorizationSet(set);
         return loginInfoRepo.save(lgIf);
     }
     

@@ -36,11 +36,11 @@ public class LoadSubjectAndLevelService {
         return subjectRepo.findAll();
     }
     
-    public Subject findSubjectbyId(Long id){
+    public Subject findSubjectbyId(int id){
         return subjectRepo.getById(id);
     }
     
-    public Level findLevelbyId(Long id){
+    public Level findLevelbyId(int id){
         return levelRepo.getById(id);
     }
 }

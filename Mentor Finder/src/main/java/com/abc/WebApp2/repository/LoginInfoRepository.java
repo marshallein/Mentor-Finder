@@ -11,17 +11,17 @@ import org.springframework.lang.Nullable;
 
 import org.springframework.stereotype.Repository;
 
+
 /**
  *
  * @author User
  */
 @Repository
-public interface LoginInfoRepository extends JpaRepository<LoginInfo, Long> {
+public interface LoginInfoRepository extends JpaRepository<LoginInfo, Integer> {
 
-    @Nullable
-    LoginInfo findByUsername(String username);
+    LoginInfo findBylgUsername(String username);
 
-    @Nullable
-    LoginInfo findByEmail(String email);
+    
+    LoginInfo findBylgEmail(String email);
 
 }
