@@ -8,12 +8,14 @@ package com.abc.WebApp2.controller;
 import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
+import com.abc.WebApp2.service.LoadSubjectAndLevelService;
 import com.abc.WebApp2.service.RequestService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,20 +24,65 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class RequestController {
     
     @Autowired
+    LoadSubjectAndLevelService lsals;
+    
+    @Autowired
     CurrentUserExtractorService cUES;
     
     @Autowired
     RequestService reqsrv;
     
     
-    @PostMapping("/mentee/request/create")
-    public String createRequest(Model model){
+    @GetMapping("/mentee/request/create")
+    public String requestForm(Model model){
+        model.addAttribute("newRq", new Request());
+        model.addAttribute("subjectList", lsals.getAllSubject());
+        model.addAttribute("levelList", lsals.getAllLevel());
+        return "RequestForm";
+    }
+    
+    
+    @PostMapping("/request/create")
+    public String createRequest(@ModelAttribute("newRq") Request newRq, Model model,
+            @RequestParam(value = "subjectId") int subId,
+            @RequestParam(value = "levelId") int levId,
+            @RequestParam(value = "dotw", required = false) String[] dotw,
+            @RequestParam(value = "dORn", required = false) String[] dORn){
+        
+        StringBuffer sb = new StringBuffer();
+        for(int i = 0; i < dotw.length; i++) {
+            sb.append(dotw[i]);
+            sb.append(" ");
+        }
+         for(int i = 0; i < dORn.length; i++) {
+            sb.append(dORn[i]);
+            sb.append(" ");
+        }
+        String str = sb.toString();
+        
+        System.out.println(subId + " " + levId);
+        
+        
+        newRq.setMenteeIdFrom(cUES.returnCurrentUser());
+        newRq.setReqAvaiTime(str);
+        newRq.setLevId(lsals.findLevelbyId(levId));
+        newRq.setSubId(lsals.findSubjectbyId(subId));
+        System.out.println(newRq.toString());
+        reqsrv.saveNewRequest(newRq);
+        
+        return "redirect:/home";
+    }
+    
+    
+    @GetMapping("/mentee/request/edit")
+    public String editRequestForm(Model model){
         
         return "";
     }
     
-    @PostMapping("/mentee/request/edit")
-    public String editRequest(Model model){
+    
+    @PostMapping("/request/edit")
+    public String editRequest(@RequestParam(name="editRequest") Integer requestId, Model model){
         
         return "";
     }
@@ -56,7 +103,14 @@ public class RequestController {
     @GetMapping("/mentee/request/my_request")
     public String myRequestList(Model model){
         UserInfo user = cUES.returnCurrentUser();
-        List<Request> requests = reqsrv.getMyRequestMentee(user.getUId());
+        if (user == null) return "redirect:/landing";
+        List<Request> requests = null;
+        if (user.getURole().equalsIgnoreCase("Mentor")) {
+            return "redirect:/landing";
+        }
+        else if (user.getURole().equalsIgnoreCase("Mentee")){
+            requests = reqsrv.getMyRequestMentee(user.getUId());
+        }
         model.addAttribute("requests", requests);
         return "";
     }
