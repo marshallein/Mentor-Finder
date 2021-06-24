@@ -16,11 +16,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserInfoSaveService {
-
     @Autowired
     UserInfoRepository uiRepo;
-
-    public void saveUserInfo(UserInfo ui) {
+    
+    public void saveUserInfo(UserInfo ui)
+    {
         uiRepo.save(ui);
     }
 }

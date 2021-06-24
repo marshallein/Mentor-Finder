@@ -22,63 +22,68 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RequestController {
-
+    
     @Autowired
     LoadSubjectAndLevelService lsals;
-
+    
     @Autowired
     CurrentUserExtractorService cUES;
-
+    
     @Autowired
     RequestService reqsrv;
-
+    
+    
     @GetMapping("/mentee/request/create")
-    public String requestForm(Model model) {
+    public String requestForm(Model model){
         model.addAttribute("newRq", new Request());
         model.addAttribute("subjectList", lsals.getAllSubject());
         model.addAttribute("levelList", lsals.getAllLevel());
         return "RequestForm";
     }
-
+    
+    
     public String createRequest(@ModelAttribute("newRq") Request newRq, Model model,
             @RequestParam(value = "subjectId") int subId,
             @RequestParam(value = "levelId") int levId,
             @RequestParam(value = "dotw", required = false) String[] dotw,
-            @RequestParam(value = "dORn", required = false) String[] dORn) {
-
+            @RequestParam(value = "dORn", required = false) String[] dORn){
+        
         StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < dotw.length; i++) {
+        for(int i = 0; i < dotw.length; i++) {
             sb.append(dotw[i]);
             sb.append(" ");
         }
-        for (int i = 0; i < dORn.length; i++) {
+         for(int i = 0; i < dORn.length; i++) {
             sb.append(dORn[i]);
             sb.append(" ");
         }
         String str = sb.toString();
-
+        
         System.out.println(subId + " " + levId);
-
+        
+        
         newRq.setMenteeIdFrom(cUES.returnCurrentUser());
         newRq.setReqAvaiTime(str);
         newRq.setLevId(lsals.findLevelbyId(levId));
         newRq.setSubId(lsals.findSubjectbyId(subId));
         System.out.println(newRq.toString());
         reqsrv.saveNewRequest(newRq);
-
+        
         return "redirect:/home";
     }
-
+    
+    
     @PostMapping("/mentee/request/edit")
-    public String editRequest(@RequestParam(name = "editRequest") Integer requestId, Model model) {
-
+    public String editRequest(@RequestParam(name="editRequest") Integer requestId, Model model){
+        
         return "";
     }
-
+    
     @GetMapping("/request/view")
-    public String viewRequest(@RequestParam(value = "id") Integer rID, Model model) {
-
+    public String viewRequest(@RequestParam(value="id") Integer rID,Model model){
+        
         // doan nay su dung RequestParam thay vi PathVariable neu nhu dung cu phap tren
+        
         Request thisRequest = reqsrv.getRequestFromId(rID);
         model.addAttribute("userRealName", thisRequest.getMenteeIdFrom().getUName());
         model.addAttribute("subject", thisRequest.getSubId().getSubName());
@@ -86,28 +91,27 @@ public class RequestController {
         model.addAttribute("request", thisRequest);
         return "RequestView";
     }
-
+    
     @GetMapping("/request/my_request")
-    public String myRequestList(Model model) {
+    public String myRequestList(Model model){
         UserInfo user = cUES.returnCurrentUser();
-        if (user == null) {
-            return "redirect:/landing";
-        }
+        if (user == null) return "redirect:/landing";
         List<Request> requests = null;
         if (user.getURole().equalsIgnoreCase("Mentor")) {
             return "redirect:/landing";
-        } else if (user.getURole().equalsIgnoreCase("Mentee")) {
+        }
+        else if (user.getURole().equalsIgnoreCase("Mentee")){
             requests = reqsrv.getMyRequestMentee(user.getUId());
         }
         model.addAttribute("requests", requests);
         return "";
     }
-
+    
     @GetMapping("/request")
-    public String AllRequest(Model model) {
+    public String AllRequest(Model model){
         List<Request> requests = reqsrv.getAllRequest();
         model.addAttribute("requests", requests);
         return "";
     }
-
+    
 }

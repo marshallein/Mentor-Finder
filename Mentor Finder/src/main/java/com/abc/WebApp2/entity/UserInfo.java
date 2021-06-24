@@ -29,17 +29,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "UserInfo")
 @NamedQueries({
-    @NamedQuery(name = "UserInfo.findAll", query = "SELECT u FROM UserInfo u"),
-    @NamedQuery(name = "UserInfo.findByUId", query = "SELECT u FROM UserInfo u WHERE u.uId = :uId"),
-    @NamedQuery(name = "UserInfo.findByUName", query = "SELECT u FROM UserInfo u WHERE u.uName = :uName"),
-    @NamedQuery(name = "UserInfo.findByUDOB", query = "SELECT u FROM UserInfo u WHERE u.uDOB = :uDOB"),
-    @NamedQuery(name = "UserInfo.findByUGender", query = "SELECT u FROM UserInfo u WHERE u.uGender = :uGender"),
-    @NamedQuery(name = "UserInfo.findByURole", query = "SELECT u FROM UserInfo u WHERE u.uRole = :uRole"),
-    @NamedQuery(name = "UserInfo.findByUPhoneNumber", query = "SELECT u FROM UserInfo u WHERE u.uPhoneNumber = :uPhoneNumber"),
-    @NamedQuery(name = "UserInfo.findByUAddress", query = "SELECT u FROM UserInfo u WHERE u.uAddress = :uAddress"),
-    @NamedQuery(name = "UserInfo.findByUImage", query = "SELECT u FROM UserInfo u WHERE u.uImage = :uImage"),
-    @NamedQuery(name = "UserInfo.findByUDescription", query = "SELECT u FROM UserInfo u WHERE u.uDescription = :uDescription"),
-    @NamedQuery(name = "UserInfo.findByUStatus", query = "SELECT u FROM UserInfo u WHERE u.uStatus = :uStatus")})
+    @NamedQuery(name = "UserInfo.findAll", query = "SELECT u FROM UserInfo u")
+    , @NamedQuery(name = "UserInfo.findByUId", query = "SELECT u FROM UserInfo u WHERE u.uId = :uId")
+    , @NamedQuery(name = "UserInfo.findByUName", query = "SELECT u FROM UserInfo u WHERE u.uName = :uName")
+    , @NamedQuery(name = "UserInfo.findByUDOB", query = "SELECT u FROM UserInfo u WHERE u.uDOB = :uDOB")
+    , @NamedQuery(name = "UserInfo.findByUGender", query = "SELECT u FROM UserInfo u WHERE u.uGender = :uGender")
+    , @NamedQuery(name = "UserInfo.findByURole", query = "SELECT u FROM UserInfo u WHERE u.uRole = :uRole")
+    , @NamedQuery(name = "UserInfo.findByUPhoneNumber", query = "SELECT u FROM UserInfo u WHERE u.uPhoneNumber = :uPhoneNumber")
+    , @NamedQuery(name = "UserInfo.findByUAddress", query = "SELECT u FROM UserInfo u WHERE u.uAddress = :uAddress")
+    , @NamedQuery(name = "UserInfo.findByUImage", query = "SELECT u FROM UserInfo u WHERE u.uImage = :uImage")
+    , @NamedQuery(name = "UserInfo.findByUDescription", query = "SELECT u FROM UserInfo u WHERE u.uDescription = :uDescription")
+    , @NamedQuery(name = "UserInfo.findByUStatus", query = "SELECT u FROM UserInfo u WHERE u.uStatus = :uStatus")})
 public class UserInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,7 +47,7 @@ public class UserInfo implements Serializable {
     @Basic(optional = false)
     @Column(name = "uId")
     private Integer uId;
-
+    
     @Basic(optional = false)
     @Column(name = "uName")
     private String uName;
@@ -73,7 +73,7 @@ public class UserInfo implements Serializable {
     @Basic(optional = false)
     @Column(name = "uStatus")
     private boolean uStatus;
-
+    
     @MapsId
     @JoinColumn(name = "uId", referencedColumnName = "lgId", insertable = false, updatable = false)
     @OneToOne(cascade = CascadeType.ALL, optional = false)
@@ -205,7 +205,7 @@ public class UserInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.abc.WebApp2.entity.UserInfo[ uId=" + uId + " " + loginInfo.toString() + " ]";
+        return "com.abc.WebApp2.entity.UserInfo[ uId=" + uId + " " + loginInfo.toString() +" ]";
     }
-
+    
 }

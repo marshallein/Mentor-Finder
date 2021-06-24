@@ -15,30 +15,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
+
 @Controller
 public class EnrolledController {
-
+    
+    
     @Autowired
     CurrentUserExtractorService cUES;
-
+    
     @Autowired
     EnrollService eServ;
-
+    
     @GetMapping("/enrolled")
-    public String getMyEnroll(Model model) {
+    public String getMyEnroll(Model model){
         UserInfo user = cUES.returnCurrentUser();
-        if (user == null) {
-            return "redirect:/landing";
-        }
-        if (user.getURole().equalsIgnoreCase("Mentee")) {
-            return "redirect:/landing";
-        }
+        if (user == null) return "redirect:/landing";
+        if (user.getURole().equalsIgnoreCase("Mentee")) return "redirect:/landing";
         List<Enrolled> enrolled = null;
-        if (user.getURole().equalsIgnoreCase("Mentor")) {
+        if (user.getURole().equalsIgnoreCase("Mentor")){
             enrolled = eServ.getMyEnrolled(user.getUId());
         }
         model.addAttribute("enrolled", enrolled);
         return "";
     }
-
+    
 }

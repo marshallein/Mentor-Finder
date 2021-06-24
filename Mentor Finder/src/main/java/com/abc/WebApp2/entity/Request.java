@@ -39,7 +39,7 @@ public class Request implements Serializable {
     @Column(name = "reqTitle")
     private String reqTitle;
     @Column(name = "reqAvaiTime")
-    private String reqAvaiTime;
+        private String reqAvaiTime;
     @Column(name = "reqDateTime")
     @Temporal(TemporalType.DATE)
     private Date reqDateTime;
@@ -67,6 +67,7 @@ public class Request implements Serializable {
     @JoinColumn(name = "subId", referencedColumnName = "subId")
     @ManyToOne
     private Subject subId;
+
 
     public Request() {
     }
@@ -129,6 +130,8 @@ public class Request implements Serializable {
         this.subId = subId;
     }
 
+
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -185,5 +188,5 @@ public class Request implements Serializable {
     public void setMenteeIdFrom(UserInfo menteeIdFrom) {
         this.menteeIdFrom = menteeIdFrom;
     }
-
+    
 }

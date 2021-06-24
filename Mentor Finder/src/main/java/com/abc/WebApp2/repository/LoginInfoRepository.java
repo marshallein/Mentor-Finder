@@ -11,6 +11,7 @@ import org.springframework.lang.Nullable;
 
 import org.springframework.stereotype.Repository;
 
+
 /**
  *
  * @author User
@@ -20,6 +21,7 @@ public interface LoginInfoRepository extends JpaRepository<LoginInfo, Integer> {
 
     LoginInfo findBylgUsername(String username);
 
+    
     LoginInfo findBylgEmail(String email);
 
 }

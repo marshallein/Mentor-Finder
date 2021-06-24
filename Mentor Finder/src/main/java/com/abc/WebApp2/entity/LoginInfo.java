@@ -29,12 +29,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "LoginInfo")
 @NamedQueries({
-    @NamedQuery(name = "LoginInfo.findAll", query = "SELECT l FROM LoginInfo l"),
-    @NamedQuery(name = "LoginInfo.findByLgId", query = "SELECT l FROM LoginInfo l WHERE l.lgId = :lgId"),
-    @NamedQuery(name = "LoginInfo.findByLgUsername", query = "SELECT l FROM LoginInfo l WHERE l.lgUsername = :lgUsername"),
-    @NamedQuery(name = "LoginInfo.findByLgEmail", query = "SELECT l FROM LoginInfo l WHERE l.lgEmail = :lgEmail"),
-    @NamedQuery(name = "LoginInfo.findByLgPassword", query = "SELECT l FROM LoginInfo l WHERE l.lgPassword = :lgPassword")})
+    @NamedQuery(name = "LoginInfo.findAll", query = "SELECT l FROM LoginInfo l")
+    , @NamedQuery(name = "LoginInfo.findByLgId", query = "SELECT l FROM LoginInfo l WHERE l.lgId = :lgId")
+    , @NamedQuery(name = "LoginInfo.findByLgUsername", query = "SELECT l FROM LoginInfo l WHERE l.lgUsername = :lgUsername")
+    , @NamedQuery(name = "LoginInfo.findByLgEmail", query = "SELECT l FROM LoginInfo l WHERE l.lgEmail = :lgEmail")
+    , @NamedQuery(name = "LoginInfo.findByLgPassword", query = "SELECT l FROM LoginInfo l WHERE l.lgPassword = :lgPassword")})
 public class LoginInfo implements Serializable {
+
+   
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,17 +53,17 @@ public class LoginInfo implements Serializable {
     @Basic(optional = false)
     @Column(name = "lgPassword")
     private String lgPassword;
-
+    
     @ManyToMany
-    @JoinTable(
-            name = "LoginInfo_Authorization",
-            joinColumns = @JoinColumn(
-                    name = "lgId"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "aId")
+    @JoinTable( 
+        name = "LoginInfo_Authorization", 
+        joinColumns = @JoinColumn(
+          name = "lgId"), 
+        inverseJoinColumns = @JoinColumn(
+          name = "aId") 
     )
     private Set<Authorization> authorizationSet;
-
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "loginInfo")
     private UserInfo userInfo;
 
@@ -149,7 +151,8 @@ public class LoginInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.abc.WebApp2.entity.LoginInfo[ lgId=" + lgId + "  " + lgUsername + " ]";
+        return "com.abc.WebApp2.entity.LoginInfo[ lgId=" + lgId + "  " + lgUsername +" ]";
     }
+
 
 }

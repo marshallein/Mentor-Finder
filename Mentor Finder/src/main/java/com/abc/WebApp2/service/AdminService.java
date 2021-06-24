@@ -17,11 +17,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AdminService {
-
-    @Autowired
+     @Autowired
     RequestRepository repo;
-
-    public List<Request> getAllRequest() {
-        return repo.findAll();
-    }
+     
+     public List<Request> getAllRequest(){
+         return repo.findAll();
+     }
 }

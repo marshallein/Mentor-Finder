@@ -24,37 +24,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class MentorController {
-
+    
     @Autowired
     CurrentUserExtractorService cUES;
-
-    @Autowired
+    
+    @Autowired 
     RequestService rqsrv;
-
+     
     @GetMapping("/mentor")
     public String showMentorPage(Model model) {
         UserInfo uIf = cUES.returnCurrentUser();
         System.out.println(uIf.toString());
-
-        if (uIf.getURole().equals("Mentee")) {
+        
+        if(uIf.getURole().equals("Mentee"))
+        {
             return "redirect:/mentee";
         }
-
+       
         return "HomeMentor";
     }
-
+    
     @RequestMapping("/mentor/{pageNum}")
     public String showMentorList(Model model,
-            @PathVariable(name = "pageNum") int pageNum) {
+            @PathVariable(name = "pageNum") int pageNum)
+    {
         Page<Request> page = rqsrv.listAllByPage(pageNum);
         List<Request> requestList = page.getContent();
-
-        model.addAttribute("currentPage", pageNum);
+        
+        model.addAttribute("currentPage", pageNum);		
         model.addAttribute("totalPages", page.getTotalPages());
-        model.addAttribute("totalItems", page.getTotalElements());
-
+	model.addAttribute("totalItems", page.getTotalElements());
+        
         model.addAttribute("requestList", requestList);
-
+        
         return "HomeMentor";
     }
 }

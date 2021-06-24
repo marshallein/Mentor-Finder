@@ -21,6 +21,7 @@ public class UserInfoService {
     @Autowired
     CurrentUserExtractorService cUES;
 
+
     public void setUserInfo(String uEmail,
             String uName,
             Date uDob,
@@ -37,12 +38,11 @@ public class UserInfoService {
         user.setUDescription(uDescription);
         ui_repo.save(user);
     }
-
-    public UserInfo findUserInfoId(int id) {
+    
+        public UserInfo findUserInfoId(int id){
         return ui_repo.getById(id);
     }
-
-    public List<UserInfo> findAllMentees() {
+        public List<UserInfo> findAllMentees() {
         return ui_repo.findAll();
     }
 }
