@@ -41,9 +41,9 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/landing")
+        @GetMapping("/landing")
     public String showStart() {
-        return "updateRequest";
+        return "LandingPage";
     }
 
     @GetMapping("/signin2")
