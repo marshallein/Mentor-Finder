@@ -10,9 +10,14 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" th:href="@{bootstrap/postregister/css/bootstrap.min.css}">
+         <link rel="stylesheet" th:href="@{fonts/postregister/font-awesome.min.css}">
+         <link rel="stylesheet" th:href="@{css/postregister/checkbox.css}">
+         <link rel="stylesheet" th:href="@{css/postregister/Navigation-Clean.css}">
+          <link rel="stylesheet" th:href="@{css/postregister/styles.css}">
     </head>
-    <body>
-        
+    <body style="background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 121, 205, 0.46) 35.94%, #23049D 100%);">
+        <div class="container" style="margin-top: 60px;margin-bottom: 100px;">
         <div th:object ="${registeredUser}">
 <!--            <p> <span th:text = *{id}> </p>-->
             <p> <span th:text = ${registeredUser.lgId}> </p>
@@ -52,5 +57,6 @@ and open the template in the editor.
             
             <input type="submit" value="Let's go" />
         </form>
+        </div>
     </body>
 </html>
