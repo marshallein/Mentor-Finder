@@ -8,6 +8,7 @@ package com.abc.WebApp2.service;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.repository.UserInfoRepository;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +41,8 @@ public class UserInfoService {
     
         public UserInfo findUserInfoId(int id){
         return ui_repo.getById(id);
+    }
+        public List<UserInfo> findAllMentees() {
+        return ui_repo.findAll();
     }
 }
