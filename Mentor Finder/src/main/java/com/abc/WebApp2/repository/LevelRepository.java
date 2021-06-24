@@ -15,7 +15,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface LevelRepository extends JpaRepository<Level, Integer> {
-
    
-    
 }

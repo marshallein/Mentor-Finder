@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>Welcome back, User</div>
+        
+        <div id="filter">
+            
+            
+            
+        </div>        
+        <div id="requestListBox">
+            <table border="1" cellpadding="10">
+                <thead>
+			<tr>
+				<th>
+				    ID
+				</th>
+				<th>
+			            reqTitle
+				</th>
+				<th>
+				    reqAvaiTime
+				</th>
+				<th>
+				    reqDesc
+				</th>
+				<th>
+				    menteeIdFrom
+				</th>	
+                                <th>
+                                    A
+                                </th>
+			</tr>
+		</thead>
+                <tbody>
+                    <tr th:each="request : ${requestList}">
+				<td th:text="${request.reqId}">-</td>
+				<td th:text="${request.reqTitle}">-</td>
+				<td th:text="${request.reqAvaiTime}">-</td>
+				<td th:text="${request.reqDesc}">-</td>
+				<td th:text="${request.menteeIdFrom.uId}">-</td>
+				<td>
+                                    <a th:href="@{'/request/view?id=' + ${request.reqId}}">View</a>
+				</td>
+		    </tr>
+                </tbody>    
+            </table>
+        <div th:if="${totalPages > 1}">
+		Total Items: [[${totalItems}]]
+		&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;    
+            <a th:if="${currentPage > 1}" th:href="@{/mentor/1}">First</a>
+            <span th:unless="${currentPage > 1}">First</span>
+		&nbsp;&nbsp;
+		
+            <a th:if="${currentPage > 1}" th:href="@{/mentor/{page}(page = ${currentPage - 1})}">Previous</a>
+            <span th:unless="${currentPage > 1}">Previous</span>
+		
+                &nbsp;&nbsp;
+		
+<!--            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+		<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+		<span th:unless="${currentPage != i}">[[${i}]]</span>
+			&nbsp;
+            </span>-->
+		
+            <a th:if="${currentPage < totalPages}" th:href="@{'/mentor/' + ${currentPage + 1}}">Next</a>
+            <span th:unless="${currentPage < totalPages}">Next</span>
+                &nbsp;&nbsp;
+		
+            <a th:if="${currentPage < totalPages}" th:href="@{'/mentor/' + ${totalPages} } ">Last</a>
+            <span th:unless="${currentPage < totalPages}">Last</span>
+                  
+        </div>
+    </div>
+        
+        
+    </body>
+</html>
