@@ -48,4 +48,9 @@ public class RequestService {
     {
         return repo.findByreqId(rId);
     }
+    
+    public void deleteRequest(int rId){
+        repo.deleteById(rId);
+    }
+
 }

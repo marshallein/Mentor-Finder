@@ -43,7 +43,7 @@ public class HomeController {
 
     @GetMapping("/landing")
     public String showStart() {
-        return "LandingPage";
+        return "updateRequest";
     }
 
     @GetMapping("/signin2")
