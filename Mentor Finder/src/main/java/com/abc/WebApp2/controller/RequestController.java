@@ -42,6 +42,7 @@ public class RequestController {
     }
     
     
+    @PostMapping("/request/create")
     public String createRequest(@ModelAttribute("newRq") Request newRq, Model model,
             @RequestParam(value = "subjectId") int subId,
             @RequestParam(value = "levelId") int levId,
@@ -73,7 +74,14 @@ public class RequestController {
     }
     
     
-    @PostMapping("/mentee/request/edit")
+    @GetMapping("/mentee/request/edit")
+    public String editRequestForm(Model model){
+        
+        return "";
+    }
+    
+    
+    @PostMapping("/request/edit")
     public String editRequest(@RequestParam(name="editRequest") Integer requestId, Model model){
         
         return "";
@@ -92,7 +100,7 @@ public class RequestController {
         return "RequestView";
     }
     
-    @GetMapping("/request/my_request")
+    @GetMapping("/mentee/request/my_request")
     public String myRequestList(Model model){
         UserInfo user = cUES.returnCurrentUser();
         if (user == null) return "redirect:/landing";
