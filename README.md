@@ -8,7 +8,11 @@ Cứ thế mà phát triển lên từ đó.
 
 
 
+
 # Version
+
+## 24/6/2021
+Thu nghiem cai Chatbox, van chua chay duoc nhung thoi cu de day.
 
 ## 17/6/2021
 Sửa lại bảng Request, xong sơ bộ function Create Request
