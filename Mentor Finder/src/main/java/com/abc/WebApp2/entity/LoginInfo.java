@@ -5,7 +5,9 @@
  */
 package com.abc.WebApp2.entity;
 
+import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,38 +17,44 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import org.springframework.lang.Nullable;
 
 /**
  *
  * @author User
  */
 @Entity
-@Table(name = "LoginInfo", uniqueConstraints = {
-    @UniqueConstraint(columnNames = "lgUsername"),
-    @UniqueConstraint(columnNames = "lgEmail")})
-public class LoginInfo {
+@Table(name = "LoginInfo")
+@NamedQueries({
+    @NamedQuery(name = "LoginInfo.findAll", query = "SELECT l FROM LoginInfo l")
+    , @NamedQuery(name = "LoginInfo.findByLgId", query = "SELECT l FROM LoginInfo l WHERE l.lgId = :lgId")
+    , @NamedQuery(name = "LoginInfo.findByLgUsername", query = "SELECT l FROM LoginInfo l WHERE l.lgUsername = :lgUsername")
+    , @NamedQuery(name = "LoginInfo.findByLgEmail", query = "SELECT l FROM LoginInfo l WHERE l.lgEmail = :lgEmail")
+    , @NamedQuery(name = "LoginInfo.findByLgPassword", query = "SELECT l FROM LoginInfo l WHERE l.lgPassword = :lgPassword")})
+public class LoginInfo implements Serializable {
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "loginInfo")
-    private UserInfo userInfo;
+   
+
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "lgId")
-    private Long userid;
-
+    private Integer lgId;
+    @Basic(optional = false)
     @Column(name = "lgUsername")
-    private String username;
-
+    private String lgUsername;
+    @Basic(optional = false)
     @Column(name = "lgEmail")
-    private String email;
-
+    private String lgEmail;
+    @Basic(optional = false)
     @Column(name = "lgPassword")
-    private String password;
-
-    @ManyToMany 
+    private String lgPassword;
+    
+    @ManyToMany
     @JoinTable( 
         name = "LoginInfo_Authorization", 
         joinColumns = @JoinColumn(
@@ -54,56 +62,63 @@ public class LoginInfo {
         inverseJoinColumns = @JoinColumn(
           name = "aId") 
     )
+    private Set<Authorization> authorizationSet;
     
-    
-    private Set<Authorization> authors;
-    
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Long getUserid() {
-        return userid;
-    }
-
-    public void setUserid(Long userid) {
-        this.userid = userid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Authorization> getRoles() {
-        return authors;
-    }
-
-    public void setRoles(Set<Authorization> authors) {
-        this.authors = authors;
-    }
-
-    @Override
-    public String toString() {
-        return "LoginEntity{" + "userid=" + userid + ", username=" + username + ", password=" + password + '}';
-    }
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "loginInfo")
+    private UserInfo userInfo;
 
     public LoginInfo() {
+    }
+
+    public LoginInfo(Integer lgId) {
+        this.lgId = lgId;
+    }
+
+    public LoginInfo(Integer lgId, String lgUsername, String lgEmail, String lgPassword) {
+        this.lgId = lgId;
+        this.lgUsername = lgUsername;
+        this.lgEmail = lgEmail;
+        this.lgPassword = lgPassword;
+    }
+
+    public Integer getLgId() {
+        return lgId;
+    }
+
+    public void setLgId(Integer lgId) {
+        this.lgId = lgId;
+    }
+
+    public String getLgUsername() {
+        return lgUsername;
+    }
+
+    public void setLgUsername(String lgUsername) {
+        this.lgUsername = lgUsername;
+    }
+
+    public String getLgEmail() {
+        return lgEmail;
+    }
+
+    public void setLgEmail(String lgEmail) {
+        this.lgEmail = lgEmail;
+    }
+
+    public String getLgPassword() {
+        return lgPassword;
+    }
+
+    public void setLgPassword(String lgPassword) {
+        this.lgPassword = lgPassword;
+    }
+
+    public Set<Authorization> getAuthorizationSet() {
+        return authorizationSet;
+    }
+
+    public void setAuthorizationSet(Set<Authorization> authorizationSet) {
+        this.authorizationSet = authorizationSet;
     }
 
     public UserInfo getUserInfo() {
@@ -113,6 +128,31 @@ public class LoginInfo {
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
     }
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (lgId != null ? lgId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof LoginInfo)) {
+            return false;
+        }
+        LoginInfo other = (LoginInfo) object;
+        if ((this.lgId == null && other.lgId != null) || (this.lgId != null && !this.lgId.equals(other.lgId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.abc.WebApp2.entity.LoginInfo[ lgId=" + lgId + "  " + lgUsername +" ]";
+    }
+
+
 }

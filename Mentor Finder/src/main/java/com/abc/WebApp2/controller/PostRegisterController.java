@@ -5,6 +5,7 @@
  */
 package com.abc.WebApp2.controller;
 
+import com.abc.WebApp2.entity.LoginInfo;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.UserInfoSaveService;
 import javax.servlet.http.HttpSession;
@@ -23,15 +24,19 @@ public class PostRegisterController {
     UserInfoSaveService suis;
     
     @PostMapping("/post-register")
-    public String checkRegister(@ModelAttribute("newUIf") UserInfo ui, HttpSession session){
+    public String checkRegister(@ModelAttribute("newUIf") UserInfo ui,   
+                                HttpSession session){
       
-         System.out.println("aDSADSDSADSADSAD");
-        ui.setId((Long)session.getAttribute("id"));
-        System.out.println(ui.getId());
-        System.out.println(ui.getuDOB());
-
-        ui.setuStatus(true);
-        suis.saveUserInfo(ui);
+        System.out.println("aDSADSDSADSADSAD");
+        LoginInfo lgIf = (LoginInfo) session.getAttribute("thatlgIf");
+        
+        ui.setUId(lgIf.getLgId());
+        ui.setLoginInfo(lgIf);
+        ui.setUStatus(true);
+       
+        //model attribute sẽ mất dữ liệu nếu không phải là nhập form, nên dùng Session 
+         System.out.println(ui.getUId() + " " + ui.getUName() + " " +  ui.getLoginInfo().getLgId());
+         suis.saveUserInfo(ui);
         return "redirect:/login";
     }
 }

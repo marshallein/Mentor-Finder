@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author User
  */
 @Repository
-public interface AuthorizationRepository extends JpaRepository<Authorization, Long> {
+public interface AuthorizationRepository extends JpaRepository<Authorization, Integer> {
 
-    Authorization findByName(String name);
+    Authorization findByaName(String name);
 }

@@ -37,5 +37,8 @@ public class UserInfoService {
         user.setUDescription(uDescription);
         ui_repo.save(user);
     }
-
+    
+        public UserInfo findUserInfoId(int id){
+        return ui_repo.getById(id);
+    }
 }
