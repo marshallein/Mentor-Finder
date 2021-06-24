@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>MANAGE MENTEE</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div align="center">
+            <h2>Manage Mentee</h2>
+            
+            <br></br>
+            
+            <table border="1" cellpadding="10">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>DOB</th>
+                        <th>Gender</th>
+                        <th>PhoneNumber</th>
+                        <th>Address</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user : ${listMentees}">
+                        <td th:text="${user.uId}">ID</td>
+                        <td th:text="${user.uName}">Name</td>
+                        <td th:text="${user.uDOB}">DOB</td>
+                        <td th:text="${user.uGender}">Gender</td>
+                        <td th:text="${user.uPhoneNumber}">PhoneNumber</td>
+                        <td th:text="${user.uAddress}">Address</td>
+                        <td th:text="${user.uDescription}">Description</td>
+                        <td>
+<!--                            <a th:href="/@{'/edit/' + ${user.uId}}">Edit</a>-->
+                            <a href="#">Edit</a>
+                            <a href="#">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>      
+            </table>
+        </div>
+    </body>
+</html>
