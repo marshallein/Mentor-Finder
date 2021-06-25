@@ -19,6 +19,8 @@
     <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
         <div class="container"><a class="navbar-brand" href="#">Mentor Finder</a><button class="navbar-toggler" data-toggle="collapse"></button></div>
     </nav>
+    <div th:text="${error}">  </div>
+    <form  th:action="@{/login_check}" method="post">
     <div class="container">
         <div class="row">
             <div class="col-md-6"><img src="/image/signin2/Group1070.png"></div>
@@ -34,11 +36,12 @@
                     </form>
                     <a class="forgot-password" href="#">Forgot your password?</a>
                     <br>
-                    <a href="#"> Don't have a account? Sign up now</a>
+                    <a th:href="@{/signup}"> Don't have a account? Sign up now</a>
                 </div>
             </div>
         </div>
     </div>
+    </form>
     <div class="d-block" style="height: 60px;">
         <div class="container" style="height: 60px;">
             <div class="row" style="height: 60px;">
