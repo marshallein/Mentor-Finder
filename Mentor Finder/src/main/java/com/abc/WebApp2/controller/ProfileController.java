@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,10 +28,10 @@ public class ProfileController {
     @Autowired
     private UserInfoService uisrv;
 
-    @GetMapping("/mentor_profile")
-    public String getMentorProfile(@RequestParam(name = "mentor_id", required = true) Long mentor_id, Model model) {
-        //UserInfo mentor = uisrv.getUserInfo(mentor_id);
-        //model.addAttribute("mentor", mentor);
+    @GetMapping("/mentor/{mentor_id}/profile")
+    public String getMentorProfile(@PathVariable("mentor_id") Integer mentor_id, Model model) {
+        UserInfo mentor = uisrv.findUserInfoId(mentor_id);
+        model.addAttribute("mentor", mentor);
         return "mentor_profile";
     }
 
