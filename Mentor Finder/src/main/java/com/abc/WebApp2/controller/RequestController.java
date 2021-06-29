@@ -111,10 +111,10 @@ public class RequestController {
             return "redirect:/landing";
         }
         else if (user.getURole().equalsIgnoreCase("Mentee")){
-            requests = reqsrv.getMyRequestMentee(user.getUId());
+            requests = reqsrv.getMyRequestMentee(user);
         }
         model.addAttribute("requests", requests);
-        return "";
+        return "HomeMentor";
     }
     
     @RequestMapping("/mentor/{pageNum}")

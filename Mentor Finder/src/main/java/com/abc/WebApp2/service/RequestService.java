@@ -6,6 +6,7 @@
 package com.abc.WebApp2.service;
 
 import com.abc.WebApp2.entity.Request;
+import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.repository.RequestRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,9 @@ public class RequestService {
         return repo.save(newRq);
     }
     
-    public List<Request> getMyRequestMentee(Integer uId){
+    public List<Request> getMyRequestMentee(UserInfo uId){
         
-        return repo.findByMenteeIdFrom(uId);
+        return repo.findBymenteeIdFrom(uId);
     }
     
     
