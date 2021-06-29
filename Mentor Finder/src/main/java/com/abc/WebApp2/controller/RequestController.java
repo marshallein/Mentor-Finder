@@ -12,12 +12,14 @@ import com.abc.WebApp2.service.LoadSubjectAndLevelService;
 import com.abc.WebApp2.service.RequestService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -115,11 +117,18 @@ public class RequestController {
         return "";
     }
     
-    @GetMapping("/request")
-    public String AllRequest(Model model){
-        List<Request> requests = reqsrv.getAllRequest();
-        model.addAttribute("requests", requests);
-        return "";
+    @RequestMapping("/mentor/{pageNum}")
+    public String AllRequest(Model model,
+            @PathVariable(name = "pageNum") int pageNum){
+        Page<Request> page = reqsrv.listAllByPage(pageNum);
+        List<Request> requestList = page.getContent();
+        
+        model.addAttribute("currentPage", pageNum);		
+        model.addAttribute("totalPages", page.getTotalPages());
+	model.addAttribute("totalItems", page.getTotalElements());
+        
+        model.addAttribute("requestList", requestList);
+        
+        return "HomeMentor";
     }
-    
 }
