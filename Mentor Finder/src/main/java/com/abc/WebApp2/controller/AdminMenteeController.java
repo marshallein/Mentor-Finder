@@ -37,7 +37,7 @@ public class AdminMenteeController {
         model.addAttribute("listMentees", listMentees);
         return "Admin_ManageMentee";
     }
-
+    // delete UserInfo mentee with id from AdminManageMentee 
     @RequestMapping("/deleteMentee")
     public String deleteMentee(@RequestParam(value = "id") int uId)
     {
