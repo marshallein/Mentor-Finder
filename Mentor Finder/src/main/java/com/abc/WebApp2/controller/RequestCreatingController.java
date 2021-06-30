@@ -70,6 +70,5 @@ public class RequestCreatingController {
         rqSr.saveNewRequest(newRq);
         
         return "redirect:/home";
-    }
-    
+    }  
 }

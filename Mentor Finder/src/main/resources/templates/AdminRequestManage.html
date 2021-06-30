@@ -2,9 +2,179 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
 <head>
+     <style>
+            @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body{
+  font-family: 'Roboto', sans-serif;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+i {
+  margin-right: 10px;
+}
+/*----------multi-level-accordian-menu------------*/
+.navbar-logo{
+  padding: 15px;
+  color: #fff;
+}
+.navbar-mainbg{
+  background-color: #5161ce;
+  padding: 0px;
+}
+#navbarSupportedContent{
+  overflow: hidden;
+  position: relative;
+}
+#navbarSupportedContent ul{
+  padding: 0px;
+  margin: 0px;
+}
+#navbarSupportedContent ul li a i{
+  margin-right: 10px;
+}
+#navbarSupportedContent li {
+  list-style-type: none;
+  float: left;
+}
+#navbarSupportedContent ul li a{
+  color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 15px;
+    display: block;
+    padding: 20px 20px;
+    transition-duration:0.6s;
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+}
+#navbarSupportedContent>ul>li.active>a{
+  color: #5161ce;
+  background-color: transparent;
+  transition: all 0.7s;
+}
+#navbarSupportedContent a:not(:only-child):after {
+  content: "\f105";
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 14px;
+  font-family: "Font Awesome 5 Free";
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  font-weight: 900;
+  transition: 0.5s;
+}
+#navbarSupportedContent .active>a:not(:only-child):after {
+  transform: rotate(90deg);
+}
+.hori-selector{
+  display:inline-block;
+  position:absolute;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  transition-duration:0.6s;
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  background-color: #fff;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  margin-top: 10px;
+}
+.hori-selector .right,
+.hori-selector .left{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-color: #fff;
+  bottom: 10px;
+}
+.hori-selector .right{
+  right: -25px;
+}
+.hori-selector .left{
+  left: -25px;
+}
+.hori-selector .right:before,
+.hori-selector .left:before{
+  content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #5161ce;
+}
+.hori-selector .right:before{
+  bottom: 0;
+    right: -25px;
+}
+.hori-selector .left:before{
+  bottom: 0;
+    left: -25px;
+}
+
+
+@media(min-width: 992px){
+  .navbar-expand-custom {
+      -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+      -ms-flex-pack: start;
+      justify-content: flex-start;
+  }
+  .navbar-expand-custom .navbar-nav {
+      -ms-flex-direction: row;
+      flex-direction: row;
+  }
+  .navbar-expand-custom .navbar-toggler {
+      display: none;
+  }
+  .navbar-expand-custom .navbar-collapse {
+      display: -ms-flexbox!important;
+      display: flex!important;
+      -ms-flex-preferred-size: auto;
+      flex-basis: auto;
+  }
+}
+
+
+@media (max-width: 991px){
+  #navbarSupportedContent ul li a{
+    padding: 12px 30px;
+  }
+  .hori-selector{
+    margin-top: 0px;
+    margin-left: 10px;
+    border-radius: 0;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+  }
+  .hori-selector .left,
+  .hori-selector .right{
+    right: 10px;
+  }
+  .hori-selector .left{
+    top: -25px;
+    left: auto;
+  }
+  .hori-selector .right{
+    bottom: -25px;
+  }
+  .hori-selector .left:before{
+    left: -25px;
+    top: -25px;
+  }
+  .hori-selector .right:before{
+    bottom: -25px;
+    left: -25px;
+  }
+}
+        </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Table - Mentor Finder</title>
+    
       <link rel="stylesheet"type="text/css" th:href="@{/bootstrap/landingpage/css/bootstrap.min.css}">
     <link rel="stylesheet"type="text/css" th:href="@{https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic}">
     <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/fontawesome-all.min.css}">
@@ -15,15 +185,43 @@
     <link rel="stylesheet"type="text/css" th:href="@{/css/landingpage/Animated-CSS-Waves-Background-SVG.css}">
     <link rel="stylesheet"type="text/css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css}">
     <link rel="stylesheet"type="text/css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body id="page-top">
+    <nav class="navbar navbar-expand-custom navbar-mainbg">
+        <a class="navbar-brand navbar-logo" href="#">Mentor Finder</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars text-white"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/admin'}"><i class="fas "></i>Manage Request</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/dashBoard"><i class="far fa-chart-line"></i>Request Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far"></i>Calendar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href ="@{/logout}"><i class="far fa-lock-open"></i>Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
                 <br/><br/><br/>
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Manage Request</h3>
+                    <h3 class="text-dark mb-4" style="text-align: center">Manage All Request</h3>
                     <div class="card shadow">
                         <div class="card-header py-3">
-                            <a class="text-primary m-0 font-weight-bold" href="newRequest">Create request</a>
+                            <a href="#showInfo" data-toggle="modal" data-target="#add">Create request</a> &nbsp; &nbsp;
+                            <a style="font-size: 19px" class="text-primary m-0 font-weight-bold" href="/admin/dashBoard">Request Dashboard</a>&nbsp; &nbsp;
+                            <a href="#showInfo" data-toggle="modal" data-target="#filter">Filter Request</a>
                         </div>
                         <div class="card-body">
                            
@@ -31,7 +229,7 @@
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Request ID</th>
                                             <th>From</th>
                                             <th>Subject</th>
                                             <th>Level</th>
@@ -43,55 +241,206 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="request : ${requests}">
+                                            <div th:with="someVariable=${0}">
                                             <td th:text="${request.getReqId()}"></td>
-                                            <td th:text="${request.getMenteeIdFrom().uName}"></td>
+                                            
+                                            <td><a href="#showInfo" data-toggle="modal" th:attr="data-target='#datauser'+*{request.getMenteeIdFrom().getUId()}" th:data-whatever="${request.getMenteeIdFrom().uName}" th:text="${request.getMenteeIdFrom().uName}"></a></td>
                                             <td th:text="${request.getSubId().subName}"></td>
                                             <td th:text="${request.getLevId().levName}"></td>
                                             <td th:text="${request.reqTitle}"></td>
                                             <td th:text="${request.reqDesc}"></td>
                                             <td th:text="${request.getReqAvaiTime()}"></td>
                                             <td style="display: inline-flex">
-                                                <a class="btn btn-primary" data-bss-hover-animate="pulse" type="button" style="background: var(--red);border-color: var(--pink);width: 110.7344px;margin-right: 37px;" th:href="@{'/deleteRequest?id='+ ${request.getReqId()}}" onclick= "return confirm('Do you want to delete?');">Delete</a> 
-                                                <a class="btn btn-primary" data-bss-hover-animate="pulse" type="button" style="background: var(--teal);border-color: var(--teal);width: 110.6719px;" th:href="@{'/updateRequest?id='+ ${request.getReqId()}}">Update</a>
+                                                <a th:href="@{'/deleteRequest?id='+ ${request.getReqId()}}" onclick= "return confirm('Do you want to delete?');"><i class="fa fa-trash" style="margin-left: 15px;color: #FF79CD"></i></a>
+                                                <a href="#showInfo" data-toggle="modal" th:attr="data-target='#edit'+*{request.getMenteeIdFrom().getUId()}"><i class="fa fa-pencil" style="margin-left: 15px;color: #6f42c1"></i></a>
+<!--                                                <a th:href="@{'/updateRequest?id='+ ${request.getReqId()}}" data-toggle="modal" data-target="#editRequest"><i class="fa fa-pencil" style="margin-left: 15px;color: #6f42c1"></i></a>-->
+                                                <a th:href="@{'/viewRequest?id='+ ${request.getReqId()}}"><i class="fa fa-eye" style="margin-left: 15px;color: #0062cc"></i></a>
                                             </td>
+                                            <div role="dialog" tabindex="-1" class="modal fade" th:id="*{'datauser'+{request.getMenteeIdFrom().getUId()}}" >
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">User Details</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Name: [[*{request.getMenteeIdFrom().uName}]]</p>
+                                                        <p>DOB: [[*{request.getMenteeIdFrom().getUDOB()}]]</p>
+                                                        <p>Gender: [[*{request.getMenteeIdFrom().getUGender()}]]</p>
+                                                        <p>Phone: [[*{request.getMenteeIdFrom().getUPhoneNumber()}]]</p>
+                                                        <p>Address: [[*{request.getMenteeIdFrom().getUAddress()}]]</p>
+                                                    </div>
+                                                    <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            
+                                      <div role="dialog" tabindex="-1" class="modal fade" th:id="*{'edit'+{request.getMenteeIdFrom().getUId()}}" >
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <form th:action="@{/updateRequest}" method="post">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Edit Request</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                        </div>
+
+                                                            <div class="modal-body">
+                                                                RequestID:&emsp;<input style="background-color: #b3e4ec" type="text" th:value="${request.reqId}" readonly="" name="id"></br></br>
+                                                                MenteeID:&emsp;
+                                                                <input style="background-color: #b3e4ec" readonly="" type="text" th:name="menteeId" th:value="${request.getMenteeIdFrom().getUId()}"/></br></br>
+                                                                Subject:&emsp;&emsp;&emsp;
+                                                                <select  th:name="subjectId">
+                                                                    <option th:selected hidden th:text="${request.getSubId().subName}" th:value="${request.getSubId().getSubId()}"></option>
+                                                                    <option th:each="subject : ${subjectList}" th:value="${subject.getSubId()}" th:text="${subject.getSubName()}"></option>
+                                                                </select>
+                                                                <select th:name="levelId">
+                                                                    <optgroup>
+                                                                        <option th:selected hidden th:text="${request.getLevId().levName}" th:value="${request.getLevId().getLevId()}"></option>
+                                                                        <option th:each="level : ${levelList}" th:value="${level.levId}" th:text="${level.getLevName()}"></option>
+                                                                    </optgroup>
+                                                                </select></br></br>
+                                                                Title:&emsp;&nbsp;&emsp;&emsp;&emsp;
+                                                                <input type="text" name="title" th:value="${request.reqTitle}"></br></br>
+                                                                    Description:&emsp;
+                                                                    <textarea name="description" th:text="${request.reqDesc}"></textarea></br></br>
+                                                                    Available:&emsp;&emsp;
+                                                                    <input name="available" th:value="${request.getReqAvaiTime()}" type="text">
+                                                            </div> 
+                                                        <div class="modal-footer">
+                                                            <button style="background-color: #be2617" class="btn btn-light" type="button" data-dismiss="modal">Close</button>
+                                                            <button style="background-color: #17a673" class="btn btn-light" type="submit">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                         </tr>                                       
-                                    </tbody>
-                                    
+                                    </tbody>    
                                 </table>
+                            </div>
+                            
+                            <div th:if="${totalPages > 1}">
+<!--                                <div class="row col-sm-10">
+                                    <div class="col-sm-2" style="font-size: 20px">
+                                        Total  Requests : [[${totalItems}]] Today requests: [[${requestToday}]]
+                                        
+                                    </div>
+                                </div>-->
                             </div>
                             <div class="row">
                                 <div class="col-md-6 align-self-center">
-                                   
                                 </div>
                                 <div class="col-md-6">
+                                    <div th:if="${totalPages > 1}">
                                     <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                                        <ul class="pagination">
-                                            <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                                        </ul>
+                                        <p style="display:inline-block;font-size:25px">Pages : </p> &nbsp; &nbsp;
+                                        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                                            <a style="font-size: 25px" th:if="${currentPage != i}" th:href="@{'/page/'+${i}}">[[${i}]]</a>
+                                            <span style="font-size: 25px" th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp; 
+                                        </span>
+                                        <a style="font-size: 25px" th:if="${currentPage < totalPages}" th:href="@{'/page/'+${currentPage + 1}}">Next</a>
+                                        <span style="font-size: 25px" th:unless="${currentPage < totalPages}">Next</span>
                                     </nav>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+<!--            <div role="dialog" tabindex="-1" class="modal fade" id="editRequest" >
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Edit Request</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                         <p style="display: inline-block;margin-left: 11px;">Request ID</p><input type="text" style="display: inline-block;margin-left: 81px;" th:value="${Request.reqId}" readonly="" name="id">
+                                                    </div>
+                                                    <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button></div>
+                                                </div>
+                                            </div>
+                                        </div>-->
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © Mentor Finder 2021</span></div>
                 </div>
+                
+                <div role="dialog" tabindex="-1" class="modal fade" id="add" >
+                    <form th:action="@{/saveRequest}" method="post">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add Request</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    Mentee ID&emsp;&emsp;
+                                    <input type="text" name="id"></br></br>
+                                    Subject&emsp;&emsp;&emsp;&nbsp;
+                                    <select th:name="subjectId">
+                                        <option th:each="subject : ${subjectList}" th:value="${subject.getSubId()}" th:text="${subject.getSubName()}"></option>
+                                    </select>
+                                    <select th:name="levelId">
+                                        <optgroup>
+                                            <option th:each="level : ${levelList}" th:value="${level.levId}" th:text="${level.getLevName()}"></option>
+                                        </optgroup>
+                                    </select></br></br>
+                                    Title&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
+                                    <input type="text" name="title"></br></br>
+                                    Description&emsp;&nbsp;
+                                    <textarea name="description" ></textarea></br></br>
+                                    Available&emsp;&emsp;&nbsp;   
+                                    <input name="available" type="text">
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button style="background-color: #be2617" class="btn btn-light" type="button" data-dismiss="modal">Close</button>
+                                    <button style="background-color: #17a673" class="btn btn-light" type="submit">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <div role="dialog" tabindex="-1" class="modal fade" id="filter" >
+                    <form th:action="@{/filterRequest}" method="post">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Filter Request</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                </div>
+                                <div class="modal-body">
+                                   Subject&emsp;&emsp;&emsp;&emsp;
+                                    <select th:name="subjectId">
+                                        <option th:value="-1" th:text="All"></option>
+                                        <option th:each="subject : ${subjectList}" th:value="${subject.getSubId()}" th:text="${subject.getSubName()}"></option>
+                                    </select>
+                                    <select th:name="levelId">
+                                        <optgroup>
+                                            <option th:value="-1" th:text="All"></option>
+                                            <option th:each="level : ${levelList}" th:value="${level.levId}" th:text="${level.getLevName()}"></option>
+                                        </optgroup>
+                                    </select></br></br>
+                                    Date from&emsp;&emsp;&emsp;<input type="date" th:name="dateFrom"></br></br>
+                                    Date to&emsp;&emsp;&emsp;&emsp;<input type="date" th:name="dateTo">
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button style="background-color: #be2617" class="btn btn-light" type="button" data-dismiss="modal">Close</button>
+                                    <button style="background-color: #17a673" class="btn btn-light" type="submit">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/chart.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    <script src="assets/js/theme.js"></script>
+    
+    <script src="/js/landingpage/jquery.min.js"></script>
+    <script src="/bootstrap/landingpage/js/bootstrap.min.js"></script>
+    <script src="/js/landingpage/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
 </body>
 
 </html>

@@ -47,7 +47,7 @@ public class RegisterController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken){
              model.addAttribute("registerInfo", new LoginInfo());
-            return "Register";
+            return "SignUp";
         }
         
         return "redirect:/home";
@@ -63,21 +63,21 @@ public class RegisterController {
             Model model, HttpSession session) {
         if (!password.equals(passwordRetyped)) {
             model.addAttribute("error", "Password doesn't not match");
-            return "Register";
+            return "SignUp";
         } else if (password.trim().equals("")) {
             model.addAttribute("error", "Password must not be empty");
-            return "Register";
+            return "SignUp";
         }
         else if(lcs.checkLoginInfo(username, password) != -1L)
         {
             model.addAttribute("error", "Account already existed, please specify another ");
-            return "Register";
+            return "SignUp";
         } else if (!lcs.checkEmail(email)) {
             model.addAttribute("error", "Email is already existed ");
-            return "Register";
+            return "SignUp";
         } else if (acceptTerm == null) {
             model.addAttribute("error", "Please accept the term");
-            return "Register";
+            return "SignUp";
         } else {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -97,7 +97,7 @@ public class RegisterController {
             uIf.setLoginInfo(lgIf);
             model.addAttribute("newUIf", uIf);
 //            session.setAttribute("id", lgIf.getUserid());
-            return "UserInfoSpecify";
+            return "PostRegister2";
         }
 
     }

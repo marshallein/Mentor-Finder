@@ -43,7 +43,7 @@ public class HomeController {
 
     @GetMapping("/landing")
     public String showStart() {
-        return "updateRequest";
+        return "LandingPage";
     }
 
     @GetMapping("/signin2")
@@ -55,4 +55,24 @@ public class HomeController {
     public String showHomePage1() {
         return "home";
     }
+    
+    @GetMapping("/signup")
+    public String showSignUP(){
+        return "SignUp";
+    }
+    
+    @GetMapping("/post")
+    public String postRe(){
+        return "PostRegister";
+    } 
+    
+     @GetMapping("/post2")
+    public String postRe2(){
+        return "PostRegister2";
+    } 
+    
+     @GetMapping("/test")
+    public String test(){
+        return "AdminRequestDashboard";
+    } 
 }
