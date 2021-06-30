@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -26,15 +27,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class AdminMenteeController {
-    @Autowired 
+
+    @Autowired
     UserInfoService userService;
-     
+
     @GetMapping("/adminMentee")
     public String showMenteeList(Model model) {
         List<UserInfo> listMentees = userService.findAllMentees();
         model.addAttribute("listMentees", listMentees);
         return "Admin_ManageMentee";
     }
-    
+
+    @RequestMapping("/deleteMentee")
+    public String deleteMentee(@RequestParam(value = "id") int uId)
+    {
+        userService.deleteMentee(uId);
+        return "redirect:/adminMentee";
+    }
 
 }

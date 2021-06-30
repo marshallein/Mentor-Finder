@@ -41,7 +41,7 @@ and open the template in the editor.
                         <td>
 <!--                            <a th:href="/@{'/edit/' + ${user.uId}}">Edit</a>-->
                             <a href="#">Edit</a>
-                            <a href="#">Delete</a>
+                            <a th:href="@{'/deleteMentee?id=' + ${user.uId}}" onclick= "return confirm('Do you want to delete this?');">Delete</a>
                         </td>
                     </tr>
                 </tbody>      
