@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,12 +38,28 @@ public class AdminMenteeController {
         model.addAttribute("listMentees", listMentees);
         return "Admin_ManageMentee";
     }
-    // delete UserInfo mentee with id from AdminManageMentee 
-    @RequestMapping("/deleteMentee")
-    public String deleteMentee(@RequestParam(value = "id") int uId)
-    {
-        userService.deleteMentee(uId);
-        return "redirect:/adminMentee";
+
+    // deact UserInfo mentee with id from AdminManageMentee 
+//    @RequestMapping("/deactMentee")
+//    public String deactMentee(@RequestParam(value = "id") int uId)
+//    {
+//        UserInfo user = new UserInfo();
+//        user = userService.findUserInfoId(uId);
+//        //userService;
+//        return "redirect:/adminMentee";
+//    }
+//    
+    @GetMapping("/updateMentee")
+    public String updateMentee(@RequestParam(value = "id") int uId, Model model) {
+        UserInfo user = userService.findUserInfoId(uId);
+
+        model.addAttribute("user", user);
+        return "Admin_UpdateMentee";
     }
 
+    @GetMapping("/saveMentee")
+    public String saveUpdateMentee(@ModelAttribute("user") UserInfo user) {
+        userService.saveMentee(user);
+        return "redirect:/adminMentee";
+    }
 }

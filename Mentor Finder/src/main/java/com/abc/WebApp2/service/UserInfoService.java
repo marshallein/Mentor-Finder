@@ -48,4 +48,7 @@ public class UserInfoService {
     public void deleteMentee(int id){
         ui_repo.deleteById(id);
     }
+    public void saveMentee(UserInfo user){
+        ui_repo.save(user);
+    }
 }
