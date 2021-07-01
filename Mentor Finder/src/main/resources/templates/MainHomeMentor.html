@@ -72,8 +72,34 @@
                         </div>
                     </div>
                 </section>
-                    <div style="margin: 10px;text-align:right;">
-                        <div class="btn-group" role="group"><a class="btn btn-primary" role="button" >Prev</a> <a class="btn btn-primary"  role="button" style="margin-left: 10px;">Next</a></div>
+                    <div style="margin: 14px;">
+                        <nav>
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <form th:action="@{/mentee}" method="GET" th:object="${pageNum}">
+                                        <div  th:if="${totalPages==1}">
+                                            <input th:value="${pageNum}" style="display: none">
+                                        </div>
+                                        <div  th:unless="${totalPages==1}">
+                                            <input th:value="${pageNum}-1" style="display: none">
+                                        </div>
+                                        <a class="page-link" aria-label="Previous" type="submit"><span aria-hidden="true">«</span></a>
+                                    </form>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">[[${pageNum}]]</a></li>
+                                <li class="page-item">
+                                    <form th:action="@{/mentee}" method="GET" th:object="${pageNum}">
+                                        <div  th:if="${totalPages==1}">
+                                            <input th:value="${pageNum}" style="display: none">
+                                        </div>
+                                        <div  th:unless="${totalPages==1}">
+                                            <input th:value="${pageNum}+1" style="display: none">
+                                        </div>
+                                        <a class="page-link" aria-label="Next" type="submit"><span aria-hidden="true">»</span></a>
+                                    </form>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-4">

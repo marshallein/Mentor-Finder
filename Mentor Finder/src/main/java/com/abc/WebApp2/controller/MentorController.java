@@ -5,10 +5,13 @@
  */
 package com.abc.WebApp2.controller;
 
+import com.abc.WebApp2.entity.Enrolled;
 import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
+import com.abc.WebApp2.service.EnrollService;
 import com.abc.WebApp2.service.RequestService;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,6 +38,9 @@ public class MentorController {
     @Autowired 
     RequestService rqsrv;
     
+    @Autowired
+    EnrollService eServ;
+    
     @ModelAttribute("pageNum")
     public Integer pageNum(){
         return 1;
@@ -50,6 +56,10 @@ public class MentorController {
         
         Page<Request> page = rqsrv.listAllByPage(pageNum);
         List<Request> requests = page.getContent();
+        List<Enrolled> enrolled = eServ.allMyEnrolled(uIf);
+        for(Enrolled e: enrolled){
+            requests.remove(e.getReqId());
+        }
         
         model.addAttribute("pageNum", pageNum);		
         model.addAttribute("totalPages", page.getTotalPages());
