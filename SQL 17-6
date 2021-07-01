@@ -159,8 +159,8 @@ INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (4, '
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (5, 'Nguyen Tran Hoang', '12/12/2001', 0, 'Mentee', '123456789')
 
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (6, 'Nguyen Tran A', '12/12/2001', 1, 'Mentor', '123456789')
-INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (7, 'Nguyen Tran B', '12/12/2001', 1, 'Mentor', '123456789')
-INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (8, 'Nguyen Tran Thai An', '12/12/2001', 1, 'Mentor', '0923456789')
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber, uStatus) VALUES (7, 'Nguyen Tran B', '12/12/2001', 1, 'Mentor', '123456789', 0)
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber, uStatus) VALUES (8, 'Nguyen Tran Thai An', '12/12/2001', 1, 'Mentor', '0923456789', 0)
 
 SELECT * From UserInfo where uId= 1
 SELECT * From UserInfo

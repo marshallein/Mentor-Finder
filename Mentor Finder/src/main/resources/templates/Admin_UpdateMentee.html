@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="stylesheet"type="text/css" th:href="@{/bootstrap/landingpage/css/bootstrap.min.css}">
+                <link rel="stylesheet"type="text/css" th:href="@{https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic}">
+                <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/fontawesome-all.min.css}">
+                <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/font-awesome.min.css}">
+                <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/simple-line-icons.min.css}">
+                <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/typicons.min.css}">
+                <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/fontawesome5-overrides.min.css}">
+                <link rel="stylesheet"type="text/css" th:href="@{/css/landingpage/Animated-CSS-Waves-Background-SVG.css}">
+                <link rel="stylesheet"type="text/css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css}">
+                <link rel="stylesheet"type="text/css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css}">
+                </head>
+                <body>
+
+                    <div align="center">
+                        <h1>Update Mentee</h1>
+                        <form th:action="@{/saveMentee}" th:object="${user}">
+                            <table border="0" cellpadding="10">
+                                <tr>
+                                    <td>Mentee ID</td>
+                                    <td><input type="text" th:field="*{uId}" readonly/></td>
+                                </tr>
+                                <tr>
+                                    <td>Mentee Name</td>
+                                    <td><input type="text" th:field="*{uName}"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Mentee DOB</td>
+                                    <td><input type="text" th:field="*{uDOB}"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Mentee Gender</td>
+                                    <td><input type="text" th:field="*{uGender}"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Mentee Role</td>
+                                    <td><input type="text" th:field="*{uRole}"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Mentee PhoneNumber</td>
+                                    <td><input type="text" th:field="*{uPhoneNumber}"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Mentee Address</td>
+                                    <td><input type="text" th:field="*{uAddress}"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Mentee Image</td>
+                                    <td><input type="text" th:field="*{uImage}"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Mentee Description</td>
+                                    <td><input type="text" th:field="*{uDescription}"/></td>
+                                </tr>
+                                <tr>
+                                    <td><input class="btn btn-primary" data-bss-hover-animate="pulse"  style="background: green" type="submit" value="Submit"/></td>
+                                    <td><a href="adminMentee" class="btn btn-primary">Cancel</a></td>
+                                </tr>
+                            </table>
+
+                        </form>
+                    </div>
+                </body>
+                </html>

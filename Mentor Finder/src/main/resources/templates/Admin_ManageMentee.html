@@ -9,43 +9,94 @@ and open the template in the editor.
         <title>MANAGE MENTEE</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"type="text/css" th:href="@{/bootstrap/landingpage/css/bootstrap.min.css}">
+        <link rel="stylesheet"type="text/css" th:href="@{https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic}">
+        <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/fontawesome-all.min.css}">
+        <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/font-awesome.min.css}">
+        <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/simple-line-icons.min.css}">
+        <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/typicons.min.css}">
+        <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/fontawesome5-overrides.min.css}">
+        <link rel="stylesheet"type="text/css" th:href="@{/css/landingpage/Animated-CSS-Waves-Background-SVG.css}">
+        <link rel="stylesheet"type="text/css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css}">
+        <link rel="stylesheet"type="text/css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css}">
     </head>
-    <body>
-        <div align="center">
-            <h2>Manage Mentee</h2>
-            
-            <br></br>
-            
-            <table border="1" cellpadding="10">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>DOB</th>
-                        <th>Gender</th>
-                        <th>PhoneNumber</th>
-                        <th>Address</th>
-                        <th>Description</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="user : ${listMentees}">
-                        <td th:text="${user.uId}">ID</td>
-                        <td th:text="${user.uName}">Name</td>
-                        <td th:text="${user.uDOB}">DOB</td>
-                        <td th:text="${user.uGender}">Gender</td>
-                        <td th:text="${user.uPhoneNumber}">PhoneNumber</td>
-                        <td th:text="${user.uAddress}">Address</td>
-                        <td th:text="${user.uDescription}">Description</td>
-                        <td>
-<!--                            <a th:href="/@{'/edit/' + ${user.uId}}">Edit</a>-->
-                            <a href="#">Edit</a>
-                            <a href="#">Delete</a>
-                        </td>
-                    </tr>
-                </tbody>      
-            </table>
+    <body id="page-top">
+        <br/><br/><br/>
+        <div class="container-fluid">
+            <h3 class="text-dark mb-4">Manage Mentee</h3>
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                        <table class="table my-0" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>DOB</th>
+                                    <th>Gender</th>
+                                    <th>PhoneNumber</th>
+                                    <th>Address</th>
+                                    <th>Image</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="user : ${listMentees}">
+                                    <td th:text="${user.uId}">ID</td>
+                                    <td th:text="${user.uName}">Name</td>
+                                    <td th:text="${user.uDOB}">DOB</td>
+                                    <td th:text="${user.uGender}">Gender</td>
+                                    <td th:text="${user.uPhoneNumber}">PhoneNumber</td>
+                                    <td th:text="${user.uAddress}">Address</td>
+                                    <td th:text="${user.uImage}">Image</td>
+                                    <td th:text="${user.uDescription}">Description</td>
+                                    <td th:text="${user.uStatus}">Status</td>
+                                    <td style="display: inline-flex">
+<!--                                    <a class="btn btn-primary" data-bss-hover-animate="pulse" type="button" style="background: var(--red);border-color: var(--pink);width: 110.7344px;margin-right: 37px;" th:href="@{'/deactMentee?id=' + ${user.uId}}" onclick= "return confirm('Do you want to delete?');">Delete</a> 
+                                        <a class="btn btn-primary" data-bss-hover-animate="pulse" type="button" style="background: var(--teal);border-color: var(--teal);width: 110.6719px;" th:href="@{'/updateRequest?id='+ ${request.getReqId()}}">Update</a>-->
+                                        <a class="btn btn-primary" data-bss-hover-animate="pulse" type="button" style="background: var(--blue);border-color: var(--blue);width: 110.7344px;margin-right: 37px;" th:href="@{'/updateMentee?id=' + ${user.uId}}">Update</a>
+                                        <span th:switch="${user.uStatus}">
+                                            <a class="btn btn-primary" data-bss-hover-animate="pulse" type="button" style="background: var(--red);border-color: var(--pink);width: 110.7344px;margin-right: 37px;" th:case="true" th:href="@{'/deactMentee?id=' + ${user.uId}}" onclick= "return confirm('Do you want to deactivate this?');">Deactivate</a>
+                                            <a class="btn btn-primary" data-bss-hover-animate="pulse" type="button" style="background: var(--teal);border-color: var(--teal);width: 110.7344px;margin-right: 37px;" th:case="false" th:href="@{'/deactMentee?id=' + ${user.uId}}" onclick= "return confirm('Do you want to reactivate this?');">Reactivate</a>
+                                        </span>
+                                    </td>
+                                </tr>                                       
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 align-self-center">
+
+                        </div>
+                        <div class="col-md-6">
+                            <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                <ul class="pagination">
+                                    <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </body>
+    <footer class="bg-white sticky-footer">
+        <div class="container my-auto">
+            <div class="text-center my-auto copyright"><span>Copyright © Mentor Finder 2021</span></div>
+        </div>
+    </footer>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/chart.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
 </html>
