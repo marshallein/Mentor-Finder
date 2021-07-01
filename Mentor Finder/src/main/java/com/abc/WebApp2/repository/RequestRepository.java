@@ -6,6 +6,7 @@
 package com.abc.WebApp2.repository;
 
 import com.abc.WebApp2.entity.Request;
+import com.abc.WebApp2.entity.UserInfo;
 import java.util.List;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.Page;
@@ -22,9 +23,7 @@ import org.springframework.stereotype.Repository;
 public interface RequestRepository extends JpaRepository<Request, Integer> {
     
     @Nullable
-    List<Request> findByMenteeIdFrom(Integer menteeId);
-    
-    List<Request> findAll();
+    List<Request> findBymenteeIdFrom(UserInfo menteeId);
     
     Request findByreqId(int rId);
     

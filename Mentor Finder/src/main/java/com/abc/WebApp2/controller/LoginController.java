@@ -38,7 +38,7 @@ public class LoginController {
     public String showSignUpForm() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken){
-             return "Login";
+             return "SignIn";
         }
         
         return "redirect:/home";

@@ -17,12 +17,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
  * @author User
  */
 @Controller
+@RequestMapping("/mentor")
 public class MentorController {
     
     @Autowired
@@ -31,7 +33,7 @@ public class MentorController {
     @Autowired 
     RequestService rqsrv;
      
-    @GetMapping("/mentor")
+    @RequestMapping(method = RequestMethod.GET)
     public String showMentorPage(Model model) {
         UserInfo uIf = cUES.returnCurrentUser();
         System.out.println(uIf.toString());
@@ -44,19 +46,4 @@ public class MentorController {
         return "HomeMentor";
     }
     
-    @RequestMapping("/mentor/{pageNum}")
-    public String showMentorList(Model model,
-            @PathVariable(name = "pageNum") int pageNum)
-    {
-        Page<Request> page = rqsrv.listAllByPage(pageNum);
-        List<Request> requestList = page.getContent();
-        
-        model.addAttribute("currentPage", pageNum);		
-        model.addAttribute("totalPages", page.getTotalPages());
-	model.addAttribute("totalItems", page.getTotalElements());
-        
-        model.addAttribute("requestList", requestList);
-        
-        return "HomeMentor";
-    }
 }

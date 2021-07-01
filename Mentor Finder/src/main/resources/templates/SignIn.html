@@ -19,23 +19,29 @@
     <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
         <div class="container"><a class="navbar-brand" href="#">Mentor Finder</a><button class="navbar-toggler" data-toggle="collapse"></button></div>
     </nav>
+    <div th:text="${error}">  </div>
+    <form  th:action="@{/login_check}" method="post">
     <div class="container">
         <div class="row">
             <div class="col-md-6"><img src="/image/signin2/Group1070.png"></div>
             <div class="col-md-6">
                 <div class="login-card"><img class="profile-img-card" src="/image/signin2/avatar_2x.png">
-                    <p class="profile-name-card"> </p>
-                    <form class="form-signin"><span class="reauth-email"> </span><input class="form-control" type="email" id="inputEmail" required="" placeholder="Username" autofocus=""><input class="form-control" type="password" id="inputPassword" required="" placeholder="Password">
+                    <p class="profile-name-card"></p>
+                    <form class="form-signin">
+                        <span class="reauth-email"> </span>
+                        <input class="form-control" required="" placeholder="Username" autofocus="" th:name="username" ><input th:name="password" class="form-control" type="password" id="inputPassword" required="" placeholder="Password">
                         <div class="checkbox">
                             <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label class="form-check-label" for="formCheck-5">Remember me</label></div>
                         </div><button class="btn btn-primary btn-block btn-lg btn-signin" type="submit">Sign in</button>
-                    </form><a class="forgot-password" href="#">Forgot your password?</a>
+                    </form>
+                    <a class="forgot-password" href="#">Forgot your password?</a>
                     <br>
-                    <a href="#"> Don't have a account? Sign up now</a>
+                    <a th:href="@{/signup}"> Don't have a account? Sign up now</a>
                 </div>
             </div>
         </div>
     </div>
+    </form>
     <div class="d-block" style="height: 60px;">
         <div class="container" style="height: 60px;">
             <div class="row" style="height: 60px;">

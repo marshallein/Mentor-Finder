@@ -131,16 +131,37 @@ CREATE TABLE Comment(
 
 INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('user1', 'user1@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
 INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('user2', 'user2@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
+INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('mentee1', 'mentee1@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
+INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('mentee2', 'mentee2@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
+INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('mentee3', 'mentee3@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
+INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('mentor1', 'mentor1@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
+INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('mentor2', 'mentor2@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
+INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('mentor3', 'mentor3@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
 SELECT * FROM LoginInfo
 
 INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (1,1)
 INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (1,2)
 INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (2,2)
+INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (3,2)
+INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (4,2)
+INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (5,2)
+INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (6,2)
+INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (7,2)
+INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (8,2)
 
 SELECT * FROM LoginInfo_Authorization
 
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (1, 'Nguyen Van A', '12/12/2001', 1, 'Mentor', '123456789')
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (2, 'Nguyen Van B', '12/12/2001', 1, 'Mentor', '123456789')
+
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (3, 'Nguyen Minh Hanh', '12/12/2001', 0, 'Mentee', '123456789')
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (4, 'Nguyen Thu An', '12/12/2001', 0, 'Mentee', '123456789')
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (5, 'Nguyen Tran Hoang', '12/12/2001', 0, 'Mentee', '123456789')
+
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (6, 'Nguyen Tran A', '12/12/2001', 1, 'Mentor', '123456789')
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (7, 'Nguyen Tran B', '12/12/2001', 1, 'Mentor', '123456789')
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (8, 'Nguyen Tran Thai An', '12/12/2001', 1, 'Mentor', '0923456789')
+
 SELECT * From UserInfo where uId= 1
 SELECT * From UserInfo
 
@@ -153,6 +174,11 @@ INSERT INTO [Subject](subName, subDesc) VALUES ('Chemistry','Chemistry')
 INSERT INTO [Subject](subName, subDesc) VALUES ('Geography','Geography')
 INSERT INTO [Subject](subName, subDesc) VALUES ('Art','Art')
 INSERT INTO [Subject](subName, subDesc) VALUES ('Calculus','Calculus')
+INSERT INTO [Subject](subName, subDesc) VALUES ('Biology','Biology')
+INSERT INTO [Subject](subName, subDesc) VALUES ('Java','Java')
+INSERT INTO [Subject](subName, subDesc) VALUES ('Python','Python')
+INSERT INTO [Subject](subName, subDesc) VALUES ('C++','C++')
+INSERT INTO [Subject](subName, subDesc) VALUES ('Spring MVC','Spring MVC')
 
 INSERT INTO [Level](levName, levDesc) VALUES ('Grade 1', 'Primary School')
 INSERT INTO [Level](levName, levDesc) VALUES ('Grade 2', 'Primary School')
@@ -166,6 +192,9 @@ INSERT INTO [Level](levName, levDesc) VALUES ('Grade 9', 'Secondary School')
 INSERT INTO [Level](levName, levDesc) VALUES ('Grade 10', 'High School')
 INSERT INTO [Level](levName, levDesc) VALUES ('Grade 11', 'High School')
 INSERT INTO [Level](levName, levDesc) VALUES ('Grade 12', 'High School')
+INSERT INTO [Level](levName, levDesc) VALUES ('Freshman', 'University')
+INSERT INTO [Level](levName, levDesc) VALUES ('Sophomore', 'University')
+INSERT INTO [Level](levName, levDesc) VALUES ('Senior', 'University')
 Select * from Subject
 Select * From Level
 
