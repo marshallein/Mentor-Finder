@@ -43,9 +43,11 @@ and open the template in the editor.
                         <td th:text="${user.uDescription}">Description</td>
                         <td th:text="${user.uStatus}">Status</td>
                         <td>
-<!--                            <a th:href="/@{'/edit/' + ${user.uId}}">Edit</a>-->
                             <a th:href="@{'/updateMentee?id=' + ${user.uId}}">Update</a>
-                            <!--<a th:href="@{'/deactMentee?id=' + ${user.uId}}" onclick= "return confirm('Do you want to deactivate this?');">Deactivate</a>-->
+                            <span th:switch="${user.uStatus}">
+                                <a th:case="true" th:href="@{'/deactMentee?id=' + ${user.uId}}" onclick= "return confirm('Do you want to deactivate this?');">Deactivate</a>
+                                <a th:case="false" th:href="@{'/deactMentee?id=' + ${user.uId}}" onclick= "return confirm('Do you want to reactivate this?');">Reactivate</a>
+                            </span>
                         </td>
                     </tr>
                 </tbody>      
