@@ -34,9 +34,9 @@
         <div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-xl-4"><img data-aos="fade" src="image/mainhomementor/Group%2013.png" style="margin: 15px;margin-left: 30px;"></div>
+                    <div class="col-md-6 col-xl-4"><img data-aos="fade" src="/image/mainhomementor/Group%2013.png" style="margin: 15px;margin-left: 30px;"></div>
                     <div class="col-md-6">
-                        <p style="font-size: 40px;margin-top: 20px;"><em>Welcome back, User !</em><br></p>
+                        <p style="font-size: 40px;margin-top: 20px;"><em>Welcome back, [[$user.getUName()]] !</em><br></p>
                         <p>Paragraph</p>
                         <p>Paragraph</p>
                     </div>
@@ -68,7 +68,7 @@
                             <div style="margin-left: 20px;"><i class="fa fa-calendar" style="display: inline-block;font-size: 15px;"></i>
                                 <p style="display: inline-block;font-size: 10px;margin-left: 10px;">[[${request.getReqAvaiTime()}]]</p>
                             </div>
-                            <div style="margin-top: 6px;text-align: left;padding: 5px;"><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete">Enroll this Request</button></div>
+                            <div style="margin-top: 6px;text-align: left;padding: 5px;"><button th:with="request=${request}" class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete">Enroll this Request</button></div>
                         </div>
                     </div>
                 </section>
@@ -76,7 +76,7 @@
                         <nav>
                             <ul class="pagination">
                                 <li class="page-item">
-                                    <form th:action="@{/mentee}" method="GET" th:object="${pageNum}">
+                                    <form th:action="@{/mentor}" method="GET" th:object="${pageNum}">
                                         <div  th:if="${totalPages==1}">
                                             <input th:value="${pageNum}" style="display: none">
                                         </div>
@@ -88,7 +88,7 @@
                                 </li>
                                 <li class="page-item active"><a class="page-link" href="#">[[${pageNum}]]</a></li>
                                 <li class="page-item">
-                                    <form th:action="@{/mentee}" method="GET" th:object="${pageNum}">
+                                    <form th:action="@{/mentor}" method="GET" th:object="${pageNum}">
                                         <div  th:if="${totalPages==1}">
                                             <input th:value="${pageNum}" style="display: none">
                                         </div>
@@ -144,17 +144,20 @@
             </div>
         </div>
         <div class="modal fade" role="dialog" tabindex="-1" id="delete">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Modal Title</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <form th:action="@{/enrolled/create}" method="Post" >
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Confirm</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Enrolled this Request?</p>
+                        </div>
+                        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button th:with="reqId=${request}" class="btn btn-primary" type="submit">Save</button></div>
                     </div>
-                    <div class="modal-body">
-                        <p>The content of your modal.</p>
-                    </div>
-                    <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
                 </div>
-            </div>
+                
+            </form>
         </div>
         <footer class="bg-light footer" style="margin-top: 35px;padding: 20px;">
             <div class="container">
