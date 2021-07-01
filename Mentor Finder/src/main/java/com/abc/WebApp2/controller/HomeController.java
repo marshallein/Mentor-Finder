@@ -5,8 +5,11 @@
  */
 package com.abc.WebApp2.controller;
 
+import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
+import com.abc.WebApp2.service.RequestService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -24,21 +28,25 @@ public class HomeController {
 
     @Autowired
     CurrentUserExtractorService cUES;
+    
+    @Autowired
+    RequestService reqsrv;
 
     @GetMapping("/home")
-    public String showHomePage(Model model) {
+    public String showHomePage(Model model, RedirectAttributes redirectAttrs) {
         UserInfo uIf = cUES.returnCurrentUser();
         System.out.println(uIf.toString());
         model.addAttribute("currentUserInfo", uIf);
+        redirectAttrs.addFlashAttribute("pageNum", 1);
         if(uIf.getURole().equals("Mentee"))
         {
-            return "home";
+            return "redirect:/mentee";
         }
         else if(uIf.getURole().equals("Mentor"))
         {
-            return "home";
+            return "redirect:/mentor";
         }
-        return "home";
+        return "redirect:/login";
     }
 
         @GetMapping("/landing")
@@ -48,7 +56,7 @@ public class HomeController {
 
     @GetMapping("/signin2")
     public String showSignIn() {
-        return "SignIn";
+        return "MainHomeMentee";
     }
 
     @PostMapping("/home")

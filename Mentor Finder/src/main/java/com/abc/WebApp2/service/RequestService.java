@@ -31,12 +31,12 @@ public class RequestService {
         return repo.save(newRq);
     }
     
-    public List<Request> getMyRequestMentee(UserInfo uId){
+    
+    public Page<Request> listAllMyByPage(UserInfo uId, int pagenum) {
+        Pageable pageable = PageRequest.of(pagenum - 1, 10);
         
-        return repo.findBymenteeIdFrom(uId);
+        return repo.findBymenteeIdFrom(uId, pageable);
     }
-    
-    
 
     public List<Request> getAllRequest() {
         return repo.findAll();

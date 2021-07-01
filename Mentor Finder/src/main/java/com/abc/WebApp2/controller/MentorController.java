@@ -15,9 +15,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -32,18 +34,29 @@ public class MentorController {
     
     @Autowired 
     RequestService rqsrv;
+    
+    @ModelAttribute("pageNum")
+    public Integer pageNum(){
+        return 1;
+    }
      
     @RequestMapping(method = RequestMethod.GET)
-    public String showMentorPage(Model model) {
+    public String showMentorPage(Model model, @ModelAttribute("pageNum") Integer pageNum) {
         UserInfo uIf = cUES.returnCurrentUser();
-        System.out.println(uIf.toString());
-        
         if(uIf.getURole().equals("Mentee"))
         {
-            return "redirect:/mentee";
+            return "redirect:/home";
         }
-       
-        return "HomeMentor";
+        
+        Page<Request> page = rqsrv.listAllByPage(pageNum);
+        List<Request> requests = page.getContent();
+        
+        model.addAttribute("pageNum", pageNum);		
+        model.addAttribute("totalPages", page.getTotalPages());
+	model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("requests", requests);
+        
+        return "MainHomeMentor";
     }
     
 }
