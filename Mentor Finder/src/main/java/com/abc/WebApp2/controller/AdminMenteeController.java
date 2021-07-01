@@ -40,15 +40,19 @@ public class AdminMenteeController {
     }
 
     // deact UserInfo mentee with id from AdminManageMentee 
-//    @RequestMapping("/deactMentee")
-//    public String deactMentee(@RequestParam(value = "id") int uId)
-//    {
-//        UserInfo user = new UserInfo();
-//        user = userService.findUserInfoId(uId);
-//        //userService;
-//        return "redirect:/adminMentee";
-//    }
-//    
+    @GetMapping("/deactMentee")
+    public String deactMentee(@RequestParam(value = "id") int uId)
+    {
+        UserInfo user = userService.findUserInfoId(uId);
+        if (user.getUStatus() == true){
+            user.setUStatus(false);
+        }else{
+            user.setUStatus(true);
+        }
+        userService.saveMentee(user);
+        return "redirect:/adminMentee";
+    }
+    
     @GetMapping("/updateMentee")
     public String updateMentee(@RequestParam(value = "id") int uId, Model model) {
         UserInfo user = userService.findUserInfoId(uId);
