@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
-<html lang="en">
 
     <head>
         <meta charset="utf-8">
@@ -56,21 +55,23 @@
                             <div class="search-container"><input class="form-control search-input" type="text" name="search-bar" placeholder="Search..."><button class="btn btn-light search-btn" type="button" style="border: 1px solid;"> <i class="fa fa-search"></i></button></div>
                         </form>
                     </div>
-                    <section>
-                        <div data-aos="fade" style="margin: 10px;padding: 20px;border: solid white 2px;background-color: #FF79CD;">
-                            <div style="padding: 10px;border-width: 3px;border-style: solid;background: #ffffff;"><img src="image/mainhomementor/Group%2013.png" style="width: 100px;">
-                                <p style="display: inline-block;margin-left: 44px;font-size: 31px;"><em>I want to find a math mentor</em></p>
+                <section data-aos="fade" data-aos-duration="200" data-aos-delay="50" data-aos-once="true">
+                    <div th:each="request: ${requests}">
+                        <div style="margin: 10px;padding: 15px;border: solid white 2px;background-color: #FF79CD;">
+                            <h1>[[${request.getReqTitle()}]]</h1>
+                            <div style="padding: 28px;border-width: 3px;border-style: solid;background: #ffffff;margin-top: 24px;margin-bottom: 29px;padding-bottom: 14px;"><img src="/image/mainhomementor/Group%2013.png" style="float: left;height: 112px;">
+                                <p style="display: inline-block;margin-left: 26px;font-size: 15px;width: 452px;min-height: 100px;max-height: 150px;"><br>[[${request.getReqDesc()}]]<br><br></p>
                             </div>
-                            <p style="color: white;font-size: 15px;"><br>It was that terrifying feeling you have as you tightly hold the covers over you with the knowledge that there is something hiding under your bed. You want to look, but you don't at the same time. You're frozen with fear and unable to act. That's where she found herself and she didn't know what to do next<br><br></p>
                             <div><i class="fas fa-school" style="margin-left: 20px;font-size: 15px;"></i>
-                                <p style="display: inline-block;margin-left: 10px;font-size: 10px;">High School</p>
+                                <p style="display: inline-block;margin-left: 10px;font-size: 10px;">[[${request.getLevId().getLevName()}]]</p>
                             </div>
                             <div style="margin-left: 20px;"><i class="fa fa-calendar" style="display: inline-block;font-size: 15px;"></i>
-                                <p style="display: inline-block;font-size: 10px;margin-left: 10px;">Mon-Tue-Sun Morning</p>
+                                <p style="display: inline-block;font-size: 10px;margin-left: 10px;">[[${request.getReqAvaiTime()}]]</p>
                             </div>
-                            <div style="margin-top: 10px;"><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete" style="margin-left: 10px;">Enroll this request</button></div>
+                            <div style="margin-top: 6px;text-align: left;padding: 5px;"><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete">Enroll this Request</button></div>
                         </div>
-                    </section>
+                    </div>
+                </section>
                     <div style="margin: 10px;text-align:right;">
                         <div class="btn-group" role="group"><a class="btn btn-primary" role="button" >Prev</a> <a class="btn btn-primary"  role="button" style="margin-left: 10px;">Next</a></div>
                     </div>

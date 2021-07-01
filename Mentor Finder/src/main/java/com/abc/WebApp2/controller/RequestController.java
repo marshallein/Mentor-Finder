@@ -102,33 +102,4 @@ public class RequestController {
         return "RequestView";
     }
     
-    @GetMapping("/mentee/request/my_request")
-    public String myRequestList(Model model){
-        UserInfo user = cUES.returnCurrentUser();
-        if (user == null) return "redirect:/landing";
-        List<Request> requests = null;
-        if (user.getURole().equalsIgnoreCase("Mentor")) {
-            return "redirect:/landing";
-        }
-        else if (user.getURole().equalsIgnoreCase("Mentee")){
-            requests = reqsrv.getMyRequestMentee(user);
-        }
-        model.addAttribute("requests", requests);
-        return "HomeMentor";
-    }
-    
-    @RequestMapping("/mentor/{pageNum}")
-    public String AllRequest(Model model,
-            @PathVariable(name = "pageNum") int pageNum){
-        Page<Request> page = reqsrv.listAllByPage(pageNum);
-        List<Request> requestList = page.getContent();
-        
-        model.addAttribute("currentPage", pageNum);		
-        model.addAttribute("totalPages", page.getTotalPages());
-	model.addAttribute("totalItems", page.getTotalElements());
-        
-        model.addAttribute("requestList", requestList);
-        
-        return "HomeMentor";
-    }
 }
