@@ -10,6 +10,7 @@ import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
 import com.abc.WebApp2.service.LoadSubjectAndLevelService;
 import com.abc.WebApp2.service.RequestService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -69,6 +70,7 @@ public class RequestController {
         newRq.setReqAvaiTime(str);
         newRq.setLevId(lsals.findLevelbyId(levId));
         newRq.setSubId(lsals.findSubjectbyId(subId));
+        newRq.setReqDateTime(new Date(System.currentTimeMillis()));
         System.out.println(newRq.toString());
         reqsrv.saveNewRequest(newRq);
         

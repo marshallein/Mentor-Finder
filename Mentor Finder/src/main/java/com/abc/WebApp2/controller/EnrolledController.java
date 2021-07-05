@@ -10,6 +10,7 @@ import com.abc.WebApp2.service.CurrentUserExtractorService;
 import com.abc.WebApp2.service.EnrollService;
 import com.abc.WebApp2.entity.Enrolled;
 import com.abc.WebApp2.entity.Request;
+import com.abc.WebApp2.service.RequestService;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class EnrolledController {
     
     @Autowired
     EnrollService eServ;
+    
+    @Autowired
+    RequestService reqServ;
     
     @ModelAttribute("pageNum")
     public Integer pageNum(){
@@ -61,13 +65,18 @@ public class EnrolledController {
     }
     
     @PostMapping("/enrolled/create")
-    public String createRequest(@RequestParam("reqId") Request reqId, Model model){
+    public String createRequest(@RequestParam("reqId") String reqId, Model model){
+        
         UserInfo user = cUES.returnCurrentUser();
+        int req = Integer.parseInt(reqId);
+        Request request = reqServ.getRequestFromId(req);
+        if (request == null) return "redirect:/home";
         Enrolled enr = new Enrolled();
         enr.setEnrDate(new Date(System.currentTimeMillis()));
-        enr.setReqId(reqId);
+        enr.setReqId(request);
         enr.setMentorId(user);
         eServ.save(enr);
+        
         return "redirect:/home";
     }
     

@@ -56,15 +56,17 @@ public class MentorController {
         
         Page<Request> page = rqsrv.listAllByPage(pageNum);
         List<Request> requests = page.getContent();
+        List<Request> reqs = new ArrayList<>(requests);
+        
         List<Enrolled> enrolled = eServ.allMyEnrolled(uIf);
         for(Enrolled e: enrolled){
-            requests.remove(e.getReqId());
+            reqs.remove(e.getReqId());
         }
         
         model.addAttribute("pageNum", pageNum);		
         model.addAttribute("totalPages", page.getTotalPages());
 	model.addAttribute("totalItems", page.getTotalElements());
-        model.addAttribute("requests", requests);
+        model.addAttribute("requests", reqs);
         
         return "MainHomeMentor";
     }
