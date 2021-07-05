@@ -8,15 +8,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" th:href="@{font/mainhomementor/fontawesome5-overrides.min.css}">
-        <link rel="stylesheet" th:href="@{css/mainhomementor/Add-Another-Button.css}">
-        <link rel="stylesheet" th:href="@{css/mainhomementor/Card-Group1-Shadow.css}">
-        <link rel="stylesheet" th:href="@{css/mainhomementor/checkbox.css}">
+        <link rel="stylesheet" th:href="@{/font/mainhomementor/fontawesome5-overrides.min.css}">
+        <link rel="stylesheet" th:href="@{/css/mainhomementor/Add-Another-Button.css}">
+        <link rel="stylesheet" th:href="@{/css/mainhomementor/Card-Group1-Shadow.css}">
+        <link rel="stylesheet" th:href="@{/css/mainhomementor/checkbox.css}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-        <link rel="stylesheet" th:href="@{css/mainhomementor/Navigation-Clean.css}">
-        <link rel="stylesheet" th:href="@{css/mainhomementor/Search-Field-With-Icon.css}">
-        <link rel="stylesheet" th:href="@{css/mainhomementor/Separator-with-icon.css}">
-        <link rel="stylesheet" tH:href="@{css/mainhomementor/styles.css}">
+        <link rel="stylesheet" th:href="@{/css/mainhomementor/Navigation-Clean.css}">
+        <link rel="stylesheet" th:href="@{/css/mainhomementor/Search-Field-With-Icon.css}">
+        <link rel="stylesheet" th:href="@{/css/mainhomementor/Separator-with-icon.css}">
+        <link rel="stylesheet" tH:href="@{/css/mainhomementor/styles.css}">
     </head>
 
     <body style="background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 121, 205, 0.46) 35.94%, #23049D 100%);">
@@ -34,7 +34,7 @@
         <div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-xl-4"><img data-aos="fade" src="image/mainhomementor/Group%2013.png" style="margin: 15px;margin-left: 30px;"></div>
+                    <div class="col-md-6 col-xl-4"><img data-aos="fade" src="/image/mainhomementor/Group%2013.png" style="margin: 15px;margin-left: 30px;"></div>
                     <div class="col-md-6">
                         <p style="font-size: 40px;margin-top: 20px;"><em>Welcome back, User !</em><br></p>
                         <p>Paragraph</p>
@@ -56,7 +56,7 @@
                         </form>
                     </div>
                 <section data-aos="fade" data-aos-duration="200" data-aos-delay="50" data-aos-once="true">
-                    <div th:each="request: ${requests}">
+                    <div th:if="${requests != null}" th:each="request: ${requests}">
                         <div style="margin: 10px;padding: 15px;border: solid white 2px;background-color: #FF79CD;">
                             <h1>[[${request.getReqTitle()}]]</h1>
                             <div style="padding: 28px;border-width: 3px;border-style: solid;background: #ffffff;margin-top: 24px;margin-bottom: 29px;padding-bottom: 14px;"><img src="/image/mainhomementor/Group%2013.png" style="float: left;height: 112px;">
@@ -68,12 +68,43 @@
                             <div style="margin-left: 20px;"><i class="fa fa-calendar" style="display: inline-block;font-size: 15px;"></i>
                                 <p style="display: inline-block;font-size: 10px;margin-left: 10px;">[[${request.getReqAvaiTime()}]]</p>
                             </div>
-                            <div style="margin-top: 6px;text-align: left;padding: 5px;"><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete">Enroll this Request</button></div>
+                            <div style="margin-top: 6px;text-align: left;padding: 5px;">
+                                <input type="text" th:value="${request.getReqId().toString()}" id="requestId" style="display: none">
+                                <button id="enrollBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete" onclick="var value = $(this).parent().children('#requestId').val();
+                                                                                                                                                $('#reqId').val(value);
+                                                                                                                                                ">Enroll this Request</button>
+                            </div>
                         </div>
                     </div>
                 </section>
-                    <div style="margin: 10px;text-align:right;">
-                        <div class="btn-group" role="group"><a class="btn btn-primary" role="button" >Prev</a> <a class="btn btn-primary"  role="button" style="margin-left: 10px;">Next</a></div>
+                    <div style="margin: 14px;">
+                        <nav>
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <form th:action="@{/mentor}" method="GET" th:object="${pageNum}">
+                                        <div  th:if="${totalPages==1}">
+                                            <input th:value="${pageNum}" style="display: none">
+                                        </div>
+                                        <div  th:unless="${totalPages==1}">
+                                            <input th:value="${pageNum}-1" style="display: none">
+                                        </div>
+                                        <a class="page-link" aria-label="Previous" type="submit"><span aria-hidden="true">«</span></a>
+                                    </form>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">[[${pageNum}]]</a></li>
+                                <li class="page-item">
+                                    <form th:action="@{/mentor}" method="GET" th:object="${pageNum}">
+                                        <div  th:if="${totalPages==1}">
+                                            <input th:value="${pageNum}" style="display: none">
+                                        </div>
+                                        <div  th:unless="${totalPages==1}">
+                                            <input th:value="${pageNum}+1" style="display: none">
+                                        </div>
+                                        <a class="page-link" aria-label="Next" type="submit"><span aria-hidden="true">»</span></a>
+                                    </form>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-4">
@@ -110,26 +141,30 @@
                             <label class="check">Checkbox
                                 <input type="checkbox" >
                                 <span class="checkmark"></span>
+                            </label>
                         </div>
-                        </label>
                         <div style="text-align: right;"><button class="btn btn-primary" type="button" style="border-color: var(--warning);background: var(--warning);">Filter</button></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal fade" role="dialog" tabindex="-1" id="delete">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Modal Title</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <form th:action="@{/enrolled/create}" method="post">
+            <div class="modal fade" role="dialog" tabindex="-1" id="delete">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Confirm</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Enrolled this Request?</p>
+                            <input type="text" th:name="reqId" id="reqId" style="display: none">
+                        </div>
+                        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
                     </div>
-                    <div class="modal-body">
-                        <p>The content of your modal.</p>
-                    </div>
-                    <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
                 </div>
             </div>
-        </div>
+        </form>
+        
         <footer class="bg-light footer" style="margin-top: 35px;padding: 20px;">
             <div class="container">
                 <div class="row">
@@ -157,7 +192,7 @@
         </footer>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
-        <script src="js/mainhomementor/bs-init.js"></script>
+        <script src="/js/mainhomementor/bs-init.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     </body>
 

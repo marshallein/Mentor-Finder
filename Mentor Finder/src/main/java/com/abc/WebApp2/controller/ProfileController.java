@@ -5,6 +5,7 @@
  */
 package com.abc.WebApp2.controller;
 
+import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.UserInfoService;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +30,7 @@ public class ProfileController {
     @Autowired
     private UserInfoService uisrv;
 
-    @GetMapping("/mentor/{mentor_id}/profile")
+    @GetMapping("/profile/{mentor_id}")
     public String getMentorProfile(@PathVariable("mentor_id") Integer mentor_id, Model model) {
         UserInfo mentor = uisrv.findUserInfoId(mentor_id);
         model.addAttribute("mentor", mentor);
@@ -43,7 +45,7 @@ public class ProfileController {
     }
 
     @PostMapping("/profile_update")
-    public String editMyProfile(
+    public String editMyProfile(Model model,
             @RequestParam(name = "uEmail") String uEmail,
             @RequestParam(name = "uName") String uName,
             @RequestParam(name = "uDob") Date uDob,
@@ -55,5 +57,4 @@ public class ProfileController {
         uisrv.setUserInfo(uEmail, uName, uDob, uGender, uPhonenumber, uAddress, uDescription);
         return "edit_profile";
     }
-
 }

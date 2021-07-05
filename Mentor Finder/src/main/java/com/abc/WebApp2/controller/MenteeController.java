@@ -38,15 +38,14 @@ public class MenteeController {
      
     @RequestMapping(method = RequestMethod.GET)
     public String showMenteePage(Model model, @ModelAttribute("pageNum") Integer pageNum) {
-        UserInfo uIf = cUES.returnCurrentUser();
-        System.out.println(uIf.toString());
+        UserInfo user = cUES.returnCurrentUser();
+        System.out.println(user.toString());
         
-        if(uIf.getURole().equals("Mentor"))
+        if(user.getURole().equals("Mentor"))
         {
             return "redirect:/mentor/1";
         }
-        
-        UserInfo user = cUES.returnCurrentUser();
+        model.addAttribute("user", user);
         if (user == null) return "redirect:/landing";
         List<Request> requests = null;
         Page<Request> page = null;
