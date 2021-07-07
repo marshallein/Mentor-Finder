@@ -42,6 +42,8 @@ public class Subject implements Serializable {
     private String subName;
     @Column(name = "subDesc")
     private String subDesc;
+    @Column(name = "subImage")
+    private String subImage;
     @JoinTable(name = "Mentor_Subject", joinColumns = {
         @JoinColumn(name = "subjId", referencedColumnName = "subId")}, inverseJoinColumns = {
         @JoinColumn(name = "mnId", referencedColumnName = "uId")})
@@ -84,6 +86,14 @@ public class Subject implements Serializable {
 
     public void setSubDesc(String subDesc) {
         this.subDesc = subDesc;
+    }
+
+    public String getSubImage() {
+        return subImage;
+    }
+
+    public void setSubImage(String subImage) {
+        this.subImage = subImage;
     }
 
     @XmlTransient

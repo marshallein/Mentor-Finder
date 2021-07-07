@@ -24,48 +24,55 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/mentee")
 public class MenteeController {
+    
+    private Integer pageNum = 1;
+    
     @Autowired
     CurrentUserExtractorService cUES;
     
     @Autowired 
     RequestService rqsrv;
     
-    @ModelAttribute("pageNum")
-    public Integer pageNum(){
-        return 1;
-    }
-    
-     
     @RequestMapping(method = RequestMethod.GET)
-    public String showMenteePage(Model model, @ModelAttribute("pageNum") Integer pageNum) {
-        UserInfo user = cUES.returnCurrentUser();
-        System.out.println(user.toString());
-        
-        if(user.getURole().equals("Mentor"))
-        {
-            return "redirect:/mentor/1";
+    public String showMenteePage(Model model, @RequestParam(name="pageNum", required=false) Integer pageNumber) {
+        try{
+            UserInfo user = cUES.returnCurrentUser();
+            if(user.getURole().equals("Mentor"))
+            {
+                return "redirect:/mentor/1";
+            }
+            List<Request> requests = null;
+            Page<Request> page = null;
+            if (user.getURole().equalsIgnoreCase("Mentor")) {
+                return "redirect:/home";
+            }
+            else if (user.getURole().equalsIgnoreCase("Mentee")){
+                if (pageNumber==null) {
+                    page = rqsrv.listAllMyByPage(user, 1);
+                    this.pageNum = 1;
+                }
+                else {
+                    page = rqsrv.listAllMyByPage(user, pageNumber);
+                    this.pageNum = pageNumber;
+                }
+            }
+            model.addAttribute("username", user.getUName());
+            model.addAttribute("currentPage", this.pageNum);
+            if (page != null){
+                requests = page.getContent();
+                model.addAttribute("requests", requests);   
+                model.addAttribute("totalPages", page.getTotalPages());
+                model.addAttribute("totalItems", page.getTotalElements());
+            }
+            else {
+                model.addAttribute("requests", requests);
+                model.addAttribute("totalPages", 1);
+                model.addAttribute("totalItems", 0);
+            }
+            return "MainHomeMentee";
         }
-        model.addAttribute("user", user);
-        if (user == null) return "redirect:/landing";
-        List<Request> requests = null;
-        Page<Request> page = null;
-        if (user.getURole().equalsIgnoreCase("Mentor")) {
-            return "redirect:/home";
+        catch (NullPointerException e){
+            return "redirect:/login";
         }
-        else if (user.getURole().equalsIgnoreCase("Mentee")){
-            page = rqsrv.listAllMyByPage(user, pageNum);
-            requests = page.getContent();
-        }
-        model.addAttribute("requests", requests);
-        model.addAttribute("pageNum", pageNum);
-        if (page != null){
-            model.addAttribute("totalPages", page.getTotalPages());
-            model.addAttribute("totalItems", page.getTotalElements());
-        }
-        else {
-            model.addAttribute("totalPages", 1);
-            model.addAttribute("totalItems", 0);
-        }
-        return "MainHomeMentee";
     }
 }

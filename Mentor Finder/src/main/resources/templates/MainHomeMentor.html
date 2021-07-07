@@ -2,8 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Home</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -36,9 +35,7 @@
                 <div class="row">
                     <div class="col-md-6 col-xl-4"><img data-aos="fade" src="/image/mainhomementor/Group%2013.png" style="margin: 15px;margin-left: 30px;"></div>
                     <div class="col-md-6">
-                        <p style="font-size: 40px;margin-top: 20px;"><em>Welcome back, User !</em><br></p>
-                        <p>Paragraph</p>
-                        <p>Paragraph</p>
+                        <p style="font-size: 40px;margin-top: 20px;"><em>Welcome back, [[${username}]] !</em><br></p>
                     </div>
                 </div>
             </div>
@@ -55,52 +52,52 @@
                             <div class="search-container"><input class="form-control search-input" type="text" name="search-bar" placeholder="Search..."><button class="btn btn-light search-btn" type="button" style="border: 1px solid;"> <i class="fa fa-search"></i></button></div>
                         </form>
                     </div>
-                <section data-aos="fade" data-aos-duration="200" data-aos-delay="50" data-aos-once="true">
-                    <div th:if="${requests != null}" th:each="request: ${requests}">
-                        <div style="margin: 10px;padding: 15px;border: solid white 2px;background-color: #FF79CD;">
-                            <h1>[[${request.getReqTitle()}]]</h1>
-                            <div style="padding: 28px;border-width: 3px;border-style: solid;background: #ffffff;margin-top: 24px;margin-bottom: 29px;padding-bottom: 14px;"><img src="/image/mainhomementor/Group%2013.png" style="float: left;height: 112px;">
-                                <p style="display: inline-block;margin-left: 26px;font-size: 15px;width: 452px;min-height: 100px;max-height: 150px;"><br>[[${request.getReqDesc()}]]<br><br></p>
-                            </div>
-                            <div><i class="fas fa-school" style="margin-left: 20px;font-size: 15px;"></i>
-                                <p style="display: inline-block;margin-left: 10px;font-size: 10px;">[[${request.getLevId().getLevName()}]]</p>
-                            </div>
-                            <div style="margin-left: 20px;"><i class="fa fa-calendar" style="display: inline-block;font-size: 15px;"></i>
-                                <p style="display: inline-block;font-size: 10px;margin-left: 10px;">[[${request.getReqAvaiTime()}]]</p>
-                            </div>
-                            <div style="margin-top: 6px;text-align: left;padding: 5px;">
-                                <input type="text" th:value="${request.getReqId().toString()}" id="requestId" style="display: none">
-                                <button id="enrollBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete" onclick="var value = $(this).parent().children('#requestId').val();
-                                                                                                                                                $('#reqId').val(value);
-                                                                                                                                                ">Enroll this Request</button>
+                    <section data-aos="fade" data-aos-duration="200" data-aos-delay="50" data-aos-once="true">
+                        <div th:if="${requests != null}" th:each="request: ${requests}">
+                            <div style="margin: 10px;padding: 15px;border: solid white 2px;background-color: #FF79CD;">
+                                <h1>[[${request.getReqTitle()}]]</h1>
+                                <div style="padding: 28px;border-width: 3px;border-style: solid;background: #ffffff;margin-top: 24px;margin-bottom: 29px;padding-bottom: 14px;"><img src="/image/mainhomementor/Group%2013.png" style="float: left;height: 112px;">
+                                    <p style="display: inline-block;margin-left: 26px;font-size: 15px;width: 452px;min-height: 100px;max-height: 150px;"><br>[[${request.getReqDesc()}]]<br><br></p>
+                                </div>
+                                <div><i class="fas fa-school" style="margin-left: 20px;font-size: 15px;"></i>
+                                    <p style="display: inline-block;margin-left: 10px;font-size: 10px;">[[${request.getLevId().getLevName()}]]</p>
+                                </div>
+                                <div style="margin-left: 20px;"><i class="fa fa-calendar" style="display: inline-block;font-size: 15px;"></i>
+                                    <p style="display: inline-block;font-size: 10px;margin-left: 10px;">[[${request.getReqAvaiTime()}]]</p>
+                                </div>
+                                <div style="margin-top: 6px;text-align: left;padding: 5px;">
+                                    <input type="text" th:value="${request.getReqId().toString()}" id="requestId" style="display: none">
+                                    <button id="enrollBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete" onclick="var value = $(this).parent().children('#requestId').val();
+                                                                                                                                                    $('#reqId').val(value);
+                                                                                                                                                    ">Enroll this Request</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
                     <div style="margin: 14px;">
                         <nav>
                             <ul class="pagination">
                                 <li class="page-item">
-                                    <form th:action="@{/mentor}" method="GET" th:object="${pageNum}">
-                                        <div  th:if="${totalPages==1}">
-                                            <input th:value="${pageNum}" style="display: none">
+                                    <form th:action="@{/mentor}" method="GET" id="prev_page">
+                                        <div  th:if="${totalPages<=1 || currentPage==1}">
+                                            <input th:value="${currentPage}" style="display: none">
                                         </div>
-                                        <div  th:unless="${totalPages==1}">
-                                            <input th:value="${pageNum}-1" style="display: none">
+                                        <div th:unless="${totalPages<=1 || currentPage==1}">
+                                            <input th:value="${currentPage}-1" style="display: none">
                                         </div>
-                                        <a class="page-link" aria-label="Previous" type="submit"><span aria-hidden="true">«</span></a>
+                                        <a class="page-link" aria-label="Previous" href="javascript:$('#prev_page').submit();"><span aria-hidden="true">«</span></a>
                                     </form>
                                 </li>
-                                <li class="page-item active"><a class="page-link" href="#">[[${pageNum}]]</a></li>
+                                <li class="page-item active"><a class="page-link" href="#">[[${currentPage}]]</a></li>
                                 <li class="page-item">
-                                    <form th:action="@{/mentor}" method="GET" th:object="${pageNum}">
-                                        <div  th:if="${totalPages==1}">
-                                            <input th:value="${pageNum}" style="display: none">
+                                    <form th:action="@{/mentor}" method="GET" id="next_page">
+                                        <div  th:if="${totalPages<=1 || currentPage>=totalPages}">
+                                            <input type="text" th:value="${currentPage}" th:name="pageNum" style="display: none">
                                         </div>
-                                        <div  th:unless="${totalPages==1}">
-                                            <input th:value="${pageNum}+1" style="display: none">
+                                        <div  th:unless="${totalPages<=1 || currentPage>=totalPages}">
+                                            <input type="text" th:value="${currentPage}+1" th:name="pageNum" style="display: none">
                                         </div>
-                                        <a class="page-link" aria-label="Next" type="submit"><span aria-hidden="true">»</span></a>
+                                            <a class="page-link" aria-label="Next" href="javascript:$('#next_page').submit();"><span aria-hidden="true">»</span></a>
                                     </form>
                                 </li>
                             </ul>

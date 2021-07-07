@@ -25,6 +25,9 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
     @Nullable
     Page<Request> findBymenteeIdFrom(UserInfo menteeId, Pageable pageable);
     
+    @Nullable
+    List<Request> findBymenteeIdFrom(UserInfo menteeId);
+    
     Request findByreqId(int rId);
     
    

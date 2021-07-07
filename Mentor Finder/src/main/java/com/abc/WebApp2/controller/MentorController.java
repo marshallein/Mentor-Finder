@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/mentor")
 public class MentorController {
     
+    private Integer pageNum=1;
+    
     @Autowired
     CurrentUserExtractorService cUES;
     
@@ -41,34 +43,52 @@ public class MentorController {
     @Autowired
     EnrollService eServ;
     
-    @ModelAttribute("pageNum")
-    public Integer pageNum(){
-        return 1;
-    }
-     
     @RequestMapping(method = RequestMethod.GET)
-    public String showMentorPage(Model model, @ModelAttribute("pageNum") Integer pageNum) {
-        UserInfo uIf = cUES.returnCurrentUser();
+    public String showMentorPage(Model model, @RequestParam(name="pageNum", required=false) Integer pageNumber) {
+        try{
+            UserInfo uIf = cUES.returnCurrentUser();
         if(uIf.getURole().equals("Mentee"))
         {
             return "redirect:/home";
         }
         
-        Page<Request> page = rqsrv.listAllByPage(pageNum);
-        List<Request> requests = page.getContent();
-        List<Request> reqs = new ArrayList<>(requests);
+        Page<Request> page;
         
-        List<Enrolled> enrolled = eServ.allMyEnrolled(uIf);
-        for(Enrolled e: enrolled){
-            reqs.remove(e.getReqId());
+        if (pageNumber==null) {
+                page = rqsrv.listAllByPage(1);
+                this.pageNum = 1;
+            }
+        else {
+            page = rqsrv.listAllByPage(pageNumber);
+            this.pageNum = pageNumber;
         }
-        
-        model.addAttribute("pageNum", pageNum);		
-        model.addAttribute("totalPages", page.getTotalPages());
-	model.addAttribute("totalItems", page.getTotalElements());
-        model.addAttribute("requests", reqs);
-        
+		
+        if (page != null){
+            List<Request> requests = page.getContent();
+            List<Request> reqs = new ArrayList<>(requests);
+
+
+            List<Enrolled> enrolled = eServ.allMyEnrolled(uIf);
+            for(Enrolled e: enrolled){
+                reqs.remove(e.getReqId());
+            }
+            
+            model.addAttribute("requests", reqs);
+            model.addAttribute("totalPages", page.getTotalPages());
+            model.addAttribute("totalItems", page.getTotalElements());
+        }
+        else {
+            model.addAttribute("requests", null);
+            model.addAttribute("totalPages", 1);
+            model.addAttribute("totalItems", 0);
+        }
+        model.addAttribute("username", uIf.getUName());
+        model.addAttribute("currentPage", this.pageNum);
         return "MainHomeMentor";
+        }
+        catch (NullPointerException e){
+            return "redirect:/login";
+        }
     }
     
 }

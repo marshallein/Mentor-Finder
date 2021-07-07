@@ -25,7 +25,7 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item" style="margin-right: 20px;"><a class="nav-link active" href="#" style="cursor: pointer;"><i class="fas fa-home" style="font-size: 45px;color: purple;"></i></a></li>
                         <li class="nav-item" style="margin-right: 20px;"><a class="nav-link" href="#"><i class="far fa-comment" style="font-size: 45px;color: purple;"></i><span class="badge badge-primary" style="padding: 2px 3.8px;margin-left: -12px;">42</span></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#"><i class="far fa-user" style="font-size: 45px;color: purple;"></i></a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/profile}"><i class="far fa-user" style="font-size: 45px;color: purple;"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -35,9 +35,7 @@
                 <div class="row">
                     <div class="col-md-6 col-xl-4"><img data-aos="fade" src="/image/mainhomementee/Group%2013.png" style="margin: 15px;margin-left: 30px;"></div>
                     <div class="col-md-6">
-                        <p style="font-size: 40px;margin-top: 20px;"><em>Welcome back, User !</em><br></p>
-                        <p>Paragraph</p>
-                        <p>Paragraph</p>
+                        <p style="font-size: 40px; margin-top: 20px;"><em>Welcome back, [[${username}]] !</em><br></p>
                     </div>
                 </div>
             </div>
@@ -76,33 +74,37 @@
                         <nav>
                             <ul class="pagination">
                                 <li class="page-item">
-                                    <form th:action="@{/mentee}" method="GET" th:object="${pageNum}">
-                                        <div  th:if="${totalPages==1}">
-                                            <input th:value="${pageNum}" style="display: none">
+                                    <form th:action="@{/mentee}" method="GET" id="prev_page">
+                                        <div  th:if="${totalPages<=1 || currentPage==1}">
+                                            <input th:value="${currentPage}" style="display: none">
                                         </div>
-                                        <div  th:unless="${totalPages==1}">
-                                            <input th:value="${pageNum}-1" style="display: none">
+                                        <div th:unless="${totalPages<=1 || currentPage==1}">
+                                            <input th:value="${currentPage}-1" style="display: none">
                                         </div>
-                                        <a class="page-link" aria-label="Previous" type="submit"><span aria-hidden="true">«</span></a>
+                                        <a class="page-link" aria-label="Previous" href="javascript:$('#prev_page').submit();"><span aria-hidden="true">«</span></a>
                                     </form>
                                 </li>
-                                <li class="page-item active"><a class="page-link" href="#">[[${pageNum}]]</a></li>
+                                <li class="page-item active"><a class="page-link" href="#">[[${currentPage}]]</a></li>
                                 <li class="page-item">
-                                    <form th:action="@{/mentee}" method="GET" th:object="${pageNum}">
-                                        <div  th:if="${totalPages==1}">
-                                            <input th:value="${pageNum}" style="display: none">
+                                    <form th:action="@{/mentee}" method="GET" id="next_page">
+                                        <div  th:if="${totalPages<=1 || currentPage>=totalPages}">
+                                            <input type="text" th:value="${currentPage}" th:name="pageNum" style="display: none">
                                         </div>
-                                        <div  th:unless="${totalPages==1}">
-                                            <input th:value="${pageNum}+1" style="display: none">
+                                        <div  th:unless="${totalPages<=1 || currentPage>=totalPages}">
+                                            <input type="text" th:value="${currentPage}+1" th:name="pageNum" style="display: none">
                                         </div>
-                                        <a class="page-link" aria-label="Next" type="submit"><span aria-hidden="true">»</span></a>
+                                            <a class="page-link" aria-label="Next" href="javascript:$('#next_page').submit();"><span aria-hidden="true">»</span></a>
                                     </form>
                                 </li>
                             </ul>
                         </nav>
                     </div>
                 </div>
-                <div class="col-md-6 col-xl-4"><button class="btn btn-outline-primary text-truncate float-none float-sm-none add-another-btn" data-bss-hover-animate="pulse" type="button" style="padding: 50px;margin-left: 50px;background: #f4b700;color: var(--dark);">Add Another Request<i class="fas fa-plus-circle edit-icon" style="font-size: 30px;"></i></button></div>
+                <div class="col-md-6 col-xl-4">
+                    <form th:action="@{/mentee/request/create}" method="GET">
+                        <button class="btn btn-outline-primary text-truncate float-none float-sm-none add-another-btn" data-bss-hover-animate="pulse" type="submit" style="padding: 50px;margin-left: 50px;background: #f4b700;color: var(--dark);">Add Another Request<i class="fas fa-plus-circle edit-icon" style="font-size: 30px;"></i></button>
+                    </form>
+                    </div>
             </div>
         </div>
         <div class="modal fade" role="dialog" tabindex="-1" id="delete">

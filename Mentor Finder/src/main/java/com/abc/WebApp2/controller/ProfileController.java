@@ -6,10 +6,14 @@
 package com.abc.WebApp2.controller;
 
 import com.abc.WebApp2.entity.Request;
+import com.abc.WebApp2.entity.Subject;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.UserInfoService;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
+import com.abc.WebApp2.service.RequestService;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +33,9 @@ public class ProfileController {
 
     @Autowired
     private UserInfoService uisrv;
+    
+    @Autowired
+    private RequestService reqServ;
 
     @GetMapping("/profile/{mentor_id}")
     public String getMentorProfile(@PathVariable("mentor_id") Integer mentor_id, Model model) {
@@ -40,8 +47,36 @@ public class ProfileController {
     @GetMapping("/profile")
     public String myProfile(Model model) {
         UserInfo user = cUES.returnCurrentUser();
-        model.addAttribute("user_info", user);
-        return "my_profile";
+        if (user == null) return "redirect:/login";
+        if (user.getURole().equalsIgnoreCase("Mentee")){
+            List<Request> requests;
+            requests = reqServ.myRequests(user);
+            if (requests.size()==0) {
+                model.addAttribute("norequest", true);
+            }
+            else {
+                List<Subject> subjects = new ArrayList<>();
+                for (Request r: requests){
+                    if (subjects.contains(r.getSubId())) {}
+                    else{
+                        subjects.add(r.getSubId());
+                    }
+                }
+                Integer subjectCount = subjects.size();
+                Integer lastSlide = subjectCount%3;
+                Integer slideCount = (int) Math.ceil(((double)subjectCount)/3);
+                model.addAttribute("requestCount", requests.size());
+                model.addAttribute("subjects", subjects);
+                model.addAttribute("subjectCount", subjectCount);
+                model.addAttribute("lastSlide", lastSlide);
+                model.addAttribute("slideCount", slideCount);
+                model.addAttribute("norequest", false);
+                model.addAttribute("currentDate", new Date(System.currentTimeMillis()));
+            }
+            model.addAttribute("user_info", user);
+            return "ProfileMentee";
+        }
+        return "";
     }
 
     @PostMapping("/profile_update")

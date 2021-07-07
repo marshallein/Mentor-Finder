@@ -8,6 +8,9 @@ Cứ thế mà phát triển lên từ đó.
 
 # Version
 
+## 7/7/2021
+Sửa bảng Subject, thêm cột hình ảnh minh họa của môn học
+
 ## 17/6/2021
 Sửa lại bảng Request, xong sơ bộ function Create Request
 
