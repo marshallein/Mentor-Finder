@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>update admin</title>
+    <link rel="stylesheet"type="text/css" th:href="@{/bootstrap/adminview/css/bootstrap.min.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic}">
+    <link rel="stylesheet"type="text/css" th:href="@{/font/adminview/fontawesome-all.min.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{/font/adminview/font-awesome.min.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{/font/adminview/simple-line-icons.min.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{/font/adminview/typicons.min.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{/font/adminview/fontawesome5-overrides.min.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{/css/adminview/Animated-CSS-Waves-Background-SVG.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css}">
+</head>
+
+<body style="background: linear-gradient(153deg, white, var(--primary) 75%);padding: 55px;padding-bottom: 176px;">
+    <div>
+        <div class="container" style="margin-top: 70px;">
+            <div class="row">
+                <div class="col-md-6 col-xl-5">
+                    <div>
+                        <h1>Mentee ID :<div style="margin-left: 6px;font-size: 53px;" th:text="${Request.getMenteeIdFrom().getUId()}"></div></h1>
+                    </div>
+                   
+                </div>
+                <div class="col-md-6 col-xl-7">
+                    <form th:action="@{/updateRequest}" method="post">
+                        <input style="display: none" type="text" th:name="menteeId" th:value="${Request.getMenteeIdFrom().getUId()}"/>
+                    <div style="padding: 23px;border-style: solid;box-shadow: 13px 16px 20px;background: var(--white);">
+                         <div style="padding: 7px;padding-top: 10px;border-style: none;">
+                            <p style="display: inline-block;margin-left: 11px;">Request ID</p><input type="text" style="display: inline-block;margin-left: 81px;" th:value="${Request.reqId}" readonly="" name="id">
+                        </div>
+                        <div style="padding: 7px;text-align: left;padding-top: 20px;border-style: none;">
+                            <p style="display: inline-block;margin-left: 11px;">Subject</p>
+                            <select style="display: inline-block;margin-left: 117px;width: 182px;" th:name="subjectId">
+                                
+                                     <option th:selected hidden th:text="${Request.getSubId().subName}" th:value="${Request.getSubId().getSubId()}"></option>
+                                     <option th:each="subject : ${subjectList}" th:value="${subject.getSubId()}" th:text="${subject.getSubName()}"></option>
+                                
+                            </select>
+                        </div>
+                        <div style="padding: 7px;text-align: left;padding-top: 20px;border-style: none;">
+                            <p style="display: inline-block;margin-left: 11px;">Level</p>
+                            <select style="display: inline-block;margin-left: 133px;width: 182px;" th:name="levelId">
+                                <optgroup>
+                                    <option th:selected hidden th:text="${Request.getLevId().levName}" th:value="${Request.getLevId().getLevId()}"></option>
+                                    <option th:each="level : ${levelList}" th:value="${level.levId}" th:text="${level.getLevName()}"></option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div style="padding: 7px;padding-top: 10px;border-style: none;">
+                            <p style="display: inline-block;margin-left: 11px;">Request title</p><input type="text" name="title" th:value="${Request.reqTitle}" style="display: inline-block;margin-left: 81px;">
+                        </div>
+                        <div style="padding: 7px;padding-top: 10px;border-style: none;">
+                            <p style="/*display: inline-block;*/margin-left: 11px;">Request Description</p><textarea style="margin-left: 11px;width: 353px;" name="description" th:text="${Request.reqDesc}"></textarea>
+                        </div>
+                        <div style="padding: 7px;padding-top: 10px;border-style: none;">
+                            <p style="display: inline-block;margin-left: 11px;">Available time</p><input name="available" th:value="${Request.getReqAvaiTime()}" type="text" style="display: inline-block;margin-left: 69px;width: 186px;">
+                        </div>
+                        <div style="text-align: center;">
+                            <input class="btn btn-primary" data-bss-hover-animate="pulse"  style="background: springgreen" type="submit" value="Submit"/>
+                            <a class="btn btn-primary" data-bss-hover-animate="pulse" href="admin"  style="background: tomato">Cancel</a>
+                        </div>            
+                    </div>
+                    </form>     
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/adminview/jquery.min.js"></script>
+    <script src="bootstrap/adminview/js/bootstrap.min.js"></script>
+    <script src="js/adminview/bs-init.js"></script>
+</body>
+
+</html>

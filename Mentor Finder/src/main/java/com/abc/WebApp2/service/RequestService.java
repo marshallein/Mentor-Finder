@@ -6,6 +6,7 @@
 package com.abc.WebApp2.service;
 
 import com.abc.WebApp2.entity.Request;
+import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.repository.RequestRepository;
 import java.sql.Date;
 import java.util.List;
@@ -31,8 +32,14 @@ public class RequestService {
         return repo.save(newRq);
     }
     
-    public List<Request> getMyRequestMentee(Integer uId){
-        return repo.findByMenteeIdFrom(uId);
+    public List<Request> myRequests(UserInfo uId){
+        return repo.findBymenteeIdFrom(uId);
+    }
+    
+    public Page<Request> listAllMyByPage(UserInfo uId, int pagenum) {
+        Pageable pageable = PageRequest.of(pagenum - 1, 10);
+        
+        return repo.findBymenteeIdFrom(uId, pageable);
     }
 
     public List<Request> getAllRequest() {
