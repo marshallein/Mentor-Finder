@@ -9,6 +9,9 @@ import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.repository.RequestRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,10 +20,16 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AdminService {
-     @Autowired
+
+    @Autowired
     RequestRepository repo;
-     
-     public List<Request> getAllRequest(){
-         return repo.findAll();
-     }
+
+    public List<Request> getAllRequest() {
+        return repo.findAll();
+    }
+    
+    public Page<Request> findPaginated(int pageNo , int pageSize){
+        Pageable pageable = PageRequest.of(pageNo-1,pageSize);
+        return repo.findAll(pageable);
+    }
 }

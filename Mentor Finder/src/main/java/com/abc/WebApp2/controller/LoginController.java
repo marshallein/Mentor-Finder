@@ -44,6 +44,18 @@ public class LoginController {
         return "redirect:/home";
        
     }
+    @GetMapping("/login2")
+    public String showSignUpForm2() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken){
+             return "SignIn";
+        }
+        
+        return "redirect:/home";
+       
+    }
+    
+    
 
 //    @PostMapping("/login")
 //    public String checkLogin(@RequestParam(value = "username") String username,
