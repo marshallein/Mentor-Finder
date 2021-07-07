@@ -97,7 +97,7 @@ public class RegisterController {
             uIf.setLoginInfo(lgIf);
             model.addAttribute("newUIf", uIf);
 //            session.setAttribute("id", lgIf.getUserid());
-            return "UserInfoSpecify";
+            return "PostRegister2";
         }
 
     }
