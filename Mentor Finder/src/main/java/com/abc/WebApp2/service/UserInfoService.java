@@ -8,6 +8,7 @@ package com.abc.WebApp2.service;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.repository.UserInfoRepository;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,6 @@ public class UserInfoService {
 
     @Autowired
     CurrentUserExtractorService cUES;
-
 
     public void setUserInfo(String uEmail,
             String uName,
@@ -37,8 +37,18 @@ public class UserInfoService {
         user.setUDescription(uDescription);
         ui_repo.save(user);
     }
-    
-        public UserInfo findUserInfoId(int id){
+
+    public UserInfo findUserInfoId(int id) {
         return ui_repo.getById(id);
+    }
+
+    public List<UserInfo> findAllMentees() {
+        return ui_repo.findAll();
+    }
+    public void deleteMentee(int id){
+        ui_repo.deleteById(id);
+    }
+    public void saveMentee(UserInfo user){
+        ui_repo.save(user);
     }
 }

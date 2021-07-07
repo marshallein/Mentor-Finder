@@ -1,18 +1,15 @@
 # Mentor-Finder
 
-đã đẩy front end draft chưa chỉnh sửa vào đây
-
 
 Gọi CurrentUserExtractorService để truy xuất ra User hiện tại khi đã đăng nhập xong.
 Cứ thế mà phát triển lên từ đó.
 
 
 
-
 # Version
 
-## 24/6/2021
-Thu nghiem cai Chatbox, van chua chay duoc nhung thoi cu de day.
+## 7/7/2021
+Sửa bảng Subject, thêm cột hình ảnh minh họa của môn học
 
 ## 17/6/2021
 Sửa lại bảng Request, xong sơ bộ function Create Request

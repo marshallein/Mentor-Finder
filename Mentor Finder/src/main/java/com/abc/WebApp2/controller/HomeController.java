@@ -5,8 +5,11 @@
  */
 package com.abc.WebApp2.controller;
 
+import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
+import com.abc.WebApp2.service.RequestService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -24,21 +28,22 @@ public class HomeController {
 
     @Autowired
     CurrentUserExtractorService cUES;
+    
+    @Autowired
+    RequestService reqsrv;
 
     @GetMapping("/home")
     public String showHomePage(Model model) {
         UserInfo uIf = cUES.returnCurrentUser();
-        System.out.println(uIf.toString());
-        model.addAttribute("currentUserInfo", uIf);
         if(uIf.getURole().equals("Mentee"))
         {
-            return "home";
+            return "redirect:/mentee";
         }
         else if(uIf.getURole().equals("Mentor"))
         {
-            return "home";
+            return "redirect:/mentor";
         }
-        return "home";
+        return "redirect:/login";
     }
 
     @GetMapping("/landing")
@@ -48,7 +53,7 @@ public class HomeController {
 
     @GetMapping("/signin2")
     public String showSignIn() {
-        return "SignIn";
+        return "MainHomeMentee";
     }
 
     @PostMapping("/home")
@@ -64,15 +69,5 @@ public class HomeController {
     @GetMapping("/post")
     public String postRe(){
         return "PostRegister";
-    } 
-    
-     @GetMapping("/post2")
-    public String postRe2(){
-        return "PostRegister2";
-    } 
-    
-     @GetMapping("/test")
-    public String test(){
-        return "AdminRequestDashboard";
     } 
 }
