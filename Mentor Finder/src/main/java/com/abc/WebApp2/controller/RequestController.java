@@ -92,7 +92,7 @@ public class RequestController {
     }
     
     @GetMapping("/request/view")
-    public String viewRequest(@RequestParam(value="id") Integer rID,Model model){
+    public String viewRequest(@RequestParam(value="id") Integer rID, Model model){
         
         // doan nay su dung RequestParam thay vi PathVariable neu nhu dung cu phap tren
         

@@ -5,11 +5,13 @@
  */
 package com.abc.WebApp2.controller;
 
+import com.abc.WebApp2.entity.Enrolled;
 import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.entity.Subject;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.UserInfoService;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
+import com.abc.WebApp2.service.EnrollService;
 import com.abc.WebApp2.service.RequestService;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,6 +38,9 @@ public class ProfileController {
     
     @Autowired
     private RequestService reqServ;
+    
+    @Autowired
+    private EnrollService eServ;
 
     @GetMapping("/profile/{mentor_id}")
     public String getMentorProfile(@PathVariable("mentor_id") Integer mentor_id, Model model) {
@@ -46,37 +51,73 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String myProfile(Model model) {
-        UserInfo user = cUES.returnCurrentUser();
-        if (user == null) return "redirect:/login";
-        if (user.getURole().equalsIgnoreCase("Mentee")){
-            List<Request> requests;
-            requests = reqServ.myRequests(user);
-            if (requests.size()==0) {
-                model.addAttribute("norequest", true);
+        try {
+            UserInfo user = cUES.returnCurrentUser();
+
+            model.addAttribute("user_info", user);
+            model.addAttribute("currentDate", new Date(System.currentTimeMillis()));
+
+            if (user.getURole().equalsIgnoreCase("Mentee")){
+                List<Request> requests;
+                requests = reqServ.myRequests(user);
+                model.addAttribute("requestCount", requests.size());
+                if (requests.isEmpty()) {
+                    model.addAttribute("norequest", true);
+                }
+                else {
+                    List<Subject> subjects = listSubjectFromRequests(requests);
+                    addProfileModelAttributes(model, subjects);
+                }
+                return "ProfileMentee";
             }
             else {
-                List<Subject> subjects = new ArrayList<>();
-                for (Request r: requests){
-                    if (subjects.contains(r.getSubId())) {}
-                    else{
-                        subjects.add(r.getSubId());
-                    }
+                List<Enrolled> enrolleds = eServ.allMyEnrolled(user);
+                
+                model.addAttribute("requestCount", enrolleds.size());
+                    
+                List<Request> requests = new ArrayList<>();
+                if (enrolleds.isEmpty()){
+                    model.addAttribute("norequest", true);
                 }
-                Integer subjectCount = subjects.size();
-                Integer lastSlide = subjectCount%3;
-                Integer slideCount = (int) Math.ceil(((double)subjectCount)/3);
-                model.addAttribute("requestCount", requests.size());
-                model.addAttribute("subjects", subjects);
-                model.addAttribute("subjectCount", subjectCount);
-                model.addAttribute("lastSlide", lastSlide);
-                model.addAttribute("slideCount", slideCount);
-                model.addAttribute("norequest", false);
-                model.addAttribute("currentDate", new Date(System.currentTimeMillis()));
+                else {
+                    for (Enrolled e: enrolleds){
+                        if (!requests.contains(e.getReqId())){ 
+                            requests.add(e.getReqId());
+                        }
+                    }
+                    List<Subject> subjects = listSubjectFromRequests(requests);
+                    addProfileModelAttributes(model, subjects);
+                }
+                return "ProfileMentor";
             }
-            model.addAttribute("user_info", user);
-            return "ProfileMentee";
         }
-        return "";
+        catch (NullPointerException e){
+            return "redirect:/login";
+        }
+        
+    }
+    
+    private List<Subject> listSubjectFromRequests(List<Request> requests){
+        List<Subject> subjects = new ArrayList<>();
+        //get number of subjects that user request for
+        for (Request r: requests){
+            if (subjects.contains(r.getSubId())) {}
+            else{
+                subjects.add(r.getSubId());
+            }
+        }
+        return subjects;
+    }
+    
+    private void addProfileModelAttributes(Model model, List<Subject> subjects){
+        Integer subjectCount = subjects.size();
+        Integer lastSlide = subjectCount%3;
+        Integer slideCount = (int) Math.ceil(((double)subjectCount)/3);
+        model.addAttribute("subjects", subjects);
+        model.addAttribute("subjectCount", subjectCount);
+        model.addAttribute("lastSlide", lastSlide);
+        model.addAttribute("slideCount", slideCount);
+        model.addAttribute("norequest", false);
     }
 
     @PostMapping("/profile_update")

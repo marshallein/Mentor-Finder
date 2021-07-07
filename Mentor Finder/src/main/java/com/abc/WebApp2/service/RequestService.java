@@ -5,7 +5,9 @@
  */
 package com.abc.WebApp2.service;
 
+import com.abc.WebApp2.entity.Level;
 import com.abc.WebApp2.entity.Request;
+import com.abc.WebApp2.entity.Subject;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.repository.RequestRepository;
 import java.util.List;
@@ -58,6 +60,10 @@ public class RequestService {
     
     public void deleteRequest(int rId){
         repo.deleteById(rId);
+    }
+    
+    public List<Request> allRequestWithFilter(List<Level> levId, List<Subject> subId){
+        return repo.findByLevIdInAndSubIdIn(levId, subId);
     }
 
 }

@@ -39,11 +39,11 @@
                     <p style="font-size: 38px;font-family: 'PT Serif', serif;margin-top: 50px;text-align: left;display: inline-block;"><em>[[${user_info.getUName()}]],</em></p>
                     <p style="display: inline-block;margin-left: 10px;font-size: 38px;font-family: 'PT Serif', serif;">[[${currentDate.getYear()-user_info.getUDOB().getYear()}]].</p><i th:if="${user_info.getUGender()}" class="fas fa-mars" style="font-size: 31px;display: inline-block;margin-left: 23px;"></i><i th:unless="${user_info.getUGender()}" class="fas fa-venus" style="font-size: 31px;display: inline-block;margin-left: 23px;"></i>
                 </div>
-                <div style="display: inline-block;height: 45px;margin-left: -5px;background: var(--purple);border-radius: 33px;border-width: 0px;border-style: solid;margin-bottom: 4px;margin-top: -13px;">
-                    <p style="padding: 10px;padding-right: 15px;padding-left: 15px;">Mentee</p>
+                <div style="display: inline-block;height: 45px;margin-left: -5px;background: var(--yellow);border-radius: 33px;border-width: 0px;border-style: solid;margin-bottom: 4px;margin-top: -13px;">
+                    <p style="padding: 10px;padding-right: 15px;padding-left: 15px;">Mentor</p>
                 </div>
                 <div style="border-bottom-style: solid;height: 43px;width: 234px;margin-top: 5px;"><i class="fas fa-user-graduate" style="display: inline-block;font-size: 24px;margin-right: 25px;"></i>
-                    <p style="display: inline-block;font-size: 25px;" value="User School"><em>[[${user_info.getUDescription()}]]</em></p>
+                    <p style="display: inline-block;font-size: 25px;"><em>[[${user_info.getUDescription()}]]</em></p>
                 </div>
                 <div>
                     <p style="margin-top: 8px;"></p>
@@ -58,7 +58,7 @@
                     <div></div><i class="fas fa-clipboard"></i>
                     <div></div>
                 </div>
-                <p style="padding: 11px;text-align: center;color: #000000;margin: 5px;border-style: solid;border-color: #000000;background: #ffffff;margin-right: 6px;margin-left: 8px;">You have total of&nbsp;<span>[[${requestCount}]] requests.</span></p>
+                <p style="padding: 11px;text-align: center;color: #000000;margin: 5px;border-style: solid;border-color: #000000;background: #ffffff;margin-right: 6px;margin-left: 8px;">You have total of&nbsp;<span>[[${requestCount}]] enrollments.</span></p>
                 <div class="text-center icon-separator">
                     <div></div><i class="far fa-id-card"></i>
                     <div></div>
@@ -71,13 +71,13 @@
             <div class="col-md-6 col-xl-9" style="margin-top: 23px;">
                 <div th:if="${norequest}" style="padding: 39px;"><img src="/image/profilementee/Group%201071.png" style="height: 378px;display: inline-block;">
                     <div style="display: inline-block;background: var(--light);margin-right: 0px;position: relative;left: -40px;border-style: solid;border-radius: 8px;box-shadow: 17px 9px 9px;width: 408.156px;">
-                        <p style="padding: 26px;margin-bottom: 3px;margin-left: 1px;font-family: 'PT Serif', serif;border-style: none;"><em>You don't have a request yet, go to home page and create on now!</em><span><a th:href="@{/home}">&nbsp; Go to Home</a></span></p>
+                        <p style="padding: 26px;margin-bottom: 3px;margin-left: 1px;font-family: 'PT Serif', serif;border-style: none;"><em>You don't have an Enrollment yet, go to home page and enroll now!</em><span><a th:href="@{/home}">&nbsp; Go to Home</a></span></p>
                     </div>
                 </div>
                 <div th:unless="${norequest}" style="padding: 15px;">
                     <section class="team-clean" style="align-items: center;">
                         <div class="intro">
-                            <h2 class="text-center" style="margin-bottom: 0px;padding-top: 21px;">Wanted Subjects</h2>
+                            <h2 class="text-center" style="margin-bottom: 0px;padding-top: 21px;">Enrolled Subjects</h2>
                         </div>
                         <div style=" padding: 25px;">
                             <div class="carousel slide carousel-fade" data-ride="carousel" id="carousel-1" style="width: 750.5px; padding: 25px;">
@@ -146,7 +146,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="carousel-item" th:if="${slideCount>=2}">
+                                    <div class="carousel-item" th:if="${slideCount>=2}" >
                                         <div class="row">
                                             <div class="col-4 col-md-4">
                                                 <img class="w-100" th:src="${subjects.get(3*(slideCount-1)).getSubImage()}" alt="Slide Image">
