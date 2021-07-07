@@ -5,7 +5,9 @@
  */
 package com.abc.WebApp2.repository;
 
+import com.abc.WebApp2.entity.Level;
 import com.abc.WebApp2.entity.Request;
+import com.abc.WebApp2.entity.Subject;
 import com.abc.WebApp2.entity.UserInfo;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +31,9 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
     List<Request> findBymenteeIdFrom(UserInfo menteeId);
     
     Request findByreqId(int rId);
+    
+    @Nullable
+    List<Request> findByLevIdInAndSubIdIn(@Nullable List<Level> levId, @Nullable List<Subject> subId);
     
    
 }
