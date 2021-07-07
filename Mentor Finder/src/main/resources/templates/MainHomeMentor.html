@@ -53,7 +53,7 @@
                         </form>
                     </div>
                     <section data-aos="fade" data-aos-duration="200" data-aos-delay="50" data-aos-once="true">
-                        <div class="request-group" th:if="${requests != null && totalItems<10}" style="display: block">
+                        <div class="request-group" th:if="${!requests.isEmpty() && totalItems<10}" style="display: block">
                             <div th:each="i: ${#numbers.sequence(0, totalItems-1)}">
                                 <div style="margin: 10px;padding: 15px;border: solid white 2px;background-color: #FF79CD;">
                                     <h1>[[${requests.get(i).getReqTitle()}]]</h1>
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="request-group" th:if="${requests != null && totalItems>=10}" style="display: block">
+                        <div class="request-group" th:if="${!requests.isEmpty() && totalItems>=10}" style="display: block">
                             <div th:each="i: ${#numbers.sequence(0, 9)}">
                                 <div style="margin: 10px;padding: 15px;border: solid white 2px;background-color: #FF79CD;">
                                     <h1>[[${requests.get(i).getReqTitle()}]]</h1>
@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="request-group" th:if="${requests != null && totalPages>=3}" th:each="p: ${#numbers.sequence(1, totalPages-2)}" style="display: none">
+                        <div class="request-group" th:if="${!requests.isEmpty() && totalPages>=3}" th:each="p: ${#numbers.sequence(1, totalPages-2)}" style="display: none">
                             <div th:each="i: ${#numbers.sequence(10*p, 10*p+9)}">
                                 <div style="margin: 10px;padding: 15px;border: solid white 2px;background-color: #FF79CD;">
                                     <h1>[[${requests.get(i).getReqTitle()}]]</h1>
@@ -119,7 +119,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="request-group" th:if="${requests != null && totalPages>=2}" style="display: none">
+                        <div class="request-group" th:if="${!requests.isEmpty() && totalPages>=2}" style="display: none">
                             <div th:each="i: ${#numbers.sequence(10*(totalPages-1), 10*(totalPages-1)+lastPage-1)}">
                                 <div style="margin: 10px;padding: 15px;border: solid white 2px;background-color: #FF79CD;">
                                     <h1>[[${requests.get(i).getReqTitle()}]]</h1>
@@ -252,7 +252,7 @@
         <script>
             function nextPage(total_page){
                 var current_page = parseInt($("#current-page").text(),10);
-                if (current_page==total_page) return;
+                if (current_page===total_page) return;
                 $("#current-page").html(current_page+1);
                 $($(".request-group")[current_page-1]).hide();
                 $($(".request-group")[current_page]).show();
@@ -261,7 +261,7 @@
 
             function prevPage(){
                 var current_page = parseInt($("#current-page").text(),10);
-                if (current_page==1) return;
+                if (current_page===1) return;
                 $("#current-page").html(current_page-1);
                 $($(".request-group")[current_page-1]).hide();
                 $($(".request-group")[current_page-2]).show();
