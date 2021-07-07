@@ -33,11 +33,8 @@ public class HomeController {
     RequestService reqsrv;
 
     @GetMapping("/home")
-    public String showHomePage(Model model, RedirectAttributes redirectAttrs) {
+    public String showHomePage(Model model) {
         UserInfo uIf = cUES.returnCurrentUser();
-        System.out.println(uIf.toString());
-        model.addAttribute("currentUserInfo", uIf);
-        redirectAttrs.addFlashAttribute("pageNum", 1);
         if(uIf.getURole().equals("Mentee"))
         {
             return "redirect:/mentee";
@@ -49,7 +46,7 @@ public class HomeController {
         return "redirect:/login";
     }
 
-        @GetMapping("/landing")
+    @GetMapping("/landing")
     public String showStart() {
         return "LandingPage";
     }

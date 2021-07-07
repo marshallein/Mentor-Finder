@@ -31,6 +31,9 @@ public class RequestService {
         return repo.save(newRq);
     }
     
+    public List<Request> myRequests(UserInfo uId){
+        return repo.findBymenteeIdFrom(uId);
+    }
     
     public Page<Request> listAllMyByPage(UserInfo uId, int pagenum) {
         Pageable pageable = PageRequest.of(pagenum - 1, 10);
