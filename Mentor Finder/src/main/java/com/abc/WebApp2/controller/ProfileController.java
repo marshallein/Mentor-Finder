@@ -11,7 +11,7 @@ import com.abc.WebApp2.entity.Subject;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.UserInfoService;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
-import com.abc.WebApp2.service.EnrollService;
+import com.abc.WebApp2.service.EnrolledService;
 import com.abc.WebApp2.service.RequestService;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,7 +40,7 @@ public class ProfileController {
     private RequestService reqServ;
     
     @Autowired
-    private EnrollService eServ;
+    private EnrolledService eServ;
 
     @GetMapping("/profile/{mentor_id}")
     public String getMentorProfile(@PathVariable("mentor_id") Integer mentor_id, Model model) {

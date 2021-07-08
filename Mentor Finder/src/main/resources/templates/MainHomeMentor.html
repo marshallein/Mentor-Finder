@@ -248,25 +248,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
         <script src="/js/mainhomementor/bs-init.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-        <script>
-            function nextPage(total_page){
-                var current_page = parseInt($("#current-page").text(),10);
-                if (current_page===total_page) return;
-                $("#current-page").html(current_page+1);
-                $($(".request-group")[current_page-1]).hide();
-                $($(".request-group")[current_page]).show();
-                window.scrollTo(0,460);
-            }
-
-            function prevPage(){
-                var current_page = parseInt($("#current-page").text(),10);
-                if (current_page===1) return;
-                $("#current-page").html(current_page-1);
-                $($(".request-group")[current_page-1]).hide();
-                $($(".request-group")[current_page-2]).show();
-                window.scrollTo(0,460);
-            }
-        </script>
+        <script src="/js/mainhomementor/HomeMentor.js"></script>
     </body>
 
 </html>

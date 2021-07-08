@@ -7,20 +7,26 @@ package com.abc.WebApp2.controller;
 
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
-import com.abc.WebApp2.service.EnrollService;
+import com.abc.WebApp2.service.EnrolledService;
 import com.abc.WebApp2.entity.Enrolled;
 import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.service.RequestService;
+import com.google.gson.Gson;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
@@ -32,36 +38,39 @@ public class EnrolledController {
     CurrentUserExtractorService cUES;
     
     @Autowired
-    EnrollService eServ;
+    EnrolledService eServ;
     
     @Autowired
     RequestService reqServ;
     
-    @ModelAttribute("pageNum")
-    public Integer pageNum(){
-        return 1;
-    }
     
-    @GetMapping("/enrolled")
-    public String getMyEnroll(Model model, @ModelAttribute("pageNum") Integer pageNum){
-        UserInfo user = cUES.returnCurrentUser();
-        Page<Enrolled> page = null;
-        if (user == null) return "redirect:/landing";
-        if (user.getURole().equalsIgnoreCase("Mentee")) return "redirect:/home";
-        List<Enrolled> enrolled = null;
-        page = eServ.listAllMyByPage(user, pageNum);
-        enrolled = page.getContent();
-        model.addAttribute("enrolled", enrolled);
-        model.addAttribute("pageNum", pageNum);
-        if (page != null){
-            model.addAttribute("totalPages", page.getTotalPages());
-            model.addAttribute("totalItems", page.getTotalElements());
+    @GetMapping(value="/enrolled/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getMyEnroll(@RequestParam int reqId){
+        try {
+            UserInfo user = cUES.returnCurrentUser();
+            Request request = reqServ.getRequestFromId(reqId);
+            if (request == null) {
+                return "[]";
+            }
+            List<Enrolled> enrollList = eServ.getAllByRequest(request);
+            if (enrollList.isEmpty()) return "[]";
+            List<Map<String, String>> result = new ArrayList<>();
+            for (Enrolled e: enrollList) {
+                Map<String, String> enr = new HashMap<>();
+                enr.put("uid", e.getMentorId().getUId().toString());
+                enr.put("name", e.getMentorId().getUName());
+                enr.put("enrId", e.getEnrId().toString());
+                result.add(enr);
+            }
+            String stringJSON = new Gson().toJson(result);
+            return stringJSON;
         }
-        else {
-            model.addAttribute("totalPages", 1);
-            model.addAttribute("totalItems", 0);
+        catch (NullPointerException eNull){
+           Logger.getLogger(EnrolledController.class.getName()).log(Level.SEVERE, null, eNull);
+           return "[]";
         }
-        return "";
+        
     }
     
     @PostMapping("/enrolled/create")

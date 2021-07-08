@@ -25,6 +25,25 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item" style="margin-right: 20px;"><a class="nav-link active" href="#" style="cursor: pointer;"><i class="fas fa-home" style="font-size: 45px;color: purple;"></i></a></li>
                         <li class="nav-item" style="margin-right: 20px;"><a class="nav-link" href="#"><i class="far fa-comment" style="font-size: 45px;color: purple;"></i><span class="badge badge-primary" style="padding: 2px 3.8px;margin-left: -12px;">42</span></a></li>
+                        <li class="nav-item" style="padding: 8px;">
+                            <div class="nav-item dropdown"><a class="dropdown-toggle" aria-expanded="false" data-toggle="dropdown" href="#"><i class="far fa-bell" style="font-size: 45px;color: purple;"></i><span class="badge badge-primary" style="padding: 2px 3.8px;margin-left: -12px;">42</span></a>
+                                <div class="dropdown-menu dropdown-menu-right" style="box-shadow: 4px 4px 0px var(--gray);">
+                                    <h1 class="dropdown-header">Notification</h1><a class="dropdown-item" href="#">
+                                        <div class="notify_icon"><i class="far fa-plus-square" style="font-size: 22px;color: var(--pink);margin-right: 11px;"></i></div>
+                                        <div class="notify_item">
+                                            <p style="margin-bottom: 7px;">Request ID :&nbsp;<span style="color: var(--yellow);"><strong>10218</strong></span>&nbsp;has new Mentor enroll, go check it out.</p>
+                                        </div>
+                                    </a><a class="dropdown-item" href="#">
+                                        <div class="notify_icon"><i class="far fa-plus-square" style="font-size: 22px;color: var(--pink);margin-right: 11px;"></i></div>
+                                        <div class="notify_item">
+                                            <p style="margin-bottom: 7px;">Request ID :&nbsp;<span style="color: var(--yellow);"><strong>10218</strong></span>&nbsp;has new Mentor enroll, go check it out.</p>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="dropdown-item" style="text-align: center;"><a href="#" style="color: var(--pink);">View All Notifications</a></div>
+                                </div>
+                            </div>
+                        </li>
                         <li class="nav-item"><a class="nav-link" th:href="@{/profile}"><i class="far fa-user" style="font-size: 45px;color: purple;"></i></a></li>
                     </ul>
                 </div>
@@ -66,7 +85,12 @@
                                 <div style="margin-left: 20px;"><i class="fa fa-calendar" style="display: inline-block;font-size: 15px;"></i>
                                     <p style="display: inline-block;font-size: 10px;margin-left: 10px;">[[${request.getReqAvaiTime()}]]</p>
                                 </div>
-                                <div style="margin-top: 10px;"><button class="btn btn-primary" type="button" style="margin-left: 450px;">View enrolled</button><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete" style="margin-left: 10px;">Delete</button></div>
+                                <div style="margin-top: 10px;">
+                                    <input type="text" th:value="${request.getReqId()}" class="requestId" style="display: none;">
+                                    <button class="btn btn-primary" type="button" style="margin-left: 450px;" data-toggle="modal" data-target="#enroll" onclick="var value = $(this).parent().children('.requestId').val();
+                                                                                                                                                                getEnrolledList(value);">View enrolled</button>
+                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete" style="margin-left: 10px;" onclick="var value = $(this).parent().children('.requestId').val();
+                                                                                                                                                                $('#reqIdDelete').val(value);">Delete</button></div>
                             </div>
                         </div>
                     </section>
@@ -104,19 +128,40 @@
                     <form th:action="@{/mentee/request/create}" method="GET">
                         <button class="btn btn-outline-primary text-truncate float-none float-sm-none add-another-btn" data-bss-hover-animate="pulse" type="submit" style="padding: 50px;margin-left: 50px;background: #f4b700;color: var(--dark);">Add Another Request<i class="fas fa-plus-circle edit-icon" style="font-size: 30px;"></i></button>
                     </form>
-                    </div>
+                </div>
             </div>
         </div>
-        <div class="modal fade" role="dialog" tabindex="-1" id="delete">
+        <form th:action="@{/request/delete}" method="POST">
+            <input type="text" id="reqIdDelete" style="display: none;" name="reqId">
+            <div class="modal fade" role="dialog" tabindex="-1" id="delete">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Confirm</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Delete this Request?</p>
+                        </div>
+                        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Cancel</button><button class="btn btn-primary" type="submit">Confirm</button></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="modal fade" role="dialog" tabindex="-1" id="enroll">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Modal Title</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Enrolled List</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                     </div>
                     <div class="modal-body">
-                        <p>The content of your modal.</p>
+                        <p>Finished</p>
+                        <div style="padding: 20px;overflow-y: scroll;max-height: 500px;box-shadow: 7px 7px 0px var(--secondary);border: 3px solid var(--gray) ;">
+                            <div id="listmentor" style="padding: 10px;border: 1px solid var(--gray);margin-top: 10px;padding-bottom: 5px;">
+                                
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button></div>
                 </div>
             </div>
         </div>
@@ -148,6 +193,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
         <script src="/js/mainhomementee/bs-init.js"></script>
+        <script src="/js/mainhomementee/Enrolled.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     </body>
 

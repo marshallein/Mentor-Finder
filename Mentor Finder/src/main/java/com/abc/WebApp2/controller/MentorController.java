@@ -11,7 +11,7 @@ import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.entity.Subject;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
-import com.abc.WebApp2.service.EnrollService;
+import com.abc.WebApp2.service.EnrolledService;
 import com.abc.WebApp2.service.LoadSubjectAndLevelService;
 import com.abc.WebApp2.service.RequestService;
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class MentorController {
     RequestService rqsrv;
     
     @Autowired
-    EnrollService eServ;
+    EnrolledService eServ;
     
     @Autowired
     LoadSubjectAndLevelService slServ;

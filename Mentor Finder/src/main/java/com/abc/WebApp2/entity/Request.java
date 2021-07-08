@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -58,8 +59,7 @@ public class Request implements Serializable {
     private boolean reqStatus;
     @Column(name = "reqDesc")
     private String reqDesc;
-
-    @OneToMany(mappedBy = "reqId")
+    @OneToMany(mappedBy = "reqId", cascade=CascadeType.REMOVE)
     private Collection<Enrolled> enrolledCollection;
     @JoinColumn(name = "levId", referencedColumnName = "levId")
     @ManyToOne
