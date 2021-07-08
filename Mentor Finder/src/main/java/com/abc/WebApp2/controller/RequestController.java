@@ -45,6 +45,23 @@ public class RequestController {
     }
     
     
+    @PostMapping("/request/delete")
+    public String deleteRequest(Model model, @RequestParam("reqId") Integer reqId){
+        try{
+            UserInfo user = cUES.returnCurrentUser();
+            Request request = reqsrv.getRequestFromId(reqId);
+            UserInfo mentee = request.getMenteeIdFrom();
+            if (user.equals(mentee)){
+                reqsrv.deleteRequest(reqId);
+            }
+            return "redirect:/home";
+        }
+        catch (NullPointerException e){
+            return "redirect:/login";
+        }
+    }
+    
+    
     @PostMapping("/request/create")
     public String createRequest(@ModelAttribute("newRq") Request newRq, Model model,
             @RequestParam(value = "subjectId") int subId,

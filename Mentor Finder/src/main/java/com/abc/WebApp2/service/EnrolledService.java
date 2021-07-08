@@ -6,9 +6,14 @@
 package com.abc.WebApp2.service;
 
 import com.abc.WebApp2.entity.Enrolled;
+import com.abc.WebApp2.entity.Request;
+import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.repository.EnrolledRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -41,6 +46,24 @@ public class EnrolledService {
                 repo.delete(enrolled);
             }
         }
+    }
+    
+    public Page<Enrolled> listAllMyByPage(UserInfo uId, int pagenum) {
+        Pageable pageable = PageRequest.of(pagenum - 1, 10);
+        return repo.findByMentorId(uId, pageable);
+    }
+    
+    public List<Enrolled> allMyEnrolled(UserInfo uId){
+        return repo.findByMentorId(uId);
+    }
+    
+    public List<Enrolled> getAllByRequest(Request reqId){
+        return repo.findByReqId(reqId);
+    }
+    
+    
+    public void save(Enrolled enr){
+        repo.save(enr);
     }
     
 }
