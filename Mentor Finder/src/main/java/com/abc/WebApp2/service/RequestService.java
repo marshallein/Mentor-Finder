@@ -5,6 +5,7 @@
  */
 package com.abc.WebApp2.service;
 
+import com.abc.WebApp2.entity.Enrolled;
 import com.abc.WebApp2.entity.Level;
 import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.entity.Subject;

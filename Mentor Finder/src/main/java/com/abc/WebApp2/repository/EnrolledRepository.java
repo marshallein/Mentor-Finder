@@ -27,5 +27,7 @@ public interface EnrolledRepository extends JpaRepository<Enrolled, Integer> {
    List<Enrolled> findByReqId(Request reqId);
    
    Enrolled findByReqIdAndStatus(Request reqId, String status);
+   
+   List<Enrolled> findByReqIdInAndMentorIdAndStatus(List<Request> reqId, UserInfo mentorId, String status);
     
 }

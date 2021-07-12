@@ -1,9 +1,7 @@
 function getEnrolledList(reqId){
-    console.log("step 1");
     var json = {
         reqId: parseInt(reqId,10)
     };
-    console.log("step 2");
     $.ajax({
         type: "GET",
         url: "/enrolled/list",
@@ -36,7 +34,6 @@ function getEnrolledList(reqId){
             }
             html += '</div>'
                 +   '</div>';
-            console.log(html);
             $(".modal-body").html(html);
         
         },
