@@ -12,6 +12,7 @@ import com.abc.WebApp2.entity.Enrolled;
 import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.service.RequestService;
 import com.google.gson.Gson;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -43,6 +44,18 @@ public class EnrolledController {
     
     @Autowired
     RequestService reqServ;
+    
+    @GetMapping(value="/mentor/enrolled/list")
+    public String myEnrollList(Model model){
+        UserInfo user = cUES.returnCurrentUser();
+        model.addAttribute("user", user);
+        List<Enrolled> enr = eServ.allMyEnrolled(user);
+        model.addAttribute("enrolls", enr);
+        String pattern = "dd/MM/yyyy";
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        model.addAttribute("format", format);
+        return "ListEnrolled";
+    }
     
     
     @GetMapping(value="/enrolled/list", produces = MediaType.APPLICATION_JSON_VALUE)
