@@ -346,7 +346,10 @@ public class AdminController {
             i += 1;
         }
         int enrolledRequest = countDistinct(arr, arr.length);
-//        System.out.println(enrolledRequest);
+        if (eList.isEmpty()) {
+            enrolledRequest = 0;
+        }
+        System.out.println("hbchbhxxc: " + enrolledRequest);
         int requestToday = 0;
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
@@ -451,7 +454,7 @@ public class AdminController {
         return a;
     }
 
-   public int[] numberOfSubjectInRequests() {
+    public int[] numberOfSubjectInRequests() {
         //0:math || 1:literature || 2:english || 3:history || 
         //4:physic || 5:chemistry || 6:geography || 7:art || 8:calculus
         //9: Biology || 10: Java || 11:Python || 12:C++ || 13:SpringMvc
@@ -507,7 +510,7 @@ public class AdminController {
         return a;
     }
 
-   public int[] gradeRequest() {
+    public int[] gradeRequest() {
         int a[] = {0, 0, 0, 0};
         int totalRequest = aSrv.getAllRequest().size();
         List<Request> all = aSrv.getAllRequest();
