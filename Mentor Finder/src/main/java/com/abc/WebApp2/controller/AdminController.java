@@ -451,10 +451,11 @@ public class AdminController {
         return a;
     }
 
-    public int[] numberOfSubjectInRequests() {
+   public int[] numberOfSubjectInRequests() {
         //0:math || 1:literature || 2:english || 3:history || 
         //4:physic || 5:chemistry || 6:geography || 7:art || 8:calculus
-        int a[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+        //9: Biology || 10: Java || 11:Python || 12:C++ || 13:SpringMvc
+        int a[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         List<Request> all = aSrv.getAllRequest();
         for (Request request : all) {
             if (request.getSubId().getSubName().equalsIgnoreCase("Math")) {
@@ -484,8 +485,23 @@ public class AdminController {
             if (request.getSubId().getSubName().equalsIgnoreCase("Calculus")) {
                 a[8] = a[8] + 1;
             }
+            if (request.getSubId().getSubName().equalsIgnoreCase("Biology")) {
+                a[9] = a[9] + 1;
+            }
+            if (request.getSubId().getSubName().equalsIgnoreCase("Java")) {
+                a[10] = a[10] + 1;
+            }
+            if (request.getSubId().getSubName().equalsIgnoreCase("Python")) {
+                a[11] = a[11] + 1;
+            }
+            if (request.getSubId().getSubName().equalsIgnoreCase("C++")) {
+                a[12] = a[12] + 1;
+            }
+            if (request.getSubId().getSubName().equalsIgnoreCase("Spring MVC")) {
+                a[13] = a[13] + 1;
+            }
         }
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 14; i++) {
             System.out.println(a[i]);
         }
         return a;
