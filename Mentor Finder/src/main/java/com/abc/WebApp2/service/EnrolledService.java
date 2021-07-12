@@ -9,7 +9,12 @@ import com.abc.WebApp2.entity.Enrolled;
 import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.repository.EnrolledRepository;
+import com.google.gson.Gson;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +29,10 @@ import org.springframework.stereotype.Service;
 public class EnrolledService {
     @Autowired
     EnrolledRepository repo;
+    
+    public Enrolled getById(Integer enrId){
+        return repo.getById(enrId);
+    }
     
     public List<Enrolled> getAllEnrolled() {
         return repo.findAll();
@@ -62,8 +71,59 @@ public class EnrolledService {
     }
     
     
+    public String ToJSON(Request request){
+        if(request.getReqStatus()){
+            Enrolled enrolled = getByRequestAndStatus(request, "ACCEPT");
+            if (enrolled == null) return "[]";
+            Map<String, String> result = new HashMap<>();
+            result.put("status", String.valueOf(request.getReqStatus()));
+            result.put("uid", enrolled.getMentorId().getUId().toString());
+            result.put("name", enrolled.getMentorId().getUName());
+            return new Gson().toJson(result);
+        }
+        else {
+            List<Enrolled> enrollList = getAllByRequest(request);
+            if (enrollList.isEmpty()) return "[]";
+            List<Map<String, String>> result = new ArrayList<>();
+            for (Enrolled e: enrollList) {
+                Map<String, String> enr = new HashMap<>();
+                enr.put("status", String.valueOf(request.getReqStatus()));
+                enr.put("estatus", e.getStatus());
+                enr.put("uid", e.getMentorId().getUId().toString());
+                enr.put("name", e.getMentorId().getUName());
+                enr.put("enrId", e.getEnrId().toString());
+                result.add(enr);
+            }
+            return new Gson().toJson(result);
+        }
+        
+        
+    }
+    
+    public void createEnrolled(UserInfo user, Request request){
+        Enrolled enr = new Enrolled();
+        enr.setEnrDate(new Date(System.currentTimeMillis()));
+        enr.setReqId(request);
+        enr.setMentorId(user);
+        repo.save(enr);
+    }
+    
     public void save(Enrolled enr){
         repo.save(enr);
+    }
+    
+    
+    public void updateStatus(Integer enrId, String status) throws IllegalArgumentException{
+        Enrolled enr = repo.getById(enrId);
+        if (enr == null) {
+            throw new IllegalArgumentException("Illegal Enrolled ID");
+        }
+        enr.setStatus(status);
+        save(enr);
+    }
+    
+    public Enrolled getByRequestAndStatus(Request request, String status){
+        return repo.findByReqIdAndStatus(request, status);
     }
     
 }

@@ -42,6 +42,8 @@ public class Enrolled implements Serializable {
     @Column(name = "enrDate")
     @Temporal(TemporalType.DATE)
     private Date enrDate;
+    @Column(name="status")
+    private String status = "NEW";
     @JoinColumn(name = "reqId", referencedColumnName = "reqId")
     @ManyToOne
     private Request reqId;
@@ -86,6 +88,14 @@ public class Enrolled implements Serializable {
 
     public void setMentorId(UserInfo mentorId) {
         this.mentorId = mentorId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

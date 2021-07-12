@@ -66,5 +66,9 @@ public class RequestService {
     public List<Request> allRequestWithFilter(List<Level> levId, List<Subject> subId){
         return repo.findByLevIdInAndSubIdIn(levId, subId);
     }
+    
+    public void updateRequest(Request req){
+        repo.save(req);
+    }
 
 }

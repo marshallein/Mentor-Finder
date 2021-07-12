@@ -90,7 +90,8 @@ CREATE TABLE Enrolled(
     enrId int PRIMARY KEY identity(1,1),
 	reqId int FOREIGN KEY REFERENCES Request(reqId),
 	mentorId int FOREIGN KEY REFERENCES UserInfo(uId),
-	enrDate DATE
+	enrDate DATE,
+	status nvarchar(32) DEFAULT N'NEW'
 )
 
 

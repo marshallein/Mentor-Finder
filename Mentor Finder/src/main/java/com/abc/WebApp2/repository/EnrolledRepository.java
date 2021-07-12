@@ -25,5 +25,7 @@ public interface EnrolledRepository extends JpaRepository<Enrolled, Integer> {
    
    @Nullable
    List<Enrolled> findByReqId(Request reqId);
+   
+   Enrolled findByReqIdAndStatus(Request reqId, String status);
     
 }
