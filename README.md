@@ -8,6 +8,9 @@ Cứ thế mà phát triển lên từ đó.
 
 # Version
 
+## 12/7/2021
+Sửa bảng Enrolled, thêm cột status, hoàn thiện chức năng enrolled, accept reject enrolled
+
 ## 7/7/2021
 Sửa bảng Subject, thêm cột hình ảnh minh họa của môn học
 
