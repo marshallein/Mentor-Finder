@@ -507,8 +507,8 @@ public class AdminController {
         return a;
     }
 
-    public int[] gradeRequest() {
-        int a[] = {0, 0, 0};
+   public int[] gradeRequest() {
+        int a[] = {0, 0, 0, 0};
         int totalRequest = aSrv.getAllRequest().size();
         List<Request> all = aSrv.getAllRequest();
         for (Request request : all) {
@@ -521,18 +521,24 @@ public class AdminController {
             if (request.getLevId().getLevDesc().equalsIgnoreCase("High School")) {
                 a[2] = a[2] + 1;
             }
+            if (request.getLevId().getLevDesc().equalsIgnoreCase("University")) {
+                a[3] = a[3] + 1;
+            }
         }
         double total = totalRequest;
         double pschool = a[0];
         double sschool = a[1];
         double hschool = a[2];
+        double uni = a[3];
         double per1 = (pschool / total) * 100;
         a[0] = (int) Math.round(per1);
         double per2 = (sschool / total) * 100;
         a[1] = (int) Math.round(per2);
         double per3 = (hschool / total) * 100;
         a[2] = (int) Math.round(per3);
-        for (int i = 0; i < 3; i++) {
+        double per4 = (uni / total)*100;
+        a[3] = (int) Math.round(per4);
+        for (int i = 0; i < 4; i++) {
             System.out.println(a[i]);
         }
         return a;
