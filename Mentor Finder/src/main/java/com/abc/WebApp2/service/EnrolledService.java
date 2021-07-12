@@ -120,6 +120,14 @@ public class EnrolledService {
         }
         enr.setStatus(status);
         save(enr);
+        if (status.equalsIgnoreCase("ACCEPT")){
+            List<Enrolled> enrList = getAllByRequest(enr.getReqId());
+            for(Enrolled e: enrList){
+                if (e.equals(enr)) continue;
+                e.setStatus("REJECT");
+                save(e);
+            }
+        }
     }
     
     public Enrolled getByRequestAndStatus(Request request, String status){
