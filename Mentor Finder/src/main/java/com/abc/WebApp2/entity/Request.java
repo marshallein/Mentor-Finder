@@ -40,7 +40,7 @@ public class Request implements Serializable {
     @Column(name = "reqTitle")
     private String reqTitle;
     @Column(name = "reqAvaiTime")
-        private String reqAvaiTime;
+    private String reqAvaiTime;
     @Column(name = "reqDateTime")
     @Temporal(TemporalType.DATE)
     private Date reqDateTime;

@@ -134,4 +134,8 @@ public class EnrolledService {
         return repo.findByReqIdAndStatus(request, status);
     }
     
+    public List<Enrolled> getByRequestListAndMentorId(List<Request> reqId, UserInfo mentorId){
+        return repo.findByReqIdInAndMentorIdAndStatus(reqId, mentorId, "ACCEPT");
+    }
+    
 }

@@ -5,10 +5,12 @@
  */
 package com.abc.WebApp2.controller;
 
+import com.abc.WebApp2.entity.Comment;
 import com.abc.WebApp2.entity.Enrolled;
 import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.entity.Subject;
 import com.abc.WebApp2.entity.UserInfo;
+import com.abc.WebApp2.service.CommentService;
 import com.abc.WebApp2.service.UserInfoService;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
 import com.abc.WebApp2.service.EnrolledService;
@@ -41,12 +43,46 @@ public class ProfileController {
     
     @Autowired
     private EnrolledService eServ;
+    
+    @Autowired
+    private CommentService comServ;
 
     @GetMapping("/profile/{mentor_id}")
     public String getMentorProfile(@PathVariable("mentor_id") Integer mentor_id, Model model) {
+        UserInfo user = cUES.returnCurrentUser();
+        model.addAttribute("commentable", false);
         UserInfo mentor = uisrv.findUserInfoId(mentor_id);
         model.addAttribute("mentor", mentor);
-        return "mentor_profile";
+        if (user!=null) {
+            List<Request> reqs = reqServ.myRequests(user);
+            List<Enrolled> common = eServ.getByRequestListAndMentorId(reqs, mentor);
+            if (!(common==null))
+                if (!common.isEmpty()){
+                model.addAttribute("commentable", true);
+            }
+        }
+        
+        List<Comment> comments = comServ.getByUserReceived(mentor);
+        model.addAttribute("comments", comments);
+        
+        model.addAttribute("currentDate", new Date(System.currentTimeMillis()));
+        List<Enrolled> enrolleds = eServ.allMyEnrolled(mentor);
+        model.addAttribute("requestCount", enrolleds.size());
+        
+        List<Request> requests = new ArrayList<>();
+        if (enrolleds.isEmpty()){
+            model.addAttribute("norequest", true);
+        }
+        else {
+            for (Enrolled e: enrolleds){
+                if (!requests.contains(e.getReqId())){ 
+                    requests.add(e.getReqId());
+                }
+            }
+            List<Subject> subjects = listSubjectFromRequests(requests);
+            addProfileModelAttributes(model, subjects);
+        }
+        return "BasicMentorInfo";
     }
 
     @GetMapping("/profile")
