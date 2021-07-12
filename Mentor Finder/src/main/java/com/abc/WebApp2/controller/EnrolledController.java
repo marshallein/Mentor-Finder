@@ -24,6 +24,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,40 +54,42 @@ public class EnrolledController {
             if (request == null) {
                 return "[]";
             }
-            List<Enrolled> enrollList = eServ.getAllByRequest(request);
-            if (enrollList.isEmpty()) return "[]";
-            List<Map<String, String>> result = new ArrayList<>();
-            for (Enrolled e: enrollList) {
-                Map<String, String> enr = new HashMap<>();
-                enr.put("uid", e.getMentorId().getUId().toString());
-                enr.put("name", e.getMentorId().getUName());
-                enr.put("enrId", e.getEnrId().toString());
-                result.add(enr);
-            }
-            String stringJSON = new Gson().toJson(result);
-            return stringJSON;
+            return eServ.ToJSON(request);
         }
         catch (NullPointerException eNull){
            Logger.getLogger(EnrolledController.class.getName()).log(Level.SEVERE, null, eNull);
            return "[]";
         }
-        
     }
     
     @PostMapping("/enrolled/create")
     public String createRequest(@RequestParam("reqId") String reqId, Model model){
-        
-        UserInfo user = cUES.returnCurrentUser();
-        int req = Integer.parseInt(reqId);
-        Request request = reqServ.getRequestFromId(req);
-        if (request == null) return "redirect:/home";
-        Enrolled enr = new Enrolled();
-        enr.setEnrDate(new Date(System.currentTimeMillis()));
-        enr.setReqId(request);
-        enr.setMentorId(user);
-        eServ.save(enr);
-        
-        return "redirect:/home";
+        try{
+            UserInfo user = cUES.returnCurrentUser();
+            int req = Integer.parseInt(reqId);
+            Request request = reqServ.getRequestFromId(req);
+            if (request == null) return "redirect:/home";
+            eServ.createEnrolled(user, request);
+            return "redirect:/home";
+        }
+        catch (NullPointerException | NumberFormatException e){
+            return "redirect:/home";
+        }
+    }
+    
+    @GetMapping("/enrolled/decide/{enrId}/{status}")
+    public String acceptRejectEnrolled(Model model, @PathVariable("enrId") Integer enrId, @PathVariable("status") String status){
+        try{
+            Enrolled enr = eServ.getById(enrId);
+            Request req = enr.getReqId();
+            req.setReqStatus(true);
+            reqServ.updateRequest(req);
+            eServ.updateStatus(enrId, status);
+            return "redirect:/home";
+        }
+        catch (IllegalArgumentException e){
+            return "redirect:/home";
+        }
     }
     
 }
