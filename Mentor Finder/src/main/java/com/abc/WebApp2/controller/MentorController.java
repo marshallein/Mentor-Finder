@@ -129,7 +129,7 @@ public class MentorController {
             }
             model.addAttribute("levs", levelsCheckedMap);
             model.addAttribute("subjs", subjectsCheckedMap);
-            model.addAttribute("username", uIf.getUName());
+            model.addAttribute("user", uIf);
             return "MainHomeMentor";
         }
         catch (NullPointerException e){
