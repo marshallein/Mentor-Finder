@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Mentor Info</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/font/mentorinfo/fontawesome5-overrides.min.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" th:href="@{/css/mentorinfo/Off-Canvas-Sidebar-Drawer-Navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/mentorinfo/Separator-with-icon.css}">
+    <link rel="stylesheet" th:href="@{/css/mentorinfo/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/mentorinfo/Team-Clean.css}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body style="background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 121, 205, 0.46) 35.94%, #23049D 100%);">
+    <input id="mentorId" type="text" name="mentorId" style="display: none;" th:value="${mentor.getUId()}">
+    <nav class="navbar navbar-dark fixed-top bg-dark off-canvas" data-right-drawer="0" data-open-drawer="0">
+        <div class="container-fluid flex-column"><button class="btn btn-dark drawer-knob" type="button" data-open="drawer"><i class="fas fa-bars"></i></button>
+            <div class="d-flex justify-content-between brand-line"><a class="navbar-brand" href="#">Mentor Finder</a><button class="btn btn-dark" type="button" data-dismiss="drawer"><span class="sr-only">Toggle Navigation&nbsp;</span><i class="fas fa-times"></i></button></div>
+            <ul class="navbar-nav flex-column drawer-menu">
+                <li class="nav-item"><a class="nav-link active" data-bss-hover-animate="pulse" th:href="@{/home}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="#">Message<span class="badge badge-primary" style="margin-left: 5px;">42</span></a></li>
+                <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" th:href="@{/profile}">Profile</a></li>
+            </ul>
+            <ul class="navbar-nav flex-column bottom-nav">
+                <li class="nav-item"><a class="nav-link active" th:href="@{/profile}">Account Setting</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Log Out</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container" style="margin-top: 53px;padding-bottom: 15px;border-bottom-width: 1px;border-bottom-style: solid;">
+        <div class="row">
+            <div class="col-md-6 col-xl-4"><img src="/image/mentorinfo/Group%2013.png" style="padding: 10px;border-right-style: none;margin: auto;"></div>
+            <div class="col-md-6 col-xl-8">
+                <div>
+                    <p style="font-size: 38px;font-family: 'PT Serif', serif;margin-top: 50px;text-align: left;display: inline-block;"><em>[[${mentor.getUName()}]]</em></p>
+                    <p style="display: inline-block;margin-left: 10px;font-size: 38px;font-family: 'PT Serif', serif;">[[${currentDate.getYear()-mentor.getUDOB().getYear()}]].</p><i th:if="${mentor.getUGender()}" class="fas fa-mars" style="font-size: 31px;display: inline-block;margin-left: 23px;"></i><i th:unless="${mentor.getUGender()}" class="fas fa-venus" style="font-size: 31px;display: inline-block;margin-left: 23px;"></i>
+                </div>
+                <div style="display: inline-block;height: 45px;margin-left: -5px;background: var(--yellow);border-radius: 33px;border-width: 0px;border-style: solid;margin-bottom: 4px;margin-top: -13px;">
+                    <p style="padding: 10px;padding-right: 15px;padding-left: 15px;">Mentor</p>
+                </div>
+                <div style="border-bottom-style: solid;height: 43px;width: 234px;margin-top: 5px;"><i class="fas fa-user-graduate" style="display: inline-block;font-size: 24px;margin-right: 25px;"></i>
+                    <p style="display: inline-block;font-size: 25px;"><em>[[${mentor.getUDescription()}]]</em></p>
+                </div>
+                <div>
+                    <p style="margin-top: 8px;"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="padding: 8px;">
+        <div class="row">
+            <div class="col-md-6 col-xl-3" style="border-color: var(--white);">
+                <div class="text-center icon-separator">
+                    <div></div><i class="fas fa-address-card"></i>
+                    <div></div>
+                </div>
+                <div style="background: var(--white);padding: 17px;border-width: 3px;border-style: solid;">
+                    <p>Address :&nbsp; [[${mentor.getUAddress()}]]</p>
+                    <p>Telephone :[[${mentor.getUPhoneNumber()}]]</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-9" style="margin-top: 23px;">
+                <div th:if="${!norequest}" style="padding: 15px;">
+                    <section class="team-clean" style="align-items: center;">
+                        <div class="intro">
+                            <h2 class="text-center" style="margin-bottom: 0px;padding-top: 21px;">Wanted Subjects</h2>
+                        </div>
+                        <div style=" padding: 25px;">
+                            <div class="carousel slide carousel-fade" data-ride="carousel" id="carousel-1" style="width: 750.5px; padding: 25px;">
+                                <div class="carousel-inner" style="padding: 30px;" >
+                                    <div class="carousel-item active">
+                                        <div class="row">
+                                            <div class="col-4 col-md-4">
+                                                <img class="w-100" th:src="${subjects.get(0).getSubImage()}" alt="Slide Image">
+                                            </div>
+                                            <div class="col-4 col-md-4" th:if="${subjectCount>=2}">
+                                                <img class="w-100" th:src="${subjects.get(1).getSubImage()}" alt="Slide Image">
+                                            </div>
+                                            <div class="col-4 col-md-4" th:if="${subjectCount>=3}">
+                                                <img class="w-100" th:src="${subjects.get(2).getSubImage()}" alt="Slide Image">
+                                            </div>
+                                            <div class="w-100"></div>
+                                            <div class="col-4 col-md-4">
+                                                <div class="w-100 d-md-block">
+                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(0).getSubName()}]]</h1>
+                                                    <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(0).getSubDesc()}]]</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 col-md-4" th:if="${subjectCount>=2}">
+                                                <div class="w-100 d-md-block">
+                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(1).getSubName()}]]</h1>
+                                                    <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(1).getSubDesc()}]]</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 col-md-4" th:if="${subjectCount>=3}">
+                                                <div class="w-100 d-md-block">
+                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(2).getSubName()}]]</h1>
+                                                    <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(2).getSubDesc()}]]</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item" th:if="${slideCount>=3}" th:each="i: ${#numbers.sequence(1, slideCount-2)}">
+                                        <div class="row">
+                                            <div class="col-4 col-md-4">
+                                                <img class="w-100" th:src="${subjects.get(3*i).getSubImage()}" alt="Slide Image">
+                                            </div>
+                                            <div class="col-4 col-md-4">
+                                                <img class="w-100" th:src="${subjects.get(3*i+1).getSubImage()}" alt="Slide Image">
+                                            </div>
+                                            <div class="col-4 col-md-4">
+                                                <img class="w-100" th:src="${subjects.get(3*i+2).getSubImage()}" alt="Slide Image">
+                                            </div>
+                                            <div class="w-100"></div>
+                                            <div class="col-4 col-md-4">
+                                                <div class="w-100 d-md-block">
+                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(3*i).getSubName()}]]</h1>
+                                                    <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(3*i).getSubDesc()}]]</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 col-md-4">
+                                                <div class="w-100 d-md-block">
+                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(3*i+1).getSubName()}]]</h1>
+                                                    <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(3*i+1).getSubDesc()}]]</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 col-md-4">
+                                                <div class="w-100 d-md-block">
+                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(3*i+2).getSubName()}]]</h1>
+                                                    <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(3*i+2).getSubDesc()}]]</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item" th:if="${slideCount>=2}">
+                                        <div class="row">
+                                            <div class="col-4 col-md-4">
+                                                <img class="w-100" th:src="${subjects.get(3*(slideCount-1)).getSubImage()}" alt="Slide Image">
+                                            </div>
+                                            <div class="col-4 col-md-4" th:if="${lastSlide==0 || lastSlide==2}">
+                                                <img class="w-100" th:src="${subjects.get(3*(slideCount-1)+1).getSubImage()}" alt="Slide Image">
+                                            </div>
+                                            <div class="col-4 col-md-4" th:if="${lastSlide==0}">
+                                                <img class="w-100" th:src="${subjects.get(3*(slideCount-1)+2).getSubImage()}" alt="Slide Image">
+                                            </div>
+                                            <div class="w-100"></div>
+                                            <div class="col-4 col-md-4">
+                                                <div class="w-100 d-md-block">
+                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(3*(slideCount-1)).getSubName()}]]</h1>
+                                                    <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(3*(slideCount-1)).getSubDesc()}]]</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 col-md-4" th:if="${lastSlide==0 || lastSlide==2}">
+                                                <div class="w-100 d-md-block">
+                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(3*(slideCount-1)+1).getSubName()}]]</h1>
+                                                    <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(3*(slideCount-1)+1).getSubDesc()}]]</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-4 col-md-4" th:if="${lastSlide==0}">
+                                                <div class="w-100 d-md-block">
+                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(3*(slideCount-1)+2).getSubName()}]]</h1>
+                                                    <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(3*(slideCount-1)+2).getSubDesc()}]]</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" style="filter: invert(100%);"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" style="filter: invert(100%);"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                                <ol class="carousel-indicators" style="filter: invert(100%);">
+                                    <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
+                                    <div th:if="${slideCount>=2}"  th:each="i: ${#numbers.sequence(1, slideCount-1)}">
+                                        <li data-target="#carousel-1" th:attr="data-slide-to='${i}'"></li>
+                                    </div>
+                                </ol>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div style="max-height: 554; height: 230px;background: #ffffff;margin-top: 27px; overflow: auto">
+                    <h2 class="w3-center w3-text-purple" style="padding-left: 17px;padding-top: 7px;padding-bottom: 16px;">Feedback</h2>
+                    <div th:if="${commentable}" >
+                        <form id="commentForm" class="w3-container w3-light-grey w3-text-amber w3-margin" method="POST">
+                            <p></p>
+                            <input id="from" type="text" name="mentorId" style="display: none;" th:value="${mentor.getUId()}">
+                            <input id="content" class="w3-input" type="text" name="content">
+                            <input id="send-comment" class="w3-button w3-block w3-section w3-purple w3-ripple w3-padding" type="submit" value="Send">
+                        </form>
+                    </div>
+                    <div class="comment-list">
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-light footer" style="margin-top: 35px;padding: 20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 text-center text-lg-left my-auto h-100">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item"><a href="#">About</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Contact</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Terms of &nbsp;Use</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">© Mentor Finder 2021. All Rights Reserved.</p>
+                </div>
+                <div class="col-lg-6 text-center text-lg-right my-auto h-100">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-facebook fa-2x fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-twitter fa-2x fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-instagram fa-2x fa-fw"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/mentorinfo/bs-init.js"></script>
+    <script src="/js/mentorinfo/Off-Canvas-Sidebar-Drawer-Navbar.js"></script>
+    <script src="/js/mentorinfo/Off-Canvas-Sidebar-Drawer-Navbar-1.js"></script>
+    <script src="/js/mentorinfo/comment.js"></script>
+    <script>
+        $(document).ready(
+            getComment()
+        );
+        $("#commentForm").submit(function(event){
+            event.preventDefault();
+            comment($(this).children("#from").val(), $(this).children("#content").val());
+            getComment();
+        });
+    </script>
+    
+</body>
+
+</html>

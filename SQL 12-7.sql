@@ -48,7 +48,8 @@ CREATE TABLE SkillnExperience(
 CREATE TABLE Subject( -- toan 
     subId int PRIMARY KEY identity(1,1),
 	subName nvarchar(32) NOT NULL,
-	subDesc nvarchar(256)
+	subDesc nvarchar(256),
+	subImage nvarchar(256)
 )
 
 CREATE TABLE Level( -- 11 12
@@ -89,7 +90,8 @@ CREATE TABLE Enrolled(
     enrId int PRIMARY KEY identity(1,1),
 	reqId int FOREIGN KEY REFERENCES Request(reqId),
 	mentorId int FOREIGN KEY REFERENCES UserInfo(uId),
-	enrDate DATE
+	enrDate DATE,
+	status nvarchar(32) DEFAULT N'NEW'
 )
 
 
@@ -159,26 +161,26 @@ INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (4, '
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (5, 'Nguyen Tran Hoang', '12/12/2001', 0, 'Mentee', '123456789')
 
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (6, 'Nguyen Tran A', '12/12/2001', 1, 'Mentor', '123456789')
-INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (7, 'Nguyen Tran B', '12/12/2001', 1, 'Mentor', '123456789')
-INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (8, 'Nguyen Tran Thai An', '12/12/2001', 1, 'Mentor', '0923456789')
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber, uStatus) VALUES (7, 'Nguyen Tran B', '12/12/2001', 1, 'Mentor', '123456789', 0)
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber, uStatus) VALUES (8, 'Nguyen Tran Thai An', '12/12/2001', 1, 'Mentor', '0923456789', 0)
 
 SELECT * From UserInfo where uId= 1
 SELECT * From UserInfo
 
-INSERT INTO [Subject](subName, subDesc) VALUES ('Math','Mathematics')
-INSERT INTO [Subject](subName, subDesc) VALUES ('Literature','Literature')
-INSERT INTO [Subject](subName, subDesc) VALUES ('English','English')
-INSERT INTO [Subject](subName, subDesc) VALUES ('History','History')
-INSERT INTO [Subject](subName, subDesc) VALUES ('Physic','Physic')
-INSERT INTO [Subject](subName, subDesc) VALUES ('Chemistry','Chemistry')
-INSERT INTO [Subject](subName, subDesc) VALUES ('Geography','Geography')
-INSERT INTO [Subject](subName, subDesc) VALUES ('Art','Art')
-INSERT INTO [Subject](subName, subDesc) VALUES ('Calculus','Calculus')
-INSERT INTO [Subject](subName, subDesc) VALUES ('Biology','Biology')
-INSERT INTO [Subject](subName, subDesc) VALUES ('Java','Java')
-INSERT INTO [Subject](subName, subDesc) VALUES ('Python','Python')
-INSERT INTO [Subject](subName, subDesc) VALUES ('C++','C++')
-INSERT INTO [Subject](subName, subDesc) VALUES ('Spring MVC','Spring MVC')
+INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Math','Mathematics', N'/image/subjectImage/math.jpg')
+INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Literature','Literature', N'/image/subjectImage/literature.jpg')
+INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('English','English', N'/image/subjectImage/english.jpg')
+INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('History','History', N'/image/subjectImage/history.jpg')
+INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Physics','Physics', N'/image/subjectImage/physics.jpg')
+INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Chemistry','Chemistry', N'/image/subjectImage/chemistry.jpg')
+INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Geography','Geography', N'/image/subjectImage/geography.jpg')
+INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Art','Art', N'/image/subjectImage/art.jpg')
+INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Calculus','Calculus', N'/image/subjectImage/math.jpg')
+INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Biology','Biology', N'/image/subjectImage/biology.jpg')
+INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Java','Java', N'/image/subjectImage/IT.jpg')
+INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Python','Python', N'/image/subjectImage/IT.jpg')
+INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('C++','C++', N'/image/subjectImage/IT.jpg')
+INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Spring MVC','Spring MVC', N'/image/subjectImage/IT.jpg')
 
 INSERT INTO [Level](levName, levDesc) VALUES ('Grade 1', 'Primary School')
 INSERT INTO [Level](levName, levDesc) VALUES ('Grade 2', 'Primary School')

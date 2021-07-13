@@ -10,6 +10,7 @@ import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
 import com.abc.WebApp2.service.LoadSubjectAndLevelService;
 import com.abc.WebApp2.service.RequestService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -44,6 +45,23 @@ public class RequestController {
     }
     
     
+    @PostMapping("/request/delete")
+    public String deleteRequest(Model model, @RequestParam("reqId") Integer reqId){
+        try{
+            UserInfo user = cUES.returnCurrentUser();
+            Request request = reqsrv.getRequestFromId(reqId);
+            UserInfo mentee = request.getMenteeIdFrom();
+            if (user.equals(mentee)){
+                reqsrv.deleteRequest(reqId);
+            }
+            return "redirect:/home";
+        }
+        catch (NullPointerException e){
+            return "redirect:/login";
+        }
+    }
+    
+    
     @PostMapping("/request/create")
     public String createRequest(@ModelAttribute("newRq") Request newRq, Model model,
             @RequestParam(value = "subjectId") int subId,
@@ -69,6 +87,7 @@ public class RequestController {
         newRq.setReqAvaiTime(str);
         newRq.setLevId(lsals.findLevelbyId(levId));
         newRq.setSubId(lsals.findSubjectbyId(subId));
+        newRq.setReqDateTime(new Date(System.currentTimeMillis()));
         System.out.println(newRq.toString());
         reqsrv.saveNewRequest(newRq);
         
@@ -90,7 +109,7 @@ public class RequestController {
     }
     
     @GetMapping("/request/view")
-    public String viewRequest(@RequestParam(value="id") Integer rID,Model model){
+    public String viewRequest(@RequestParam(value="id") Integer rID, Model model){
         
         // doan nay su dung RequestParam thay vi PathVariable neu nhu dung cu phap tren
         
@@ -102,33 +121,4 @@ public class RequestController {
         return "RequestView";
     }
     
-    @GetMapping("/mentee/request/my_request")
-    public String myRequestList(Model model){
-        UserInfo user = cUES.returnCurrentUser();
-        if (user == null) return "redirect:/landing";
-        List<Request> requests = null;
-        if (user.getURole().equalsIgnoreCase("Mentor")) {
-            return "redirect:/landing";
-        }
-        else if (user.getURole().equalsIgnoreCase("Mentee")){
-            requests = reqsrv.getMyRequestMentee(user);
-        }
-        model.addAttribute("requests", requests);
-        return "HomeMentor";
-    }
-    
-    @RequestMapping("/mentor/{pageNum}")
-    public String AllRequest(Model model,
-            @PathVariable(name = "pageNum") int pageNum){
-        Page<Request> page = reqsrv.listAllByPage(pageNum);
-        List<Request> requestList = page.getContent();
-        
-        model.addAttribute("currentPage", pageNum);		
-        model.addAttribute("totalPages", page.getTotalPages());
-	model.addAttribute("totalItems", page.getTotalElements());
-        
-        model.addAttribute("requestList", requestList);
-        
-        return "HomeMentor";
-    }
 }
