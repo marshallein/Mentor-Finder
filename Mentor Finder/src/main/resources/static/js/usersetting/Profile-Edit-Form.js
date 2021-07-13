@@ -34,7 +34,7 @@
         }
     }
 
-    $("input.form-control[name=avatar-file]").change(function(){
+    $("input.form-control[name=avatar]").change(function(){
         readURL(this);
     });
     
@@ -52,6 +52,7 @@
     
     $('#profile').on('submit', function (e) {
         e.preventDefault();
+        var form = new FormData($("form#profile-form")[0]);
         var json = {
             fullname: $("#fullname").val(),
             school: $("#school").val(),
@@ -62,10 +63,11 @@
         };
         $.ajax({
             type: "POST",
-            contentType : "application/x-www-form-urlencoded; charset=UTF-8",
             url: "/profile/update",
-            data: json,
+            data: form,
             dataType: "json",
+            contentType: false,
+            processData: false,
             success: function(){
                 $("#fullname").attr("value", json["fullname"]);
                 $("#school").attr("value", json["school"]);

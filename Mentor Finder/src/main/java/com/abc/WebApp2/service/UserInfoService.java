@@ -62,12 +62,14 @@ public class UserInfoService {
     }
     
     public void updateProfile(UserInfo user,
+            String uImage,
             String uEmail,
             String uName,
             Date uDob,
             String uPhonenumber,
             String uAddress,
             String uDescription){
+        user.setUImage(uImage);
         user.setUAddress(uAddress);
         user.setUName(uName);
         user.setUDOB(uDob);

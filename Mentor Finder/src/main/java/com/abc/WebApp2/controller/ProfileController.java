@@ -17,6 +17,15 @@ import com.abc.WebApp2.service.EnrolledService;
 import com.abc.WebApp2.service.LoginInfoDetailsImplService;
 import com.abc.WebApp2.service.RequestService;
 import com.google.gson.Gson;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,8 +33,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +48,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -180,24 +195,45 @@ public class ProfileController {
         return "edit_profile";
     }
     
-    @PostMapping("/profile/update")
+    @PostMapping(value="/profile/update", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public String updateProfile(
+            @RequestParam(name = "avatar") MultipartFile file,
             @RequestParam(name = "email") String uEmail,
             @RequestParam(name = "fullname") String uName,
             @RequestParam(name = "dob") String uDob,
             @RequestParam(name = "telephone") String uPhonenumber,
             @RequestParam(name = "address") String uAddress,
-            @RequestParam(name = "school") String uDescription){
+            @RequestParam(name = "school") String uDescription) throws FileNotFoundException{
         try {
             UserInfo user = cUES.returnCurrentUser();
-            uisrv.updateProfile(user, uEmail, uName, new SimpleDateFormat("yyyy-MM-dd").parse(uDob), uPhonenumber, uAddress, uDescription);
+            
+            // get file extension
+            String filename = file.getOriginalFilename();
+            String[] split = filename.split("\\.");
+            
+            // naming the file to store in the resources
+            String newName = user.getLoginInfo().getLgUsername()+"."+split[split.length-1];
+            String storePath = "/image/avatar/" + newName;
+            
+            // copy the original file to new file in the resources
+            File uploads = new File("src\\main\\resources\\static\\image\\avatar");
+            File fileServer = new File(uploads, newName);
+            try (InputStream file_content = file.getInputStream()) {
+                Files.copy(file_content, fileServer.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }
+            uisrv.updateProfile(user, storePath, 
+                    uEmail, uName, new SimpleDateFormat("yyyy-MM-dd").parse(uDob),
+                    uPhonenumber, uAddress, uDescription);
             return toJson(true);
         }
         catch (NullPointerException e){
             return toJson(false);
         }
         catch (ParseException e){
+            return toJson(false);
+        } catch (IOException ex) {
+            Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
             return toJson(false);
         }
     }
