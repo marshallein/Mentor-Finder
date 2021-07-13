@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <link rel="icon" type="image/png" sizes="16x16" th:href="@{/image/favicon/favicon-16x16.png}">
     <title>UserMentee</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif">
@@ -68,7 +69,7 @@
                 <div style="background: var(--white);padding: 17px;border-width: 3px;border-style: solid;">
                     <p>Address :&nbsp; [[${user_info.getUAddress()}]]</p>
                     <p>Telephone : [[${user_info.getUPhoneNumber()}]]</p>
-                </div><button class="btn btn-primary" type="button" style="margin: 8px;padding: 5px 12px;background: var(--yellow);border: 3px solid var(--secondary);text-align: center;">Account setting</button>
+                </div><a class="btn btn-primary" th:href="@{/profile/update/detail}" type="button" style="margin: 8px;padding: 5px 12px;background: var(--yellow);border: 3px solid var(--secondary);text-align: center;">Account setting</a>
             </div>
             <div class="col-md-6 col-xl-9" style="margin-top: 23px;">
                 <div th:if="${norequest}" style="padding: 39px;"><img src="/image/profilementee/Group%201071.png" style="height: 378px;display: inline-block;">
@@ -130,19 +131,19 @@
                                             <div class="w-100"></div>
                                             <div class="col-4 col-md-4">
                                                 <div class="w-100 d-md-block">
-                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(3*i).getSubName()}]]</h1>
+                                                    <h5 style="color: var(--gray-dark);">[[${subjects.get(3*i).getSubName()}]]</h5>
                                                     <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(3*i).getSubDesc()}]]</p>
                                                 </div>
                                             </div>
                                             <div class="col-4 col-md-4">
                                                 <div class="w-100 d-md-block">
-                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(3*i+1).getSubName()}]]</h1>
+                                                    <h5 style="color: var(--gray-dark);">[[${subjects.get(3*i+1).getSubName()}]]</h5>
                                                     <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(3*i+1).getSubDesc()}]]</p>
                                                 </div>
                                             </div>
                                             <div class="col-4 col-md-4">
                                                 <div class="w-100 d-md-block">
-                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(3*i+2).getSubName()}]]</h1>
+                                                    <h5 style="color: var(--gray-dark);">[[${subjects.get(3*i+2).getSubName()}]]</h5>
                                                     <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(3*i+2).getSubDesc()}]]</p>
                                                 </div>
                                             </div>
@@ -162,19 +163,19 @@
                                             <div class="w-100"></div>
                                             <div class="col-4 col-md-4">
                                                 <div class="w-100 d-md-block">
-                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(3*(slideCount-1)).getSubName()}]]</h1>
+                                                    <h5 style="color: var(--gray-dark);">[[${subjects.get(3*(slideCount-1)).getSubName()}]]</h5>
                                                     <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(3*(slideCount-1)).getSubDesc()}]]</p>
                                                 </div>
                                             </div>
                                             <div class="col-4 col-md-4" th:if="${lastSlide==0 || lastSlide==2}">
                                                 <div class="w-100 d-md-block">
-                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(3*(slideCount-1)+1).getSubName()}]]</h1>
+                                                    <h5 style="color: var(--gray-dark);">[[${subjects.get(3*(slideCount-1)+1).getSubName()}]]</h5>
                                                     <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(3*(slideCount-1)+1).getSubDesc()}]]</p>
                                                 </div>
                                             </div>
                                             <div class="col-4 col-md-4" th:if="${lastSlide==0}">
                                                 <div class="w-100 d-md-block">
-                                                    <h1 style="color: var(--gray-dark);">[[${subjects.get(3*(slideCount-1)+2).getSubName()}]]</h1>
+                                                    <h5 style="color: var(--gray-dark);">[[${subjects.get(3*(slideCount-1)+2).getSubName()}]]</h5>
                                                     <p style="color: var(--gray-dark); word-wrap: break-word;">[[${subjects.get(3*(slideCount-1)+2).getSubDesc()}]]</p>
                                                 </div>
                                             </div>

@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <link rel="icon" type="image/png" sizes="16x16" th:href="@{/image/favicon/favicon-16x16.png}">
     <title>Profile Setting</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif">
@@ -47,14 +48,14 @@
                         <div class="pulse animated avatar-bg center"></div>
                     </div>
                     <div style="margin-top: 37px;padding: 0px;padding-bottom: 16px;padding-top: 7px;background: var(--white);border-style: solid;border-color: var(--gray-dark);border-radius: 0px;padding-right: 0px;margin-right: 27px;margin-left: 30px;/*margin: auto;*/">
-                        <button class="btn btn-primary pulse animated" type="button" style="margin: auto;margin-right: 0px;padding: 5px 12px;margin-left: 47px;font-family: 'PT Serif', serif;color: var(--white);background: var(--pink);width: 202.656px;margin-top: 11px;"><a th:href="@{/profile/update/detail}" style="text-decoration: none; color:white"><i class="far fa-user" style="margin-right: 4px;"></i><em>Personal infomation</em></a></button>
+                        <button class="btn btn-primary pulse animated" type="button" style="margin: auto;margin-right: 0px;padding: 5px 12px;margin-left: 47px;font-family: 'PT Serif', serif;color: var(--white);background: var(--pink);width: 202.656px;margin-top: 11px;"><a th:href="@{/profile/update/detail}" style="text-decoration: none; color:white"><i class="far fa-user" style="margin-right: 4px;"></i><em>Personal information</em></a></button>
                         <button class="btn btn-primary pulse animated" type="button" style="margin: auto;margin-right: 0px;padding: 5px 12px;margin-left: 47px;font-family: 'PT Serif', serif;color: var(--white);background: var(--pink);width: 202.656px;margin-top: 11px;"><a th:href="@{/profile/update/security}" style="text-decoration: none; color:white"><i class="fas fa-lock" style="margin-right: 4px;"></i><em>Security Setting</em></a></button>
                         <button class="btn btn-primary pulse animated" type="button" style="margin: auto;margin-right: 0px;padding: 5px 12px;margin-left: 46px;font-family: 'PT Serif', serif;color: var(--white);background: var(--pink);width: 202.656px;margin-top: 13px;"><a th:href="@{/profile/update/cert}" style="text-decoration: none; color:white"><i class="far fa-id-card" style="margin-right: 4px;"></i><em>Skill and Certificates</em></a></button>
                     </div>
                 </div>
                 <div class="col-md-8" style="padding: 38px;background: var(--white);border-radius: 30px;border: 5px solid var(--yellow) ;">
                     <h1>Security Setting</h1>
-                    <div style="text-align: right;"><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#warndeactive">Deactive account</button></div>
+                    <div style="text-align: right;"><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#warndeactive">De-active account</button></div>
                     <div class="form-group"><label><em>Old Password</em><br></label><input class="form-control" id="old-pass" type="password" autocomplete="off" required="" name="oldPass"></div>
                     <div class="form-row">
                         <div class="col-sm-12 col-md-6">
@@ -81,7 +82,7 @@
                 <div class="modal-body">
                     <p>The content of your modal.</p>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><a href="#">Link<button class="btn btn-primary" type="button">Save</button></a></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><a href="#"><button class="btn btn-primary" style="background-color: red" type="button">De-active</button></a></div>
             </div>
         </div>
     </div>

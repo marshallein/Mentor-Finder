@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <link rel="icon" type="image/png" sizes="16x16" th:href="@{/image/favicon/favicon-16x16.png}">
     <title>Mentor Finder</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif">
@@ -98,32 +99,32 @@
                             <div style="height: 120px;">
                                 <div style="padding: 10px;padding-bottom: 0px;padding-top: 0px;">
                                     <div>
-                                        <p style="margin-left: 128px;padding: 16px;border-style: solid;text-align: left;font-size: 20px;width: 423px;">[[${e.getReqId().getMenteeIdFrom().getUName()}]]</p>
+                                        <p style="margin-left: 128px;padding: 16px;border-style: solid;text-align: left;font-size: 20px;width: 423px;">Mentor Name: <span style="color: pink;">[[${e.getReqId().getMenteeIdFrom().getUName()}]]</span></p>
                                     </div>
                                 </div>
                                 <div style="display: inline-block;padding: 10px;margin-left: 26px;border-style: solid;padding-bottom: 0px;">
-                                    <p>[[${e.getReqId().getSubId().getSubName()}]]</p>
+                                    <p>Subject: <span style="color: pink;">[[${e.getReqId().getSubId().getSubName()}]]</span></p>
                                 </div>
                                 <div style="display: inline-block;padding: 10px;margin-left: 46px;border-style: solid;padding-bottom: 0px;">
-                                    <p>[[${e.getReqId().getLevId().getLevName()}]]</p>
+                                    <p>Level: <span style="color: pink;">[[${e.getReqId().getLevId().getLevName()}]]</span></p>
                                 </div>
                             </div>
                             <div>
-                                <div style="text-align: center;padding: 8px;border-style: solid;border-color: var(--gray);margin-top: 28px;">
-                                    <p>[[${e.getReqId().getReqTitle()}]]</p>
+                                <div style="text-align: center;padding: 8px;margin-top: 28px;border-radius: 37px;border-style: none;border-color: var(--gray);box-shadow: 0px 4px var(--gray);background: rgba(0,0,0,0.05);">
+                                    <p style="font-size: 26px;">[[${e.getReqId().getReqTitle()}]]</p>
                                 </div>
                             </div>
                             <div>
-                                <div style="padding: 10px;margin-top: 8px;border-style: solid;border-color: var(--gray);">
+                                <div style="padding: 10px;margin-top: 20px;border-style: solid;border-color: var(--gray);box-shadow: 0px 6px var(--secondary);">
                                     <p>[[${e.getReqId().getReqDesc()}]]</p>
                                 </div>
                             </div>
                             <div style="margin-top: 14px;padding: 14px;text-align: right;">
                                 <div style="display: inline-block;border-style: solid;border-color: var(--gray);">
-                                    <p>[[${e.getStatus()}]]</p>
+                                    <p style="padding: 8px;margin-bottom: 3px;">Status: <span style="color: #ff3399;">[[${e.getStatus()}]]</span></p>
                                 </div>
                                 <div style="display: inline-block;margin-left: 40px;border-style: solid;border-color: var(--gray);">
-                                    <p>[[${format.format(e.getEnrDate())}]]</p>
+                                    <p style="padding: 8px;margin-bottom: 3px;">Date Created: <span style="color: #ff3399;">[[${format.format(e.getEnrDate())}]]</span></p>
                                 </div>
                             </div>
                         </div>

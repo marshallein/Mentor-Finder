@@ -148,6 +148,8 @@ public class AdminController {
                 i++;
             }
         }
+        Enrolled accepted = eSrv.getByRequestAndStatus(a, "ACCEPT");
+        model.addAttribute("Accepted", accepted);
         model.addAttribute("requests", menteeRequest);
         model.addAttribute("MenteeAddress", u.getUAddress());
         model.addAttribute("MenteePhone", u.getUPhoneNumber());
