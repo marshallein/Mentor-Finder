@@ -1,94 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>postregister</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" th:href="@{/css/postregister/checkbox.css}">
-    <link rel="stylesheet" th:href="@{/css/postregister/Navigation-Clean.css}">
-    <link rel="stylesheet" th:href="@{/css/postregister/styles.css}">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <link rel="icon" type="image/png" sizes="16x16" th:href="@{/image/favicon/favicon-16x16.png}">
+        <title>postregister</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+        <link rel="stylesheet" th:href="@{/css/postregister/checkbox.css}">
+        <link rel="stylesheet" th:href="@{/css/postregister/Navigation-Clean.css}">
+        <link rel="stylesheet" th:href="@{/css/postregister/styles.css}">
+    </head>
 
-<body style="background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 121, 205, 0.46) 35.94%, #23049D 100%);">
-    <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
-        <div class="container"><a class="navbar-brand" href="#">Mentor Finder</a>
-            <p>Hello, User!</p>
-        </div>
-    </nav>
-    <div class="container" style="margin-top: 60px;">
-        <form  th:action="@{/post-register}" method="post" th:object=${newUIf}>
-        <div class="row">
-            <div class="col-md-6"><img th:src="@{/image/postregister/Group1070.png}" style="width: 400px;"></div>
-            <div class="col-md-6" style="padding: 23px;background: #ffdc73;box-shadow: 12px 17px 13px;">
-                <p style="font-size: 38px;">Tell Us about Yourself......</p>
-                 
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user" style="font-size: 24px;"></i></span></div><input th:field="*{uName}" type="text" style="width: 400px;" placeholder="Your Name">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar-o" style="font-size: 24px;"></i></span></div><input th:field="*{uDOB}" type="date" style="/*margin-left: 40px;*/width: 173.969px;">
-                </div>
-                <div style="padding-bottom: 10px;">
-                    <p style="margin-bottom: -1px;">Gender:</p>
-                    <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-1" th:field="*{uGender}" value="true"><label class="form-check-label" for="formCheck-1">Male</label></div>
-                    <div class="form-check"><input class="form-check-input" type="radio" id="formCheck-2" th:field="*{uGender}" value="false"><label class="form-check-label" for="formCheck-2">Female</label></div>
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone" style="font-size: 24px;"></i></span></div><input th:field="*{uPhoneNumber}" type="text" style="width: 402px;" placeholder="Your Phone">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-home" style="font-size: 24px;"></i></span></div><input th:field="*{uAddress}" type="text" style="width: 400px;" placeholder="Your Address">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-pencil" style="font-size: 24px;"></i></span></div><input th:field="*{uDescription}" type="text" style="width: 406.781px;" placeholder="Description">
-                </div>
-                <div style="padding: 7px;background: var(--light);margin-top: 10px;border-top-left-radius: 16px;border-top-right-radius: 16px;">
-                    <p style="margin-bottom: 1px;">Accept requests and help other Mentee with your skills and knowledge<br></p><label class="check">Mentor
-  <input th:field="*{uRole}" value="Mentor" type="checkbox">
-  <span class="checkmark"></span>
-</label>
-                </div>
-                <div style="padding: 7px;background: var(--light);margin-top: 10px;border-top-left-radius: 16px;border-top-right-radius: 16px;">
-                    <p style="margin-bottom: 1px;">Create requests and connect to many Mentors around you<br></p><label class="check">Mentee
-  <input th:field="*{uRole}" value="Mentee" type="checkbox">
-  <span class="checkmark"></span>
-</label>
-                </div>
-                <div style="text-align: right;margin-top: 8px;"><button class="btn btn-primary" type="submit" style="text-align: right;background: var(--pink);border-color: var(--red);">Create</button></div>
+    <body style="background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 121, 205, 0.46) 35.94%, #23049D 100%);">
+        <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
+            <div class="container"><a class="navbar-brand" href="#">Mentor Finder</a>
+                <p>Hello, User!</p>
             </div>
-        </div>
-        </form>
-    </div>
-    <footer class="bg-light footer" style="margin-top: 35px;padding: 20px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 text-center text-lg-left my-auto h-100">
-                    <ul class="list-inline mb-2">
-                        <li class="list-inline-item"><a href="#">About</a></li>
-                        <li class="list-inline-item"><span>⋅</span></li>
-                        <li class="list-inline-item"><a href="#">Contact</a></li>
-                        <li class="list-inline-item"><span>⋅</span></li>
-                        <li class="list-inline-item"><a href="#">Terms of &nbsp;Use</a></li>
-                        <li class="list-inline-item"><span>⋅</span></li>
-                        <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-                    </ul>
-                    <p class="text-muted small mb-4 mb-lg-0">© Mentor Finder 2021. All Rights Reserved.</p>
+        </nav>
+        <div class="container" style="margin-top: 60px;">
+            <form  th:action="@{/post-register}" method="post" th:object=${newUIf}>
+                <div class="row">
+                    <div class="col-md-6"><img src="/image/postregister/Group1070.png" style="width: 400px;"></div>
+                    <div class="col-md-6" style="padding: 23px;background: #ffdc73;box-shadow: 12px 17px 13px;">
+                        <p style="font-size: 38px;">Tell Us about Yourself......</p>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-user" style="font-size: 24px;"></i></span></div><input required="" th:field="*{uName}" type="text" style="width: 400px;" placeholder="Your Name">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar-o" style="font-size: 24px;"></i></span></div><input required="" th:field="*{uDOB}" type="date" style="/*margin-left: 40px;*/width: 173.969px;">
+                        </div>
+                        <div style="padding-bottom: 10px;">
+                            <p style="margin-bottom: -1px;">Gender:</p>
+                            <div class="form-check"><input class="form-check-input" type="radio" name="user-gender-radio" required="required" id="formCheck-1" th:field="*{uGender}" value="true"><label class="form-check-label" for="formCheck-1">Male</label></div>
+                            <div class="form-check"><input class="form-check-input" type="radio" name="user-gender-radio" id="formCheck-2" th:field="*{uGender}" value="false"><label class="form-check-label" for="formCheck-2">Female</label></div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone" style="font-size: 24px;"></i></span></div><input th:field="*{uPhoneNumber}" type="text" style="width: 402px;" placeholder="Your Phone">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-home" style="font-size: 24px;"></i></span></div><input th:field="*{uAddress}" type="text" style="width: 400px;" placeholder="Your Address">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-building" style="font-size: 24px;"></i></span></div><input th:field="*{uDescription}" type="text" style="width: 406.781px;" placeholder="Your School/Workplace">
+                        </div>
+                        <div style="padding: 7px;background: var(--light);margin-top: 10px;border-top-left-radius: 16px;border-top-right-radius: 16px;">
+                            <p style="margin-bottom: 1px;">Accept requests and help other Mentee with your skills and knowledge<br></p><label class="check">Mentor
+                                <input th:field="*{uRole}" value="Mentor" name="user-role" required="" type="radio">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div style="padding: 7px;background: var(--light);margin-top: 10px;border-top-left-radius: 16px;border-top-right-radius: 16px;">
+                            <p style="margin-bottom: 1px;">Create requests and connect to many Mentors around you<br></p><label class="check">Mentee
+                                <input th:field="*{uRole}" value="Mentee" name="user-role" type="radio">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div style="text-align: right;margin-top: 8px;"><button class="btn btn-primary" type="submit" style="text-align: right;background: var(--pink);border-color: var(--red);">Create</button></div>
+                    </div>
                 </div>
-                <div class="col-lg-6 text-center text-lg-right my-auto h-100">
-                    <ul class="list-inline mb-0">
-                        <li class="list-inline-item"><a href="#"><i class="fa fa-facebook fa-2x fa-fw"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fa fa-twitter fa-2x fa-fw"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fa fa-instagram fa-2x fa-fw"></i></a></li>
-                    </ul>
+            </form>
+        </div>
+        <footer class="bg-light footer" style="margin-top: 35px;padding: 20px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 text-center text-lg-left my-auto h-100">
+                        <ul class="list-inline mb-2">
+                            <li class="list-inline-item"><a href="#">About</a></li>
+                            <li class="list-inline-item"><span>⋅</span></li>
+                            <li class="list-inline-item"><a href="#">Contact</a></li>
+                            <li class="list-inline-item"><span>⋅</span></li>
+                            <li class="list-inline-item"><a href="#">Terms of &nbsp;Use</a></li>
+                            <li class="list-inline-item"><span>⋅</span></li>
+                            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                        </ul>
+                        <p class="text-muted small mb-4 mb-lg-0">© Mentor Finder 2021. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-right my-auto h-100">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-facebook fa-2x fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-twitter fa-2x fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a href="#"><i class="fa fa-instagram fa-2x fa-fw"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
-</body>
+        </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    </body>
 
 </html>

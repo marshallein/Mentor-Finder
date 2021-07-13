@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Profile Setting</title>
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/image/favicon/favicon-16x16.png}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -30,7 +31,7 @@
             </ul>
             <ul class="navbar-nav flex-column bottom-nav">
                 <li class="nav-item"><a class="nav-link active" th:href="@{/profile/update/detail}">Account Setting</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Log Out</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Log Out</a></li>
             </ul>
         </div>
     </nav>

@@ -4,6 +4,7 @@
     <head>
         <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Mentor Finder</title>
+        <link rel="icon" type="image/png" sizes="16x16" th:href="@{/image/favicon/favicon-16x16.png}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -66,6 +67,9 @@
                                     <div style="padding: 28px;border-width: 3px;border-style: solid;background: #ffffff;margin-top: 24px;margin-bottom: 29px;padding-bottom: 14px;"><img src="/image/mainhomementor/Group%2013.png" style="float: left;height: 112px;">
                                         <p style="display: inline-block;margin-left: 26px;font-size: 15px;width: 452px;min-height: 100px;max-height: 150px;"><br>[[${requests.get(i).getReqDesc()}]]<br><br></p>
                                     </div>
+                                    <div><i class="fas fa-book" style="margin-left: 20px;font-size: 15px;"></i>
+                                        <p style="display: inline-block;margin-left: 10px;font-size: 10px;"> [[${requests.get(i).getSubId().getSubName()}]]</p>
+                                    </div>
                                     <div><i class="fas fa-school" style="margin-left: 20px;font-size: 15px;"></i>
                                         <p style="display: inline-block;margin-left: 10px;font-size: 10px;">[[${requests.get(i).getLevId().getLevName()}]]</p>
                                     </div>
@@ -84,9 +88,12 @@
                         <div class="request-group" th:if="${!requests.isEmpty() && totalItems>=10}" style="display: block">
                             <div th:each="i: ${#numbers.sequence(0, 9)}">
                                 <div style="margin: 10px;padding: 15px;border: solid white 2px;background-color: #FF79CD;">
-                                    <h1>[[${requests.get(i).getReqTitle()}]]</h1>
+                                    <h3 style="padding-left: 11px;">[[${requests.get(i).getReqTitle()}]]</h3>
                                     <div style="padding: 28px;border-width: 3px;border-style: solid;background: #ffffff;margin-top: 24px;margin-bottom: 29px;padding-bottom: 14px;"><img src="/image/mainhomementor/Group%2013.png" style="float: left;height: 112px;">
                                         <p style="display: inline-block;margin-left: 26px;font-size: 15px;width: 452px;min-height: 100px;max-height: 150px;"><br>[[${requests.get(i).getReqDesc()}]]<br><br></p>
+                                    </div>
+                                     <div><i class="fas fa-book" style="margin-left: 20px;font-size: 15px;"></i>
+                                        <p style="display: inline-block;margin-left: 10px;font-size: 10px;"> [[${requests.get(i).getSubId().getSubName()}]]</p>
                                     </div>
                                     <div><i class="fas fa-school" style="margin-left: 20px;font-size: 15px;"></i>
                                         <p style="display: inline-block;margin-left: 10px;font-size: 10px;">[[${requests.get(i).getLevId().getLevName()}]]</p>
@@ -106,9 +113,12 @@
                         <div class="request-group" th:if="${!requests.isEmpty() && totalPages>=3}" th:each="p: ${#numbers.sequence(1, totalPages-2)}" style="display: none">
                             <div th:each="i: ${#numbers.sequence(10*p, 10*p+9)}">
                                 <div style="margin: 10px;padding: 15px;border: solid white 2px;background-color: #FF79CD;">
-                                    <h1>[[${requests.get(i).getReqTitle()}]]</h1>
+                                    <h3 style="padding-left: 11px;">[[${requests.get(i).getReqTitle()}]]</h3>
                                     <div style="padding: 28px;border-width: 3px;border-style: solid;background: #ffffff;margin-top: 24px;margin-bottom: 29px;padding-bottom: 14px;"><img src="/image/mainhomementor/Group%2013.png" style="float: left;height: 112px;">
                                         <p style="display: inline-block;margin-left: 26px;font-size: 15px;width: 452px;min-height: 100px;max-height: 150px;"><br>[[${requests.get(i).getReqDesc()}]]<br><br></p>
+                                    </div>
+                                     <div><i class="fas fa-book" style="margin-left: 20px;font-size: 15px;"></i>
+                                        <p style="display: inline-block;margin-left: 10px;font-size: 10px;"> [[${requests.get(i).getSubId().getSubName()}]]</p>
                                     </div>
                                     <div><i class="fas fa-school" style="margin-left: 20px;font-size: 15px;"></i>
                                         <p style="display: inline-block;margin-left: 10px;font-size: 10px;">[[${requests.get(i).getLevId().getLevName()}]]</p>
@@ -128,9 +138,12 @@
                         <div class="request-group" th:if="${!requests.isEmpty() && totalPages>=2}" style="display: none">
                             <div th:each="i: ${#numbers.sequence(10*(totalPages-1), 10*(totalPages-1)+lastPage-1)}">
                                 <div style="margin: 10px;padding: 15px;border: solid white 2px;background-color: #FF79CD;">
-                                    <h1>[[${requests.get(i).getReqTitle()}]]</h1>
+                                    <h3 style="padding-left: 11px;">[[${requests.get(i).getReqTitle()}]]</h3>
                                     <div style="padding: 28px;border-width: 3px;border-style: solid;background: #ffffff;margin-top: 24px;margin-bottom: 29px;padding-bottom: 14px;"><img src="/image/mainhomementor/Group%2013.png" style="float: left;height: 112px;">
                                         <p style="display: inline-block;margin-left: 26px;font-size: 15px;width: 452px;min-height: 100px;max-height: 150px;"><br>[[${requests.get(i).getReqDesc()}]]<br><br></p>
+                                    </div>
+                                     <div><i class="fas fa-book" style="margin-left: 20px;font-size: 15px;"></i>
+                                        <p style="display: inline-block;margin-left: 10px;font-size: 10px;"> [[${requests.get(i).getSubId().getSubName()}]]</p>
                                     </div>
                                     <div><i class="fas fa-school" style="margin-left: 20px;font-size: 15px;"></i>
                                         <p style="display: inline-block;margin-left: 10px;font-size: 10px;">[[${requests.get(i).getLevId().getLevName()}]]</p>
@@ -163,6 +176,11 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-4">
+                    <a
+                    class="btn btn-outline-primary text-truncate float-none float-sm-none add-another-btn"
+                    data-bss-hover-animate="pulse" th:href="@{/mentor/enrolled/list}"
+                    style="text-decoration: none; color:white;padding: 50px;margin-left: 44px;background: #f4b700;color: var(--dark);margin-top: 16px;font-size: 18px;font-family: 'PT Serif', serif;">See
+                    all Enrolled<i class="fas fa-inbox edit-icon" style="font-size: 25px;"></i></a>
                     <div style="padding: 10px;margin: 10px;border: 4px solid;background-color: white;">
                         <form th:action="@{/mentor}" method="GET">
                             <div class="text-center icon-separator">
@@ -216,10 +234,10 @@
                             <h4 class="modal-title">Confirm</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                         </div>
                         <div class="modal-body">
-                            <p>Enrolled this Request?</p>
+                            <p>Enroll this Request?</p>
                             <input type="text" th:name="reqId" id="reqId" style="display: none">
                         </div>
-                        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                        <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Enroll</button></div>
                     </div>
                 </div>
             </div>

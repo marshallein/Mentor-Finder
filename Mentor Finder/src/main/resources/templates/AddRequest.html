@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>addrequest2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/font/addrequest/fontawesome5-overrides.min.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" th:href="@{/css/addrequest/Multi-step-form.css}">
+    <link rel="stylesheet" th:href="@{/css/addrequest/Off-Canvas-Sidebar-Drawer-Navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/addrequest/Separator-with-icon.css}">
+    <link rel="stylesheet" th:href="@{/css/addrequest/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/addrequest/Team-Clean.css}">
+</head>
+
+<body style="background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 121, 205, 0.46) 35.94%, #23049D 100%);">
+    <nav class="navbar navbar-dark fixed-top bg-dark off-canvas" data-right-drawer="0" data-open-drawer="0">
+        <div class="container-fluid flex-column"><button class="btn btn-dark drawer-knob" type="button" data-open="drawer"><i class="fas fa-bars"></i></button>
+            <div class="d-flex justify-content-between brand-line"><a class="navbar-brand" href="#">Mentor Finder</a><button class="btn btn-dark" type="button" data-dismiss="drawer"><span class="sr-only">Toggle Navigation&nbsp;</span><i class="fas fa-times"></i></button></div>
+            <ul class="navbar-nav flex-column drawer-menu">
+                <li class="nav-item"><a class="nav-link" th:href="@{/home}">Home</a></li>
+                <li class="nav-item" th:if="${is_mentor}"><a class="nav-link" data-bss-hover-animate="pulse" th:href="@{/mentor/enrolled/list}">Enrolled List</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Message<span class="badge badge-primary" style="margin-left: 5px;">42</span></a></li>
+                <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="#">Notification<span class="badge badge-primary" style="margin-left: 5px;">42</span></a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/profile}">Profile</a></li>
+            </ul>
+            <ul class="navbar-nav flex-column bottom-nav">
+                <li class="nav-item"><a class="nav-link" th:href="@{/profile/update/detail}">Account Setting</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Log Out</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container" style="margin-top: 53px;padding-bottom: 15px;border-bottom-width: 1px;border-bottom-style: solid;">
+        <div class="row">
+            <div class="col-md-6 col-xl-3"><img src="/image/addrequest/Group%2013.png" style="padding: 10px;border-right-style: none;width: 187px;"></div>
+            <div class="col-md-6 col-xl-9">
+                <div style="padding: 24px;margin-top: 22px;border-width: 6px;border-style: solid;background: #ffffff;width: 600px;height: 135px;margin-left: 9px;box-shadow: 7px 7px var(--gray);">
+                    <p style="font-family: 'PT Serif', serif;font-size: 46px;">Add request</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div id="multple-step-form-n" class="container overflow-hidden" style="margin-top: 0px;margin-bottom: 10px;padding-bottom: 300px;padding-top: 57px;">
+            <div id="progress-bar-button" class="multisteps-form">
+                <div class="row">
+                    <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
+                        <div class="multisteps-form__progress"><a class="btn multisteps-form__progress-btn js-active" role="button" title="User Info">User Info</a><a class="btn multisteps-form__progress-btn" role="button" title="User Info">About</a><a class="btn multisteps-form__progress-btn"
+                                role="button" title="User Info">Contact&nbsp;</a></div>
+                    </div>
+                </div>
+            </div>
+            <div id="multistep-start-row" class="row">
+                <div id="multistep-start-column" class="col-12 col-lg-8 m-auto">
+                    <form th:action="@{/request/create}" method="post" id="main-form" class="multisteps-form__form">
+                        <div id="single-form-next" class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
+                            <h3 class="text-center multisteps-form__title">Request Description<i class="fas fa-pen-fancy" style="margin-left: 9px;"></i></h3>
+                            <div id="form-content" class="multisteps-form__content">
+                                <div id="input-grp-double" class="form-row mt-4">
+                                    <div class="col-12 col-sm-6"><input class="form-control multisteps-form__input" type="text" placeholder="Title" th:field="${newRq.reqTitle}"></div>
+                                </div>
+                                <div id="input-grp-single" class="form-row mt-4">
+                                    <div class="col-12"><textarea class="form-control" placeholder="Description" th:field="${newRq.reqDesc}"></textarea></div>
+                                </div>
+                                <div id="next-button" class="button-row d-flex mt-4"><button class="btn btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button></div>
+                            </div>
+                        </div>
+                        <div id="single-form-next-prev" class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                            <h3 class="text-center multisteps-form__title">Choose Your Time<i class="fa fa-calendar" style="margin-right: 0px;margin-left: 10px;"></i></h3>
+                            <div id="form-content-1" class="multisteps-form__content">
+                                <div id="input-grp-double-1" class="form-row mt-4">
+                                    <div class="col-12 col-sm-6"><label>Available Days</label>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1" name="dotw" value="Monday"><label class="form-check-label" for="formCheck-1">Monday</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2" name="dotw" value="Tuesday"><label class="form-check-label" for="formCheck-2">Tuesday</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3" name="dotw" value="Wednesday"><label class="form-check-label" for="formCheck-3">Wednesday</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4" name="dotw" value="Thursday"><label class="form-check-label" for="formCheck-4">Thursday</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5" name="dotw" value="Friday"><label class="form-check-label" for="formCheck-5">Friday</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6" name="dotw" value="Saturday"><label class="form-check-label" for="formCheck-6">Saturday</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6" name="dotw" value="Sunday"><label class="form-check-label" for="formCheck-6">Sunday</label></div>
+                                    </div>
+                                    <div class="col-12 col-sm-6"><label>Available Time in Day</label>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1" name="dORn" value="Morning"><label class="form-check-label" for="formCheck-1">Morning</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2" name="dORn" value="Evening"><label class="form-check-label" for="formCheck-2">Evening</label></div>
+                                    </div>
+                                </div>
+                                <div id="next-prev-buttons" class="button-row d-flex mt-4"><button class="btn btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button><button class="btn btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button></div>
+                            </div>
+                        </div>
+                        <div id="single-form-next-prev-1" class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                            <h3 class="text-center multisteps-form__title">Choose additional Informations<i class="fas fa-book" style="margin-left: 9px;"></i></h3>
+                            <div id="form-content-2" class="multisteps-form__content">
+                                <div id="input-grp-double-2" class="form-row mt-4">
+                                    <div class="col-12 col-sm-6"><label>Subject</label><select class="form-control" th:name="subjectId">
+                                            <optgroup label="Subject">
+                                                <option th:each="subject : ${subjectList}" th:value="${subject.subId}" th:text="${subject.getSubName()}"></option>
+                                            </optgroup>
+                                        </select></div>
+                                    <div class="col-12 col-sm-6 mt-4 mt-sm-0"><label>Level</label><select class="form-control" th:name="levelId">
+                                            <optgroup label="Level">
+                                                <option th:each="level : ${levelList}" th:value="${level.levId}" th:text="${level.getLevName()}"></option>
+                                            </optgroup>
+                                        </select></div>
+                                </div>
+                                <div id="next-prev-buttons-1" class="button-row d-flex mt-4"><button class="btn btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button><button class="btn btn btn-primary ml-auto js-btn-next" type="submit" title="Save">Save</button></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-light footer" style="margin-top: 35px;padding: 20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 text-center text-lg-left my-auto h-100">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item"><a href="#">About</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Contact</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Terms of &nbsp;Use</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">© Mentor Finder 2021. All Rights Reserved.</p>
+                </div>
+                <div class="col-lg-6 text-center text-lg-right my-auto h-100">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-facebook fa-2x fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-twitter fa-2x fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-instagram fa-2x fa-fw"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/addrequest/bs-init.js"></script>
+    <script src="/js/addrequest/Off-Canvas-Sidebar-Drawer-Navbar.js"></script>
+    <script src="/js/addrequest/Off-Canvas-Sidebar-Drawer-Navbar-1.js"></script>
+    <script src="/js/addrequest/Multi-step-form.js"></script>
+</body>
+
+</html>
