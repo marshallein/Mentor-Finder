@@ -10,6 +10,7 @@ import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
 import com.abc.WebApp2.service.LoadSubjectAndLevelService;
 import com.abc.WebApp2.service.RequestService;
+import com.abc.WebApp2.service.UserInfoService;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +36,24 @@ public class RequestController {
     @Autowired
     RequestService reqsrv;
     
+    @Autowired
+    UserInfoService uiServ;
+    
     
     @GetMapping("/mentee/request/create")
     public String requestForm(Model model){
-        model.addAttribute("newRq", new Request());
-        model.addAttribute("subjectList", lsals.getAllSubject());
-        model.addAttribute("levelList", lsals.getAllLevel());
-        return "RequestForm";
+        try{
+            UserInfo user = cUES.returnCurrentUser();
+            model.addAttribute("user", user);
+            model.addAttribute("is_mentor", uiServ.isMentor(user));
+            model.addAttribute("newRq", new Request());
+            model.addAttribute("subjectList", lsals.getAllSubject());
+            model.addAttribute("levelList", lsals.getAllLevel());
+            return "AddRequest";
+        }
+        catch (NullPointerException e){
+            return "redirect:/login";
+        }
     }
     
     
@@ -70,14 +82,17 @@ public class RequestController {
             @RequestParam(value = "dORn", required = false) String[] dORn){
         
         StringBuffer sb = new StringBuffer();
-        for(int i = 0; i < dotw.length; i++) {
+        for(int i = 0; i < dotw.length-1; i++) {
             sb.append(dotw[i]);
-            sb.append(" ");
+            sb.append("-");
         }
-         for(int i = 0; i < dORn.length; i++) {
+        sb.append(dotw[dotw.length-1]);
+        sb.append(" / ");
+         for(int i = 0; i < dORn.length-1; i++) {
             sb.append(dORn[i]);
-            sb.append(" ");
+            sb.append("-");
         }
+        sb.append(dORn[dORn.length-1]);
         String str = sb.toString();
         
         System.out.println(subId + " " + levId);
