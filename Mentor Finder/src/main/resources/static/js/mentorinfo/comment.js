@@ -10,14 +10,14 @@ function comment(mentorId, content){
         url: "/comment",
         data: json,
         dataType: "json",
-        success: function(){
+        success: function(event){
             console.log("success");
         },
         error: function(e){
             console.log(e);
         }
 
-    })
+    });
 }
 
 function getComment(){
@@ -45,5 +45,5 @@ function getComment(){
             console.log(e);
         }
 
-    })
+    });
 }

@@ -26,13 +26,14 @@
         <div class="container-fluid flex-column"><button class="btn btn-dark drawer-knob" type="button" data-open="drawer"><i class="fas fa-bars"></i></button>
             <div class="d-flex justify-content-between brand-line"><a class="navbar-brand" href="#">Mentor Finder</a><button class="btn btn-dark" type="button" data-dismiss="drawer"><span class="sr-only">Toggle Navigation&nbsp;</span><i class="fas fa-times"></i></button></div>
             <ul class="navbar-nav flex-column drawer-menu">
-                <li class="nav-item"><a class="nav-link active" data-bss-hover-animate="pulse" th:href="@{/home}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" th:href="@{/home}">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" data-bss-hover-animate="pulse" th:href="@{/mentor/enrolled/list}">Enrolled List</a></li>
                 <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="#">Message<span class="badge badge-primary" style="margin-left: 5px;">42</span></a></li>
                 <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="#">Notification<span class="badge badge-primary" style="margin-left: 5px;">42</span></a></li>
                 <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" th:href="@{/profile}">Profile</a></li>
             </ul>
             <ul class="navbar-nav flex-column bottom-nav">
-                <li class="nav-item"><a class="nav-link active" th:href="@{/profile}">Account Setting</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/profile/update/detail}">Account Setting</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Log Out</a></li>
             </ul>
         </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Profile Setting</title>
+    <title>Mentor Finder</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -22,12 +22,14 @@
         <div class="container-fluid flex-column"><button class="btn btn-dark drawer-knob" type="button" data-open="drawer"><i class="fas fa-bars"></i></button>
             <div class="d-flex justify-content-between brand-line"><a class="navbar-brand" href="#">Mentor Finder</a><button class="btn btn-dark" type="button" data-dismiss="drawer"><span class="sr-only">Toggle Navigation&nbsp;</span><i class="fas fa-times"></i></button></div>
             <ul class="navbar-nav flex-column drawer-menu">
-                <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/home}">Home</a></li>
+                <li class="nav-item" th:if="${is_mentor}"><a class="nav-link" data-bss-hover-animate="pulse" th:href="@{/mentor/enrolled/list}">Enrolled List</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Message<span class="badge badge-primary" style="margin-left: 5px;">42</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="#">Notification<span class="badge badge-primary" style="margin-left: 5px;">42</span></a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/profile}">Profile</a></li>
             </ul>
             <ul class="navbar-nav flex-column bottom-nav">
-                <li class="nav-item"><a class="nav-link active" href="#">Account Setting</a></li>
+                <li class="nav-item"><a class="nav-link active" th:href="@{/profile/update/detail}">Account Setting</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Log Out</a></li>
             </ul>
         </div>
@@ -38,32 +40,37 @@
                 <div class="alert alert-info alert-dismissible absolue center" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span>Profile save with success</span></div>
             </div>
         </div>
-        <form>
+        <form th:action="@{/profile/update}" method="POST">
             <div class="form-row profile-row">
                 <div class="col-md-4 relative">
                     <div class="avatar">
                         <div class="pulse animated avatar-bg center"></div>
                     </div><input class="form-control-file form-control" type="file" name="avatar-file" style="width: 303px;height: 45px;padding: 7px 12px;margin: 6px;margin-top: 27px;margin: auto;">
-                    <div style="margin-top: 37px;padding: 0px;padding-bottom: 16px;padding-top: 7px;background: var(--white);border-style: solid;border-color: var(--gray-dark);border-radius: 0px;padding-right: 0px;margin-right: 27px;margin-left: 30px;/*margin: auto;*/"><button class="btn btn-primary pulse animated" type="button" style="margin: auto;margin-right: 0px;padding: 5px 12px;margin-left: 47px;font-family: 'PT Serif', serif;color: var(--white);background: var(--pink);width: 202.656px;margin-top: 11px;"><i class="far fa-user" style="margin-right: 4px;"></i><em>Personal infomation</em></button><button class="btn btn-primary pulse animated" type="button" style="margin: auto;margin-right: 0px;padding: 5px 12px;margin-left: 47px;font-family: 'PT Serif', serif;color: var(--white);background: var(--pink);width: 202.656px;margin-top: 11px;"><i class="fas fa-lock" style="margin-right: 4px;"></i><em>Security Setting</em></button><button class="btn btn-primary pulse animated" type="button" style="margin: auto;margin-right: 0px;padding: 5px 12px;margin-left: 46px;font-family: 'PT Serif', serif;color: var(--white);background: var(--pink);width: 202.656px;margin-top: 13px;"><i class="far fa-id-card" style="margin-right: 4px;"></i><em>Skill and Certificates</em></button></div>
+                    <div style="margin-top: 37px;padding: 0px;padding-bottom: 16px;padding-top: 7px;background: var(--white);border-style: solid;border-color: var(--gray-dark);border-radius: 0px;padding-right: 0px;margin-right: 27px;margin-left: 30px;/*margin: auto;*/">
+                        <button class="btn btn-primary pulse animated" type="button" style="margin: auto;margin-right: 0px;padding: 5px 12px;margin-left: 47px;font-family: 'PT Serif', serif;color: var(--white);background: var(--pink);width: 202.656px;margin-top: 11px;"><a th:href="@{/profile/update/detail}" style="text-decoration: none; color:white"><i class="far fa-user" style="margin-right: 4px;"></i><em>Personal infomation</em></a></button>
+                        <button class="btn btn-primary pulse animated" type="button" style="margin: auto;margin-right: 0px;padding: 5px 12px;margin-left: 47px;font-family: 'PT Serif', serif;color: var(--white);background: var(--pink);width: 202.656px;margin-top: 11px;"><a th:href="@{/profile/update/security}" style="text-decoration: none; color:white"><i class="fas fa-lock" style="margin-right: 4px;"></i><em>Security Setting</em></a></button>
+                        <button class="btn btn-primary pulse animated" type="button" style="margin: auto;margin-right: 0px;padding: 5px 12px;margin-left: 46px;font-family: 'PT Serif', serif;color: var(--white);background: var(--pink);width: 202.656px;margin-top: 13px;"><a th:href="@{/profile/update/cert}" style="text-decoration: none; color:white"><i class="far fa-id-card" style="margin-right: 4px;"></i><em>Skill and Certificates</em></a></button>
+                    </div>
                 </div>
-                <div class="col-md-8" style="padding: 38px;background: var(--white);border-radius: 30px;border: 5px solid var(--yellow) ;">
+                <div class="col-md-8" style="padding: 38px;background: var(--white);border-radius: 30px;border: 5px solid var(--yellow); margin-top: -110px;">
                     <h1>Personal Information</h1>
                     <hr>
                     <div class="form-row">
                         <div class="col-sm-12 col-md-6">
-                            <div class="form-group"><label><em>Fullname</em></label><input class="form-control" type="text" name="fullname"></div>
+                            <div class="form-group"><label><em>Fullname</em></label><input class="form-control" type="text" id="fullname" name="fullname" th:value="${user.getUName()}"></div>
                         </div>
                         <div class="col-sm-12 col-md-6">
-                            <div class="form-group"><label><em>Your School</em></label><input class="form-control" type="text" name="school"></div>
+                            <div class="form-group"><label><em>Your School</em></label><input class="form-control" type="text" id="school" name="school" th:value="${user.getUDescription()}"></div>
                         </div>
                     </div>
-                    <div class="form-group"><label><em>Email </em></label><input class="form-control" type="email" autocomplete="off" required="" name="email"></div>
+                    <div class="form-group"><label><em>Email </em></label><input class="form-control" type="email" autocomplete="off" required="" id="email" name="email" th:value="${user.getLoginInfo().getLgEmail()}"></div>
+                    <div class="form-group"><label><em>Address </em></label><input class="form-control" type="text" autocomplete="off" id="address" name="address" th:value="${user.getUAddress()}"></div>
                     <div class="form-row">
                         <div class="col-sm-12 col-md-6">
-                            <div class="form-group"><label><em>Telephone</em></label><input class="form-control" type="text" name="telephone"></div>
+                            <div class="form-group"><label><em>Telephone</em></label><input class="form-control" type="text" name="telephone" id="telephone" th:value="${user.getUPhoneNumber()}"></div>
                         </div>
                         <div class="col-sm-12 col-md-6">
-                            <div class="form-group"><label><em>Date of Birth</em></label><input class="form-control" type="date" name="dob"></div>
+                            <div class="form-group"><label><em>Date of Birth</em></label><input class="form-control" type="date" id="dob" name="dob" th:value="${user.getUDOB()}"></div>
                         </div>
                     </div>
                     <hr>
