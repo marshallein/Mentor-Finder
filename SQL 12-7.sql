@@ -181,6 +181,7 @@ INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Java','Java', N'/imag
 INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Python','Python', N'/image/subjectImage/IT.jpg')
 INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('C++','C++', N'/image/subjectImage/IT.jpg')
 INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Spring MVC','Spring MVC', N'/image/subjectImage/IT.jpg')
+INSERT INTO [Subject](subName, subDesc) VALUES ('Other','Other')
 
 INSERT INTO [Level](levName, levDesc) VALUES ('Grade 1', 'Primary School')
 INSERT INTO [Level](levName, levDesc) VALUES ('Grade 2', 'Primary School')
@@ -197,6 +198,7 @@ INSERT INTO [Level](levName, levDesc) VALUES ('Grade 12', 'High School')
 INSERT INTO [Level](levName, levDesc) VALUES ('Freshman', 'University')
 INSERT INTO [Level](levName, levDesc) VALUES ('Sophomore', 'University')
 INSERT INTO [Level](levName, levDesc) VALUES ('Senior', 'University')
+INSERT INTO [Level](levName, levDesc) VALUES ('Other', 'Other')
 Select * from Subject
 Select * From Level
 
