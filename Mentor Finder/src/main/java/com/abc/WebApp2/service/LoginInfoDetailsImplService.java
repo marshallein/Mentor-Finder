@@ -7,6 +7,7 @@ package com.abc.WebApp2.service;
 
 import com.abc.WebApp2.repository.LoginInfoRepository;
 import com.abc.WebApp2.entity.LoginInfo;
+import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.entity.Authorization;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +18,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,6 +52,17 @@ public class LoginInfoDetailsImplService implements UserDetailsService {
                 lgInf.getLgPassword(), grantedAuthorities);
 
         return userDetails;
+    }
+    
+    public boolean changePassword(UserInfo user, String oldPass, String newPass, String reNewPass){
+        LoginInfo lgInfo = user.getLoginInfo();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        
+        // encode password <passwordEncoder.encode(password)>
+        // in the database the password is save as encoded password not raw
+        // return true for success, false for fail
+        // fail if oldPass is correct, reNewPass match newPass
+        return false;
     }
 
 }

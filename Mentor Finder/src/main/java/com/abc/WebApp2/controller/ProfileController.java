@@ -14,10 +14,16 @@ import com.abc.WebApp2.service.CommentService;
 import com.abc.WebApp2.service.UserInfoService;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
 import com.abc.WebApp2.service.EnrolledService;
+import com.abc.WebApp2.service.LoginInfoDetailsImplService;
 import com.abc.WebApp2.service.RequestService;
+import com.google.gson.Gson;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +33,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -46,6 +53,9 @@ public class ProfileController {
     
     @Autowired
     private CommentService comServ;
+    
+    @Autowired
+    private LoginInfoDetailsImplService lgServ;
 
     @GetMapping("/profile/{mentor_id}")
     public String getMentorProfile(@PathVariable("mentor_id") Integer mentor_id, Model model) {
@@ -169,4 +179,89 @@ public class ProfileController {
         uisrv.setUserInfo(uEmail, uName, uDob, uGender, uPhonenumber, uAddress, uDescription);
         return "edit_profile";
     }
+    
+    @PostMapping("/profile/update")
+    @ResponseBody
+    public String updateProfile(
+            @RequestParam(name = "email") String uEmail,
+            @RequestParam(name = "fullname") String uName,
+            @RequestParam(name = "dob") String uDob,
+            @RequestParam(name = "telephone") String uPhonenumber,
+            @RequestParam(name = "address") String uAddress,
+            @RequestParam(name = "school") String uDescription){
+        try {
+            UserInfo user = cUES.returnCurrentUser();
+            uisrv.updateProfile(user, uEmail, uName, new SimpleDateFormat("yyyy-MM-dd").parse(uDob), uPhonenumber, uAddress, uDescription);
+            return toJson(true);
+        }
+        catch (NullPointerException e){
+            return toJson(false);
+        }
+        catch (ParseException e){
+            return toJson(false);
+        }
+    }
+    
+    @PostMapping("/profile/update/password")
+    @ResponseBody
+    public String changePassword(Model model,
+            @RequestParam(name="old_password") String oldPass,
+            @RequestParam(name="new_password") String newPass,
+            @RequestParam(name="re_new_password") String reNewPass){
+        try {
+            UserInfo user = cUES.returnCurrentUser();
+            boolean result = lgServ.changePassword(user, oldPass, newPass, reNewPass);
+            return toJson(result);
+        }
+        catch (NullPointerException e){
+            return toJson(false);
+        }
+    }
+    
+    private String toJson(boolean result){
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("status", result);
+        return new Gson().toJson(map);
+    }
+    
+    
+    @GetMapping("/profile/update/detail")
+    public String profileSettingPage(Model model, String template){
+        try {
+            UserInfo user = cUES.returnCurrentUser();
+            model.addAttribute("user", user);
+            model.addAttribute("is_mentor", uisrv.isMentor(user));
+            return "Personal";
+        }
+        catch (NullPointerException e){
+            return "redirect:/login";
+        }
+    }
+    
+    @GetMapping("/profile/update/security")
+    public String profileSecurityPage(Model model, String template){
+        try {
+            UserInfo user = cUES.returnCurrentUser();
+            model.addAttribute("user", user);
+            model.addAttribute("is_mentor", uisrv.isMentor(user));
+            return "Security";
+        }
+        catch (NullPointerException e){
+            return "redirect:/login";
+        }
+    }
+    
+    @GetMapping("/profile/update/cert")
+    public String profileCertPage(Model model, String template){
+        try {
+            UserInfo user = cUES.returnCurrentUser();
+            model.addAttribute("user", user);
+            model.addAttribute("is_mentor", uisrv.isMentor(user));
+            return "Certificate";
+        }
+        catch (NullPointerException e){
+            return "redirect:/login";
+        }
+    }
+    
 }
