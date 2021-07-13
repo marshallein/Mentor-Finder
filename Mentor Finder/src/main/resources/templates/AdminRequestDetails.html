@@ -317,12 +317,46 @@ i {
                                                             <div class="form-group"><label for="username"><strong>Date Created</strong></label><input readonly="" class="form-control" type="text" id="username" th:value="${DateCreated}"></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="form-group"><label for="email"><strong>Number of enrolled <a href="#showInfo" data-toggle="modal" data-target="#enrolled"><i class="fa fa-eye" style="color: #0062cc"></i></a></strong></label><input readonly="" class="form-control" th:value="${EnrolledNumber}" id="email"></div>
+                                                            <div class="form-group"><label for="email"><strong>Number of enrolled <a href="#enrolled" data-toggle="modal" data-target="#enrolled"><i class="fa fa-eye" style="color: #0062cc"></i></a></strong></label><input readonly="" class="form-control" th:value="${EnrolledNumber}" id="email"></div>
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="col" th:if="${Status}">
-                                                            <div class="form-group"><label for="first_name"><strong>Request Status</strong></label><input readonly="" value="Already found mentor" class="form-control" type="text" id="first_name"></div>
+                                                            <div class="form-group"><label for="first_name"><strong>Request Status <a href="#accepted" data-toggle="modal" data-target="#accepted"><i class="fa fa-eye" style="color: #0062cc"></i></a></strong></label><input readonly="" value="Already found mentor" class="form-control" type="text" id="first_name"></div>
+                                                                            <div role="dialog" tabindex="-1" class="modal fade" id="accepted" >                 
+                                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h4 class="modal-title">Enrolled</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <table class="table my-0" id="dataTable">
+                                                                                                <thead>
+                                                                                                    <th>
+                                                                                                        ID &emsp;
+                                                                                                    </th>
+                                                                                                    <th>
+                                                                                                        Name&emsp;
+                                                                                                    </th>
+                                                                                                    <th>
+                                                                                                        Enrolled Date&emsp;
+                                                                                                    </th>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td th:text="${Accepted.getMentorId().getUId()}"></td>
+                                                                                                        <td th:text="${Accepted.getMentorId().getUName()}"></td>
+                                                                                                        <td th:text="${Accepted.getEnrDate()}"></td>                                    
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>                    
+                </div>
                                                         </div>
                                                          <div class="col" th:unless="${Status}">
                                                             <div class="form-group"><label for="first_name"><strong>Request Status</strong></label><input readonly="" value="Mentor not found yet" class="form-control" type="text" id="first_name"></div>
@@ -373,7 +407,7 @@ i {
                     </div>
                 </div>
                 <div role="dialog" tabindex="-1" class="modal fade" id="enrolled" >
-                    <form th:action="@{/saveRequest}" method="post">
+                    
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -407,8 +441,10 @@ i {
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    
                 </div>
+                
+
                 <footer class="bg-white sticky-footer">
                     <div class="container my-auto">
                         <div class="text-center my-auto copyright"><span>Copyright © Mentor Finder 2021</span></div>
