@@ -1,0 +1,18 @@
+.edit-icon {
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+.add-another-btn {
+  border: 2px solid #FFDF6B;
+  color: #FFDF6B;
+  font-size: 14px;
+  line-height: 1.8em;
+}
+
+.add-another-btn:hover {
+  border: 2px solid #FFDF6B;
+  background: #FFDF6B;
+  color: white;
+}
+

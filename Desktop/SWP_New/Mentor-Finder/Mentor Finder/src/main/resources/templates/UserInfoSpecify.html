@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" th:href="@{bootstrap/postregister/css/bootstrap.min.css}">
+         <link rel="stylesheet" th:href="@{fonts/postregister/font-awesome.min.css}">
+         <link rel="stylesheet" th:href="@{css/postregister/checkbox.css}">
+         <link rel="stylesheet" th:href="@{css/postregister/Navigation-Clean.css}">
+          <link rel="stylesheet" th:href="@{css/postregister/styles.css}">
+    </head>
+    <body style="background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 121, 205, 0.46) 35.94%, #23049D 100%);">
+        <div class="container" style="margin-top: 60px;margin-bottom: 100px;">
+        <div th:object ="${registeredUser}">
+<!--            <p> <span th:text = *{id}> </p>-->
+            <p> <span th:text = ${registeredUser.lgId}> </p>
+            <p> <span th:text = ${registeredUser.lgUsername}> </p>
+            <p> <span th:text = ${registeredUser.lgEmail}> </p>
+            <p> <span th:text = ${registeredUser.lgPassword}> </p>
+        </div>
+        <br> ab <br>
+        
+        
+        <div>Hi, welcome to Mentor Finder!</div> <br>
+        <div>Tell us a little bit about you!:</div> <br>
+
+        <form  th:action="@{/post-register}" method="post" th:object=${newUIf}>
+
+            
+     
+            Your name: <input type="text" th:field="*{uName}" /> <br>
+            DoB: <input type="date" th:field="*{uDOB}" /> <br>
+            Gender: <input type="radio" th:field="*{uGender}" value="true"> Male <br>
+                    <input type="radio" th:field="*{uGender}" value="false"> Female <br>
+            I want to be: <br>
+                <div> 
+                    <input type="radio" th:field="*{uRole}" value="Mentor">  A mentor <br>
+                    Accept requests and help other mentee with your skills and knowledge
+                </div>
+            
+                <div> 
+                    <input type="radio" th:field="*{uRole}" value="Mentee">  A mentee <br>
+                    Create requests and connect to many mentors around you
+                </div>
+            
+            A phone number: (optional)  <input type="tel" th:field="*{uPhoneNumber}"> <br>
+            Your address: (optional)   <input type="text" th:field="*{uAddress}"> <br>
+            Tell us about yourself: (optional) <input type="text" th:field="*{uDescription}"> <br>
+            
+            
+            <input type="submit" value="Let's go" />
+        </form>
+        </div>
+    </body>
+</html>
