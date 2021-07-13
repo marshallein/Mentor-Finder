@@ -68,7 +68,7 @@
                 <div style="background: var(--white);padding: 17px;border-width: 3px;border-style: solid;">
                     <p>Address :&nbsp; [[${user_info.getUAddress()}]]</p>
                     <p>Telephone : [[${user_info.getUPhoneNumber()}]]</p>
-                </div><button class="btn btn-primary" type="button" style="margin: 8px;padding: 5px 12px;background: var(--yellow);border: 3px solid var(--secondary);text-align: center;">Account setting</button>
+                </div><a class="btn btn-primary" th:href="@{/profile/update/detail}" type="button" style="margin: 8px;padding: 5px 12px;background: var(--yellow);border: 3px solid var(--secondary);text-align: center;">Account setting</a>
             </div>
             <div class="col-md-6 col-xl-9" style="margin-top: 23px;">
                 <div th:if="${norequest}" style="padding: 39px;"><img src="/image/profilementee/Group%201071.png" style="height: 378px;display: inline-block;">
