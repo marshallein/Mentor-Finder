@@ -118,16 +118,15 @@ public class EnrolledService {
         if (enr == null) {
             throw new IllegalArgumentException("Illegal Enrolled ID");
         }
-        enr.setStatus(status);
-        save(enr);
         if (status.equalsIgnoreCase("ACCEPT")){
             List<Enrolled> enrList = getAllByRequest(enr.getReqId());
             for(Enrolled e: enrList){
-                if (e.equals(enr)) continue;
                 e.setStatus("REJECT");
                 save(e);
             }
         }
+        enr.setStatus(status);
+        save(enr);
     }
     
     public Enrolled getByRequestAndStatus(Request request, String status){
