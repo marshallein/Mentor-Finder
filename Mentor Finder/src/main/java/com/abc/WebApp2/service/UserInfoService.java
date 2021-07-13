@@ -47,10 +47,12 @@ public class UserInfoService {
         return ui_repo.getById(id);
     }
 
-    public List<UserInfo> findAllMentees() {
-        return ui_repo.findAll();
+    public List<UserInfo> findAllMentees(){
+        String role = "Mentee";
+        return ui_repo.findByuRole(role);
     }
     
+
     public void deleteMentee(int id){
         ui_repo.deleteById(id);
     }
@@ -89,5 +91,16 @@ public class UserInfoService {
             return true;
         }
         return false;
+    }
+    
+    public List<UserInfo> findAllMentors() {
+        String role = "Mentor";
+        return ui_repo.findByuRole(role);
+    }
+    public void deleteMentor(int id){
+        ui_repo.deleteById(id);
+    }
+    public void saveMentor(UserInfo user){
+        ui_repo.save(user);
     }
 }
