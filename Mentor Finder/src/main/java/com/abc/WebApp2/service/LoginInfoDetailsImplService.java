@@ -57,7 +57,14 @@ public class LoginInfoDetailsImplService implements UserDetailsService {
     public boolean changePassword(UserInfo user, String oldPass, String newPass, String reNewPass){
         LoginInfo lgInfo = user.getLoginInfo();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        
+         
+        if(passwordEncoder.matches(oldPass, lgInfo.getLgPassword())){
+            if(newPass.equals(reNewPass)){
+                lgInfo.setLgPassword(passwordEncoder.encode(newPass));
+                loginInfoRepository.save(lgInfo);
+                return true;
+            }
+        }
         // encode password <passwordEncoder.encode(password)>
         // in the database the password is save as encoded password not raw
         // return true for success, false for fail
