@@ -112,9 +112,9 @@ public class RequestController {
         newRq.setReqDateTime(new Date(System.currentTimeMillis()));
         System.out.println(newRq.toString());
         
-        notiServ.createNotification(0, user, user, String.valueOf(newRq.getReqId()));
-        reqsrv.saveNewRequest(newRq);
+        Request req = reqsrv.saveNewRequest(newRq);
         
+        notiServ.createNotification(0, user, user, String.valueOf(req.getReqId()));
         return "redirect:/home";
     }
     
