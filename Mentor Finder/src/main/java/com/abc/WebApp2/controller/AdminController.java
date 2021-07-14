@@ -395,6 +395,11 @@ public class AdminController {
         model.addAttribute("pendingRequest", pendingRequest);
         return "AdminRequestDashboard";
     }
+    
+    @GetMapping("/AdminHome")
+    public String adminHomePage(){
+        return "AdminHome";
+    }
 
     public int countDistinct(int arr[], int n) {
         int res = 1;
