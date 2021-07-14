@@ -12,6 +12,9 @@
     <class>com.abc.WebApp2.entity.UserInfo</class>
     <class>com.abc.WebApp2.entity.LoginInfo</class>
     <class>com.abc.WebApp2.entity.Authorization</class>
+    <class>com.abc.WebApp2.entity.PrivateChatRoom</class>
+    <class>com.abc.WebApp2.entity.PrivateChatRoomMessage</class>
+    <class>com.abc.WebApp2.entity.PrivateChatMessage</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://;databaseName=SWPTEST1"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>
