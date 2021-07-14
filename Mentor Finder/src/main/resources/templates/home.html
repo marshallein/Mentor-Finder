@@ -6,24 +6,14 @@
     </head>
     
     <body>
-   
+        <button id="btn" onclick="">GET NOTIFICATION</button>
         <h1>Result</h1>
-        <div th:object ="${currentUserInfo}">
-<!--            <p> <span th:text = *{id}> </p>-->
-            <p> <span th:text = *{uName}> </p>
-            <p> <span th:text = *{uGender}> </p>
-            <p> <span th:text = *{uRole}> </p>
-            <p> <span th:text = *{uPhoneNumber}> </p>
+        <div id="test">
         </div>
        
-        <br>
-        <br>
-        Add a request:
-        <br>
-        Your Requests:
-        
-      
-        
-        <a th:href ="@{/logout}"> Log Out </a>
+        <script src="/js/usersetting/Test.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

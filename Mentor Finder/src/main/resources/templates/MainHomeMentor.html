@@ -28,7 +28,18 @@
                     <li class="nav-item"><a class="nav-link active" data-bss-hover-animate="pulse" th:href="@{/home}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" th:href="@{/mentor/enrolled/list}">Enrolled List</a></li>
                     <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="#">Message<span class="badge badge-primary" style="margin-left: 5px;">42</span></a></li>
-                    <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="#">Notification<span class="badge badge-primary" style="margin-left: 5px;">42</span></a></li>
+                    <li class="nav-item">
+                        <div class="nav-item dropdown dropright"><a id="noti-dropdown" class="dropdown-toggle" aria-expanded="false" data-toggle="dropdown" href="#" data-display="static" style="text-decoration: none;color: rgb(169,168,168);">Notification<span class="badge badge-primary" id="noti-unread"></span></a>
+                            <div class="dropdown-menu dropdown-menu-right" style="box-shadow: 4px 4px 0px var(--gray);z-index: 1;position: absolute;max-height: 300px;min-height: 50px;  margin-top: -120px">
+                                <h1 class="dropdown-header">Notification</h1>
+                                <div style="overflow-y: auto;max-height: 200px; height:70" id="noti-item">
+                                    
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-item" style="text-align: center;"><a href="#" style="color: var(--pink);">View All Notifications</a></div>
+                            </div>
+                        </div>
+                    </li>
                     <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" th:href="@{/profile}">Profile</a></li>
                 </ul>
                 <ul class="navbar-nav flex-column bottom-nav">
@@ -275,6 +286,16 @@
         <script src="/js/mainhomementor/HomeMentor.js"></script>
         <script src="/js/profilementee/Off-Canvas-Sidebar-Drawer-Navbar.js"></script>
         <script src="/js/profilementee/Off-Canvas-Sidebar-Drawer-Navbar-1.js"></script>
+        <script src="/js/CommonJS.js"></script>
+        <script>
+            $(document).ready(
+                getAllNotification()
+            );
+            $("#noti-dropdown").click(function(){
+                updateNotificationStatus();
+                getAllNotification();
+            });
+        </script>
     </body>
 
 </html>

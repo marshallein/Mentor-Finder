@@ -30,6 +30,9 @@ public class EnrolledService {
     @Autowired
     EnrolledRepository repo;
     
+    @Autowired
+    NotifyService notiServ;
+
     public Enrolled getById(Integer enrId){
         return repo.getById(enrId);
     }
@@ -100,12 +103,13 @@ public class EnrolledService {
         
     }
     
-    public void createEnrolled(UserInfo user, Request request){
+    public Enrolled createEnrolled(UserInfo user, Request request){
         Enrolled enr = new Enrolled();
         enr.setEnrDate(new Date(System.currentTimeMillis()));
         enr.setReqId(request);
         enr.setMentorId(user);
         repo.save(enr);
+        return enr;
     }
     
     public void save(Enrolled enr){
@@ -123,7 +127,13 @@ public class EnrolledService {
             for(Enrolled e: enrList){
                 e.setStatus("REJECT");
                 save(e);
+                notiServ.createNotification(4, e.getMentorId(), e.getReqId().getMenteeIdFrom(), String.valueOf(e.getEnrId()));
             }
+            
+            notiServ.createNotification(3, enr.getMentorId(), enr.getReqId().getMenteeIdFrom(), String.valueOf(enr.getEnrId()));
+        }
+        else {
+            notiServ.createNotification(4, enr.getMentorId(), enr.getReqId().getMenteeIdFrom(), String.valueOf(enr.getEnrId()));
         }
         enr.setStatus(status);
         save(enr);

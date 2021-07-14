@@ -10,6 +10,7 @@ import com.abc.WebApp2.service.CurrentUserExtractorService;
 import com.abc.WebApp2.service.EnrolledService;
 import com.abc.WebApp2.entity.Enrolled;
 import com.abc.WebApp2.entity.Request;
+import com.abc.WebApp2.service.NotifyService;
 import com.abc.WebApp2.service.RequestService;
 import com.google.gson.Gson;
 import java.text.SimpleDateFormat;
@@ -44,6 +45,10 @@ public class EnrolledController {
     
     @Autowired
     RequestService reqServ;
+    
+    @Autowired
+    NotifyService notiServ;
+
     
     @GetMapping(value="/mentor/enrolled/list")
     public String myEnrollList(Model model){
@@ -82,7 +87,10 @@ public class EnrolledController {
             int req = Integer.parseInt(reqId);
             Request request = reqServ.getRequestFromId(req);
             if (request == null) return "redirect:/home";
-            eServ.createEnrolled(user, request);
+            Enrolled enr = eServ.createEnrolled(user, request);
+            
+            notiServ.createNotification(7, request.getMenteeIdFrom(), user, String.valueOf(request.getReqId()));
+            
             return "redirect:/home";
         }
         catch (NullPointerException | NumberFormatException e){
