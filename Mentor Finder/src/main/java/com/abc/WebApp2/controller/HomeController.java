@@ -5,19 +5,15 @@
  */
 package com.abc.WebApp2.controller;
 
-import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
 import com.abc.WebApp2.service.RequestService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -39,10 +35,15 @@ public class HomeController {
         {
             return "redirect:/mentee";
         }
+         else if(uIf.getURole().equals("Admin"))
+        {
+            return "redirect:/AdminHome";
+        }
         else if(uIf.getURole().equals("Mentor"))
         {
             return "redirect:/mentor";
         }
+       
         return "redirect:/login";
     }
 
