@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,10 +36,17 @@ public class Notify implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "notId")
     private Integer notId;
+    
+    //0 for create req, 1 for delete req, 2 for edit req,
+    //3 for accept, 4 for reject, 5 for edit profile, 6 for password change
+    //7 for create enrollment
     @Column(name = "notType")
     private Integer notType;
+    
+    //0 for read, 1 for new
     @Basic(optional = false)
     @Column(name = "notStatus")
     private boolean notStatus;

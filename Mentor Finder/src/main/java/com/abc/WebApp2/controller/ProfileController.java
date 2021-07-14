@@ -15,6 +15,7 @@ import com.abc.WebApp2.service.UserInfoService;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
 import com.abc.WebApp2.service.EnrolledService;
 import com.abc.WebApp2.service.LoginInfoDetailsImplService;
+import com.abc.WebApp2.service.NotifyService;
 import com.abc.WebApp2.service.RequestService;
 import com.google.gson.Gson;
 import java.io.File;
@@ -71,6 +72,9 @@ public class ProfileController {
     
     @Autowired
     private LoginInfoDetailsImplService lgServ;
+    
+    @Autowired
+    NotifyService notiServ;
 
     @GetMapping("/profile/{mentor_id}")
     public String getMentorProfile(@PathVariable("mentor_id") Integer mentor_id, Model model) {
@@ -225,6 +229,9 @@ public class ProfileController {
             uisrv.updateProfile(user, storePath, 
                     uEmail, uName, new SimpleDateFormat("yyyy-MM-dd").parse(uDob),
                     uPhonenumber, uAddress, uDescription);
+            
+            notiServ.createNotification(5, user, user, "profile");
+            
             return toJson(true);
         }
         catch (NullPointerException e){
@@ -247,6 +254,9 @@ public class ProfileController {
         try {
             UserInfo user = cUES.returnCurrentUser();
             boolean result = lgServ.changePassword(user, oldPass, newPass, reNewPass);
+            
+            notiServ.createNotification(6, user, user, "password");
+            
             return toJson(result);
         }
         catch (NullPointerException e){

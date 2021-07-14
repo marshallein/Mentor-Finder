@@ -9,6 +9,7 @@ import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
 import com.abc.WebApp2.service.LoadSubjectAndLevelService;
+import com.abc.WebApp2.service.NotifyService;
 import com.abc.WebApp2.service.RequestService;
 import com.abc.WebApp2.service.UserInfoService;
 import java.util.Date;
@@ -39,6 +40,9 @@ public class RequestController {
     @Autowired
     UserInfoService uiServ;
     
+    @Autowired
+    NotifyService notiServ;
+    
     
     @GetMapping("/mentee/request/create")
     public String requestForm(Model model){
@@ -66,6 +70,8 @@ public class RequestController {
             if (user.equals(mentee)){
                 reqsrv.deleteRequest(reqId);
             }
+            
+            notiServ.createNotification(1, user, user, String.valueOf(request.getReqId()));
             return "redirect:/home";
         }
         catch (NullPointerException e){
@@ -81,6 +87,7 @@ public class RequestController {
             @RequestParam(value = "dotw", required = false) String[] dotw,
             @RequestParam(value = "dORn", required = false) String[] dORn){
         
+        UserInfo user = cUES.returnCurrentUser();
         StringBuffer sb = new StringBuffer();
         for(int i = 0; i < dotw.length-1; i++) {
             sb.append(dotw[i]);
@@ -98,12 +105,14 @@ public class RequestController {
         System.out.println(subId + " " + levId);
         
         
-        newRq.setMenteeIdFrom(cUES.returnCurrentUser());
+        newRq.setMenteeIdFrom(user);
         newRq.setReqAvaiTime(str);
         newRq.setLevId(lsals.findLevelbyId(levId));
         newRq.setSubId(lsals.findSubjectbyId(subId));
         newRq.setReqDateTime(new Date(System.currentTimeMillis()));
         System.out.println(newRq.toString());
+        
+        notiServ.createNotification(0, user, user, String.valueOf(newRq.getReqId()));
         reqsrv.saveNewRequest(newRq);
         
         return "redirect:/home";
