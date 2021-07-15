@@ -133,6 +133,12 @@
                                 </div>
                             </div>
                             <div style="margin-top: 14px;padding: 14px;text-align: right;">
+                                   
+                                <div style="display: inline-block;border-style: solid;border-color: var(--gray);">
+                                    <a th:href="@{'/roomcreate/' +  ${e.getReqId().getMenteeIdFrom().getUId()}}">
+                                        <button id="connectChat" class="btn btn-primary" type="button">Connect Chat</button>        
+                                    </a>  
+                                </div>
                                 <div style="display: inline-block;border-style: solid;border-color: var(--gray);">
                                     <p style="padding: 8px;margin-bottom: 3px;">Status: <span style="color: #ff3399;">[[${e.getStatus()}]]</span></p>
                                 </div>

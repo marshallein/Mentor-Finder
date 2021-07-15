@@ -25,8 +25,5 @@ public interface PrivateChatRoomRepository extends JpaRepository<PrivateChatRoom
     
     @Query("SELECT c FROM PrivateChatRoom c WHERE (c.pcrUser1.uId= ?1) OR (c.pcrUser2.uId= ?1)")
     List<PrivateChatRoom> findAllChatRoomOfThisPeopleOnly(int id1);
-    
-    
-    
-    
+  
 }

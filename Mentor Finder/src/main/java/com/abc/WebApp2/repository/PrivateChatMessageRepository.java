@@ -11,6 +11,7 @@ import com.abc.WebApp2.entity.PrivateChatRoom;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -22,6 +23,7 @@ public interface PrivateChatMessageRepository extends JpaRepository<PrivateChatM
     
     List<PrivateChatMessage> findAllBypmsgDestination(PrivateChatRoom pcr);
 
+    @Nullable
     @Query("SELECT c FROM PrivateChatMessage c WHERE c.pmsgDateTime IN (SELECT MAX(p.pmsgDateTime) FROM PrivateChatMessage p WHERE p.pmsgDestination.pcrId = ?1) AND c.pmsgDestination = ?1")
     PrivateChatMessage grabNewestMessageFromThisRoom(int id);
     

@@ -7,6 +7,7 @@ package com.abc.WebApp2.service;
 
 import com.abc.WebApp2.entity.PrivateChatMessage;
 import com.abc.WebApp2.entity.PrivateChatRoom;
+import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.repository.PrivateChatMessageRepository;
 import com.abc.WebApp2.repository.PrivateChatRoomRepository;
 import java.util.List;
@@ -56,4 +57,8 @@ public class PrivateChatService {
         return pmsgRepo.grabNewestMessageFromThisRoom(roomId);
     }
             
+    public PrivateChatRoom createNewRoom(PrivateChatRoom theRoom)
+    {
+        return pcrRepo.save(theRoom);
+    }
 }

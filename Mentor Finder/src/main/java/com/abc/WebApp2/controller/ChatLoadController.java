@@ -79,8 +79,9 @@ public class ChatLoadController {
                 System.out.println(room.getPcrId());
                 System.out.println(room.getPcrUser1());
                 System.out.println(room.getPcrUser2());
+                
                 PrivateChatMessage lastestMsg = pcs.getLastesMsgOfThisRoom(room.getPcrId());
-                System.out.println(lastestMsg);
+    
                 
                 Map<String, String> roomDisplay = new HashMap<>();
                 if(room.getPcrUser1().getUId() == userId)
@@ -94,11 +95,20 @@ public class ChatLoadController {
                 {
                     roomDisplay.put("theOtherGuyId", room.getPcrUser1().getUId().toString());
                     roomDisplay.put("theOtherGuyAvatar", room.getPcrUser1().getUImage()); 
-                    roomDisplay.put("theOtherGuyName",  room.getPcrUser2().getUName());
+                    roomDisplay.put("theOtherGuyName",  room.getPcrUser1().getUName());
                 }
                 roomDisplay.put("thatRoomId", room.getPcrId().toString());
-                roomDisplay.put("lastMsgContent", lastestMsg.getPmsgContent());
-                roomDisplay.put("lastMsgTime", lastestMsg.getPmsgDateTime().toString());
+                if(lastestMsg == null)
+                {
+                    roomDisplay.put("lastMsgContent", "");
+                    roomDisplay.put("lastMsgTime", "");
+                }
+                else
+                {
+                    roomDisplay.put("lastMsgContent", lastestMsg.getPmsgContent());
+                    roomDisplay.put("lastMsgTime", lastestMsg.getPmsgDateTime().toString());
+                }
+               
                 
                 result.add(roomDisplay);  
             }
