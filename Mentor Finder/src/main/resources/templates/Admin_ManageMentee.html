@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-
+<!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
-
+-->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
     <head>
 
@@ -33,38 +33,7 @@ and open the template in the editor.
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{'/admin'}"><i class="fas "></i>Manage Request</a>
                 </li>
-                <!--<!DOCTYPE html>
-
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
-    <head>
-
-        <title>MANAGE MENTEE</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet"type="text/css" th:href="@{/bootstrap/landingpage/css/bootstrap.min.css}">
-        <link rel="stylesheet"type="text/css" th:href="@{https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic}">
-        <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/fontawesome-all.min.css}">
-        <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/font-awesome.min.css}">
-        <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/simple-line-icons.min.css}">
-        <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/typicons.min.css}">
-        <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/fontawesome5-overrides.min.css}">
-        <link rel="stylesheet"type="text/css" th:href="@{/css/landingpage/Animated-CSS-Waves-Background-SVG.css}">
-             <link rel="stylesheet"type="text/css" th:href="@{/css/landingpage/navbar.css}">
-        <link rel="stylesheet"type="text/css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css}">
-        <link rel="stylesheet"type="text/css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css}">
-    </head>
-    <nav class="navbar navbar-expand-custom navbar-mainbg">
-        <a class="navbar-brand navbar-logo" href="/AdminHome">Mentor Finder</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars text-white"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-               
+                
                 <li class="nav-item">
                     <a class="nav-link" href="javascript:void(0);"><i class="far"></i>Calendar</a>
                 </li>
@@ -109,8 +78,8 @@ and open the template in the editor.
                                     <td th:text="${user.uDescription}">Description</td>
                                     <td th:text="${user.uStatus}">Status</td>
                                     <td style="display: inline-flex">
-                                    <a class="btn btn-primary" data-bss-hover-animate="pulse" type="button" style="background: var(--red);border-color: var(--pink);width: 110.7344px;margin-right: 37px;" th:href="@{'/deactMentee?id=' + ${user.uId}}" onclick= "return confirm('Do you want to delete?');">Delete</a> 
-                                        <a class="btn btn-primary" data-bss-hover-animate="pulse" type="button" style="background: var(--teal);border-color: var(--teal);width: 110.6719px;" th:href="@{'/updateRequest?id='+ ${request.getReqId()}}">Update</a>
+<!--                                    <a class="btn btn-primary" data-bss-hover-animate="pulse" type="button" style="background: var(--red);border-color: var(--pink);width: 110.7344px;margin-right: 37px;" th:href="@{'/deactMentee?id=' + ${user.uId}}" onclick= "return confirm('Do you want to delete?');">Delete</a> 
+                                        <a class="btn btn-primary" data-bss-hover-animate="pulse" type="button" style="background: var(--teal);border-color: var(--teal);width: 110.6719px;" th:href="@{'/updateRequest?id='+ ${request.getReqId()}}">Update</a>-->
                                         <a class="btn btn-primary" data-bss-hover-animate="pulse" type="button" style="background: var(--blue);border-color: var(--blue);width: 110.7344px;margin-right: 37px;" th:href="@{'/updateMentee?id=' + ${user.uId}}">Update</a>
                                         <span th:switch="${user.uStatus}">
                                             <a class="btn btn-primary" data-bss-hover-animate="pulse" type="button" style="background: var(--red);border-color: var(--pink);width: 110.7344px;margin-right: 37px;" th:case="true" th:href="@{'/deactMentee?id=' + ${user.uId}}" onclick= "return confirm('Do you want to deactivate this?');">Deactivate</a>
