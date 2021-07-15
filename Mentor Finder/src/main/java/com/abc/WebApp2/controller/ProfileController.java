@@ -216,13 +216,21 @@ public class ProfileController {
             String filename = file.getOriginalFilename();
             String[] split = filename.split("\\.");
             
+            
+            
             // naming the file to store in the resources
             String newName = user.getLoginInfo().getLgUsername()+"."+split[split.length-1];
             String storePath = "/image/avatar/" + newName;
             if (file.isEmpty()) {
                 storePath = null;
+                
             }
             else {
+                String pathString = "src\\main\\resources\\static\\image\\avatar";
+                Path path = Paths.get(pathString);
+                if (!Files.isDirectory(path)){
+                    Files.createDirectories(path);
+                }
                 // copy the original file to new file in the resources
                 File uploads = new File("src\\main\\resources\\static\\image\\avatar");
                 File fileServer = new File(uploads, newName);
