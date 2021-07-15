@@ -63,16 +63,6 @@ CREATE TABLE Mentor_Subject(
 	subjId int REFERENCES Subject(subId)
 )
 
----CREATE TABLE Request(
-    --reqId int PRIMARY KEY identity(1,1),
-	--menteeId int FOREIGN KEY REFERENCES [User](uId),
-	--subId int FOREIGN KEY REFERENCES Subject(subId),
-	--levId int FOREIGN KEY REFERENCES Level(levId),
-	--reqStatus bit NOT NULL DEFAULT 0,
-	--reqDesc nvarchar(256),
-	--reqDate DATE
---)
-
 CREATE TABLE Request(
      reqId int PRIMARY KEY identity(1,1),
 	 menteeIdFrom int FOREIGN KEY REFERENCES UserInfo(uId),
@@ -90,30 +80,29 @@ CREATE TABLE Enrolled(
     enrId int PRIMARY KEY identity(1,1),
 	reqId int FOREIGN KEY REFERENCES Request(reqId),
 	mentorId int FOREIGN KEY REFERENCES UserInfo(uId),
-	enrDate DATE
+	enrDate DATE,
+	status nvarchar(32) DEFAULT N'NEW'
 )
 
---CREATE TABLE TopicChatRoom(
---  tcrId int PRIMARY KEY identity(1,1),
---  tcrName nvarchar(64)
---)
 
---CREATE TABLE TopicChatRoomMessage(
---  tmsgId int PRIMARY KEY identity(1,1),
---  tmsgUserSent int FOREIGN KEY REFERENCES UserInfo(uId),
---  tmsgContent nvarchar(256),
---  tmsgDestination int FOREIGN KEY REFERENCES TopicChatRoom(tcrId),
---  tmsgDateTime DATETIME
---)
+CREATE TABLE Notify(
+    notId int PRIMARY KEY identity(1,1),
+	notType int,
+	userReceived int  FOREIGN KEY REFERENCES UserInfo(uId),
+	userFrom int FOREIGN KEY REFERENCES UserInfo(uId),
+	notStatus bit NOT NULL DEFAULT 0,
+	notDate DATE,
+	notDesc nvarchar(256)
 
---INSERT INTO TopicChatRoom(tcrName) VALUES ('Math for everyone')
---INSERT INTO TopicChatRoom(tcrName) VALUES ('Literature for everyone')
---INSERT INTO TopicChatRoom(tcrName) VALUES ('English for pro')
+)
 
---SELECT * FrOM TopicChatRoom
---SELECT * FrOM TopicChatRoomMessage
---DROP TABLE TopicChatRoom
---DROP TABLE TopicChatRoomMessage
+CREATE TABLE Comment(
+    comId int PRIMARY KEY identity(1,1),
+	userFrom int FOREIGN KEY REFERENCES UserInfo(uId),
+	userReceived int FOREIGN KEY REFERENCES UserInfo(uId),
+	comContent nvarchar(256),
+	comDate DATE
+)
 
 CREATE TABLE PrivateChatRoom(
   pcrId int PRIMARY KEY identity(1,1),
@@ -135,26 +124,6 @@ SELECT * FROM PrivateChatMessage
 
 SELECT TOP 10 * FROM PrivateChatMessage Where pmsgDestination = 1 and pmsgId < 8 order by pmsgId desc 
 SELECT * FROM PrivateChatMessage c WHERE c.pmsgDateTime IN (SELECT MAX(pmsgDateTime) FROM PrivateChatMessage WHERE pmsgDestination= 1) AND c.pmsgDestination = 1
-
-CREATE TABLE Notify(
-    notId int PRIMARY KEY identity(1,1),
-	notType int,
-	userReceived int  FOREIGN KEY REFERENCES UserInfo(uId),
-	userFrom int FOREIGN KEY REFERENCES UserInfo(uId),
-	notStatus bit NOT NULL DEFAULT 0,
-	notDate DATE,
-	notDesc nvarchar(256)
-
-)
-
-CREATE TABLE Comment(
-    comId int PRIMARY KEY identity(1,1),
-	userFrom int FOREIGN KEY REFERENCES UserInfo(uId),
-	userReceived int FOREIGN KEY REFERENCES UserInfo(uId),
-	comContent nvarchar(256),
-	comDate DATE
-)
-
 
 
 
