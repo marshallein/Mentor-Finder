@@ -6,7 +6,9 @@
 package com.abc.WebApp2.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -41,6 +44,15 @@ import org.springframework.format.annotation.DateTimeFormat;
     , @NamedQuery(name = "UserInfo.findByUDescription", query = "SELECT u FROM UserInfo u WHERE u.uDescription = :uDescription")
     , @NamedQuery(name = "UserInfo.findByUStatus", query = "SELECT u FROM UserInfo u WHERE u.uStatus = :uStatus")})
 public class UserInfo implements Serializable {
+
+    @OneToMany(mappedBy = "pmsgUserSent")
+    private List<PrivateChatMessage> privateChatMessageList;
+    @OneToMany(mappedBy = "pcrUser1")
+    private List<PrivateChatRoom> privateChatRoomList;
+    @OneToMany(mappedBy = "pcrUser2")
+    private List<PrivateChatRoom> privateChatRoomList1;
+
+
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -207,5 +219,30 @@ public class UserInfo implements Serializable {
     public String toString() {
         return "com.abc.WebApp2.entity.UserInfo[ uId=" + uId + " " + loginInfo.toString() +" ]";
     }
-    
+
+    public List<PrivateChatMessage> getPrivateChatMessageList() {
+        return privateChatMessageList;
+    }
+
+    public void setPrivateChatMessageList(List<PrivateChatMessage> privateChatMessageList) {
+        this.privateChatMessageList = privateChatMessageList;
+    }
+
+    public List<PrivateChatRoom> getPrivateChatRoomList() {
+        return privateChatRoomList;
+    }
+
+    public void setPrivateChatRoomList(List<PrivateChatRoom> privateChatRoomList) {
+        this.privateChatRoomList = privateChatRoomList;
+    }
+
+    public List<PrivateChatRoom> getPrivateChatRoomList1() {
+        return privateChatRoomList1;
+    }
+
+    public void setPrivateChatRoomList1(List<PrivateChatRoom> privateChatRoomList1) {
+        this.privateChatRoomList1 = privateChatRoomList1;
+    }
+
 }
+

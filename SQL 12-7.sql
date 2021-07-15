@@ -63,16 +63,6 @@ CREATE TABLE Mentor_Subject(
 	subjId int REFERENCES Subject(subId)
 )
 
----CREATE TABLE Request(
-    --reqId int PRIMARY KEY identity(1,1),
-	--menteeId int FOREIGN KEY REFERENCES [User](uId),
-	--subId int FOREIGN KEY REFERENCES Subject(subId),
-	--levId int FOREIGN KEY REFERENCES Level(levId),
-	--reqStatus bit NOT NULL DEFAULT 0,
-	--reqDesc nvarchar(256),
-	--reqDate DATE
---)
-
 CREATE TABLE Request(
      reqId int PRIMARY KEY identity(1,1),
 	 menteeIdFrom int FOREIGN KEY REFERENCES UserInfo(uId),
@@ -95,20 +85,6 @@ CREATE TABLE Enrolled(
 )
 
 
-CREATE TABLE ChatEndpoints(
-    cEpId int PRIMARY KEY identity(1,1) ,
-    userFrom int FOREIGN KEY REFERENCES UserInfo(uId),
-	userTo int FOREIGN KEY REFERENCES UserInfo(uId)
-)
-
-Create Table Chat(
-    cId int PRIMARY KEY identity(1,1),
-	cUserFrom bit,
-	cEndpId int FOREIGN KEY REFERENCES ChatEndpoints(cEpId),
-	cContent nvarchar(256),
-	cData DATE
-)
-
 CREATE TABLE Notify(
     notId int PRIMARY KEY identity(1,1),
 	notType int,
@@ -128,6 +104,26 @@ CREATE TABLE Comment(
 	comDate DATE
 )
 
+CREATE TABLE PrivateChatRoom(
+  pcrId int PRIMARY KEY identity(1,1),
+  pcrUser1 int FOREIGN KEY REFERENCES UserInfo(uId),
+  pcrUser2 int FOREIGN KEY REFERENCES UserInfo(uId)
+)
+
+CREATE TABLE PrivateChatMessage(
+  pmsgId int PRIMARY KEY identity(1,1),
+  pmsgUserSent int FOREIGN KEY REFERENCES UserInfo(uId),
+  pmsgContent nvarchar(256),
+  pmsgDestination int FOREIGN KEY REFERENCES PrivateChatRoom(pcrId),
+  pmsgDateTime DATETIME
+)
+
+SELECT * FROM PrivateChatRoom
+SELECT * FROM PrivateChatMessage
+
+
+SELECT TOP 10 * FROM PrivateChatMessage Where pmsgDestination = 1 and pmsgId < 8 order by pmsgId desc 
+SELECT * FROM PrivateChatMessage c WHERE c.pmsgDateTime IN (SELECT MAX(pmsgDateTime) FROM PrivateChatMessage WHERE pmsgDestination= 1) AND c.pmsgDestination = 1
 
 
 
@@ -139,6 +135,10 @@ INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('mentee3', 'mentee
 INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('mentor1', 'mentor1@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
 INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('mentor2', 'mentor2@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
 INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('mentor3', 'mentor3@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
+INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('mentortest', 'mentortest@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
+INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('menteetest', 'menteetest@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
+INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('monkeytest', 'monkeytest@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
+
 SELECT * FROM LoginInfo
 
 INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (1,1)
@@ -150,6 +150,9 @@ INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (5,2)
 INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (6,2)
 INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (7,2)
 INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (8,2)
+INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (9,2)
+INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (10,2)
+INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (11,2)
 
 SELECT * FROM LoginInfo_Authorization
 
@@ -164,7 +167,10 @@ INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (6, '
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber, uStatus) VALUES (7, 'Nguyen Tran B', '12/12/2001', 1, 'Mentor', '123456789', 0)
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber, uStatus) VALUES (8, 'Nguyen Tran Thai An', '12/12/2001', 1, 'Mentor', '0923456789', 0)
 
-SELECT * From UserInfo where uId= 1
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (9, 'Mentor Test', '12/12/2001', 1, 'Mentor', '123456789')
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (10, 'Mentee Test', '12/12/2001', 1, 'Mentee', '123456789')
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (11, 'Monkey Test', '12/12/2001', 1, 'Mentee', '123456789')
+
 SELECT * From UserInfo
 
 INSERT INTO [Subject](subName, subDesc, subImage) VALUES ('Math','Mathematics', N'/image/subjectImage/math.jpg')
@@ -197,7 +203,6 @@ INSERT INTO [Level](levName, levDesc) VALUES ('Grade 12', 'High School')
 INSERT INTO [Level](levName, levDesc) VALUES ('Freshman', 'University')
 INSERT INTO [Level](levName, levDesc) VALUES ('Sophomore', 'University')
 INSERT INTO [Level](levName, levDesc) VALUES ('Senior', 'University')
-Select * from Subject
-Select * From Level
 
-Select* From Request
+INSERT INTO PrivateChatRoom(pcrUser1, pcrUser2) VALUES (9, 10)
+INSERT INTO PrivateChatRoom(pcrUser1, pcrUser2) VALUES (11, 9)

@@ -5,9 +5,13 @@
  */
 package com.abc.WebApp2.ws;
 
+import com.abc.WebApp2.entity.PrivateChatMessage;
 import com.abc.WebApp2.model.ChatMessage;
 import com.abc.WebApp2.model.ChatMessage.MessageType;
+import com.abc.WebApp2.service.PrivateChatService;
+import com.abc.WebApp2.service.UserInfoService;
 import static java.lang.String.format;
+import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,49 +27,51 @@ import org.springframework.stereotype.Controller;
  *
  * @author User
  */
-//@Controller
-//public class ChatRoomController {
-//
-//  @Autowired
-//  private SimpMessageSendingOperations messagingTemplate;
-//
-//  @MessageMapping("/chat/{roomId}/sendMessage")
-//  public void sendMessage(@DestinationVariable String roomId, @Payload ChatMessage chatMessage) {
-//    messagingTemplate.convertAndSend(format("/channel/%s", roomId), chatMessage);
-//  }
-//
-//  @MessageMapping("/chat/{roomId}/addUser")
-//  public void addUser(@DestinationVariable String roomId, @Payload ChatMessage chatMessage,
-//      SimpMessageHeaderAccessor headerAccessor) {
-//    String currentRoomId = (String) headerAccessor.getSessionAttributes().put("room_id", roomId);
-//    if (currentRoomId != null) {
-//      ChatMessage leaveMessage = new ChatMessage();
-//      leaveMessage.setType(MessageType.LEAVE);
-//      leaveMessage.setSender(chatMessage.getSender());
-//      messagingTemplate.convertAndSend(format("/channel/%s", currentRoomId), leaveMessage);
-//    }
-//    headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
-//    messagingTemplate.convertAndSend(format("/channel/%s", roomId), chatMessage);
-//  }
     
-    @Controller
+@Controller
 public class ChatRoomMsgController {
 
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-        return chatMessage;
+  private static final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
+
+  @Autowired
+  private SimpMessageSendingOperations messagingTemplate; 
+  
+  @Autowired
+  private PrivateChatService pcServ;
+  
+  @Autowired
+  private UserInfoService uiServ;
+
+  @MessageMapping("/chat/{roomId}/sendMessage")
+  public void sendMessage(@DestinationVariable String roomId, @Payload ChatMessage chatMessage) {
+  
+    Date date = new Date(System.currentTimeMillis());
+    String currentTime =  date.toString();
+    
+    chatMessage.setTime(currentTime);
+    
+    PrivateChatMessage chatmsg = new PrivateChatMessage();
+    chatmsg.setPmsgDestination(pcServ.findChatRoomWithId(Integer.valueOf(roomId)));
+    chatmsg.setPmsgUserSent(uiServ.findUserInfoId(Integer.valueOf(chatMessage.getSender())));
+    chatmsg.setPmsgContent(chatMessage.getContent());
+    chatmsg.setPmsgDateTime(new Date(System.currentTimeMillis()));
+    
+    pcServ.saveChatMessage(chatmsg);
+
+    messagingTemplate.convertAndSend(format("/chatroom/%s", roomId), chatMessage);
+  }
+
+  @MessageMapping("/chat/{roomId}/joinedOnline")
+  public void addUser(@DestinationVariable String roomId, @Payload ChatMessage chatMessage) {
+      
+
+    if (roomId != null) {
+      ChatMessage leaveMessage = new ChatMessage();
+      leaveMessage.setType(MessageType.JOIN );
+      leaveMessage.setSender(chatMessage.getSender());
+      messagingTemplate.convertAndSend(format("/chatroom/%s", roomId), leaveMessage);
     }
 
-    @MessageMapping("/chat.addUser")
-    @SendTo("/topic/public")
-    public ChatMessage addUser(@Payload ChatMessage chatMessage,
-                               SimpMessageHeaderAccessor headerAccessor) {
-        // Add username in web socket session
-        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
-        return chatMessage;
-    }
-
-
-
+    messagingTemplate.convertAndSend(format("/chatroom/%s", roomId), chatMessage);
+  }
 }
