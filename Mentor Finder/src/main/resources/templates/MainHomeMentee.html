@@ -50,7 +50,7 @@
         <div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-xl-4"><img data-aos="fade" src="/image/mainhomementee/Group%2013.png" style="margin: 15px;margin-left: 30px;"></div>
+                    <div class="col-md-6 col-xl-4"><img data-aos="fade" th:src="${user.getUImage()}" style="margin: 15px;margin-left: 30px;width:272px;border: 3px solid var(--purple) ;"></div>
                     <div class="col-md-6">
                         <p style="font-size: 40px; margin-top: 20px;"><em>Welcome back, [[${username}]] !</em><br></p>
                     </div>
@@ -74,9 +74,9 @@
                         <div th:each="request: ${requests}">
                             <div style="margin: 10px;padding: 15px;border: solid white 2px;background-color: #FF79CD;">
                                 <div style="text-align: left;">
-                                <h3 style="padding-left: 11px;">[[${request.getReqTitle()}]]<a href="#" style="font-size: 19px;float: right;"><i class="fas fa-pen" style="font-size: 21px;color: rgb(0,0,0);"></i></a></h3>
+                                <h3 style="padding-left: 11px;">[[${request.getReqTitle()}]]<a th:href="@{'/mentee/request/edit?id=' + ${request.getReqId()}}" style="font-size: 19px;float: right;"><i class="fas fa-pen" style="font-size: 21px;color: rgb(0,0,0);"></i></a></h3>
                                 </div>
-                                <div style="padding: 28px;border-width: 3px;border-style: solid;background: #ffffff;margin-top: 24px;margin-bottom: 29px;padding-bottom: 14px;"><img src="/image/mainhomementee/Group%2013.png" style="float: left;height: 112px;">
+                                <div style="padding: 28px;border-width: 3px;border-style: solid;background: #ffffff;margin-top: 24px;margin-bottom: 29px;padding-bottom: 14px;"><img th:src="${user.getUImage()}" style="float: left;height: 112px;border: 2px solid var(--purple) ;">
                                     <p style="display: inline-block;margin-left: 26px;font-size: 15px;width: 452px;min-height: 100px;max-height: 150px;"><br>[[${request.getReqDesc()}]]<br><br></p>
                                 </div>
                                 <div><i class="fas fa-book" style="margin-left: 20px;font-size: 15px;"></i>

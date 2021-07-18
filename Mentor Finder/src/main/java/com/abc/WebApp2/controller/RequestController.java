@@ -5,14 +5,18 @@
  */
 package com.abc.WebApp2.controller;
 
+import com.abc.WebApp2.entity.Level;
 import com.abc.WebApp2.entity.Request;
+import com.abc.WebApp2.entity.Subject;
 import com.abc.WebApp2.entity.UserInfo;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
 import com.abc.WebApp2.service.LoadSubjectAndLevelService;
 import com.abc.WebApp2.service.NotifyService;
 import com.abc.WebApp2.service.RequestService;
 import com.abc.WebApp2.service.UserInfoService;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -120,17 +124,100 @@ public class RequestController {
     
     
     @GetMapping("/mentee/request/edit")
-    public String editRequestForm(Model model){
+    public String editRequestForm(Model model, @RequestParam(name = "id") Integer requestId) {
+        UserInfo user = cUES.returnCurrentUser();
+
+        List<Subject> listSubject = lsals.getAllSubject();
+        List<Level> listLevel = lsals.getAllLevel();
+
+        Request selectedRequest = reqsrv.getRequestFromId(requestId);
+
+        String availTime = selectedRequest.getReqAvaiTime();
+
+        String[] token = availTime.split("/");
+
+        String[] days = token[0].trim().split("-"); // monday - adasdas / morning - evening
+
+        String[] time = token[1].trim().split("-");
+
+        LinkedHashMap<String, Boolean> timemap = new LinkedHashMap<>();
+        LinkedHashMap<String, Boolean> timemap2 = new LinkedHashMap<>();
+
+        List<String> DaysList = Arrays.asList(days);
+
+        for (String string : DaysList) {
+            string.trim();
+        }
+
+        timemap.put("Monday", DaysList.contains("Monday"));
+        timemap.put("Tuesday", DaysList.contains("Tuesday"));
+        timemap.put("Wednesday", DaysList.contains("Wednesday"));
+        timemap.put("Thursday", DaysList.contains("Thursday"));
+        timemap.put("Friday", DaysList.contains("Friday"));
+        timemap.put("Saturday", DaysList.contains("Saturday"));
+        timemap.put("Sunday", DaysList.contains("Sunday"));
+
+        List<String> TimeList = Arrays.asList(time);
+
+        for (String string : TimeList) {
+            string.trim();
+        }
+
+        timemap2.put("Morning", TimeList.contains("Morning"));
+        timemap2.put("Evening", TimeList.contains("Evening"));
         
-        return "";
+
+        model.addAttribute("selectedRequest", selectedRequest);
+        model.addAttribute("listSubject", listSubject);
+        model.addAttribute("listLevel", listLevel);
+        model.addAttribute("selectedSubject", selectedRequest.getSubId());
+        model.addAttribute("selectedLevel", selectedRequest.getLevId());
+        model.addAttribute("time", timemap2);
+        model.addAttribute("days", timemap);
+        model.addAttribute("user", user);
+
+        return "UpdateRequest";
     }
     
     
     @PostMapping("/request/edit")
-    public String editRequest(@RequestParam(name="editRequest") Integer requestId, Model model){
+    public String editRequest(@ModelAttribute("selectedRequest") Request newRq, Model model,
+            @RequestParam(value = "subjectId") int subId,
+            @RequestParam(value = "levelId") int levId,
+            @RequestParam(value = "dotw", required = false) String[] dotw,
+            @RequestParam(value = "dORn", required = false) String[] dORn,
+            @RequestParam(value = "reqId") String Id) {
         
-        return "";
+        
+        
+        
+        newRq.setReqId(Integer.parseInt(Id));
+        UserInfo user = cUES.returnCurrentUser();
+        newRq.setMenteeIdFrom(user);
+        newRq.setSubId(lsals.findSubjectbyId(subId));
+        newRq.setLevId(lsals.findLevelbyId(levId));
+        
+         StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < dotw.length - 1; i++) {
+            sb.append(dotw[i]);
+            sb.append("-");
+        }
+        sb.append(dotw[dotw.length - 1]);
+        sb.append(" / ");
+        for (int i = 0; i < dORn.length - 1; i++) {
+            sb.append(dORn[i]);
+            sb.append("-");
+        }
+        sb.append(dORn[dORn.length - 1]);
+        String str = sb.toString();
+        
+        newRq.setReqAvaiTime(str);
+        
+        reqsrv.updateRequest(newRq);
+
+        return "redirect:/home";
     }
+
     
     @GetMapping("/request/view")
     public String viewRequest(@RequestParam(value="id") Integer rID, Model model){
