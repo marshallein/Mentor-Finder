@@ -205,7 +205,7 @@ i {
                     <a class="nav-link" href="/admin/dashBoard"><i class="far fa-chart-line"></i>Request Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);"><i class="far"></i>Calendar</a>
+                    <a class="nav-link" href="/AdminCalendar"><i class="far"></i>Calendar</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href ="@{/logout}"><i class="far fa-lock-open"></i>Logout</a>
@@ -251,7 +251,7 @@ i {
                                             <td th:text="${request.reqDesc}"></td>
                                             <td th:text="${request.getReqAvaiTime()}"></td>
                                             <td style="display: inline-flex">
-                                                <a th:href="@{'/deleteRequest?id='+ ${request.getReqId()}}" onclick= "return confirm('Do you want to delete?');"><i class="fa fa-trash" style="margin-left: 15px;color: #FF79CD"></i></a>
+                                                <a th:href="@{'/deleteRequest?id='+ ${request.getReqId()}}" onclick= "return confirm('Notify will be sended to user if you delete this request');"><i class="fa fa-trash" style="margin-left: 15px;color: #FF79CD"></i></a>
                                                 <a href="#showInfo" data-toggle="modal" th:attr="data-target='#edit'+*{request.getMenteeIdFrom().getUId()}"><i class="fa fa-pencil" style="margin-left: 15px;color: #6f42c1"></i></a>
 <!--                                                <a th:href="@{'/updateRequest?id='+ ${request.getReqId()}}" data-toggle="modal" data-target="#editRequest"><i class="fa fa-pencil" style="margin-left: 15px;color: #6f42c1"></i></a>-->
                                                 <a th:href="@{'/viewRequest?id='+ ${request.getReqId()}}"><i class="fa fa-eye" style="margin-left: 15px;color: #0062cc"></i></a>
@@ -306,7 +306,7 @@ i {
                                                             </div> 
                                                         <div class="modal-footer">
                                                             <button style="background-color: #be2617" class="btn btn-light" type="button" data-dismiss="modal">Close</button>
-                                                            <button style="background-color: #17a673" class="btn btn-light" type="submit">Save</button>
+                                                            <button onclick= "return confirm('Notify about update is sended to user');" style="background-color: #17a673" class="btn btn-light" type="submit">Save</button>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -393,7 +393,7 @@ i {
                                 </div>
                                 <div class="modal-footer">
                                     <button style="background-color: #be2617" class="btn btn-light" type="button" data-dismiss="modal">Close</button>
-                                    <button style="background-color: #17a673" class="btn btn-light" type="submit">Save</button>
+                                    <button onclick= "return confirm('Notify has been sended to user !');" style="background-color: #17a673" class="btn btn-light" type="submit">Save</button>
                                 </div>
                             </div>
                         </div>
@@ -425,7 +425,7 @@ i {
                                 </div>
                                 <div class="modal-footer">
                                     <button style="background-color: #be2617" class="btn btn-light" type="button" data-dismiss="modal">Close</button>
-                                    <button style="background-color: #17a673" class="btn btn-light" type="submit">Search</button>
+                                    <button  style="background-color: #17a673" class="btn btn-light" type="submit">Search</button>
                                 </div>
                             </div>
                         </div>
