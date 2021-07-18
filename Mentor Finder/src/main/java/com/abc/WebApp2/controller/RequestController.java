@@ -31,26 +31,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RequestController {
-    
+
     @Autowired
     LoadSubjectAndLevelService lsals;
-    
+
     @Autowired
     CurrentUserExtractorService cUES;
-    
+
     @Autowired
     RequestService reqsrv;
-    
+
     @Autowired
     UserInfoService uiServ;
-    
+
     @Autowired
     NotifyService notiServ;
-    
-    
+
     @GetMapping("/mentee/request/create")
-    public String requestForm(Model model){
-        try{
+    public String requestForm(Model model) {
+        try {
             UserInfo user = cUES.returnCurrentUser();
             model.addAttribute("user", user);
             model.addAttribute("is_mentor", uiServ.isMentor(user));
@@ -58,71 +57,65 @@ public class RequestController {
             model.addAttribute("subjectList", lsals.getAllSubject());
             model.addAttribute("levelList", lsals.getAllLevel());
             return "AddRequest";
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             return "redirect:/login";
         }
     }
-    
-    
+
     @PostMapping("/request/delete")
-    public String deleteRequest(Model model, @RequestParam("reqId") Integer reqId){
-        try{
+    public String deleteRequest(Model model, @RequestParam("reqId") Integer reqId) {
+        try {
             UserInfo user = cUES.returnCurrentUser();
             Request request = reqsrv.getRequestFromId(reqId);
             UserInfo mentee = request.getMenteeIdFrom();
-            if (user.equals(mentee)){
+            if (user.equals(mentee)) {
                 reqsrv.deleteRequest(reqId);
             }
-            
+
             notiServ.createNotification(1, user, user, String.valueOf(request.getReqId()));
             return "redirect:/home";
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             return "redirect:/login";
         }
     }
-    
-    
+
     @PostMapping("/request/create")
     public String createRequest(@ModelAttribute("newRq") Request newRq, Model model,
             @RequestParam(value = "subjectId") int subId,
             @RequestParam(value = "levelId") int levId,
             @RequestParam(value = "dotw", required = false) String[] dotw,
-            @RequestParam(value = "dORn", required = false) String[] dORn){
-        
+            @RequestParam(value = "dORn", required = false) String[] dORn) {
+
         UserInfo user = cUES.returnCurrentUser();
         StringBuffer sb = new StringBuffer();
-        for(int i = 0; i < dotw.length-1; i++) {
+        for (int i = 0; i < dotw.length - 1; i++) {
             sb.append(dotw[i]);
             sb.append("-");
         }
-        sb.append(dotw[dotw.length-1]);
+        sb.append(dotw[dotw.length - 1]);
         sb.append(" / ");
-         for(int i = 0; i < dORn.length-1; i++) {
+        for (int i = 0; i < dORn.length - 1; i++) {
             sb.append(dORn[i]);
             sb.append("-");
         }
-        sb.append(dORn[dORn.length-1]);
+        sb.append(dORn[dORn.length - 1]);
         String str = sb.toString();
-        
+
         System.out.println(subId + " " + levId);
-        
-        
+
         newRq.setMenteeIdFrom(user);
         newRq.setReqAvaiTime(str);
         newRq.setLevId(lsals.findLevelbyId(levId));
         newRq.setSubId(lsals.findSubjectbyId(subId));
         newRq.setReqDateTime(new Date(System.currentTimeMillis()));
         System.out.println(newRq.toString());
-        
+
         Request req = reqsrv.saveNewRequest(newRq);
-        
+
         notiServ.createNotification(0, user, user, String.valueOf(req.getReqId()));
         return "redirect:/home";
     }
-    
-    
+
     @GetMapping("/mentee/request/edit")
     public String editRequestForm(Model model, @RequestParam(name = "id") Integer requestId) {
         UserInfo user = cUES.returnCurrentUser();
@@ -165,7 +158,6 @@ public class RequestController {
 
         timemap2.put("Morning", TimeList.contains("Morning"));
         timemap2.put("Evening", TimeList.contains("Evening"));
-        
 
         model.addAttribute("selectedRequest", selectedRequest);
         model.addAttribute("listSubject", listSubject);
@@ -178,8 +170,7 @@ public class RequestController {
 
         return "UpdateRequest";
     }
-    
-    
+
     @PostMapping("/request/edit")
     public String editRequest(@ModelAttribute("selectedRequest") Request newRq, Model model,
             @RequestParam(value = "subjectId") int subId,
@@ -187,17 +178,14 @@ public class RequestController {
             @RequestParam(value = "dotw", required = false) String[] dotw,
             @RequestParam(value = "dORn", required = false) String[] dORn,
             @RequestParam(value = "reqId") String Id) {
-        
-        
-        
-        
+
         newRq.setReqId(Integer.parseInt(Id));
         UserInfo user = cUES.returnCurrentUser();
         newRq.setMenteeIdFrom(user);
         newRq.setSubId(lsals.findSubjectbyId(subId));
         newRq.setLevId(lsals.findLevelbyId(levId));
-        
-         StringBuffer sb = new StringBuffer();
+
+        StringBuffer sb = new StringBuffer();
         for (int i = 0; i < dotw.length - 1; i++) {
             sb.append(dotw[i]);
             sb.append("-");
@@ -210,20 +198,18 @@ public class RequestController {
         }
         sb.append(dORn[dORn.length - 1]);
         String str = sb.toString();
-        
-        newRq.setReqAvaiTime(str);
-        
-        reqsrv.updateRequest(newRq);
 
+        newRq.setReqAvaiTime(str);
+
+        reqsrv.updateRequest(newRq);
+        notiServ.createNotification(2, user, user, String.valueOf(newRq.getReqId()));
         return "redirect:/home";
     }
 
-    
     @GetMapping("/request/view")
-    public String viewRequest(@RequestParam(value="id") Integer rID, Model model){
-        
+    public String viewRequest(@RequestParam(value = "id") Integer rID, Model model) {
+
         // doan nay su dung RequestParam thay vi PathVariable neu nhu dung cu phap tren
-        
         Request thisRequest = reqsrv.getRequestFromId(rID);
         model.addAttribute("userRealName", thisRequest.getMenteeIdFrom().getUName());
         model.addAttribute("subject", thisRequest.getSubId().getSubName());
@@ -231,5 +217,5 @@ public class RequestController {
         model.addAttribute("request", thisRequest);
         return "RequestView";
     }
-    
+
 }
