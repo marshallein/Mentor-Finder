@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <title>Nura Admin - Dashboard</title>
+    <meta name="description" content="Dashboard | Nura Admin">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Your website">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet"type="text/css" th:href="@{/css/landingpage/AdminDaily.css}">
+        <link rel="stylesheet"type="text/css" th:href="@{/css/landingpage/Chart.min.css}">
+        <link rel="stylesheet"type="text/css" th:href="@{/css/landingpage/datatables.min.css}">
+        <link rel="stylesheet"type="text/css" th:href="@{/css/landingpage/navbar.css}">
+            <link rel="stylesheet"type="text/css" th:href="@{/bootstrap/landingpage/css/bootstrap.min.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic}">
+    <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/fontawesome-all.min.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/font-awesome.min.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/simple-line-icons.min.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/typicons.min.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{/font/landingpage/fontawesome5-overrides.min.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{/css/landingpage/Animated-CSS-Waves-Background-SVG.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css}">
+    <link rel="stylesheet"type="text/css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Font Awesome CSS -->
+   
+</head>
+
+      <nav class="navbar navbar-expand-custom navbar-mainbg">
+        <a class="navbar-brand navbar-logo" href="/AdminHome">Mentor Finder</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars text-white"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/admin'}"><i class="fas "></i>Manage Request</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);"><i class="far"></i>Calendar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href ="@{/logout}"><i class=""></i>Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<body class="adminbody">
+
+
+    <!-- Start content -->
+    <div class="content">
+         <br/> <br/> 
+        <div class="container-fluid">
+
+            <div class="row">
+                <h1 style="text-align: center">Report for [[${Date}]]</h1>
+            </div>
+            <!-- end row -->
+            <br/><br/><br/>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+                    <div class="card-box noradius noborder bg-danger">
+                        <i class="far fa-user float-right text-white"></i>
+                        <h6 class="text-white text-uppercase m-b-20">Requests Created</h6>
+                        <h1 class="m-b-20 text-white counter">[[${RequestToday}]]</h1>
+                        
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+                    <div class="card-box noradius noborder bg-purple">
+                        <i class="fas fa-check-circle float-right text-white"></i>
+                        <h6 class="text-white text-uppercase m-b-20">Request Enrolled</h6>
+                        <h1 class="m-b-20 text-white counter">[[${EnrollToday}]]</h1>
+                        
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+                    <div class="card-box noradius noborder bg-warning">
+                        <i class="fas fa-comment float-right text-white"></i>
+                        <h6 class="text-white text-uppercase m-b-20">Comment Created</h6>
+                        <h1 class="m-b-20 text-white counter">[[${CommentToday}]]</h1>
+                        
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
+                    <div class="card-box noradius noborder bg-info">
+                        <i class="far fa-envelope float-right text-white"></i>
+                        <h6 class="text-white text-uppercase m-b-20">Message Sended</h6>
+                        <h1 class="m-b-20 text-white counter">[[${ChatToday}]]</h1>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-bar"></i> Compare Chart </h3>
+                           Compare the rate of each subject in request between today and this month
+                        </div>
+
+                        <div class="card-body">
+                             <canvas id="comboBarLineChart"></canvas> 
+                        </div>
+                        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                    </div>
+                    <!-- end card-->
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-bar"></i> Chart 2</h3>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non luctus metus. Vivamus fermentum ultricies orci sit amet sollicitudin.
+                        </div>
+
+                        <div class="card-body">
+                             <canvas id="barChart"></canvas> 
+                        </div>
+                        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                    </div>
+                    <!-- end card-->
+                </div>
+            </div>
+            <!-- end row -->
+
+
+
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h3><i class="fas fa-history"></i>Level overview</h3>
+                            Display the percentage of level occur in request 
+                        </div>
+
+                        <div class="card-body">
+                            <p class="font-600 mb-1">Primary School<span class="text-info pull-right"><b>[[${gradeRequest[0]}]]%</b></span></p>
+                            <div class="progress">
+                                <div class="progress-bar progress-xs bg-success" role="progressbar" th:style="'width:'+${gradeRequest[0]}+'%;'" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
+                            <div class="mb-3"></div>
+
+                            <p class="font-600 mb-1">Secondary School <span class="text-primary pull-right"><b>[[${gradeRequest[1]}]]%</b></span></p>
+                            <div class="progress">
+                                <div class="progress-bar progress-xs bg-primary" role="progressbar" th:style="'width:'+${gradeRequest[1]}+'%;'" aria-valuenow="95" aria-valuemin="0" aria-valuemax="95">
+                                </div>
+                            </div>
+
+                            <div class="mb-3"></div>
+
+                            <p class="font-600 mb-1">High School <span class="text-primary pull-right"><b>[[${gradeRequest[2]}]]%</b></span></p>
+                            <div class="progress">
+                                <div class="progress-bar progress-xs bg-primary" role="progressbar" th:style="'width:'+${gradeRequest[2]}+'%;'" aria-valuenow="88" aria-valuemin="0" aria-valuemax="88">
+                                </div>
+                            </div>
+
+                            <div class="mb-3"></div>
+
+                            <p class="font-600 mb-1">University<span class="text-info pull-right"><b>[[${gradeRequest[3]}]]%</b></span>
+                            </p>
+                            <div class="progress">
+                                <div class="progress-bar progress-xs bg-info" role="progressbar" th:style="'width:'+${gradeRequest[3]}+'%;'" aria-valuenow="75" aria-valuemin="0" aria-valuemax="75">
+                                </div>
+                            </div>
+
+                           
+                        </div>
+                        <div class="card-footer small text-muted">Updated today at 11:59 PM</div>
+                    </div>
+                    <!-- end card-->
+                </div>
+
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h3><i class="fas fa-envelope"></i> Latest messages</h3>
+                            Display today message sended
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="widget-messages nicescroll" style="height: 270px;overflow-y: scroll">
+                                <div th:each="message : ${ListChat}">
+                                    <div class="message-item">
+                                        <p class="message-item-user">[[${message.getPmsgUserSent().getUName()}]]</p>
+                                        <p class="message-item-msg">[[${message.getPmsgContent()}]]</p>
+                                        <p class="message-item-date">[[${message.getPmsgDateTime().getHours()}]]:[[${message.getPmsgDateTime().getMinutes()}]]</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                        <div class="card-footer small text-muted">Updated today at 11:59 PM</div>
+                    </div>
+                    <!-- end card-->
+                </div>
+
+                <div class="col-12">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h3><i class="fas fa-user-friends"></i> Request list on [[${Date}]] </h3>
+                            List of request with action 
+                        </div>
+
+                        <div class="card-body">
+
+                            <table class="table table-bordered table-hover display" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Request ID</th>
+                                            <th>From</th>
+                                            <th>Subject</th>
+                                            <th>Level</th>
+                                            <th>Title</th>
+                                            <th>Describe</th>
+                                            <th>Available</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="request : ${requests}">
+                                            <div th:with="someVariable=${0}">
+                                            <td th:text="${request.getReqId()}"></td>
+                                            
+                                            <td><a href="#showInfo" data-toggle="modal" th:attr="data-target='#datauser'+*{request.getMenteeIdFrom().getUId()}" th:data-whatever="${request.getMenteeIdFrom().uName}" th:text="${request.getMenteeIdFrom().uName}"></a></td>
+                                            <td th:text="${request.getSubId().subName}"></td>
+                                            <td th:text="${request.getLevId().levName}"></td>
+                                            <td th:text="${request.reqTitle}"></td>
+                                            <td th:text="${request.reqDesc}"></td>
+                                            <td th:text="${request.getReqAvaiTime()}"></td>
+                                            <td style="display: inline-flex">
+                                                <a th:href="@{'/deleteRequest?id='+ ${request.getReqId()}}" onclick= "return confirm('Do you want to delete?');"><i class="fa fa-trash" style="margin-left: 15px;color: #FF79CD"></i></a>
+                                                <a href="#showInfo" data-toggle="modal" th:attr="data-target='#edit'+*{request.getMenteeIdFrom().getUId()}"><i class="fa fa-pencil" style="margin-left: 15px;color: #6f42c1"></i></a>
+<!--                                                <a th:href="@{'/updateRequest?id='+ ${request.getReqId()}}" data-toggle="modal" data-target="#editRequest"><i class="fa fa-pencil" style="margin-left: 15px;color: #6f42c1"></i></a>-->
+                                                <a th:href="@{'/viewRequest?id='+ ${request.getReqId()}}"><i class="fa fa-eye" style="margin-left: 15px;color: #0062cc"></i></a>
+                                            </td>
+                                            <div role="dialog" tabindex="-1" class="modal fade" th:id="*{'datauser'+{request.getMenteeIdFrom().getUId()}}" >
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">User Details</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Name: [[*{request.getMenteeIdFrom().uName}]]</p>
+                                                        <p>DOB: [[*{request.getMenteeIdFrom().getUDOB()}]]</p>
+                                                        <p>Gender: [[*{request.getMenteeIdFrom().getUGender()}]]</p>
+                                                        <p>Phone: [[*{request.getMenteeIdFrom().getUPhoneNumber()}]]</p>
+                                                        <p>Address: [[*{request.getMenteeIdFrom().getUAddress()}]]</p>
+                                                    </div>
+                                                    <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            
+                                      <div role="dialog" tabindex="-1" class="modal fade" th:id="*{'edit'+{request.getMenteeIdFrom().getUId()}}" >
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <form th:action="@{/updateRequest}" method="post">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Edit Request</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                        </div>
+
+                                                            <div class="modal-body">
+                                                                RequestID:&emsp;<input style="background-color: #b3e4ec" type="text" th:value="${request.reqId}" readonly="" name="id"></br></br>
+                                                                MenteeID:&emsp;
+                                                                <input style="background-color: #b3e4ec" readonly="" type="text" th:name="menteeId" th:value="${request.getMenteeIdFrom().getUId()}"/></br></br>
+                                                                Subject:&emsp;&emsp;&emsp;
+                                                                <select  th:name="subjectId">
+                                                                    <option th:selected hidden th:text="${request.getSubId().subName}" th:value="${request.getSubId().getSubId()}"></option>
+                                                                    <option th:each="subject : ${subjectList}" th:value="${subject.getSubId()}" th:text="${subject.getSubName()}"></option>
+                                                                </select>
+                                                                <select th:name="levelId">
+                                                                    <optgroup>
+                                                                        <option th:selected hidden th:text="${request.getLevId().levName}" th:value="${request.getLevId().getLevId()}"></option>
+                                                                        <option th:each="level : ${levelList}" th:value="${level.levId}" th:text="${level.getLevName()}"></option>
+                                                                    </optgroup>
+                                                                </select></br></br>
+                                                                Title:&emsp;&nbsp;&emsp;&emsp;&emsp;
+                                                                <input type="text" name="title" th:value="${request.reqTitle}"></br></br>
+                                                                    Description:&emsp;
+                                                                    <textarea name="description" th:text="${request.reqDesc}"></textarea></br></br>
+                                                                    Available:&emsp;&emsp;
+                                                                    <input name="available" th:value="${request.getReqAvaiTime()}" type="text">
+                                                            </div> 
+                                                        <div class="modal-footer">
+                                                            <button style="background-color: #be2617" class="btn btn-light" type="button" data-dismiss="modal">Close</button>
+                                                            <button style="background-color: #17a673" class="btn btn-light" type="submit">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        </tr>                                       
+                                    </tbody>    
+                                </table>
+                            <!-- end table-responsive-->
+
+                        </div>
+                        <!-- end card-body-->
+                    </div>
+                    <!-- end card-->
+                </div>
+
+            </div>
+            <!-- end row-->
+
+        </div>
+        <!-- END container-fluid -->
+
+    </div>
+    <!-- END content -->
+
+    </div>
+    <!-- END content-page -->
+
+
+
+    <script src="assets/js/modernizr.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/moment.min.js"></script>
+
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <script src="assets/js/detect.js"></script>
+    <script src="assets/js/fastclick.js"></script>
+    <script src="assets/js/jquery.blockUI.js"></script>
+    <script src="assets/js/jquery.nicescroll.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/admin.js"></script>
+
+    </div>
+     <script src="/js/landingpage/jquery.min.js"></script>
+    <script src="/bootstrap/landingpage/js/bootstrap.min.js"></script>
+    <script src="/js/landingpage/bs-init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="/js/landingpage/Chart.min.js"></script>
+    <script src="/js/landingpage/datatables.min.js"></script>
+    <script src="/js/landingpage/jquery.waypoints.min.js"></script>
+    <script src="/js/landingpage/jquery.counterup.min.js"></script>
+    <script src="/js/landingpage/data_datatables.js"></script>
+<!--    <script src="/js/landingpage/data_charts_dashboard.js"></script>-->
+    
+    
+    <script>
+        // comboBarLineChart
+        
+var ctx_combo_bar = document.getElementById("comboBarLineChart").getContext('2d');
+var comboBarLineChart = new Chart(ctx_combo_bar, {
+		type: 'bar',
+		data: {
+			labels: ["Math", "Literature", "English", "History", "Physics", "Chemistry", "Geography", "Art", "Calculus", "Biology", "Java", "Python","C++","SpringMVC"],
+                        
+			datasets: [{
+                                 
+					type: 'bar',
+					label: 'Today',
+					backgroundColor: '#FF6B8A',
+					data: [10, 11, 7, 5, 9, 13, 10, 16, 7, 8, 12, 5,3,7],
+					borderColor: 'white',
+					borderWidth: 0
+                                        
+				}, {
+					type: 'bar',
+					label: 'This month',
+					backgroundColor: '#059BFF',
+                                        
+					data: [10, 11, 7, 5, 9, 13, 10, 16, 7, 8, 12, 5,7,9],
+
+				}], 
+				borderWidth: 1
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			}
+		}
+});	
+
+
+// barChart
+var ctx_bar_chart = document.getElementById("barChart").getContext('2d');
+var barChart = new Chart(ctx_bar_chart, {
+		type: 'bar',
+		data: {
+			labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+			datasets: [{
+				label: 'Amount received',
+				data: [12, 19, 3, 5, 10, 5, 13, 17, 11, 8, 11, 9],
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)',
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)'				
+				],
+				borderColor: [
+					'rgba(255,99,132,1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)',
+					'rgba(255,99,132,1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)',
+					'rgba(153, 102, 255, 1)',
+					'rgba(255, 159, 64, 1)'
+				],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero:true
+					}
+				}]
+			}
+		}
+});
+
+    </script>
+    <!-- END Java Script for this page -->
+
+</body>
+
+</html>

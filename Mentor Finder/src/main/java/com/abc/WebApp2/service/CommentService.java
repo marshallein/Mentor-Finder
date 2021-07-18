@@ -59,4 +59,8 @@ public class CommentService {
         
     }
     
+    public List<Comment> getAllComment(){
+        return repo.findAll();
+    }
+    
 }

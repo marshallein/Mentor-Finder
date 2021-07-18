@@ -24,5 +24,5 @@ public interface PrivateChatMessageRepository extends JpaRepository<PrivateChatM
 
     @Query("SELECT c FROM PrivateChatMessage c WHERE c.pmsgDateTime IN (SELECT MAX(p.pmsgDateTime) FROM PrivateChatMessage p WHERE p.pmsgDestination.pcrId = ?1) AND c.pmsgDestination = ?1")
     PrivateChatMessage grabNewestMessageFromThisRoom(int id);
-    
+      
 }

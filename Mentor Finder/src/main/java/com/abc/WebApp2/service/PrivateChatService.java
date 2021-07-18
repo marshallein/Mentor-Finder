@@ -55,5 +55,8 @@ public class PrivateChatService {
     {
         return pmsgRepo.grabNewestMessageFromThisRoom(roomId);
     }
-            
+    
+    public List<PrivateChatMessage> getAllMessage(){
+        return pmsgRepo.findAll();
+    }          
 }

@@ -9,6 +9,7 @@ import com.abc.WebApp2.entity.Level;
 import com.abc.WebApp2.entity.Request;
 import com.abc.WebApp2.entity.Subject;
 import com.abc.WebApp2.entity.UserInfo;
+import java.util.Date;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
@@ -31,6 +32,8 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
     List<Request> findBymenteeIdFrom(UserInfo menteeId);
     
     Request findByreqId(int rId);
+    
+    List<Request> findByReqDateTime(Date reqDateTime);
     
     @Nullable
     List<Request> findByLevIdInAndSubIdIn(@Nullable List<Level> levId, @Nullable List<Subject> subId);
