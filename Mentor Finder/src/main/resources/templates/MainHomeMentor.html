@@ -92,6 +92,10 @@
                                         <button id="enrollBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete" onclick="var value = $(this).parent().children('.requestId').val();
                                                                                                                                                         $('#reqId').val(value);
                                                                                                                                                         ">Enroll this Request</button>
+                                        <a th:href="@{'/roomcreate/' +  ${requests.get(i).getMenteeIdFrom().getUId()}}">
+                                        <button id="connectChat" class="btn btn-primary" type="button">Connect Chat</button>     
+                                            
+                                        </a>    
                                     </div>
                                 </div>
                             </div>
@@ -117,6 +121,10 @@
                                         <button id="enrollBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete" onclick="var value = $(this).parent().children('.requestId').val();
                                                                                                                                                         $('#reqId').val(value);
                                                                                                                                                         ">Enroll this Request</button>
+                                        <a th:href="@{'/roomcreate/' +  ${requests.get(i).getMenteeIdFrom().getUId()}}">
+                                        <button id="connectChat" class="btn btn-primary" type="button">Connect Chat</button>        
+                                            
+                                        </a>    
                                     </div>
                                 </div>
                             </div>
@@ -142,6 +150,10 @@
                                         <button id="enrollBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete" onclick="var value = $(this).parent().children('.requestId').val();
                                                                                                                                                         $('#reqId').val(value);
                                                                                                                                                         ">Enroll this Request</button>
+                                        <a th:href="@{'/roomcreate/' +  ${requests.get(i).getMenteeIdFrom().getUId()}}">
+                                        <button id="connectChat" class="btn btn-primary" type="button">Connect Chat</button>    
+                                            
+                                        </a>  
                                     </div> 
                                 </div>
                             </div>
@@ -167,6 +179,10 @@
                                         <button id="enrollBtn" class="btn btn-primary" type="button" data-toggle="modal" data-target="#delete" onclick="var value = $(this).parent().children('.requestId').val();
                                                                                                                                                         $('#reqId').val(value);
                                                                                                                                                         ">Enroll this Request</button>
+                                         <a th:href="@{'/roomcreate/' +  ${requests.get(i).getMenteeIdFrom().getUId()}}">
+                                        <button id="connectChat" class="btn btn-primary" type="button">Connect Chat</button>    
+                                            
+                                        </a>  
                                     </div>
                                 </div>
                             </div>

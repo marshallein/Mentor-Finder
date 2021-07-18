@@ -216,16 +216,30 @@ public class ProfileController {
             String filename = file.getOriginalFilename();
             String[] split = filename.split("\\.");
             
+            
+            
             // naming the file to store in the resources
             String newName = user.getLoginInfo().getLgUsername()+"."+split[split.length-1];
             String storePath = "/image/avatar/" + newName;
-            
-            // copy the original file to new file in the resources
-            File uploads = new File("src\\main\\resources\\static\\image\\avatar");
-            File fileServer = new File(uploads, newName);
-            try (InputStream file_content = file.getInputStream()) {
-                Files.copy(file_content, fileServer.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            if (file.isEmpty()) {
+                storePath = null;
+                
             }
+            else {
+                String pathString = "src\\main\\resources\\static\\image\\avatar";
+                Path path = Paths.get(pathString);
+                if (!Files.isDirectory(path)){
+                    Files.createDirectories(path);
+                }
+                // copy the original file to new file in the resources
+                File uploads = new File("src\\main\\resources\\static\\image\\avatar");
+                File fileServer = new File(uploads, newName);
+                try (InputStream file_content = file.getInputStream()) {
+                    Files.copy(file_content, fileServer.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                }
+            }
+            File checkFile = new File("src\\main\\resources\\static\\image\\avatar\\"+newName);
+            if (!checkFile.exists()) storePath = null;
             uisrv.updateProfile(user, storePath, 
                     uEmail, uName, new SimpleDateFormat("yyyy-MM-dd").parse(uDob),
                     uPhonenumber, uAddress, uDescription);
@@ -235,11 +249,14 @@ public class ProfileController {
             return toJson(true);
         }
         catch (NullPointerException e){
+            Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, e);
             return toJson(false);
         }
         catch (ParseException e){
+            Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, e);
             return toJson(false);
-        } catch (IOException ex) {
+        } 
+        catch (IOException ex) {
             Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
             return toJson(false);
         }

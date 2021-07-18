@@ -56,7 +56,8 @@
             <div class="form-row profile-row">
                 <div class="col-md-4 relative">
                     <div class="avatar">
-                        <div class="pulse animated avatar-bg center" th:style="'background:url('+${user.getUImage()} +'); background-size: cover; background-position:50% 50%'"></div>
+                        <div class="pulse animated avatar-bg center" th:if="${user.getUImage()!=null}" th:style="'background:url('+${user.getUImage()} +'); background-size: cover; background-position:50% 50%'"></div>
+                        <div class="pulse animated avatar-bg center" th:if="${user.getUImage()==null}" th:style="'background-size: cover; background-position:50% 50%'"></div>
                     </div>
                     <div style="margin-top: 37px;padding: 0px;padding-bottom: 16px;padding-top: 7px;background: var(--white);border-style: solid;border-color: var(--gray-dark);border-radius: 0px;padding-right: 0px;margin-right: 27px;margin-left: 30px;/*margin: auto;*/">
                         <button class="btn btn-primary pulse animated" type="button" style="margin: auto;margin-right: 0px;padding: 5px 12px;margin-left: 47px;font-family: 'PT Serif', serif;color: var(--white);background: var(--pink);width: 202.656px;margin-top: 11px;"><a th:href="@{/profile/update/detail}" style="text-decoration: none; color:white"><i class="far fa-user" style="margin-right: 4px;"></i><em>Personal information</em></a></button>

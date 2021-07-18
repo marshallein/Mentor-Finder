@@ -1,4 +1,4 @@
-file(function(){
+(function(){
     function readURL(input) {
 
         if (input.files && input.files[0]) {
@@ -50,7 +50,7 @@ file(function(){
         },1000);
     });
     
-    $('#profile').on('submit', function (e) {
+    $('form#profile-form').submit(function (e) {
         e.preventDefault();
         var form = new FormData($("form#profile-form")[0]);
         var json = {
