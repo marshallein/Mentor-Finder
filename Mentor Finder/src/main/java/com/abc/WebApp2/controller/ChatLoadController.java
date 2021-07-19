@@ -50,6 +50,7 @@ public class ChatLoadController {
                 cMsg.put("content", msg.getPmsgContent());
                 cMsg.put("sender", msg.getPmsgUserSent().getUId().toString());
                 cMsg.put("time", msg.getPmsgDateTime().toString());
+                cMsg.put("avatar", msg.getPmsgUserSent().getUImage());
                 
                 result.add(cMsg);             
             }

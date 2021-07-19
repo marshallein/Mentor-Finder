@@ -65,7 +65,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .exceptionHandling().accessDeniedPage("/403")
                 .and()
                     .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/login2");
+                    .logoutSuccessUrl("/login2")
+                .and()
+                    .rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400);
+            ;
     }
 
 }
