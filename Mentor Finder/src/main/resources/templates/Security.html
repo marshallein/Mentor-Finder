@@ -25,7 +25,7 @@
             <ul class="navbar-nav flex-column drawer-menu">
                 <li class="nav-item"><a class="nav-link" th:href="@{/home}">Home</a></li>
                 <li class="nav-item" th:if="${is_mentor}"><a class="nav-link" data-bss-hover-animate="pulse" th:href="@{/mentor/enrolled/list}">Enrolled List</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Message<span class="badge badge-primary" style="margin-left: 5px;">42</span></a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/chat}">Message<span class="badge badge-primary" style="margin-left: 5px;">42</span></a></li>
                 <li class="nav-item">
                     <div class="nav-item dropdown dropright"><a id="noti-dropdown" class="dropdown-toggle" aria-expanded="false" data-toggle="dropdown" href="#" data-display="static" style="text-decoration: none;color: rgb(169,168,168);">Notification<span class="badge badge-primary" id="noti-unread"></span></a>
                         <div class="dropdown-menu dropdown-menu-right" style="box-shadow: 4px 4px 0px var(--gray);z-index: 1;position: absolute;max-height: 300px;min-height: 100px;  margin-top: -120px">

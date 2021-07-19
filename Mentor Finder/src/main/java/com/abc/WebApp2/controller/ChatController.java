@@ -9,6 +9,7 @@ package com.abc.WebApp2.controller;
 import com.abc.WebApp2.entity.PrivateChatRoom;
 import com.abc.WebApp2.service.CurrentUserExtractorService;
 import com.abc.WebApp2.service.PrivateChatService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,11 +30,21 @@ public class ChatController {
     @Autowired
     PrivateChatService pcServ;
     
-    
+     
     @GetMapping("/chat")
     public String goChat(Model model)
     {
-        return "ChatTemplate_1";
+        List<PrivateChatRoom> listRoom = 
+        pcServ.findAllChatRoomOfThisGuy(cUES.returnCurrentUser().getUId());
+        if (listRoom.size() == 0)
+        {
+            return "ChatTemplate_1";
+        }
+        else
+        {
+            return "redirect:/chat/p/" + listRoom.get(0).getPcrId();
+        }
+    
 
     }
     
@@ -56,7 +67,14 @@ public class ChatController {
         model.addAttribute("roomId", roomId);
         
         PrivateChatRoom thisRoom = pcServ.findChatRoomWithId(roomId);
-        
-        return "ChatTemplate";
+        if((thisRoom.getPcrUser1() != cUES.returnCurrentUser()) && (thisRoom.getPcrUser2() != cUES.returnCurrentUser()))
+        {
+            return "redirect:/chat";
+        }
+        else
+        {
+            return "ChatTemplate";
+        }
+      
     }
 }
