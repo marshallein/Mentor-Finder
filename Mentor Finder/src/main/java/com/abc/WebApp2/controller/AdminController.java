@@ -19,20 +19,24 @@ import com.abc.WebApp2.service.NotifyService;
 import com.abc.WebApp2.service.PrivateChatService;
 import com.abc.WebApp2.service.RequestService;
 import com.abc.WebApp2.service.UserInfoService;
+import com.google.gson.Gson;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -55,18 +59,20 @@ public class AdminController {
 
     @Autowired
     private RequestService rqSr;
-    
+
     @Autowired
     private CommentService cmSrv;
-    
+
     @Autowired
     private PrivateChatService chatSrv;
-    
+
     @Autowired
     private NotifyService notSrv;
-    
+
     @Autowired
     private CurrentUserExtractorService curSrv;
+
+    private String dateCurrent;
 
     @GetMapping("/admin")
     public String showAdminPage(Model model) {
@@ -137,10 +143,10 @@ public class AdminController {
         System.out.println(reqID);
         rqSr.deleteRequest(reqID);
         eSrv.deleteAllEnrolledByRequestID(reqID);
-        Integer notType = 1;      
+        Integer notType = 1;
         UserInfo userFrom = curSrv.returnCurrentUser();
-         String notDesc = Integer.toString(reqID);
-         notSrv.createNotification(notType, userReceived, userFrom, notDesc);
+        String notDesc = Integer.toString(reqID);
+        notSrv.createNotification(notType, userReceived, userFrom, notDesc);
         return "redirect:/admin";
     }
 
@@ -148,6 +154,7 @@ public class AdminController {
     public String dailyReport(@RequestParam(value = "dateChoose") String date, Model model) throws ParseException {
         SimpleDateFormat formatter1 = new SimpleDateFormat("dd-MM-yyyy");
         Date a = formatter1.parse(date);
+        dateCurrent = date;
         List<Request> list = rqSr.getAllRequest();
         List<Enrolled> listEnroll = eSrv.getAllEnrolled();
         List<Comment> listComment = cmSrv.getAllComment();
@@ -157,39 +164,40 @@ public class AdminController {
         int totalRequest = 0;
         int totalEnroll = 0;
         int totalComment = 0;
-        int totalChat =0 ;
+        int totalChat = 0;
         for (Request request : list) {
-            if(request.getReqDateTime().getDate() == a.getDate() && request.getReqDateTime().getMonth() == a.getMonth()){
+            if (request.getReqDateTime().getDate() == a.getDate() && request.getReqDateTime().getMonth() == a.getMonth()) {
                 totalRequest += 1;
                 requestsToday.add(request);
             }
         }
-        
+
         for (Enrolled enrolled : listEnroll) {
-            if(enrolled.getEnrDate().equals(a)){
+            if (enrolled.getEnrDate().equals(a)) {
                 totalEnroll += 1;
             }
         }
-        
+
         for (Comment comment : listComment) {
-            if(comment.getComDate().equals(a)){
-                totalComment +=1;
+            if (comment.getComDate().equals(a)) {
+                totalComment += 1;
             }
         }
         for (PrivateChatMessage privateChatMessage : listChat) {
-            if(privateChatMessage.getPmsgDateTime().getDate() == a.getDate() && privateChatMessage.getPmsgDateTime().getMonth() == a.getMonth()){
+            if (privateChatMessage.getPmsgDateTime().getDate() == a.getDate() && privateChatMessage.getPmsgDateTime().getMonth() == a.getMonth()) {
                 totalChat += 1;
                 listChatToday.add(privateChatMessage);
-                
+
             }
         }
-        
+
         int[] gradeRequest = gradeRequest(requestsToday);
         for (int i : gradeRequest) {
             System.out.println(i);
         }
-        
-        
+
+        int[] data = {10, 11, 7, 5, 9, 13, 10, 16, 7, 8, 12, 5, 3, 7};
+
         model.addAttribute("requests", requestsToday);
         model.addAttribute("subjectList", subAndSer.getAllSubject());
         model.addAttribute("levelList", subAndSer.getAllLevel());
@@ -202,6 +210,48 @@ public class AdminController {
         model.addAttribute("RequestToday", totalRequest);
         return "AdminDailyReport";
     }
+
+    @GetMapping(value = "/checkData", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String dataChart() throws ParseException {
+        SimpleDateFormat formatter1 = new SimpleDateFormat("dd-MM-yyyy");
+        Date a = formatter1.parse(dateCurrent);
+
+        List<Request> list = rqSr.getAllRequest();
+        List<Request> requestsToday = new ArrayList<>();
+        List<Request> requestsThisMonth = new ArrayList<>();
+        for (Request request : list) {
+            if (request.getReqDateTime().getDate() == a.getDate() && request.getReqDateTime().getMonth() == a.getMonth()) {
+                requestsToday.add(request);
+            }
+        }
+        for (Request request : list) {
+            if (request.getReqDateTime().getMonth() == a.getMonth()) {
+                requestsThisMonth.add(request);
+            }
+        }
+        int[] dataToday = numberOfSubjectInRequests(requestsToday);
+        int[] dataMonth = numberOfSubjectInRequests(requestsThisMonth);
+        int[] data = new int[28];
+        int count = 14;
+        for (int i = 0; i < dataToday.length; i++) {
+            data[i] = dataToday[i];
+        }
+        for (int i = 0; i < dataMonth.length; i++) {
+            data[count] = dataMonth[i];
+            count ++;
+        }
+        return new Gson().toJson(data);
+    }
+
+    @GetMapping(value = "/checkData2", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String dataChart2() {
+        Integer[] data = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        List<Integer> data2 = Arrays.asList(data);
+        return new Gson().toJson(data);
+    }
+
 //    
 //    @GetMapping("/updateRequest")
 //    public String updateRequest(@RequestParam(value = "id") int reqID, Model model) {
@@ -211,7 +261,6 @@ public class AdminController {
 //        model.addAttribute("Request", a);
 //        return "AdminUpdateRequest";
 //    }
-
     @GetMapping("/viewRequest")
     public String viewRequestDetail(@RequestParam(value = "id") int reqID, Model model) {
         Request a = rqSr.getRequestFromId(reqID);
@@ -303,7 +352,7 @@ public class AdminController {
                 }
             }
         }
-        int pageSize = 8;
+        int pageSize = 15;
         Page<Request> page = aSrv.findPaginated(pageNo, pageSize);
         List<Request> listRequest = page.getContent();
         model.addAttribute("currentPage", pageNo);
@@ -469,7 +518,7 @@ public class AdminController {
 //        for (int j : requestPerMonth) {
 //            System.out.println(j);
 //        }
-        int[] subjectRequest = numberOfSubjectInRequests();
+        int[] subjectRequest = numberOfSubjectInRequests(all);
 //        for (int j : subjectRequest) {
 //            System.out.println(j);
 //        }
@@ -559,12 +608,12 @@ public class AdminController {
         return a;
     }
 
-    public int[] numberOfSubjectInRequests() {
+    public int[] numberOfSubjectInRequests(List<Request> all) {
         //0:math || 1:literature || 2:english || 3:history || 
         //4:physic || 5:chemistry || 6:geography || 7:art || 8:calculus
         //9: Biology || 10: Java || 11:Python || 12:C++ || 13:SpringMvc
         int a[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        List<Request> all = aSrv.getAllRequest();
+
         for (Request request : all) {
             if (request.getSubId().getSubName().equalsIgnoreCase("Math")) {
                 a[0] = a[0] + 1;
@@ -578,7 +627,7 @@ public class AdminController {
             if (request.getSubId().getSubName().equalsIgnoreCase("History")) {
                 a[3] = a[3] + 1;
             }
-            if (request.getSubId().getSubName().equalsIgnoreCase("Physic")) {
+            if (request.getSubId().getSubName().equalsIgnoreCase("Physics")) {
                 a[4] = a[4] + 1;
             }
             if (request.getSubId().getSubName().equalsIgnoreCase("Chemistry")) {
@@ -617,7 +666,7 @@ public class AdminController {
 
     public int[] gradeRequest(List<Request> all) {
         int a[] = {0, 0, 0, 0};
-        int totalRequest = all.size();        
+        int totalRequest = all.size();
         for (Request request : all) {
             if (request.getLevId().getLevDesc().equalsIgnoreCase("Primary School")) {
                 a[0] = a[0] + 1;
