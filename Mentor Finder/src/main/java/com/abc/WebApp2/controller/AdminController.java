@@ -187,7 +187,6 @@ public class AdminController {
             if (privateChatMessage.getPmsgDateTime().getDate() == a.getDate() && privateChatMessage.getPmsgDateTime().getMonth() == a.getMonth()) {
                 totalChat += 1;
                 listChatToday.add(privateChatMessage);
-
             }
         }
 
@@ -195,9 +194,6 @@ public class AdminController {
         for (int i : gradeRequest) {
             System.out.println(i);
         }
-
-        int[] data = {10, 11, 7, 5, 9, 13, 10, 16, 7, 8, 12, 5, 3, 7};
-
         model.addAttribute("requests", requestsToday);
         model.addAttribute("subjectList", subAndSer.getAllSubject());
         model.addAttribute("levelList", subAndSer.getAllLevel());
@@ -210,6 +206,8 @@ public class AdminController {
         model.addAttribute("RequestToday", totalRequest);
         return "AdminDailyReport";
     }
+    
+    
 
     @GetMapping(value = "/checkData", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -246,10 +244,63 @@ public class AdminController {
 
     @GetMapping(value = "/checkData2", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String dataChart2() {
-        Integer[] data = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-        List<Integer> data2 = Arrays.asList(data);
+    public String dataChart2() throws ParseException {
+        SimpleDateFormat formatter1 = new SimpleDateFormat("dd-MM-yyyy");
+        Date a = formatter1.parse(dateCurrent);
+       
+        List<PrivateChatMessage> listChat = chatSrv.getAllMessage();
+        List<PrivateChatMessage> listChatToday = new ArrayList<>();
+        for (PrivateChatMessage privateChatMessage : listChat) {
+            if (privateChatMessage.getPmsgDateTime().getDate() == a.getDate() && privateChatMessage.getPmsgDateTime().getMonth() == a.getMonth()) {
+                
+                listChatToday.add(privateChatMessage);
+            }
+        }
+        int[] data = numberOfMessagePerHours(listChatToday, a);
         return new Gson().toJson(data);
+    }
+    
+    public int[] numberOfMessagePerHours(List<PrivateChatMessage> listChat, Date a){
+        int[] data = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        for (PrivateChatMessage privateChatMessage : listChat) {
+            if(privateChatMessage.getPmsgDateTime().getHours() == 0 || privateChatMessage.getPmsgDateTime().getHours() == 1){
+                data[0] = data[0] + 1;
+            }
+            if(privateChatMessage.getPmsgDateTime().getHours() == 2 || privateChatMessage.getPmsgDateTime().getHours() == 3){
+                data[1] = data[1] + 1;
+            }
+            if(privateChatMessage.getPmsgDateTime().getHours() == 4 || privateChatMessage.getPmsgDateTime().getHours() == 5){
+                data[2] = data[2] + 1;
+            }
+            if(privateChatMessage.getPmsgDateTime().getHours() == 6 || privateChatMessage.getPmsgDateTime().getHours() == 7){
+                data[3] = data[3] + 1;
+            }
+            if(privateChatMessage.getPmsgDateTime().getHours() == 8 || privateChatMessage.getPmsgDateTime().getHours() == 9){
+                data[4] = data[4] + 1;
+            }
+            if(privateChatMessage.getPmsgDateTime().getHours() == 10 || privateChatMessage.getPmsgDateTime().getHours() == 11){
+                data[5] = data[5] + 1;
+            }
+            if(privateChatMessage.getPmsgDateTime().getHours() == 12 || privateChatMessage.getPmsgDateTime().getHours() == 13){
+                data[6] = data[6] + 1;
+            }
+            if(privateChatMessage.getPmsgDateTime().getHours() == 14 || privateChatMessage.getPmsgDateTime().getHours() == 15){
+                data[7] = data[7] + 1;
+            }
+            if(privateChatMessage.getPmsgDateTime().getHours() == 16 || privateChatMessage.getPmsgDateTime().getHours() == 17){
+                data[8] = data[8] + 1;
+            }
+            if(privateChatMessage.getPmsgDateTime().getHours() == 18 || privateChatMessage.getPmsgDateTime().getHours() == 19){
+                data[9] = data[9] + 1;
+            }
+            if(privateChatMessage.getPmsgDateTime().getHours() == 20 || privateChatMessage.getPmsgDateTime().getHours() == 21){
+                data[10] = data[10] + 1;
+            }
+            if(privateChatMessage.getPmsgDateTime().getHours() == 22 || privateChatMessage.getPmsgDateTime().getHours() == 23){
+                data[11] = data[11] + 1;
+            }
+        }
+        return data;
     }
 
 //    
