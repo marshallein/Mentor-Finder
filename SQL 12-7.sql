@@ -7,7 +7,8 @@ CREATE TABLE LoginInfo(
 	lgId int PRIMARY KEY identity(1,1),
 	lgUsername nvarchar(15) NOT NULL UNIQUE,
 	lgEmail nvarchar(255) NOT NULL UNIQUE,
-	lgPassword varchar(60) NOT NULL
+	lgPassword varchar(60) NOT NULL,
+	reset_password_token varchar(30)
 )
 
 CREATE TABLE [Authorization](
