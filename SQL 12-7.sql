@@ -8,7 +8,7 @@ CREATE TABLE LoginInfo(
 	lgUsername nvarchar(15) NOT NULL UNIQUE,
 	lgEmail nvarchar(255) NOT NULL UNIQUE,
 	lgPassword varchar(60) NOT NULL,
-	reset_password_token varchar(30)
+	resetPasswordToken varchar(30)
 )
 
 CREATE TABLE [Authorization](
@@ -139,6 +139,7 @@ INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('mentor3', 'mentor
 INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('mentortest', 'mentortest@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
 INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('menteetest', 'menteetest@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
 INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('monkeytest', 'monkeytest@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
+INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('hoangminh', 'hoangminhk16fpt@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
 
 SELECT * FROM LoginInfo
 
@@ -154,23 +155,22 @@ INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (8,2)
 INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (9,2)
 INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (10,2)
 INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (11,2)
+INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (12,2)
 
 SELECT * FROM LoginInfo_Authorization
 
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (1, 'Nguyen Van A', '12/12/2001', 1, 'Mentor', '123456789')
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (2, 'Nguyen Van B', '12/12/2001', 1, 'Mentor', '123456789')
-
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (3, 'Nguyen Minh Hanh', '12/12/2001', 0, 'Mentee', '123456789')
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (4, 'Nguyen Thu An', '12/12/2001', 0, 'Mentee', '123456789')
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (5, 'Nguyen Tran Hoang', '12/12/2001', 0, 'Mentee', '123456789')
-
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (6, 'Nguyen Tran A', '12/12/2001', 1, 'Mentor', '123456789')
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber, uStatus) VALUES (7, 'Nguyen Tran B', '12/12/2001', 1, 'Mentor', '123456789', 0)
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber, uStatus) VALUES (8, 'Nguyen Tran Thai An', '12/12/2001', 1, 'Mentor', '0923456789', 0)
-
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (9, 'Mentor Test', '12/12/2001', 1, 'Mentor', '123456789')
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (10, 'Mentee Test', '12/12/2001', 1, 'Mentee', '123456789')
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (11, 'Monkey Test', '12/12/2001', 1, 'Mentee', '123456789')
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (11, 'Hoang Minh', '12/12/2001', 1, 'Mentee', '123456789')
 
 SELECT * From UserInfo
 
