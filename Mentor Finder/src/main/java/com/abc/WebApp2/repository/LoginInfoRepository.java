@@ -23,5 +23,7 @@ public interface LoginInfoRepository extends JpaRepository<LoginInfo, Integer> {
 
     
     LoginInfo findBylgEmail(String email);
+    
+    LoginInfo findByresetPasswordToken(String token);
 
 }

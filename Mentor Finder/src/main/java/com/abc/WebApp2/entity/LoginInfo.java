@@ -53,7 +53,9 @@ public class LoginInfo implements Serializable {
     @Basic(optional = false)
     @Column(name = "lgPassword")
     private String lgPassword;
-    
+    @Column(name = "resetPasswordToken")
+    private String resetPasswordToken;
+     
     @ManyToMany
     @JoinTable( 
         name = "LoginInfo_Authorization", 
@@ -111,6 +113,14 @@ public class LoginInfo implements Serializable {
 
     public void setLgPassword(String lgPassword) {
         this.lgPassword = lgPassword;
+    }
+
+    public String getResetPasswordToken() {
+        return resetPasswordToken;
+    }
+
+    public void setResetPasswordToken(String resetPasswordToken) {
+        this.resetPasswordToken = resetPasswordToken;
     }
 
     public Set<Authorization> getAuthorizationSet() {
