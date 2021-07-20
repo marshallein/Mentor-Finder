@@ -171,7 +171,7 @@ INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (9, '
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (10, 'Mentee Test', '12/12/2001', 1, 'Mentee', '123456789')
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (11, 'Monkey Test', '12/12/2001', 1, 'Mentee', '123456789')
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (12, 'Hoang Minh', '12/12/2001', 1, 'Mentee', '123456789')
-INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (12, 'Minh Hanh', '12/12/2001', 1, 'Mentor', '123456789')
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (13, 'Minh Hanh', '12/12/2001', 1, 'Mentor', '123456789')
 
 SELECT * From UserInfo
 
