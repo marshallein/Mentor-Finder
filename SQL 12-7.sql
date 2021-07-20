@@ -140,7 +140,7 @@ INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('mentortest', 'men
 INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('menteetest', 'menteetest@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
 INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('monkeytest', 'monkeytest@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
 INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('hoangminh', 'hoangminhk16fpt@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
-
+INSERT INTO LoginInfo(lgUsername, lgEmail,lgPassword) VALUES ('minhhanh', 'hanh21418@gmail.com', '$2a$10$2TaGSaY8KXFZu65ZagDiM.EoZVCLxEXnZimSaBLiJIIgyt2GqX0uW')
 SELECT * FROM LoginInfo
 
 INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (1,1)
@@ -156,7 +156,7 @@ INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (9,2)
 INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (10,2)
 INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (11,2)
 INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (12,2)
-
+INSERT INTO LoginInfo_Authorization(lgId, aId) VALUES (13,2)
 SELECT * FROM LoginInfo_Authorization
 
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (1, 'Nguyen Van A', '12/12/2001', 1, 'Mentor', '123456789')
@@ -171,6 +171,7 @@ INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (9, '
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (10, 'Mentee Test', '12/12/2001', 1, 'Mentee', '123456789')
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (11, 'Monkey Test', '12/12/2001', 1, 'Mentee', '123456789')
 INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (12, 'Hoang Minh', '12/12/2001', 1, 'Mentee', '123456789')
+INSERT INTO UserInfo(uId, uName,uDOB, uGender, uRole, uPhoneNumber) VALUES (12, 'Minh Hanh', '12/12/2001', 1, 'Mentor', '123456789')
 
 SELECT * From UserInfo
 
