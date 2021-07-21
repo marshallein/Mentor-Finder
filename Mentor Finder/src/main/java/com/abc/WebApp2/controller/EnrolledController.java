@@ -103,8 +103,10 @@ public class EnrolledController {
         try{
             Enrolled enr = eServ.getById(enrId);
             Request req = enr.getReqId();
-            req.setReqStatus(true);
-            reqServ.updateRequest(req);
+            if (status.equalsIgnoreCase("ACCEPT")){
+                req.setReqStatus(true);
+                reqServ.updateRequest(req);
+            }
             eServ.updateStatus(enrId, status);
             return "redirect:/home";
         }

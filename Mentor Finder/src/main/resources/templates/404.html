@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>404error</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/font/404/fontawesome5-overrides.min.css}">
+    <link rel="stylesheet" th:href="@{/css/404/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/profilementee/Off-Canvas-Sidebar-Drawer-Navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/mainhomementee/Navigation-Clean.css}">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark off-canvas" data-right-drawer="0" data-open-drawer="0">
+        <div class="container-fluid flex-column"><button class="btn btn-dark drawer-knob" type="button" data-open="drawer"><i class="fas fa-bars"></i></button>
+            <div class="d-flex justify-content-between brand-line"><a class="navbar-brand" href="#">Mentor Finder</a><button class="btn btn-dark" type="button" data-dismiss="drawer"><span class="sr-only">Toggle Navigation&nbsp;</span><i class="fas fa-times"></i></button></div>
+            <ul class="navbar-nav flex-column drawer-menu">
+                <li class="nav-item"><a class="nav-link active" data-bss-hover-animate="pulse" th:href="@{/home}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" th:href="@{/chat}">Message<span class="badge badge-primary" style="margin-left: 5px;"></span></a></li>
+                <li class="nav-item">
+                    <div class="nav-item dropdown dropright"><a id="noti-dropdown" class="dropdown-toggle" aria-expanded="false" data-toggle="dropdown" href="#" data-display="static" style="text-decoration: none;color: rgb(169,168,168);">Notification<span class="badge badge-primary" id="noti-unread"></span></a>
+                        <div class="dropdown-menu dropdown-menu-right" style="box-shadow: 4px 4px 0px var(--gray);z-index: 1;position: absolute;max-height: 300px;min-height: 100px;  margin-top: -120px">
+                            <h1 class="dropdown-header">Notification</h1>
+                            <div style="overflow-y: auto;max-height: 200px; height:70" id="noti-item">
+
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-item" style="text-align: center;"><a href="#" style="color: var(--pink);">View All Notifications</a></div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" th:href="@{/profile}">Profile</a></li>
+            </ul>
+            <ul class="navbar-nav flex-column bottom-nav">
+                <li class="nav-item"><a class="nav-link" th:href="@{/profile/update/detail}">Account Setting</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Log Out</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div style="text-align: center;">
+        <h1 style="padding-top: 55px;">Sorry your destination right now is unavailable or currently in development, try again sometime.</h1><img th:src="@{/image/404/404.jpg}">
+    </div>
+    <footer class="bg-light footer" style="margin-top: 35px;padding: 20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 text-center text-lg-left my-auto h-100">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item"><a href="#">About</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Contact</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Terms of &nbsp;Use</a></li>
+                        <li class="list-inline-item"><span>⋅</span></li>
+                        <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">© Mentor Finder 2021. All Rights Reserved.</p>
+                </div>
+                <div class="col-lg-6 text-center text-lg-right my-auto h-100">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-facebook fa-2x fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-twitter fa-2x fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fa fa-instagram fa-2x fa-fw"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/profilementee/Off-Canvas-Sidebar-Drawer-Navbar.js"></script>
+    <script src="/js/profilementee/Off-Canvas-Sidebar-Drawer-Navbar-1.js"></script>
+</body>
+
+</html>
