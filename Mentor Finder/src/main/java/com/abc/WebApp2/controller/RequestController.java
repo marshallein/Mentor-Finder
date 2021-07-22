@@ -70,9 +70,8 @@ public class RequestController {
             UserInfo mentee = request.getMenteeIdFrom();
             if (user.equals(mentee)) {
                 reqsrv.deleteRequest(reqId);
+                notiServ.createNotification(1, user, user, String.valueOf(request.getReqId()));
             }
-
-            notiServ.createNotification(1, user, user, String.valueOf(request.getReqId()));
             return "redirect:/home";
         } catch (NullPointerException e) {
             return "redirect:/login";
