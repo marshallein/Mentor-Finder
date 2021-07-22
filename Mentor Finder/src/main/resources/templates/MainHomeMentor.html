@@ -51,7 +51,7 @@
         <div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-xl-4"><img data-aos="fade" th:src="${user.getUImage()}" style="margin: 15px;margin-left: 30px;width: 272px;border: 3px solid var(--purple) ;"></div>
+                    <div class="col-md-6 col-xl-4"><img data-aos="fade" th:src="${user.getUImage()}" style="margin: 15px;margin-left: 30px;width: 272px;height: 272px;border: 3px solid var(--purple) ;object-fit: cover;"></div>
                     <div class="col-md-6">
                         <p style="font-size: 40px;margin-top: 20px;"><em>Welcome back, [[${user.getUName()}]] !</em><br></p>
                     </div>
@@ -75,7 +75,7 @@
                             <div th:each="i: ${#numbers.sequence(0, totalItems-1)}">
                                 <div style="margin: 10px;padding: 15px;border: solid white 2px;background-color: #FF79CD;">
                                     <h3>[[${requests.get(i).getReqTitle()}]]</h3>
-                                    <div style="padding: 28px;border-width: 3px;border-style: solid;background: #ffffff;margin-top: 24px;margin-bottom: 29px;padding-bottom: 14px;"><img th:src="${requests.get(i).getMenteeIdFrom().getUImage()}" style="float: left;height: 112px;border: 2px solid var(--purple) ;">
+                                    <div style="padding: 28px;border-width: 3px;border-style: solid;background: #ffffff;margin-top: 24px;margin-bottom: 29px;padding-bottom: 14px;"><img th:src="${requests.get(i).getMenteeIdFrom().getUImage()}" style="float: left;width: 112px;height: 112px;border: 2px solid var(--purple) ;object-fit: cover;">
                                         <p style="display: inline-block;margin-left: 26px;font-size: 15px;width: 452px;min-height: 100px;max-height: 150px;"><br>[[${requests.get(i).getReqDesc()}]]<br><br></p>
                                     </div>
                                     <div><i class="fas fa-book" style="margin-left: 20px;font-size: 15px;"></i>
