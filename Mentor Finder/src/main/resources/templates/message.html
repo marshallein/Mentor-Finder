@@ -13,10 +13,12 @@ and open the template in the editor.
     </head>
     <body style="background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 121, 205, 0.46) 35.94%, #23049D 100%);">
         <div class="text-center" style="display: flex;justify-content: center;align-items: center;height: 800px;" >
-            <h2>[[${title}]]</h2>
-            <h4>[[${message}]]</h4>
-            <a th:href="@{/login}" class="btn btn-success">Login now!</a>
-            <a th:href="@{/landing}" class="btn btn-info">Go to homepage</a>
+            <div style="width: 50%;">
+                <h2>[[${title}]]</h2>
+                <h4>[[${message}]]</h4>
+                <a th:href="@{/login}" class="btn btn-success">Login now!</a>
+                <a th:href="@{/landing}" class="btn btn-info">Go to homepage</a>
+            </div>
         </div>
     </body>
 </html>
