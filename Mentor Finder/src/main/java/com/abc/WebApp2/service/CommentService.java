@@ -53,6 +53,7 @@ public class CommentService {
             Map<String, String> map = new HashMap<>();
             map.put("from", c.getUserFrom().getUName());
             map.put("content", c.getComContent());
+            map.put("avatar", c.getUserFrom().getUImage());
             result.add(map);
         }
         return new Gson().toJson(result);
