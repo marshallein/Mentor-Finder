@@ -157,6 +157,9 @@ function getAllNotification(){
             if (!(unread==="0")) {
                 $("#noti-unread").html(unread);
             }
+            else {
+                $("#noti-unread").hide();
+            }
         },
         error: function(e){
             console.log(e);

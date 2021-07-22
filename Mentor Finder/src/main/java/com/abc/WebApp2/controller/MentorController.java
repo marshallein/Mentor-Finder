@@ -98,10 +98,16 @@ public class MentorController {
             }
             
             List<Request> reqs = new ArrayList<>(requests);
-
+            List<Request> reqsFinish = new ArrayList<>();
+            for (Request req: reqs){
+                if (req.getReqStatus()) reqsFinish.add(req);
+            }
             List<Enrolled> enrolled = eServ.allMyEnrolled(uIf);
             for(Enrolled e: enrolled){
                 reqs.remove(e.getReqId());
+            }
+            for(Request req: reqsFinish){
+                reqs.remove(req);
             }
             model.addAttribute("requests", reqs);
             model.addAttribute("lastPage", reqs.size()%10);

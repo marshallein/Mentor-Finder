@@ -125,9 +125,11 @@ public class EnrolledService {
         if (status.equalsIgnoreCase("ACCEPT")){
             List<Enrolled> enrList = getAllByRequest(enr.getReqId());
             for(Enrolled e: enrList){
-                e.setStatus("REJECT");
-                save(e);
-                notiServ.createNotification(4, e.getMentorId(), e.getReqId().getMenteeIdFrom(), String.valueOf(e.getEnrId()));
+                if (!e.getMentorId().equals(enr.getMentorId())){
+                    e.setStatus("REJECT");
+                    save(e);
+                    notiServ.createNotification(4, e.getMentorId(), e.getReqId().getMenteeIdFrom(), String.valueOf(e.getEnrId()));
+                } 
             }
             
             notiServ.createNotification(3, enr.getMentorId(), enr.getReqId().getMenteeIdFrom(), String.valueOf(enr.getEnrId()));
