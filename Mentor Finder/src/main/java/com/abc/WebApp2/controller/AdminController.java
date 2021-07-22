@@ -112,13 +112,6 @@ public class AdminController {
             @RequestParam(value = "available") String available) {
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
-        System.out.println(date);
-        System.out.println(menteeId);
-        System.out.println(subId);
-        System.out.println(levId);
-        System.out.println(title);
-        System.out.println(des);
-        System.out.println(available);
         Request newRq = new Request();
         newRq.setMenteeIdFrom(userSvr.findUserInfoId(menteeId));
         newRq.setSubId(subAndSer.findSubjectbyId(subId));
@@ -363,13 +356,7 @@ public class AdminController {
             @RequestParam(value = "description") String des,
             @RequestParam(value = "available") String available,
             @RequestParam(value = "menteeId") int menteeId) {
-        System.out.println(requestID);
-        System.out.println(subId);
-        System.out.println(levId);
-        System.out.println(title);
-        System.out.println(des);
-        System.out.println(available);
-        System.out.println(menteeId);
+       
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
         Request newRq = new Request();
@@ -421,10 +408,7 @@ public class AdminController {
             @RequestParam(value = "levelId") int levId,
             @RequestParam(value = "dateFrom") String dateFrom,
             @RequestParam(value = "dateTo") String dateTo, Model model) throws ParseException {
-        System.out.println(subId);
-        System.out.println(levId);
-        System.out.println(dateFrom);
-        System.out.println(dateTo);
+        
         if (!"".equals(dateFrom) && !"".equals(dateTo)) {
             if (subId != -1 && levId != -1) {
                 SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -549,7 +533,7 @@ public class AdminController {
         if (eList.isEmpty()) {
             enrolledRequest = 0;
         }
-        System.out.println("hbchbhxxc: " + enrolledRequest);
+        
         int requestToday = 0;
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
