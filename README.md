@@ -6,7 +6,7 @@ Team Size : 5 persons.
 
 Project size : 90 days.
 
-Technologies : Java, Boostrap 4, Spring Framework, Websocket, Sql Server,TomCat server
+Technologies : Java, Boostrap 4, Spring Framework, Websocket, Sql Server, TomCat server, Thymleaf.
 
 # Version
 
